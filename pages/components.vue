@@ -1,0 +1,11 @@
+<template>
+  <table>
+    <thead>
+      <tr>
+        <td>Type</td>
+        <td>Component</td>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</template>
