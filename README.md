@@ -18,3 +18,9 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+
+TAHAPAN PEMUATAN PROJECT (https://nuxtjs.org/)
+--------------------------------------------------------------------------------
+Installation
+npm init nuxt-app <project-name>
