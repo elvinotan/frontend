@@ -32,3 +32,5 @@ asyncData hook, call before page rendered, hanya bisa di page
 fetch hook, call after page rendered, bisa di page maupun component
 
 LazyLoadingComponent = <Lazy{ComponentName}/>
+
+getProcessedPlugins is not a function = lalukan update nodejs

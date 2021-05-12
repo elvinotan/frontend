@@ -22,6 +22,8 @@
         </a>
       </div>
     </div>
+    <button class="border rounded-full hover:bg-green-300">Button</button>
+    <div class="h-11">halo</div>
   </div>
 </template>
 
