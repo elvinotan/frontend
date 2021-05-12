@@ -56,9 +56,23 @@
         <td>&nbsp;</td>
       </tr>
     </tbody>
+    {{
+      planets
+    }}
   </table>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      planets: [],
+    }
+  },
+  async fetch() {
+    this.planets = await fetch('https://api.nuxtjs.dev/planets').then((res) =>
+      res.json()
+    )
+  },
+}
 </script>
