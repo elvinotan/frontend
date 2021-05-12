@@ -8,8 +8,8 @@
     </thead>
     <tbody>
       <tr>
-        <td>Text</td>
-        <td>&nbsp;</td>
+        <td>ShortText</td>
+        <td><InputShortText id="myId" label="Elvino" :maxlength="3" /></td>
       </tr>
       <tr>
         <td>Select</td>
@@ -56,9 +56,6 @@
         <td>&nbsp;</td>
       </tr>
     </tbody>
-    {{
-      planets
-    }}
   </table>
 </template>
 
