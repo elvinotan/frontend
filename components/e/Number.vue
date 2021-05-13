@@ -13,10 +13,11 @@
       :maxlength="maxlength"
       :disabled="disabled"
       :required="required"
-      class="px-1 py-1 uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
+      class="px-1 py-1 uppercase text-right placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
       @keypress="_event"
       @input="_event"
       @blur="_event"
+      @focus="_event"
     />
 
     <p class="text-red-500 text-right text-xs italic">
@@ -49,6 +50,13 @@ export default {
       if (evt.type === 'keypress' && !'0123456789'.includes(evt.key)) {
         // keypress hanya di gunakan untuk prevent entry saja, gax ada interaksinya dgn nilai input
         evt.preventDefault()
+      } else if (evt.type === 'focus') {
+        // this.$nextTick(() => {
+        // Masih blm berfungsi
+        const ctrl = document.getElementById(this.id)
+        ctrl.focus()
+        ctrl.setSelectionRange(this.localValue.length, this.localValue.length)
+        // })
       } else {
         this.localValue = evt.target.value
         this.$emit(evt.type, this.localValue ? +this.localValue : null)

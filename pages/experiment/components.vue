@@ -234,7 +234,7 @@ export default {
       },
       number: {
         ...empty,
-        value: null,
+        value: 123456789,
         id: 'number',
         label: 'Distance',
         maxlength: 10,
