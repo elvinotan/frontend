@@ -15,85 +15,86 @@
                 <td>ShortText</td>
                 <td>
                   <EShortText
-                    id="nickName"
-                    ref="nickName"
-                    v-model="nickName"
-                    label="Nick Name"
-                    :maxlength="50"
-                    :disabled="false"
-                    :show="true"
-                    :required="true"
+                    :id="shortText.id"
+                    :ref="shortText.id"
+                    v-model="shortText.value"
+                    :label="shortText.label"
+                    :maxlength="shortText.maxlength"
+                    :disabled="shortText.disabled"
+                    :show="shortText.show"
+                    :required="shortText.required"
                     :vruntime="vruntime"
-                    @blur="bluring"
+                    @blur="blur"
                   />
                 </td>
-                <td>[{{ nickName }}]/{{ nickName.length }}</td>
+                <td>[{{ shortText }}]/{{ shortText.value.length }}</td>
               </tr>
               <tr>
                 <td>MediumText</td>
                 <td>
                   <EMediumText
-                    id="name"
-                    ref="name"
-                    v-model="name"
-                    label="Name"
-                    :maxlength="50"
-                    :disabled="false"
-                    :show="true"
-                    :required="true"
+                    :id="mediumText.id"
+                    :ref="mediumText.id"
+                    v-model="mediumText.value"
+                    :label="mediumText.label"
+                    :maxlength="mediumText.maxlength"
+                    :disabled="mediumText.disabled"
+                    :show="mediumText.show"
+                    :required="mediumText.required"
                     :vruntime="vruntime"
-                    @blur="bluring"
+                    @blur="blur"
                   />
                 </td>
-                <td>[{{ name }}]/{{ name.length }}</td>
+                <td>[{{ mediumText }}]/{{ mediumText.value.length }}</td>
               </tr>
               <tr>
                 <td>LongText</td>
                 <td>
                   <ELongText
-                    id="fullname"
-                    ref="fullname"
-                    v-model="fullname"
-                    label="Full Name"
-                    :maxlength="50"
-                    :disabled="false"
-                    :show="true"
-                    :required="true"
+                    :id="longText.id"
+                    :ref="longText.id"
+                    v-model="longText.value"
+                    :label="longText.label"
+                    :maxlength="longText.maxlength"
+                    :disabled="longText.disabled"
+                    :show="longText.show"
+                    :required="longText.required"
                     :vruntime="vruntime"
-                    @blur="bluring"
+                    @blur="blur"
                   />
                 </td>
-                <td>[{{ fullname }}]/{{ fullname.length }}</td>
+                <td>[{{ longText }}]/{{ longText.value.length }}</td>
               </tr>
               <tr>
                 <td>Area</td>
                 <td>
                   <ETextArea
-                    id="profile"
-                    ref="profile"
-                    v-model="profile"
-                    label="Your Profile"
-                    :disabled="false"
-                    :show="true"
-                    :required="true"
-                    :maxlength="10"
+                    id="textArea.id"
+                    ref="textArea.id"
+                    v-model="textArea.value"
+                    :label="textArea.label"
+                    :disabled="textArea.disabled"
+                    :show="textArea.show"
+                    :required="textArea.required"
+                    :maxlength="textArea.maxlength"
                     :vruntime="vruntime"
-                    @blur="bluring"
+                    @blur="blur"
                   />
                 </td>
-                <td>[{{ profile }}]/{{ profile.length }}</td>
+                <td>[{{ textArea }}]/{{ textArea.value.length }}</td>
               </tr>
               <tr>
                 <td>Button</td>
                 <td>
                   <EButton
-                    id="clearError"
-                    ref="buttonInside"
-                    label="Clear Error"
-                    :disabled="false"
-                    @click="clearError"
+                    :id="button.id"
+                    :ref="button.id"
+                    :label="button.label"
+                    :disabled="button.disabled"
+                    @click="click"
                   />
                 </td>
+                <td>[{{ button }}]</td>
               </tr>
               <tr>
                 <td>Select</td>
@@ -165,15 +166,48 @@
 </template>
 
 <script>
+const empty = {
+  value: '',
+  id: 'id',
+  label: 'Label',
+  maxlength: 10,
+  disabled: false,
+  show: true,
+  required: true,
+}
 export default {
   data() {
     return {
-      nickName: '',
-      name: '',
-      fullname: '',
-      profile: '',
+      shortText: {
+        ...empty,
+        id: 'shortText',
+        label: 'Nick Name',
+        maxlength: 10,
+      },
+      mediumText: {
+        ...empty,
+        id: 'mediumText',
+        label: 'Name',
+        maxlength: 20,
+      },
+      longText: {
+        ...empty,
+        id: 'longText',
+        label: 'Full Name',
+        maxlength: 30,
+      },
+      textArea: {
+        ...empty,
+        id: 'textArea',
+        label: 'Your Profile',
+        maxlength: 50,
+      },
+      button: {
+        ...empty,
+        id: 'button',
+        label: 'Clear Errors',
+      },
       planets: [],
-      requiredData: true,
     }
   },
   async fetch() {
@@ -186,14 +220,15 @@ export default {
       const result = this.$refs.firstEntryForm.validate()
       console.log(result)
     },
-    bluring(value) {
-      console.log('mybluring ', value)
+    blur(value) {
+      console.log('Event.blur ', value)
     },
     vruntime(value) {
-      if (value === 'error') return 'Gax boleh input error'
+      console.log('Event.vruntime ', value)
+      if (value === 'ERROR') return 'Gax boleh input error'
       return null
     },
-    clearError() {
+    click() {
       this.$refs.firstEntryForm.clearError()
     },
   },
