@@ -1,8 +1,8 @@
 <template>
   <div>
-    <InputForm ref="firstEntryForm">
-      <InputForm ref="upperEntryForm">
-        <InputForm ref="entryForm">
+    <EForm ref="firstEntryForm">
+      <EForm ref="upperEntryForm">
+        <EForm ref="entryForm">
           <table>
             <thead>
               <tr>
@@ -14,7 +14,7 @@
               <tr>
                 <td>ShortText</td>
                 <td>
-                  <InputShortText
+                  <EShortText
                     id="nickName"
                     ref="nickName"
                     v-model="nickName"
@@ -32,7 +32,7 @@
               <tr>
                 <td>MediumText</td>
                 <td>
-                  <InputMediumText
+                  <EMediumText
                     id="name"
                     ref="name"
                     v-model="name"
@@ -50,7 +50,7 @@
               <tr>
                 <td>LongText</td>
                 <td>
-                  <InputLongText
+                  <ELongText
                     id="fullname"
                     ref="fullname"
                     v-model="fullname"
@@ -68,7 +68,7 @@
               <tr>
                 <td>Area</td>
                 <td>
-                  <InputTextArea
+                  <ETextArea
                     id="profile"
                     ref="profile"
                     v-model="profile"
@@ -126,9 +126,9 @@
             </tbody>
           </table>
           <button ref="buttonInside" @click="clearError">ClearError</button>
-        </InputForm>
-      </InputForm>
-    </InputForm>
+        </EForm>
+      </EForm>
+    </EForm>
     <button ref="buttonOutside" @click="validateAll">Validate</button>
   </div>
 </template>
