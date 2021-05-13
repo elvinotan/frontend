@@ -84,7 +84,39 @@
                 </td>
               </tr>
               <tr>
+                <td>Button</td>
+                <td>
+                  <EButton
+                    id="clearError"
+                    ref="buttonInside"
+                    label="Clear Error"
+                    :disabled="false"
+                    @click="clearError"
+                  />
+                </td>
+              </tr>
+              <tr>
                 <td>Select</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Number</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Currency</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Percentage</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Date</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Hour</td>
                 <td>&nbsp;</td>
               </tr>
               <tr>
@@ -125,7 +157,6 @@
               </tr>
             </tbody>
           </table>
-          <button ref="buttonInside" @click="clearError">ClearError</button>
         </EForm>
       </EForm>
     </EForm>
