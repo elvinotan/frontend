@@ -26,8 +26,8 @@
                     :vruntime="vruntime"
                     @blur="bluring"
                   />
-                  {{ nickName }}
                 </td>
+                <td>[{{ nickName }}]/{{ nickName.length }}</td>
               </tr>
               <tr>
                 <td>MediumText</td>
@@ -44,8 +44,8 @@
                     :vruntime="vruntime"
                     @blur="bluring"
                   />
-                  {{ name }}
                 </td>
+                <td>[{{ name }}]/{{ name.length }}</td>
               </tr>
               <tr>
                 <td>LongText</td>
@@ -62,8 +62,8 @@
                     :vruntime="vruntime"
                     @blur="bluring"
                   />
-                  {{ name }}
                 </td>
+                <td>[{{ fullname }}]/{{ fullname.length }}</td>
               </tr>
               <tr>
                 <td>Area</td>
@@ -80,8 +80,8 @@
                     :vruntime="vruntime"
                     @blur="bluring"
                   />
-                  {{ name }}
                 </td>
+                <td>[{{ profile }}]/{{ profile.length }}</td>
               </tr>
               <tr>
                 <td>Button</td>
@@ -168,10 +168,10 @@
 export default {
   data() {
     return {
-      nickName: undefined,
-      name: undefined,
-      fullname: undefined,
-      profile: undefined,
+      nickName: '',
+      name: '',
+      fullname: '',
+      profile: '',
       planets: [],
       requiredData: true,
     }

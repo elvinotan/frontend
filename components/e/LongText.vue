@@ -13,7 +13,7 @@
       :maxlength="maxlength"
       :disabled="disabled"
       :required="required"
-      class="px-1 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
+      class="px-1 py-1 uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
       @input="_event"
       @blur="_event"
       @keyup="_event"
@@ -46,7 +46,12 @@ export default {
   },
   methods: {
     _event(evt) {
-      this.localValue = evt.target.value.trim()
+      this.localValue = evt.target.value.toUpperCase()
+      if (evt.type === 'blur') {
+        // Blur melakukan trimming yang artinya ubah data, maka infoin juga input
+        this.localValue = this.localValue.trim()
+        this.$emit('input', this.localValue)
+      }
       this.$emit(evt.type, this.localValue)
       this.validate()
     },
