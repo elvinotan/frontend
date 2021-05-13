@@ -51,12 +51,12 @@ export default {
         // keypress hanya di gunakan untuk prevent entry saja, gax ada interaksinya dgn nilai input
         evt.preventDefault()
       } else if (evt.type === 'focus') {
-        // this.$nextTick(() => {
-        // Masih blm berfungsi
-        const ctrl = document.getElementById(this.id)
-        ctrl.focus()
-        ctrl.setSelectionRange(this.localValue.length, this.localValue.length)
-        // })
+        this.$nextTick(() => {
+          // Masih blm berfungsi
+          const ctrl = document.getElementById(this.id)
+          ctrl.focus()
+          ctrl.setSelectionRange(this.localValue.length, this.localValue.length)
+        })
       } else {
         this.localValue = evt.target.value
         this.$emit(evt.type, this.localValue ? +this.localValue : null)
