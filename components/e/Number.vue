@@ -16,6 +16,7 @@
       class="px-1 py-1 uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
       @keypress="_event"
       @input="_event"
+      @blur="_event"
     />
 
     <p class="text-red-500 text-right text-xs italic">
@@ -43,7 +44,6 @@ export default {
       errors: [],
     }
   },
-  watch: {},
   methods: {
     _event(evt) {
       if (evt.type === 'keypress' && !'0123456789'.includes(evt.key)) {
@@ -52,6 +52,7 @@ export default {
       } else {
         this.localValue = evt.target.value
         this.$emit(evt.type, this.localValue ? +this.localValue : null)
+        this.validate()
       }
     },
     metaData() {
