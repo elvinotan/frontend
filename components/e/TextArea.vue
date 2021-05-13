@@ -18,7 +18,6 @@
       class="mb-0 px-1 py-1 uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
       @input="_event"
       @blur="_event"
-      @keyup="_event"
     />
     <p class="text-red-500 text-right text-xs italic">
       {{ errors.length > 0 ? errors[0] : '' }}
@@ -39,7 +38,7 @@ export default {
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
-    value: { type: [String, null], required: true, default: '' },
+    value: { type: String, required: false, default: '' },
   },
   data() {
     return {

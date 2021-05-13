@@ -27,7 +27,11 @@
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ shortText }}]/{{ shortText.value.length }}</td>
+                <td>
+                  [{{ shortText }}]/{{
+                    shortText.value ? shortText.value.length : 0
+                  }}
+                </td>
               </tr>
               <tr>
                 <td>MediumText</td>
@@ -45,7 +49,11 @@
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ mediumText }}]/{{ mediumText.value.length }}</td>
+                <td>
+                  [{{ mediumText }}]/{{
+                    mediumText.value ? mediumText.value.length : 0
+                  }}
+                </td>
               </tr>
               <tr>
                 <td>LongText</td>
@@ -63,7 +71,11 @@
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ longText }}]/{{ longText.value.length }}</td>
+                <td>
+                  [{{ longText }}]/{{
+                    longText.value ? longText.value.length : 0
+                  }}
+                </td>
               </tr>
               <tr>
                 <td>Area</td>
@@ -81,7 +93,11 @@
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ textArea }}]/{{ textArea.value.length }}</td>
+                <td>
+                  [{{ textArea }}]/{{
+                    textArea.value ? textArea.value.length : 0
+                  }}
+                </td>
               </tr>
               <tr>
                 <td>Button</td>
@@ -102,7 +118,21 @@
               </tr>
               <tr>
                 <td>Number</td>
-                <td>&nbsp;</td>
+                <td>
+                  <ENumber
+                    id="number.id"
+                    ref="number.id"
+                    v-model="number.value"
+                    :label="number.label"
+                    :disabled="number.disabled"
+                    :show="number.show"
+                    :required="number.required"
+                    :maxlength="number.maxlength"
+                    :vruntime="vruntime"
+                    @blur="blur"
+                  />
+                </td>
+                <td>[{{ number }}]</td>
               </tr>
               <tr>
                 <td>Currency</td>
@@ -167,7 +197,7 @@
 
 <script>
 const empty = {
-  value: '',
+  value: null,
   id: 'id',
   label: 'Label',
   maxlength: 10,
@@ -201,6 +231,13 @@ export default {
         id: 'textArea',
         label: 'Your Profile',
         maxlength: 50,
+      },
+      number: {
+        ...empty,
+        value: null,
+        id: 'number',
+        label: 'Distance',
+        maxlength: 10,
       },
       button: {
         ...empty,
