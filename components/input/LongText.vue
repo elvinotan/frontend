@@ -26,7 +26,7 @@
 </template>
 <script>
 export default {
-  name: 'ShortText',
+  name: 'LongText',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },

@@ -4,21 +4,22 @@
       {{ label }}
       <span class="text-red-500">{{ required ? ' *' : '' }}</span>
     </label>
-    <input
+    <textarea
       v-if="show"
       :id="id"
       :placeholder="placeholder"
       type="text"
       :value="value"
+      :rows="rows"
+      :cols="cols"
       :maxlength="maxlength"
       :disabled="disabled"
       :required="required"
-      class="px-1 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
+      class="mb-0 px-1 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
       @input="_event"
       @blur="_event"
       @keyup="_event"
     />
-
     <p class="text-red-500 text-right text-xs italic">
       {{ errors.length > 0 ? errors[0] : '' }}
     </p>
@@ -26,12 +27,14 @@
 </template>
 <script>
 export default {
-  name: 'ShortText',
+  name: 'TextArea',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
-    maxlength: { type: Number, required: false, default: 10 },
+    rows: { type: Number, required: false, default: 4 },
+    cols: { type: Number, required: false, default: 50 },
+    maxlength: { type: Number, required: false, default: 100 },
     disabled: { type: Boolean, required: false, default: false },
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
