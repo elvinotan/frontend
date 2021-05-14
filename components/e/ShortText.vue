@@ -17,7 +17,6 @@
       @input="_event"
       @blur="_event"
     />
-
     <p class="text-red-500 text-right text-xs italic">
       {{ errors.length > 0 ? errors[0] : '' }}
     </p>
@@ -39,19 +38,19 @@ export default {
   },
   data() {
     return {
-      localValue: this.value,
+      lvalue: this.value,
       errors: [],
     }
   },
   methods: {
     _event(evt) {
-      this.localValue = evt.target.value.toUpperCase()
+      this.lvalue = evt.target.value.toUpperCase()
       if (evt.type === 'blur') {
         // Blur melakukan trimming yang artinya ubah data, maka infoin juga input
-        this.localValue = this.localValue.trim()
-        this.$emit('input', this.localValue)
+        this.lvalue = this.lvalue.trim()
+        this.$emit('input', this.lvalue)
       }
-      this.$emit(evt.type, this.localValue)
+      this.$emit(evt.type, this.lvalue)
       this.validate()
     },
     metaData() {
@@ -71,16 +70,16 @@ export default {
       this.clearError()
 
       // General validation base on props
-      if (this.required && !this.localValue) {
+      if (this.required && !this.lvalue) {
         this.errors.push(`${this.label} is required`)
       }
-      if (this.localValue && this.localValue.length > this.maxlength) {
+      if (this.lvalue && this.lvalue.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
       }
 
       // add business runtime validation
       if (this.vruntime) {
-        const error = this.vruntime(this.localValue)
+        const error = this.vruntime(this.lvalue)
         if (error) this.errors.push(error)
       }
 
