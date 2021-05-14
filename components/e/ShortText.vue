@@ -5,32 +5,24 @@
         class="flex text-xs rounded border-0 outline-none ring-1 ring-gray-500"
       >
         <span
-          class="bg-gray-300 font-bold text-left rounded-l text-gray-800 w-auto p-1 pt-1"
-          >Nama&nbsp;Lengkap&nbsp;Anda&nbsp;:{{
-            required ? '&nbsp;*' : ''
-          }}</span
-        ><input
-          class="field text-sm text-gray-600 rounded-r p-1 px-1 text-xs w-full outline-none"
+          class="bg-gray-300 font-bold text-left rounded-l text-sm text-gray-800 w-auto p-1"
+        >
+          {{ label ? label.replaceAll(' ', '&nbsp;') : ''
+          }}{{ required ? '&nbsp;*' : '' }}
+        </span>
+        <input
+          :id="id"
           type="text"
-          placeholder="Please input"
+          :placeholder="placeholder"
+          :value="value"
+          :maxlength="maxlength"
+          :disabled="disabled"
+          :required="required"
+          class="field text-sm text-gray-600 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white"
+          @input="_input"
+          @blur="_blur"
         />
       </span>
-      <label class="text-gray-600 text-sm font-bold" :for="id">
-        {{ label }}
-        <span class="text-red-500">{{ required ? ' *' : '' }}</span>
-      </label>
-      <input
-        :id="id"
-        type="text"
-        :placeholder="placeholder"
-        :value="value"
-        :maxlength="maxlength"
-        :disabled="disabled"
-        :required="required"
-        class="px-1 py-1 uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none ring-1 ring-gray-500 w-full"
-        @input="_input"
-        @blur="_blur"
-      />
       <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
         {{ errors[0] }}
       </p>
