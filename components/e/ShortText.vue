@@ -1,6 +1,20 @@
 <template>
   <div>
     <div v-if="show">
+      <span
+        class="flex text-xs rounded border-0 outline-none ring-1 ring-gray-500"
+      >
+        <span
+          class="bg-gray-300 font-bold text-left rounded-l text-gray-800 w-auto p-1 pt-1"
+          >Nama&nbsp;Lengkap&nbsp;Anda&nbsp;:{{
+            required ? '&nbsp;*' : ''
+          }}</span
+        ><input
+          class="field text-sm text-gray-600 rounded-r p-1 px-1 text-xs w-full outline-none"
+          type="text"
+          placeholder="Please input"
+        />
+      </span>
       <label class="text-gray-600 text-sm font-bold" :for="id">
         {{ label }}
         <span class="text-red-500">{{ required ? ' *' : '' }}</span>
@@ -13,7 +27,7 @@
         :maxlength="maxlength"
         :disabled="disabled"
         :required="required"
-        class="px-1 py-1 uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
+        class="px-1 py-1 uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none ring-1 ring-gray-500 w-full"
         @input="_input"
         @blur="_blur"
       />
