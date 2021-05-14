@@ -23,7 +23,9 @@
       </div>
     </div>
     <button class="border rounded-full hover:bg-green-300">Button</button>
-    <div class="h-11">halo</div>
+    <div class="h-11">
+      <NuxtLink to="/experiment/components">Component</NuxtLink>
+    </div>
   </div>
 </template>
 

@@ -1,27 +1,39 @@
 <template>
   <div>
-    <label class="text-gray-600 text-sm font-bold" :for="id">
-      {{ label }}
-      <span class="text-red-500">{{ required ? ' *' : '' }}</span>
-    </label>
-    <textarea
-      v-if="show"
-      :id="id"
-      :placeholder="placeholder"
-      type="text"
-      :value="value"
-      :rows="rows"
-      :cols="cols"
-      :maxlength="maxlength"
-      :disabled="disabled"
-      :required="required"
-      class="mb-0 px-1 py-1 uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
-      @input="_event"
-      @blur="_event"
-    />
-    <p class="text-red-500 text-right text-xs italic">
-      {{ errors.length > 0 ? errors[0] : '' }}
-    </p>
+    <div v-if="show">
+      <span
+        class="flex text-xs rounded border-0 outline-none ring-1 ring-gray-500"
+      >
+        <span
+          v-if="label"
+          class="bg-gray-300 font-bold text-left rounded-l text-sm text-gray-800 w-auto p-1"
+        >
+          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : ''
+          }}{{ required ? '&nbsp;*' : '' }}
+        </span>
+        <textarea
+          :id="id"
+          type="text"
+          :placeholder="placeholder"
+          :value="value"
+          :maxlength="maxlength"
+          :disabled="disabled"
+          :required="required"
+          :rows="rows"
+          :cols="cols"
+          class="field text-sm text-gray-600 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white"
+          :class="[label ? '' : 'rounded']"
+          @input="_input"
+          @blur="_blur"
+        />
+      </span>
+      <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
+        {{ errors[0] }}
+      </p>
+      <p v-else class="text-right text-xs italic">
+        {{ `${value ? value.length : 0} / ${maxlength}` }}
+      </p>
+    </div>
   </div>
 </template>
 <script>
@@ -31,31 +43,31 @@ export default {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
-    rows: { type: Number, required: false, default: 4 },
-    cols: { type: Number, required: false, default: 50 },
-    maxlength: { type: Number, required: false, default: 100 },
+    maxlength: { type: Number, required: false, default: 10 },
     disabled: { type: Boolean, required: false, default: false },
     required: { type: Boolean, required: false, default: false },
+    rows: { type: Number, required: false, default: 4 },
+    cols: { type: Number, required: false, default: 50 },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: String, required: false, default: '' },
   },
   data() {
     return {
-      localValue: this.value,
       errors: [],
     }
   },
   methods: {
-    _event(evt) {
-      this.localValue = evt.target.value.toUpperCase()
-      if (evt.type === 'blur') {
-        // Blur melakukan trimming yang artinya ubah data, maka infoin juga input
-        this.localValue = this.localValue.trim()
-        this.$emit('input', this.localValue)
-      }
-      this.$emit(evt.type, this.localValue)
-      this.validate()
+    _input(event) {
+      const value = event.target.value.toUpperCase()
+      this.$emit(event.type, value)
+      this.$nextTick(this.validate)
+    },
+    _blur(event) {
+      const value = event.target.value.toUpperCase().trim()
+      this.$emit('input', value)
+      this.$emit(event.type, value)
+      this.$nextTick(this.validate)
     },
     metaData() {
       return {
@@ -74,16 +86,16 @@ export default {
       this.clearError()
 
       // General validation base on props
-      if (this.required && !this.localValue) {
+      if (this.required && !this.value) {
         this.errors.push(`${this.label} is required`)
       }
-      if (this.localValue && this.localValue.length > this.maxlength) {
+      if (this.value && this.value.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
       }
 
       // add business runtime validation
       if (this.vruntime) {
-        const error = this.vruntime(this.localValue)
+        const error = this.vruntime(this.value)
         if (error) this.errors.push(error)
       }
 

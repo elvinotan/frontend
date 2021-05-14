@@ -5,9 +5,10 @@
         class="flex text-xs rounded border-0 outline-none ring-1 ring-gray-500"
       >
         <span
+          v-if="label"
           class="bg-gray-300 font-bold text-left rounded-l text-sm text-gray-800 w-auto p-1"
         >
-          {{ label ? label.replaceAll(' ', '&nbsp;') : ''
+          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : ''
           }}{{ required ? '&nbsp;*' : '' }}
         </span>
         <input
@@ -19,6 +20,7 @@
           :disabled="disabled"
           :required="required"
           class="field text-sm text-gray-600 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white"
+          :class="[label ? '' : 'rounded']"
           @input="_input"
           @blur="_blur"
         />
