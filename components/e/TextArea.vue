@@ -1,46 +1,48 @@
 <template>
-  <div v-if="show">
-    <div
-      class="text-xs rounded border-0 outline-none ring-2"
-      :class="[_cssBorder, _cssInputBg]"
-    >
+  <div>
+    <div v-if="show">
       <div
-        v-if="label"
-        class="font-bold rounded-t text-sm text-gray-800 w-auto p-1"
-        :class="[_cssLabelBg]"
+        class="text-xs rounded border-0 outline-none ring-2"
+        :class="[_cssBorder, _cssInputBg]"
       >
-        {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : '' }}
-        <span
-          v-if="label && required"
-          class="font-bold text-center text-sm text-red-800 w-auto p-1"
+        <div
+          v-if="label"
+          class="font-bold rounded-t text-sm text-gray-800 w-auto p-1"
           :class="[_cssLabelBg]"
         >
-          *
-        </span>
-      </div>
+          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : '' }}
+          <span
+            v-if="label && required"
+            class="font-bold text-center text-sm text-red-800 w-auto p-1"
+            :class="[_cssLabelBg]"
+          >
+            *
+          </span>
+        </div>
 
-      <textarea
-        :id="id"
-        type="text"
-        :placeholder="placeholder"
-        :value="value"
-        :maxlength="maxlength"
-        :disabled="disabled"
-        :required="required"
-        :cols="cols"
-        :rows="rows"
-        class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
-        :class="[_cssRounded, _cssInputBg, _cssInputText]"
-        @input="_input"
-        @blur="_blur"
-      />
+        <textarea
+          :id="id"
+          type="text"
+          :placeholder="placeholder"
+          :value="value"
+          :maxlength="maxlength"
+          :disabled="disabled"
+          :required="required"
+          :cols="cols"
+          :rows="rows"
+          class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
+          :class="[_cssRounded, _cssInputBg, _cssInputText]"
+          @input="_input"
+          @blur="_blur"
+        />
+      </div>
+      <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
+        {{ errors[0] }}
+      </p>
+      <p v-else class="text-right text-xs italic">
+        {{ `${value ? value.length : 0} / ${maxlength}` }}
+      </p>
     </div>
-    <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
-      {{ errors[0] }}
-    </p>
-    <p v-else class="text-right text-xs italic">
-      {{ `${value ? value.length : 0} / ${maxlength}` }}
-    </p>
   </div>
 </template>
 <script>

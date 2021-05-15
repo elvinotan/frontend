@@ -21,10 +21,11 @@
 export default {
   name: 'Button',
   props: {
-    id: { type: String, required: true, default: null },
+    id: { type: String, required: true },
     label: { type: String, required: false, default: '' },
     disabled: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
+    color: { type: String, required: false, default: 'gray' },
   },
   methods: {
     _event(evt) {
