@@ -27,8 +27,8 @@
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
-          class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white"
-          :class="[_cssLabel]"
+          class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
+          :class="[_cssRounded, _cssInputBg, _cssInputText]"
           @input="_input"
           @blur="_blur"
         />
@@ -63,7 +63,7 @@ export default {
     }
   },
   computed: {
-    _cssLabel() {
+    _cssRounded() {
       return this.label ? '' : 'rounded'
     },
     _cssBorder() {
@@ -76,6 +76,14 @@ export default {
       let css = 'bg-gray-300'
       if (this.state === 1) css = 'bg-green-300'
       if (this.state === -1) css = 'bg-red-300'
+      return css
+    },
+    _cssInputBg() {
+      const css = this.disabled ? 'bg-gray-200' : 'bg-white'
+      return css
+    },
+    _cssInputText() {
+      const css = this.disabled ? 'text-gray-50' : 'text-gray-700'
       return css
     },
   },
