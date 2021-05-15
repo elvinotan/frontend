@@ -61,6 +61,7 @@ export default {
     vruntime: { type: Function, required: false, default: null },
     value: { type: Number, required: false, default: null },
     allowMinus: { type: Boolean, required: false, default: false },
+    separator: { type: Boolean, required: false, default: false },
     minimum: { type: Number, required: false, default: null },
     maximum: { type: Number, required: false, default: null },
   },
