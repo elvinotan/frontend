@@ -21,9 +21,9 @@
         </span>
         <input
           :id="id"
+          v-model="lvalue"
           type="text"
           :placeholder="placeholder"
-          :value="value"
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
