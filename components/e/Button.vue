@@ -5,28 +5,13 @@
         :id="id"
         type="button"
         :disabled="disabled"
-        class="text-white font-bold py-1 px-2 rounded border-0 focus:outline-white outline-none ring-2 ring-gray-500 text-xs shadow-lg"
+        class="text-white font-bold py-1 px-2 rounded border-0 focus:outline-none outline-none ring-2 ring-gray-500 text-xs shadow-lg"
         :class="[_cssBorder, _cssLabelBg]"
         @click="_event"
       >
         {{ label }}
       </button>
     </div>
-    <button
-      v-if="show"
-      :id="id"
-      type="button"
-      :disabled="disabled"
-      class="hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded text-xs"
-      :class="[
-        ...(disabled
-          ? ['bg-blue-700 opacity-50 cursor-not-allowed']
-          : ['bg-blue-700']),
-      ]"
-      @click="_event"
-    >
-      {{ label }}
-    </button>
   </div>
 </template>
 <script>
