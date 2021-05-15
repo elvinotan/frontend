@@ -131,6 +131,7 @@
                     :required="number.required"
                     :maxlength="number.maxlength"
                     :vruntime="vruntime"
+                    :allow-minus="false"
                     @blur="blur"
                   />
                 </td>

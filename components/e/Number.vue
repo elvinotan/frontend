@@ -64,9 +64,11 @@ export default {
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: Number, required: false, default: null },
+    allowMinus: { type: Boolean, required: false, default: true },
   },
   data() {
     return {
+      lvalue: this.value,
       state: 0,
       errors: [],
     }
@@ -98,8 +100,16 @@ export default {
   },
   methods: {
     _keypress(event) {
-      if (!'0123456789'.includes(event.key)) {
-        // keypress hanya di gunakan untuk prevent entry saja, gax ada interaksinya dgn nilai input
+      // Keypress ke trigger sebelum ada rendering, sehingga bagus gax ada flicker
+      const expression = this.allowMinus ? '-0123456789' : '0123456789'
+      const cursorIdx = event.target.selectionStart
+      const char = event.key
+
+      if (!expression.includes(char)) {
+        // Bila character tidak termasuk dalam expression maka di batalkan
+        event.preventDefault()
+      } else if (char === '-' && cursorIdx !== 0) {
+        // Bila character minus tapi dia mau input tidak di awal, maka di batalkan
         event.preventDefault()
       }
     },
