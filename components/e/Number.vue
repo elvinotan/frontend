@@ -64,7 +64,7 @@ export default {
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: Number, required: false, default: null },
-    allowMinus: { type: Boolean, required: false, default: true },
+    allowMinus: { type: Boolean, required: false, default: false },
   },
   data() {
     return {

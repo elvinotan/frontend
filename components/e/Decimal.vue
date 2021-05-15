@@ -61,6 +61,7 @@ export default {
     vruntime: { type: Function, required: false, default: null },
     value: { type: Number, required: false, default: null },
     maxFraction: { type: Number, required: false, default: 2 },
+    allowMinus: { type: Boolean, required: false, default: false },
   },
   data() {
     return {
@@ -96,29 +97,34 @@ export default {
   },
   methods: {
     _keypress(event) {
-      if (!'.0123456789'.includes(event.key)) {
-        // keypress hanya di gunakan untuk prevent entry saja, gax ada interaksinya dgn nilai input
+      // Keypress ke trigger sebelum ada rendering, sehingga bagus gax ada flicker
+      const expression = this.allowMinus ? '-.0123456789' : '.0123456789'
+      const cursorIdx = event.target.selectionStart
+      const char = event.key
+      const lvalue = this.lvalue
+
+      if (!expression.includes(event.key)) {
+        // Bila character tidak termasuk dalam expression maka di batalkan
         event.preventDefault()
-      } else if (
-        event.key === '.' &&
-        (!this.lvalue || !this.lvalue.length === 0)
-      ) {
-        // titik memang boleh tp bukan berarti ada di bagian depan harus berada di tengah tengah
+      } else if (char === '-' && cursorIdx !== 0) {
+        // Bila character minus tapi dia mau input tidak di awal, maka di batalkan
         event.preventDefault()
-      } else if (event.key === '.' && this.lvalue.includes('.')) {
-        // titik memang boleh tp bukan berarti boleh 2 kali, dalam 1 entry hanya boleh 1x saja
+      } else if (char === '.' && cursorIdx === 0) {
+        // bila mencoba untuk entry . di bagian depan, maka di batalkan
         event.preventDefault()
-      } else if (
-        this.lvalue &&
-        this.lvalue.includes &&
-        this.lvalue.includes('.')
-      ) {
+      } else if (char === '.' && lvalue.includes('.')) {
+        // bila mencoba untuk entry . tapi 2 kali atau lebih, maka di batalkan
+        event.preventDefault()
+      } else if (char === '.' && lvalue === '-') {
+        // bila mencoba untuk entry . tapi di depan hanya ada minus jadi '-.', maka di batalkan
+        event.preventDefault()
+      } else if (lvalue && lvalue.includes && lvalue.includes('.')) {
         // validasi kalo setalah . jumlah panjang tidak boleh lebih banyak dari maxFraction
-        const splits = this.lvalue.split('.')
-        const cursorLocation = event.target.selectionStart
+        const splits = lvalue.split('.')
+
         if (
           splits[1].length >= this.maxFraction &&
-          cursorLocation > splits[0].length
+          cursorIdx > splits[0].length
         )
           event.preventDefault()
       }

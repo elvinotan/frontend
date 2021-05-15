@@ -131,7 +131,7 @@
                     :required="number.required"
                     :maxlength="number.maxlength"
                     :vruntime="vruntime"
-                    :allow-minus="false"
+                    :allow-minus="true"
                     @blur="blur"
                   />
                 </td>
@@ -150,6 +150,7 @@
                     :required="decimal.required"
                     :maxlength="decimal.maxlength"
                     :vruntime="vruntime"
+                    :allow-minus="true"
                     @blur="blur"
                   />
                 </td>
