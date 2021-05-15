@@ -165,10 +165,6 @@
                 <td>&nbsp;</td>
               </tr>
               <tr>
-                <td>Percentage</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
                 <td>Date</td>
                 <td>&nbsp;</td>
               </tr>
