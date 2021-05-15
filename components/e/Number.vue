@@ -158,16 +158,11 @@ export default {
       if (this.value && this.value.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
       }
-      if (this.minimum) {
-        if (this.value < this.minimum) {
-          this.errors.push(`${this.label} can not be less then ${this.minimum}`)
-        }
+      if (this.minimum && this.value < this.minimum) {
+        this.errors.push(`${this.label} can not be less then ${this.minimum}`)
       }
-
-      if (this.maximum) {
-        if (this.value > this.maximum) {
-          this.errors.push(`${this.label} can not be more then ${this.maximum}`)
-        }
+      if (this.maximum && this.value > this.maximum) {
+        this.errors.push(`${this.label} can not be more then ${this.maximum}`)
       }
 
       // add business runtime validation

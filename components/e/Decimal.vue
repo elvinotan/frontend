@@ -38,11 +38,7 @@
         {{ errors[0] }}
       </p>
       <p v-else class="text-right text-xs italic">
-        {{
-          `${
-            value && value.toString ? value.toString().length : 0
-          } / ${maxlength}`
-        }}
+        {{ _info }}
       </p>
     </div>
   </div>
@@ -62,6 +58,8 @@ export default {
     value: { type: Number, required: false, default: null },
     maxFraction: { type: Number, required: false, default: 2 },
     allowMinus: { type: Boolean, required: false, default: false },
+    minimum: { type: Number, required: false, default: null },
+    maximum: { type: Number, required: false, default: null },
   },
   data() {
     return {
@@ -93,6 +91,16 @@ export default {
     _cssInputText() {
       const css = this.disabled ? 'text-gray-50' : 'text-gray-700'
       return css
+    },
+    _info() {
+      const minimum = this.minimum ? `Min:${this.minimum}` : ''
+      const maximum = this.maximum ? `Max:${this.maximum}` : ''
+      const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
+
+      const charInfo = `${this.value ? this.value.toString().length : 0} / ${
+        this.maxlength
+      } Char`
+      return minmax + charInfo
     },
   },
   methods: {
@@ -165,6 +173,12 @@ export default {
       }
       if (this.value && this.value.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
+      }
+      if (this.minimum && this.value < this.minimum) {
+        this.errors.push(`${this.label} can not be less then ${this.minimum}`)
+      }
+      if (this.maximum && this.value > this.maximum) {
+        this.errors.push(`${this.label} can not be more then ${this.maximum}`)
       }
 
       // add business runtime validation

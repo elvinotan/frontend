@@ -153,6 +153,8 @@
                     :maxlength="decimal.maxlength"
                     :vruntime="vruntime"
                     :allow-minus="true"
+                    :minimum="decimal.minimum"
+                    :maximum="decimal.maximum"
                     @blur="blur"
                   />
                 </td>
@@ -271,6 +273,8 @@ export default {
         id: 'decimal',
         label: 'Weight',
         maxlength: 10,
+        minimum: -100.86,
+        maximum: 200.54,
       },
       button: {
         ...empty,
