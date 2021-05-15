@@ -40,7 +40,7 @@
         {{ errors[0] }}
       </p>
       <p v-else class="text-right text-xs italic">
-        {{ `${value ? value.length : 0} / ${maxlength}` }}
+        {{ _info }}
       </p>
     </div>
   </div>
@@ -90,6 +90,9 @@ export default {
     _cssInputText() {
       const css = this.disabled ? 'text-gray-50' : 'text-gray-700'
       return css
+    },
+    _info() {
+      return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
     },
   },
   methods: {
