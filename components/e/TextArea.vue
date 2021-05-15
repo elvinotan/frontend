@@ -2,7 +2,7 @@
   <div v-if="show">
     <div
       class="text-xs rounded border-0 outline-none ring-2"
-      :class="[_cssBorder]"
+      :class="[_cssBorder, _cssInputBg]"
     >
       <div
         v-if="label"

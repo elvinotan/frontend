@@ -269,6 +269,9 @@ export default {
     },
     click() {
       this.shortText.disabled = !this.shortText.disabled
+      this.mediumText.disabled = !this.mediumText.disabled
+      this.longText.disabled = !this.longText.disabled
+      this.textArea.disabled = !this.textArea.disabled
       // this.$refs.firstEntryForm.clearError()
     },
   },
