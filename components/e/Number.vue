@@ -38,15 +38,7 @@
         {{ errors[0] }}
       </p>
       <p v-else class="text-right text-xs italic">
-        {{ minimum || maximum ? '(' : '' }}
-        {{ minimum ? `min:${minimum}, ` : '' }}
-        {{ maximum ? `max:${maximum} ` : '' }}
-        {{ minimum || maximum ? ')' : '' }}
-        {{
-          `${
-            value && value.toString ? value.toString().length : 0
-          } / ${maxlength}`
-        }}
+        {{ _info }}
       </p>
     </div>
   </div>
@@ -102,6 +94,16 @@ export default {
     _cssInputText() {
       const css = this.disabled ? 'text-gray-50' : 'text-gray-700'
       return css
+    },
+    _info() {
+      const minimum = this.minimum ? `Min:${this.minimum}` : ''
+      const maximum = this.maximum ? `Max:${this.maximum}` : ''
+      const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
+
+      const charInfo = `${this.value ? this.value.toString().length : 0} / ${
+        this.maxlength
+      } Char`
+      return minmax + charInfo
     },
   },
   methods: {
