@@ -1,28 +1,50 @@
 <template>
   <div>
-    <label class="text-gray-600 text-sm font-bold" :for="id">
-      {{ label }}
-      <span class="text-red-500">{{ required ? ' *' : '' }}</span>
-    </label>
-    <input
-      v-if="show"
-      :id="id"
-      :value="localValue"
-      :placeholder="placeholder"
-      type="text"
-      :maxlength="maxlength"
-      :disabled="disabled"
-      :required="required"
-      class="px-1 py-1 uppercase text-right placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-xs border-0 shadow outline-none focus:outline-none focus:ring-1 ring-gray-500 w-full"
-      @keypress="_event"
-      @input="_event"
-      @blur="_event"
-      @focus="_event"
-    />
-
-    <p class="text-red-500 text-right text-xs italic">
-      {{ errors.length > 0 ? errors[0] : '' }}
-    </p>
+    <div v-if="show">
+      <span
+        class="flex text-xs rounded border-0 outline-none ring-2"
+        :class="[_cssBorder]"
+      >
+        <span
+          v-if="label"
+          class="font-bold rounded-l text-sm text-gray-800 w-auto p-1"
+          :class="[_cssLabelBg]"
+        >
+          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : '' }}
+        </span>
+        <span
+          v-if="label && required"
+          class="font-bold text-center text-sm text-red-800 w-auto p-1"
+          :class="[_cssLabelBg]"
+        >
+          *
+        </span>
+        <input
+          :id="id"
+          type="text"
+          :placeholder="placeholder"
+          :value="value"
+          :maxlength="maxlength"
+          :disabled="disabled"
+          :required="required"
+          class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
+          :class="[_cssRounded, _cssInputBg, _cssInputText]"
+          @keypress="_keypress"
+          @input="_input"
+          @blur="_blur"
+        />
+      </span>
+      <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
+        {{ errors[0] }}
+      </p>
+      <p v-else class="text-right text-xs italic">
+        {{
+          `${
+            value && value.toString ? value.toString().length : 0
+          } / ${maxlength}`
+        }}
+      </p>
+    </div>
   </div>
 </template>
 <script>
@@ -41,27 +63,54 @@ export default {
   },
   data() {
     return {
-      localValue: this.value ? this.value.toString() : '',
+      state: 0,
       errors: [],
     }
   },
+  computed: {
+    _cssRounded() {
+      return this.label ? '' : 'rounded'
+    },
+    _cssBorder() {
+      let css = 'ring-gray-500'
+      if (this.state === 1) css = 'ring-green-500'
+      if (this.state === -1) css = 'ring-red-500'
+      return css
+    },
+    _cssLabelBg() {
+      let css = 'bg-gray-300'
+      if (this.state === 1) css = 'bg-green-300'
+      if (this.state === -1) css = 'bg-red-300'
+      return css
+    },
+    _cssInputBg() {
+      const css = this.disabled ? 'bg-gray-200' : 'bg-white'
+      return css
+    },
+    _cssInputText() {
+      const css = this.disabled ? 'text-gray-50' : 'text-gray-700'
+      return css
+    },
+  },
   methods: {
-    _event(evt) {
-      if (evt.type === 'keypress' && !'0123456789'.includes(evt.key)) {
+    _keypress(event) {
+      if (!'0123456789'.includes(event.key)) {
         // keypress hanya di gunakan untuk prevent entry saja, gax ada interaksinya dgn nilai input
-        evt.preventDefault()
-      } else if (evt.type === 'focus') {
-        this.$nextTick(() => {
-          // Masih blm berfungsi
-          const ctrl = document.getElementById(this.id)
-          ctrl.focus()
-          ctrl.setSelectionRange(this.localValue.length, this.localValue.length)
-        })
-      } else {
-        this.localValue = evt.target.value
-        this.$emit(evt.type, this.localValue ? +this.localValue : null)
-        this.validate()
+        event.preventDefault()
       }
+    },
+    _input(event) {
+      let value = event.target.value.toUpperCase()
+      value = value === '' ? null : +value
+      this.$emit(event.type, value)
+      this.$nextTick(this.validate)
+    },
+    _blur(event) {
+      let value = event.target.value.toUpperCase().trim()
+      value = value === '' ? null : +value
+      this.$emit('input', value)
+      this.$emit(event.type, value)
+      this.$nextTick(this.validate)
     },
     metaData() {
       return {
@@ -71,6 +120,7 @@ export default {
       }
     },
     clearError() {
+      this.state = 0
       this.errors = []
     },
     hasError() {
@@ -80,20 +130,21 @@ export default {
       this.clearError()
 
       // General validation base on props
-      if (this.required && !this.localValue) {
+      if (this.required && !this.value) {
         this.errors.push(`${this.label} is required`)
       }
-      if (this.localValue && this.localValue.length > this.maxlength) {
+      if (this.value && this.value.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
       }
 
       // add business runtime validation
       if (this.vruntime) {
-        const error = this.vruntime(this.localValue)
+        const error = this.vruntime(this.value)
         if (error) this.errors.push(error)
       }
-
-      return { valid: !this.hasError(), errors: this.errors }
+      const validation = { valid: !this.hasError(), errors: this.errors }
+      this.state = validation.valid ? 1 : -1
+      return validation
     },
   },
 }
