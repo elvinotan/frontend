@@ -132,6 +132,8 @@
                     :maxlength="number.maxlength"
                     :vruntime="vruntime"
                     :allow-minus="true"
+                    :minimum="number.minimum"
+                    :maximum="number.maximum"
                     @blur="blur"
                   />
                 </td>
@@ -260,6 +262,8 @@ export default {
         id: 'number',
         label: 'Distance',
         maxlength: 10,
+        minimum: 100,
+        maximum: 200,
       },
       decimal: {
         ...empty,

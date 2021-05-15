@@ -38,6 +38,10 @@
         {{ errors[0] }}
       </p>
       <p v-else class="text-right text-xs italic">
+        {{ minimum || maximum ? '(' : '' }}
+        {{ minimum ? `min:${minimum}, ` : '' }}
+        {{ maximum ? `max:${maximum} ` : '' }}
+        {{ minimum || maximum ? ')' : '' }}
         {{
           `${
             value && value.toString ? value.toString().length : 0
@@ -65,6 +69,8 @@ export default {
     vruntime: { type: Function, required: false, default: null },
     value: { type: Number, required: false, default: null },
     allowMinus: { type: Boolean, required: false, default: false },
+    minimum: { type: Number, required: false, default: null },
+    maximum: { type: Number, required: false, default: null },
   },
   data() {
     return {
@@ -149,6 +155,17 @@ export default {
       }
       if (this.value && this.value.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
+      }
+      if (this.minimum) {
+        if (this.value < this.minimum) {
+          this.errors.push(`${this.label} can not be less then ${this.minimum}`)
+        }
+      }
+
+      if (this.maximum) {
+        if (this.value > this.maximum) {
+          this.errors.push(`${this.label} can not be more then ${this.maximum}`)
+        }
       }
 
       // add business runtime validation
