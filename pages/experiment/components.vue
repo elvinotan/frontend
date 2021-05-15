@@ -106,8 +106,9 @@
                   <EButton
                     :id="button.id"
                     :ref="button.id"
-                    :label="button.label"
+                    label="Approve Proposal"
                     :disabled="button.disabled"
+                    color="green"
                     @click="click"
                   />
                 </td>
@@ -271,7 +272,7 @@ export default {
       this.shortText.disabled = !this.shortText.disabled
       this.mediumText.disabled = !this.mediumText.disabled
       this.longText.disabled = !this.longText.disabled
-      this.textArea.disabled = !this.textArea.disabled
+      // this.button.disabled = !this.button.disabled
       // this.$refs.firstEntryForm.clearError()
     },
   },
