@@ -48,6 +48,10 @@
   </div>
 </template>
 <script>
+/*
+  Number ini hanya menerima angka 0123456789
+  dan angka pertama tidak boleh 0 krn nanti akan di convert menjadi real number
+ */
 export default {
   name: 'Number',
   props: {
