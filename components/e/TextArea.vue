@@ -1,39 +1,46 @@
 <template>
-  <div>
-    <div v-if="show">
-      <span
-        class="flex text-xs rounded border-0 outline-none ring-1 ring-gray-500"
+  <div v-if="show">
+    <div
+      class="text-xs rounded border-0 outline-none ring-2"
+      :class="[_cssBorder]"
+    >
+      <div
+        v-if="label"
+        class="font-bold rounded-t text-sm text-gray-800 w-auto p-1"
+        :class="[_cssLabelBg]"
       >
+        {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : '' }}
         <span
-          v-if="label"
-          class="bg-gray-300 font-bold text-left rounded-l text-sm text-gray-800 w-auto p-1"
+          v-if="label && required"
+          class="font-bold text-center text-sm text-red-800 w-auto p-1"
+          :class="[_cssLabelBg]"
         >
-          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : ''
-          }}{{ required ? '&nbsp;*' : '' }}
+          *
         </span>
-        <textarea
-          :id="id"
-          type="text"
-          :placeholder="placeholder"
-          :value="value"
-          :maxlength="maxlength"
-          :disabled="disabled"
-          :required="required"
-          :rows="rows"
-          :cols="cols"
-          class="field text-sm text-gray-600 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white"
-          :class="[label ? '' : 'rounded']"
-          @input="_input"
-          @blur="_blur"
-        />
-      </span>
-      <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
-        {{ errors[0] }}
-      </p>
-      <p v-else class="text-right text-xs italic">
-        {{ `${value ? value.length : 0} / ${maxlength}` }}
-      </p>
+      </div>
+
+      <textarea
+        :id="id"
+        type="text"
+        :placeholder="placeholder"
+        :value="value"
+        :maxlength="maxlength"
+        :disabled="disabled"
+        :required="required"
+        :cols="cols"
+        :rows="rows"
+        class="field text-sm text-gray-800 rounded-b p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white"
+        :class="[_cssLabel]"
+        @input="_input"
+        @blur="_blur"
+      />
     </div>
+    <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
+      {{ errors[0] }}
+    </p>
+    <p v-else class="text-right text-xs italic">
+      {{ `${value ? value.length : 0} / ${maxlength}` }}
+    </p>
   </div>
 </template>
 <script>
@@ -44,18 +51,36 @@ export default {
     label: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
     maxlength: { type: Number, required: false, default: 10 },
+    cols: { type: Number, required: false, default: 50 },
+    rows: { type: Number, required: false, default: 4 },
     disabled: { type: Boolean, required: false, default: false },
     required: { type: Boolean, required: false, default: false },
-    rows: { type: Number, required: false, default: 4 },
-    cols: { type: Number, required: false, default: 50 },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: String, required: false, default: '' },
   },
   data() {
     return {
+      state: 0,
       errors: [],
     }
+  },
+  computed: {
+    _cssLabel() {
+      return this.label ? '' : 'rounded'
+    },
+    _cssBorder() {
+      let css = 'ring-gray-500'
+      if (this.state === 1) css = 'ring-green-500'
+      if (this.state === -1) css = 'ring-red-500'
+      return css
+    },
+    _cssLabelBg() {
+      let css = 'bg-gray-300'
+      if (this.state === 1) css = 'bg-green-300'
+      if (this.state === -1) css = 'bg-red-300'
+      return css
+    },
   },
   methods: {
     _input(event) {
@@ -77,6 +102,7 @@ export default {
       }
     },
     clearError() {
+      this.state = 0
       this.errors = []
     },
     hasError() {
@@ -98,8 +124,9 @@ export default {
         const error = this.vruntime(this.value)
         if (error) this.errors.push(error)
       }
-
-      return { valid: !this.hasError(), errors: this.errors }
+      const validation = { valid: !this.hasError(), errors: this.errors }
+      this.state = validation.valid ? 1 : -1
+      return validation
     },
   },
 }

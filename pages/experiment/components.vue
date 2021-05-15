@@ -23,7 +23,7 @@
                     :disabled="shortText.disabled"
                     :show="shortText.show"
                     placeholder="PlaceHoilder"
-                    :required="false"
+                    :required="shortText.required"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
@@ -213,6 +213,7 @@ export default {
         ...empty,
         id: 'shortText',
         label: 'Nick Name',
+        value: 'Pipin',
         maxlength: 10,
       },
       mediumText: {
@@ -267,7 +268,8 @@ export default {
       return null
     },
     click() {
-      this.$refs.firstEntryForm.clearError()
+      this.shortText.disabled = !this.shortText.disabled
+      // this.$refs.firstEntryForm.clearError()
     },
   },
 }
