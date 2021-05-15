@@ -18,11 +18,12 @@
                     :id="shortText.id"
                     :ref="shortText.id"
                     v-model="shortText.value"
+                    label="Nick Name"
                     :maxlength="shortText.maxlength"
                     :disabled="shortText.disabled"
                     :show="shortText.show"
                     placeholder="PlaceHoilder"
-                    :required="shortText.required"
+                    :required="false"
                     :vruntime="vruntime"
                     @blur="blur"
                   />

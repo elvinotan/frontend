@@ -2,14 +2,22 @@
   <div>
     <div v-if="show">
       <span
-        class="flex text-xs rounded border-0 outline-none ring-1 ring-gray-500"
+        class="flex text-xs rounded border-0 outline-none ring-2"
+        :class="[_cssBorder]"
       >
         <span
           v-if="label"
-          class="bg-gray-300 font-bold text-left rounded-l text-sm text-gray-800 w-auto p-1"
+          class="font-bold rounded-l text-sm text-gray-800 w-auto p-1"
+          :class="[_cssLabelBg]"
         >
-          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : ''
-          }}{{ required ? '&nbsp;*' : '' }}
+          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : '' }}
+        </span>
+        <span
+          v-if="label && required"
+          class="font-bold text-center text-sm text-red-800 w-auto p-1"
+          :class="[_cssLabelBg]"
+        >
+          *
         </span>
         <input
           :id="id"
@@ -19,8 +27,8 @@
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
-          class="field text-sm text-gray-600 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white"
-          :class="[label ? '' : 'rounded']"
+          class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 text-blueGray-600 relative bg-white"
+          :class="[_cssLabel]"
           @input="_input"
           @blur="_blur"
         />
@@ -50,8 +58,26 @@ export default {
   },
   data() {
     return {
+      state: 0,
       errors: [],
     }
+  },
+  computed: {
+    _cssLabel() {
+      return this.label ? '' : 'rounded'
+    },
+    _cssBorder() {
+      let css = 'ring-gray-500'
+      if (this.state === 1) css = 'ring-green-500'
+      if (this.state === -1) css = 'ring-red-500'
+      return css
+    },
+    _cssLabelBg() {
+      let css = 'bg-gray-300'
+      if (this.state === 1) css = 'bg-green-300'
+      if (this.state === -1) css = 'bg-red-300'
+      return css
+    },
   },
   methods: {
     _input(event) {
@@ -73,6 +99,7 @@ export default {
       }
     },
     clearError() {
+      this.state = 0
       this.errors = []
     },
     hasError() {
@@ -94,8 +121,9 @@ export default {
         const error = this.vruntime(this.value)
         if (error) this.errors.push(error)
       }
-
-      return { valid: !this.hasError(), errors: this.errors }
+      const validation = { valid: !this.hasError(), errors: this.errors }
+      this.state = validation.valid ? 1 : -1
+      return validation
     },
   },
 }
