@@ -82,8 +82,8 @@
                 <td>Area</td>
                 <td>
                   <ETextArea
-                    id="textArea.id"
-                    ref="textArea.id"
+                    :id="textArea.id"
+                    :ref="textArea.id"
                     v-model="textArea.value"
                     :label="textArea.label"
                     :disabled="textArea.disabled"
@@ -122,8 +122,8 @@
                 <td>Number</td>
                 <td>
                   <ENumber
-                    id="number.id"
-                    ref="number.id"
+                    :id="number.id"
+                    :ref="number.id"
                     v-model="number.value"
                     :label="number.label"
                     :disabled="number.disabled"
@@ -135,6 +135,24 @@
                   />
                 </td>
                 <td>[{{ number }}]</td>
+              </tr>
+              <tr>
+                <td>Decimal</td>
+                <td>
+                  <EDecimal
+                    :id="decimal.id"
+                    :ref="decimal.id"
+                    v-model="decimal.value"
+                    :label="decimal.label"
+                    :disabled="decimal.disabled"
+                    :show="decimal.show"
+                    :required="decimal.required"
+                    :maxlength="decimal.maxlength"
+                    :vruntime="vruntime"
+                    @blur="blur"
+                  />
+                </td>
+                <td>[{{ decimal }}]</td>
               </tr>
               <tr>
                 <td>Currency</td>
@@ -237,9 +255,15 @@ export default {
       },
       number: {
         ...empty,
-        value: 123456789,
         id: 'number',
         label: 'Distance',
+        maxlength: 10,
+      },
+      decimal: {
+        ...empty,
+        value: 1542.2365,
+        id: 'decimal',
+        label: 'Weight',
         maxlength: 10,
       },
       button: {

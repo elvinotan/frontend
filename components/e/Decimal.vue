@@ -21,9 +21,9 @@
         </span>
         <input
           :id="id"
+          v-model="lvalue"
           type="text"
           :placeholder="placeholder"
-          :value="value"
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
@@ -48,12 +48,8 @@
   </div>
 </template>
 <script>
-/*
-  Number ini hanya menerima angka 0123456789
-  dan angka pertama tidak boleh 0 krn nanti akan di convert menjadi real number
- */
 export default {
-  name: 'Number',
+  name: 'Decimal',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
@@ -64,9 +60,11 @@ export default {
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: Number, required: false, default: null },
+    maxFraction: { type: Number, required: false, default: 2 },
   },
   data() {
     return {
+      lvalue: this.value ? this.value.toFixed(this.maxFraction) : this.value,
       state: 0,
       errors: [],
     }
@@ -98,13 +96,35 @@ export default {
   },
   methods: {
     _keypress(event) {
-      if (!'0123456789'.includes(event.key)) {
+      if (!'.0123456789'.includes(event.key)) {
         // keypress hanya di gunakan untuk prevent entry saja, gax ada interaksinya dgn nilai input
         event.preventDefault()
+      } else if (
+        event.key === '.' &&
+        (!this.lvalue || !this.lvalue.length === 0)
+      ) {
+        // titik memang boleh tp bukan berarti ada di bagian depan harus berada di tengah tengah
+        event.preventDefault()
+      } else if (event.key === '.' && this.lvalue.includes('.')) {
+        // titik memang boleh tp bukan berarti boleh 2 kali, dalam 1 entry hanya boleh 1x saja
+        event.preventDefault()
+      } else if (
+        this.lvalue &&
+        this.lvalue.includes &&
+        this.lvalue.includes('.')
+      ) {
+        // validasi kalo setalah . jumlah panjang tidak boleh lebih banyak dari maxFraction
+        const splits = this.lvalue.split('.')
+        const cursorLocation = event.target.selectionStart
+        if (
+          splits[1].length >= this.maxFraction &&
+          cursorLocation > splits[0].length
+        )
+          event.preventDefault()
       }
     },
     _input(event) {
-      let value = event.target.value.toUpperCase()
+      let value = event.target.value
       value = value === '' ? null : +value
       this.$emit(event.type, value)
       this.$nextTick(this.validate)
