@@ -206,8 +206,21 @@
                 <td>&nbsp;</td>
               </tr>
               <tr>
-                <td>Radio</td>
-                <td>&nbsp;</td>
+                <td>Boolean / Radio</td>
+                <td>
+                  <EBoolean
+                    :id="boolean.id"
+                    :ref="boolean.id"
+                    v-model="boolean.value"
+                    :label="boolean.label"
+                    :required="boolean.required"
+                    :disabled="boolean.disabled"
+                    :show="boolean.show"
+                    :vruntime="vruntime"
+                    @blur="blur"
+                  />
+                </td>
+                <td>[{{ boolean }}]</td>
               </tr>
               <tr>
                 <td>PaginationServer</td>
@@ -319,9 +332,15 @@ export default {
         ...empty,
         minimum: '19:30',
         maximum: '23:00',
-        value: null,
+        value: '21:00',
         id: 'time',
         label: 'Birth Time',
+      },
+      boolean: {
+        ...empty,
+        value: true,
+        id: 'boolean',
+        label: 'Active',
       },
       planets: [],
     }
@@ -352,6 +371,7 @@ export default {
       this.number.disabled = !this.number.disabled
       this.decimal.disabled = !this.decimal.disabled
       this.date.disabled = !this.date.disabled
+      this.time.disabled = !this.time.disabled
       // this.button.disabled = !this.button.disabled
       // this.$refs.firstEntryForm.clearError()
     },
