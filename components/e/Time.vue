@@ -52,17 +52,16 @@ export default {
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
-    value: { type: Date, required: false, default: null },
-    minimum: { type: Date, required: false, default: null },
-    maximum: { type: Date, required: false, default: null },
+    value: { type: String, required: false, default: null },
+    minimum: { type: String, required: false, default: null },
+    maximum: { type: String, required: false, default: null },
   },
   data() {
     return {
-      locale: 'id-ID',
-      maxlength: 10,
+      maxlength: 5,
       state: 0,
       errors: [],
-      lvalue: this._format(this.value),
+      lvalue: this.value,
     }
   },
   computed: {
@@ -90,10 +89,8 @@ export default {
       return css
     },
     _info() {
-      const min = this._format(this.minimum)
-      const max = this._format(this.maximum)
-      const minimum = this.minimum ? `Min:${min}` : ''
-      const maximum = this.maximum ? `Max:${max}` : ''
+      const minimum = this.minimum ? `Min:${this.minimum}` : ''
+      const maximum = this.maximum ? `Max:${this.maximum}` : ''
       const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
 
       const charInfo = `${this.lvalue ? this.lvalue.length : 0} / ${
@@ -103,33 +100,16 @@ export default {
     },
   },
   methods: {
-    _format(value) {
-      if (value) {
-        // Must return HH:mm, krn format ini yang di terima oleh input tag dgn tipe date
-        const hours =
-          value.getHours().toString().length === 1
-            ? `0${value.getHours() + 1}`
-            : value.getHours()
-        const minutes =
-          value.getMinutes().toString().length === 1
-            ? `0${value.getMinutes() + 1}`
-            : value.getMinutes()
-
-        return 'HH:mm'.replace(/HH/g, hours).replace(/mm/g, minutes)
-      } else {
-        return value
-      }
-    },
     _input(event) {
       let value = event.target.value
-      value = value ? new Date(value) : null
+      value = value || null
 
       this.$emit(event.type, value)
       this.$nextTick(this.validate)
     },
     _blur(event) {
       let value = event.target.value
-      value = value ? new Date(value) : null
+      value = value || null
 
       this.$emit('input', value)
       this.$emit(event.type, value)
@@ -162,21 +142,11 @@ export default {
       if (this.value && this.value.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
       }
-      if (
-        this.value &&
-        this.minimum &&
-        this.value.getTime() < this.minimum.getTime()
-      ) {
-        const min = this._format(this.minimum)
-        this.errors.push(`${this.label} can not be less then ${min}`)
+      if (this.value && this.minimum && this.value < this.minimum) {
+        this.errors.push(`${this.label} can not be less then ${this.minimum}`)
       }
-      if (
-        this.value &&
-        this.maximum &&
-        this.value.getTime() > this.maximum.getTime()
-      ) {
-        const max = this._format(this.maximum)
-        this.errors.push(`${this.label} can not be more then ${max}`)
+      if (this.value && this.maximum && this.value > this.maximum) {
+        this.errors.push(`${this.label} can not be more then ${this.maximum}`)
       }
       // add business runtime validation
       if (this.vruntime) {

@@ -317,9 +317,9 @@ export default {
       },
       time: {
         ...empty,
-        minimum: new Date(),
-        maximum: new Date(),
-        value: new Date(),
+        minimum: '19:30',
+        maximum: '23:00',
+        value: null,
         id: 'time',
         label: 'Birth Time',
       },
