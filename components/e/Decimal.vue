@@ -56,7 +56,7 @@ export default {
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: Number, required: false, default: null },
-    maxFraction: { type: Number, required: false, default: 2 },
+    maximumFractionDigits: { type: Number, required: false, default: 2 },
     allowMinus: { type: Boolean, required: false, default: false },
     separator: { type: Boolean, required: false, default: false },
     minimum: { type: Number, required: false, default: null },
@@ -66,14 +66,7 @@ export default {
     return {
       separatorSign: ',',
       locale: 'en-US',
-      lvalue:
-        this.value && this.separator
-          ? new Intl.NumberFormat(this.locale).format(
-              this.value.toFixed(this.maxFraction)
-            )
-          : this.value
-          ? this.value.toFixed(this.maxFraction)
-          : this.value,
+      lvalue: this._format(this.value),
       state: 0,
       errors: [],
     }
@@ -114,6 +107,16 @@ export default {
     },
   },
   methods: {
+    _format(value) {
+      if (value && this.separator) {
+        return new Intl.NumberFormat(this.locale, {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: this.maximumFractionDigits,
+        }).format(value)
+      } else {
+        return value
+      }
+    },
     _keypress(event) {
       // Keypress ke trigger sebelum ada rendering, sehingga bagus gax ada flicker
       const expression = this.allowMinus ? '-.0123456789' : '.0123456789'
@@ -123,38 +126,33 @@ export default {
 
       if (!expression.includes(event.key)) {
         // Bila character tidak termasuk dalam expression maka di batalkan
-        console.log('prevent 1')
         event.preventDefault()
       } else if (char === '-' && cursorIdx !== 0) {
         // Bila character minus tapi dia mau input tidak di awal, maka di batalkan
-        console.log('prevent 2')
         event.preventDefault()
       } else if (char === '.' && cursorIdx === 0) {
         // bila mencoba untuk entry . di bagian depan, maka di batalkan
-        console.log('prevent 3')
         event.preventDefault()
       } else if (char === '.' && lvalue.includes('.')) {
         // bila mencoba untuk entry . tapi 2 kali atau lebih, maka di batalkan
-        console.log('prevent 4')
         event.preventDefault()
       } else if (char === '.' && lvalue === '-') {
         // bila mencoba untuk entry . tapi di depan hanya ada minus jadi '-.', maka di batalkan
-        console.log('prevent 5')
         event.preventDefault()
       } else if (lvalue && lvalue.includes && lvalue.includes('.')) {
-        // validasi kalo setalah . jumlah panjang tidak boleh lebih banyak dari maxFraction
+        // validasi kalo setalah . jumlah panjang tidak boleh lebih banyak dari maximumFractionDigits
         const splits = lvalue.split('.')
 
         if (
-          splits[1].length >= this.maxFraction &&
+          splits[1].length >= this.maximumFractionDigits &&
           cursorIdx > splits[0].length
         ) {
-          console.log('prevent 6')
           event.preventDefault()
         }
       }
     },
     _input(event) {
+      const endWithPeriode = event.target.value.endsWith('.')
       let lvalue = event.target.value
         .replaceAll(this.separatorSign, '')
         .toUpperCase()
@@ -163,20 +161,19 @@ export default {
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
       if (lvalue && this.separator) {
-        console.log('Before', lvalue)
-        this.lvalue = new Intl.NumberFormat(this.locale).format(lvalue)
-        console.log('Become', this.lvalue)
+        this.lvalue = this._format(lvalue)
+        if (endWithPeriode) this.lvalue += '.'
       }
     },
     _blur(event) {
-      let value = event.target.value
+      let lvalue = event.target.value
         .trim()
         .replaceAll(this.separatorSign, '')
         .toUpperCase()
 
-      value = value === '' ? null : +value
-      this.$emit('input', value)
-      this.$emit(event.type, value)
+      lvalue = lvalue === '' ? null : +lvalue
+      this.$emit('input', lvalue)
+      this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
     },
     metaData() {

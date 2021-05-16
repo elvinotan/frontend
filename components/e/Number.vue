@@ -69,12 +69,9 @@ export default {
     return {
       separatorSign: ',',
       locale: 'en-US',
-      lvalue:
-        this.value && this.separator
-          ? new Intl.NumberFormat(this.locale).format(this.value.toFixed(0))
-          : this.value,
       state: 0,
       errors: [],
+      lvalue: this._format(this.value),
     }
   },
   computed: {
@@ -113,6 +110,16 @@ export default {
     },
   },
   methods: {
+    _format(value) {
+      if (value && this.separator) {
+        return new Intl.NumberFormat(this.locale, {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }).format(value)
+      } else {
+        return value
+      }
+    },
     _keypress(event) {
       // Keypress ke trigger sebelum ada rendering, sehingga bagus gax ada flicker
       const expression = this.allowMinus ? '-0123456789' : '0123456789'
@@ -136,7 +143,7 @@ export default {
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
       if (lvalue && this.separator) {
-        this.lvalue = new Intl.NumberFormat(this.locale).format(lvalue)
+        this.lvalue = this._format(lvalue)
       }
     },
     _blur(event) {

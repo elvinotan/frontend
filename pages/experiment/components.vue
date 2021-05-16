@@ -156,7 +156,7 @@
                     :allow-minus="true"
                     :minimum="decimal.minimum"
                     :maximum="decimal.maximum"
-                    :max-fraction="4"
+                    :maximum-fraction-digits="6"
                     :separator="true"
                     @blur="blur"
                   />
