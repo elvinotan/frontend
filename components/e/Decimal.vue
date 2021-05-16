@@ -96,11 +96,11 @@ export default {
       return css
     },
     _info() {
-      const minimum = this.minimum ? `Min:${this.minimum}` : ''
-      const maximum = this.maximum ? `Max:${this.maximum}` : ''
+      const minimum = this.minimum ? `Min:${this._format(this.minimum)}` : ''
+      const maximum = this.maximum ? `Max:${this._format(this.maximum)}` : ''
       const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
 
-      const charInfo = `${this.value ? this.value.toString().length : 0} / ${
+      const charInfo = `${this.lvalue ? this.lvalue.length : 0} / ${
         this.maxlength
       } Char`
       return minmax + charInfo

@@ -1,5 +1,23 @@
 <template>
   <div>
+    <div class="relative z-0 w-full mb-5">
+      <input
+        type="text"
+        name="date"
+        placeholder=" "
+        onclick="this.setAttribute('type', 'date');"
+        class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+      />
+      <label
+        for="date"
+        class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500"
+        >Date</label
+      >
+      <span id="error" class="text-sm text-red-600 hidden"
+        >Date is required</span
+      >
+    </div>
+
     <div v-if="show">
       <span
         class="flex text-xs rounded border-0 outline-none ring-2"
@@ -21,15 +39,14 @@
         </span>
         <input
           :id="id"
-          v-model="lvalue"
           type="text"
           :placeholder="placeholder"
+          :value="value"
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
-          class="text-right field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
+          class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
-          @keypress="_keypress"
           @input="_input"
           @blur="_blur"
         />
@@ -43,13 +60,10 @@
     </div>
   </div>
 </template>
+
 <script>
-/*
-  Number ini hanya menerima angka 0123456789
-  dan angka pertama tidak boleh 0 krn nanti akan di convert menjadi real number
- */
 export default {
-  name: 'Number',
+  name: 'Date',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
@@ -59,19 +73,12 @@ export default {
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
-    value: { type: Number, required: false, default: null },
-    allowMinus: { type: Boolean, required: false, default: false },
-    separator: { type: Boolean, required: false, default: false },
-    minimum: { type: Number, required: false, default: null },
-    maximum: { type: Number, required: false, default: null },
+    value: { type: String, required: false, default: '' },
   },
   data() {
     return {
-      separatorSign: ',',
-      locale: 'en-US',
       state: 0,
       errors: [],
-      lvalue: this._format(this.value),
     }
   },
   computed: {
@@ -99,62 +106,19 @@ export default {
       return css
     },
     _info() {
-      const minimum = this.minimum ? `Min:${this._format(this.minimum)}` : ''
-      const maximum = this.maximum ? `Max:${this._format(this.maximum)}` : ''
-      const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
-
-      const charInfo = `${this.lvalue ? this.lvalue.length : 0} / ${
-        this.maxlength
-      } Char`
-      return minmax + charInfo
+      return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
     },
   },
   methods: {
-    _format(value) {
-      if (value && this.separator) {
-        return new Intl.NumberFormat(this.locale, {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        }).format(value)
-      } else {
-        return value
-      }
-    },
-    _keypress(event) {
-      // Keypress ke trigger sebelum ada rendering, sehingga bagus gax ada flicker
-      const expression = this.allowMinus ? '-0123456789' : '0123456789'
-      const cursorIdx = event.target.selectionStart
-      const char = event.key
-
-      if (!expression.includes(char)) {
-        // Bila character tidak termasuk dalam expression maka di batalkan
-        event.preventDefault()
-      } else if (char === '-' && cursorIdx !== 0) {
-        // Bila character minus tapi dia mau input tidak di awal, maka di batalkan
-        event.preventDefault()
-      }
-    },
     _input(event) {
-      let lvalue = event.target.value
-        .replaceAll(this.separatorSign, '')
-        .toUpperCase()
-
-      lvalue = lvalue === '' ? null : +lvalue
-      this.$emit(event.type, lvalue)
+      const value = event.target.value.toUpperCase()
+      this.$emit(event.type, value)
       this.$nextTick(this.validate)
-      if (lvalue && this.separator) {
-        this.lvalue = this._format(lvalue)
-      }
     },
     _blur(event) {
-      let lvalue = event.target.value
-        .trim()
-        .replaceAll(this.separatorSign, '')
-        .toUpperCase()
-
-      lvalue = lvalue === '' ? null : +lvalue
-      this.$emit('input', lvalue)
-      this.$emit(event.type, lvalue)
+      const value = event.target.value.toUpperCase().trim()
+      this.$emit('input', value)
+      this.$emit(event.type, value)
       this.$nextTick(this.validate)
     },
     metaData() {
@@ -175,17 +139,11 @@ export default {
       this.clearError()
 
       // General validation base on props
-      if (this.required && !this.value && this.value !== 0) {
+      if (this.required && !this.value) {
         this.errors.push(`${this.label} is required`)
       }
       if (this.value && this.value.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
-      }
-      if (this.minimum && this.value < this.minimum) {
-        this.errors.push(`${this.label} can not be less then ${this.minimum}`)
-      }
-      if (this.maximum && this.value > this.maximum) {
-        this.errors.push(`${this.label} can not be more then ${this.maximum}`)
       }
 
       // add business runtime validation

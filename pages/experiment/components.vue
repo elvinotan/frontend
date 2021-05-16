@@ -164,12 +164,8 @@
                 <td>[{{ decimal }}]</td>
               </tr>
               <tr>
-                <td>Currency</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
                 <td>Date</td>
-                <td>&nbsp;</td>
+                <td><EDate /></td>
               </tr>
               <tr>
                 <td>Hour</td>
@@ -265,7 +261,7 @@ export default {
         label: 'Distance',
         maxlength: 30,
         minimum: 100,
-        maximum: 200,
+        maximum: 200232323232323,
       },
       decimal: {
         ...empty,
@@ -273,8 +269,8 @@ export default {
         id: 'decimal',
         label: 'Weight',
         maxlength: 30,
-        minimum: -100.86,
-        maximum: 200.54,
+        minimum: -100232323.86,
+        maximum: 202323230.54,
       },
       button: {
         ...empty,
