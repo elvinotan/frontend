@@ -165,7 +165,9 @@
               </tr>
               <tr>
                 <td>Date</td>
-                <td><EDate /></td>
+                <td>
+                  <EDate id="date" label="Birth Date" :required="true" />
+                </td>
               </tr>
               <tr>
                 <td>Hour</td>

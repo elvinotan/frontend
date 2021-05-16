@@ -1,23 +1,5 @@
 <template>
   <div>
-    <div class="relative z-0 w-full mb-5">
-      <input
-        type="text"
-        name="date"
-        placeholder=" "
-        onclick="this.setAttribute('type', 'date');"
-        class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-      />
-      <label
-        for="date"
-        class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500"
-        >Date</label
-      >
-      <span id="error" class="text-sm text-red-600 hidden"
-        >Date is required</span
-      >
-    </div>
-
     <div v-if="show">
       <span
         class="flex text-xs rounded border-0 outline-none ring-2"
@@ -39,8 +21,7 @@
         </span>
         <input
           :id="id"
-          type="text"
-          :placeholder="placeholder"
+          type="date"
           :value="value"
           :maxlength="maxlength"
           :disabled="disabled"
@@ -67,8 +48,6 @@ export default {
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
-    placeholder: { type: String, required: false, default: '' },
-    maxlength: { type: Number, required: false, default: 10 },
     disabled: { type: Boolean, required: false, default: false },
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
@@ -77,6 +56,7 @@ export default {
   },
   data() {
     return {
+      maxlength: 10,
       state: 0,
       errors: [],
     }
@@ -136,24 +116,23 @@ export default {
       return this.errors.length > 0
     },
     validate() {
-      this.clearError()
-
-      // General validation base on props
-      if (this.required && !this.value) {
-        this.errors.push(`${this.label} is required`)
-      }
-      if (this.value && this.value.length > this.maxlength) {
-        this.errors.push(`${this.label} is exceeded`)
-      }
-
-      // add business runtime validation
-      if (this.vruntime) {
-        const error = this.vruntime(this.value)
-        if (error) this.errors.push(error)
-      }
-      const validation = { valid: !this.hasError(), errors: this.errors }
-      this.state = validation.valid ? 1 : -1
-      return validation
+      // implemented nanti
+      // this.clearError()
+      // // General validation base on props
+      // if (this.required && !this.value) {
+      //   this.errors.push(`${this.label} is required`)
+      // }
+      // if (this.value && this.value.length > this.maxlength) {
+      //   this.errors.push(`${this.label} is exceeded`)
+      // }
+      // // add business runtime validation
+      // if (this.vruntime) {
+      //   const error = this.vruntime(this.value)
+      //   if (error) this.errors.push(error)
+      // }
+      // const validation = { valid: !this.hasError(), errors: this.errors }
+      // this.state = validation.valid ? 1 : -1
+      // return validation
     },
   },
 }
