@@ -27,7 +27,7 @@
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
-          class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
+          class="text-right field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
           @keypress="_keypress"
           @input="_input"
@@ -67,6 +67,7 @@ export default {
   },
   data() {
     return {
+      separatorSign: ',',
       lvalue: this.value,
       state: 0,
       errors: [],
@@ -123,13 +124,23 @@ export default {
       }
     },
     _input(event) {
-      let value = event.target.value.toUpperCase()
+      let value = event.target.value
+        .replaceAll(this.separatorSign, '')
+        .toUpperCase()
+
       value = value === '' ? null : +value
       this.$emit(event.type, value)
       this.$nextTick(this.validate)
+      if (value && this.separator) {
+        this.lvalue = new Intl.NumberFormat('en-US').format(value)
+      }
     },
     _blur(event) {
-      let value = event.target.value.toUpperCase().trim()
+      let value = event.target.value
+        .trim()
+        .replaceAll(this.separatorSign, '')
+        .toUpperCase()
+
       value = value === '' ? null : +value
       this.$emit('input', value)
       this.$emit(event.type, value)

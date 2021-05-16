@@ -132,6 +132,7 @@
                     :maxlength="number.maxlength"
                     :vruntime="vruntime"
                     :allow-minus="true"
+                    :separator="true"
                     :minimum="number.minimum"
                     :maximum="number.maximum"
                     @blur="blur"
@@ -259,7 +260,7 @@ export default {
         ...empty,
         id: 'number',
         label: 'Distance',
-        maxlength: 10,
+        maxlength: 30,
         minimum: 100,
         maximum: 200,
       },
@@ -268,7 +269,7 @@ export default {
         value: 1542.2365,
         id: 'decimal',
         label: 'Weight',
-        maxlength: 10,
+        maxlength: 30,
         minimum: -100.86,
         maximum: 200.54,
       },
