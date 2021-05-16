@@ -68,7 +68,11 @@ export default {
   data() {
     return {
       separatorSign: ',',
-      lvalue: this.value,
+      locale: 'en-US',
+      lvalue:
+        this.value && this.separator
+          ? new Intl.NumberFormat(this.locale).format(this.value.toFixed(0))
+          : this.value,
       state: 0,
       errors: [],
     }
@@ -124,26 +128,26 @@ export default {
       }
     },
     _input(event) {
-      let value = event.target.value
+      let lvalue = event.target.value
         .replaceAll(this.separatorSign, '')
         .toUpperCase()
 
-      value = value === '' ? null : +value
-      this.$emit(event.type, value)
+      lvalue = lvalue === '' ? null : +lvalue
+      this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
-      if (value && this.separator) {
-        this.lvalue = new Intl.NumberFormat('en-US').format(value)
+      if (lvalue && this.separator) {
+        this.lvalue = new Intl.NumberFormat(this.locale).format(lvalue)
       }
     },
     _blur(event) {
-      let value = event.target.value
+      let lvalue = event.target.value
         .trim()
         .replaceAll(this.separatorSign, '')
         .toUpperCase()
 
-      value = value === '' ? null : +value
-      this.$emit('input', value)
-      this.$emit(event.type, value)
+      lvalue = lvalue === '' ? null : +lvalue
+      this.$emit('input', lvalue)
+      this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
     },
     metaData() {

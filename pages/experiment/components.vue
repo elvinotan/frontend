@@ -156,6 +156,8 @@
                     :allow-minus="true"
                     :minimum="decimal.minimum"
                     :maximum="decimal.maximum"
+                    :max-fraction="4"
+                    :separator="true"
                     @blur="blur"
                   />
                 </td>
@@ -259,6 +261,7 @@ export default {
       number: {
         ...empty,
         id: 'number',
+        value: 7562265.15,
         label: 'Distance',
         maxlength: 30,
         minimum: 100,
@@ -266,7 +269,7 @@ export default {
       },
       decimal: {
         ...empty,
-        value: 1542.2365,
+        value: 155142.2365,
         id: 'decimal',
         label: 'Weight',
         maxlength: 30,

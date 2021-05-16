@@ -27,7 +27,7 @@
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
-          class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
+          class="text-right field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
           @keypress="_keypress"
           @input="_input"
@@ -58,12 +58,22 @@ export default {
     value: { type: Number, required: false, default: null },
     maxFraction: { type: Number, required: false, default: 2 },
     allowMinus: { type: Boolean, required: false, default: false },
+    separator: { type: Boolean, required: false, default: false },
     minimum: { type: Number, required: false, default: null },
     maximum: { type: Number, required: false, default: null },
   },
   data() {
     return {
-      lvalue: this.value ? this.value.toFixed(this.maxFraction) : this.value,
+      separatorSign: ',',
+      locale: 'en-US',
+      lvalue:
+        this.value && this.separator
+          ? new Intl.NumberFormat(this.locale).format(
+              this.value.toFixed(this.maxFraction)
+            )
+          : this.value
+          ? this.value.toFixed(this.maxFraction)
+          : this.value,
       state: 0,
       errors: [],
     }
@@ -113,18 +123,23 @@ export default {
 
       if (!expression.includes(event.key)) {
         // Bila character tidak termasuk dalam expression maka di batalkan
+        console.log('prevent 1')
         event.preventDefault()
       } else if (char === '-' && cursorIdx !== 0) {
         // Bila character minus tapi dia mau input tidak di awal, maka di batalkan
+        console.log('prevent 2')
         event.preventDefault()
       } else if (char === '.' && cursorIdx === 0) {
         // bila mencoba untuk entry . di bagian depan, maka di batalkan
+        console.log('prevent 3')
         event.preventDefault()
       } else if (char === '.' && lvalue.includes('.')) {
         // bila mencoba untuk entry . tapi 2 kali atau lebih, maka di batalkan
+        console.log('prevent 4')
         event.preventDefault()
       } else if (char === '.' && lvalue === '-') {
         // bila mencoba untuk entry . tapi di depan hanya ada minus jadi '-.', maka di batalkan
+        console.log('prevent 5')
         event.preventDefault()
       } else if (lvalue && lvalue.includes && lvalue.includes('.')) {
         // validasi kalo setalah . jumlah panjang tidak boleh lebih banyak dari maxFraction
@@ -133,18 +148,32 @@ export default {
         if (
           splits[1].length >= this.maxFraction &&
           cursorIdx > splits[0].length
-        )
+        ) {
+          console.log('prevent 6')
           event.preventDefault()
+        }
       }
     },
     _input(event) {
-      let value = event.target.value
-      value = value === '' ? null : +value
-      this.$emit(event.type, value)
+      let lvalue = event.target.value
+        .replaceAll(this.separatorSign, '')
+        .toUpperCase()
+
+      lvalue = lvalue === '' ? null : +lvalue
+      this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
+      if (lvalue && this.separator) {
+        console.log('Before', lvalue)
+        this.lvalue = new Intl.NumberFormat(this.locale).format(lvalue)
+        console.log('Become', this.lvalue)
+      }
     },
     _blur(event) {
-      let value = event.target.value.toUpperCase().trim()
+      let value = event.target.value
+        .trim()
+        .replaceAll(this.separatorSign, '')
+        .toUpperCase()
+
       value = value === '' ? null : +value
       this.$emit('input', value)
       this.$emit(event.type, value)
