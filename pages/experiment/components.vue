@@ -174,6 +174,8 @@
                     :required="date.required"
                     :show="date.show"
                     :vruntime="vruntime"
+                    :minimum="date.minimum"
+                    :maximum="date.maximum"
                     @blur="blur"
                   />
                 </td>
@@ -291,6 +293,8 @@ export default {
       },
       date: {
         ...empty,
+        minimum: new Date('2021-05-10'),
+        maximum: new Date('2021-05-20'),
         value: new Date(),
         id: 'date',
         label: 'Birth Date',
