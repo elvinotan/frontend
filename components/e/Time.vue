@@ -53,6 +53,8 @@ export default {
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: Date, required: false, default: null },
+    minimum: { type: Date, required: false, default: null },
+    maximum: { type: Date, required: false, default: null },
   },
   data() {
     return {
@@ -60,7 +62,7 @@ export default {
       maxlength: 10,
       state: 0,
       errors: [],
-      lvalue: this._format(this.value), // Masukan dari component adalah YYYY-MM-DD, meski dari component menampilkan DD/MM/YYYY
+      lvalue: this._format(this.value, 'YYYY-MM-DD'), // Masukan dari component adalah YYYY-MM-DD, meski dari component menampilkan DD/MM/YYYY
     }
   },
   computed: {
@@ -88,12 +90,21 @@ export default {
       return css
     },
     _info() {
-      return `${this.lvalue ? this.lvalue.length : 0} / ${this.maxlength} Char`
+      const min = this._format(this.minimum, 'DD/MM/YYYY')
+      const max = this._format(this.maximum, 'DD/MM/YYYY')
+      const minimum = this.minimum ? `Min:${min}` : ''
+      const maximum = this.maximum ? `Max:${max}` : ''
+      const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
+
+      const charInfo = `${this.lvalue ? this.lvalue.length : 0} / ${
+        this.maxlength
+      } Char`
+      return minmax + charInfo
     },
   },
   methods: {
-    _format(value) {
-      if (value) {
+    _format(value, pattern) {
+      if (value && pattern) {
         // Must return YYYY-MM-DD, krn format ini yang di terima oleh input tag dgn tipe date
         const year = value.getFullYear()
         const month =
@@ -105,7 +116,12 @@ export default {
             ? `0${value.getDate() + 1}`
             : value.getDate()
 
-        const fmtDate = `${year}-${month}-${date}`
+        const fmtDate = pattern
+          .replaceAll('YYYY', year)
+          .replaceAll('MM', month)
+          .replaceAll('DD', date)
+
+        // const fmtDate = `${year}-${month}-${date}`
         return fmtDate
       } else {
         return value
@@ -152,6 +168,22 @@ export default {
       }
       if (this.value && this.value.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
+      }
+      if (
+        this.value &&
+        this.minimum &&
+        this.value.getTime() < this.minimum.getTime()
+      ) {
+        const min = this._format(this.minimum, 'DD/MM/YYYY')
+        this.errors.push(`${this.label} can not be less then ${min}`)
+      }
+      if (
+        this.value &&
+        this.maximum &&
+        this.value.getTime() > this.maximum.getTime()
+      ) {
+        const max = this._format(this.maximum, 'DD/MM/YYYY')
+        this.errors.push(`${this.label} can not be more then ${max}`)
       }
       // add business runtime validation
       if (this.vruntime) {
