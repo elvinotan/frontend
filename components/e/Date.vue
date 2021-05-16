@@ -21,8 +21,8 @@
         </span>
         <input
           :id="id"
+          v-model="lvalue"
           type="date"
-          :value="value"
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
@@ -52,13 +52,15 @@ export default {
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
-    value: { type: String, required: false, default: '' },
+    value: { type: Date, required: false, default: null },
   },
   data() {
     return {
+      locale: 'id-ID',
       maxlength: 10,
       state: 0,
       errors: [],
+      lvalue: this._format(this.value), // Masukan dari component adalah YYYY-MM-DD, meski dari component menampilkan DD/MM/YYYY
     }
   },
   computed: {
@@ -86,17 +88,40 @@ export default {
       return css
     },
     _info() {
-      return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
+      return `${this.lvalue ? this.lvalue.length : 0} / ${this.maxlength} Char`
     },
   },
   methods: {
+    _format(value) {
+      if (value) {
+        // Must return YYYY-MM-DD, krn format ini yang di terima oleh input tag dgn tipe date
+        const year = value.getFullYear()
+        const month =
+          value.getMonth().toString().length === 1
+            ? `0${value.getMonth() + 1}`
+            : value.getMonth()
+        const date =
+          value.getDate().toString().length === 1
+            ? `0${value.getDate() + 1}`
+            : value.getDate()
+
+        const fmtDate = `${year}-${month}-${date}`
+        return fmtDate
+      } else {
+        return value
+      }
+    },
     _input(event) {
-      const value = event.target.value.toUpperCase()
+      let value = event.target.value
+      value = value ? new Date(value) : null
+
       this.$emit(event.type, value)
       this.$nextTick(this.validate)
     },
     _blur(event) {
-      const value = event.target.value.toUpperCase().trim()
+      let value = event.target.value
+      value = value ? new Date(value) : null
+
       this.$emit('input', value)
       this.$emit(event.type, value)
       this.$nextTick(this.validate)
@@ -116,23 +141,26 @@ export default {
       return this.errors.length > 0
     },
     validate() {
-      // implemented nanti
-      // this.clearError()
-      // // General validation base on props
-      // if (this.required && !this.value) {
-      //   this.errors.push(`${this.label} is required`)
-      // }
-      // if (this.value && this.value.length > this.maxlength) {
-      //   this.errors.push(`${this.label} is exceeded`)
-      // }
-      // // add business runtime validation
-      // if (this.vruntime) {
-      //   const error = this.vruntime(this.value)
-      //   if (error) this.errors.push(error)
-      // }
-      // const validation = { valid: !this.hasError(), errors: this.errors }
-      // this.state = validation.valid ? 1 : -1
-      // return validation
+      this.clearError()
+      // General validation base on props
+      if (this.required && !this.value) {
+        // value null ada 2 alasan 1 krn kosong, dan 1 krn tgl yg di entry invalid
+        // if (this.lvalue ===) this.errors.push(`${this.label} is invalid`)
+        // else this.errors.push(`${this.label} is required`)
+        // ini masih blm bisa yang di atas blm ada logicnya, untuk sementara di gabung antara invalid dan required
+        this.errors.push(`${this.label} is required / invalid`)
+      }
+      if (this.value && this.value.length > this.maxlength) {
+        this.errors.push(`${this.label} is exceeded`)
+      }
+      // add business runtime validation
+      if (this.vruntime) {
+        const error = this.vruntime(this.value)
+        if (error) this.errors.push(error)
+      }
+      const validation = { valid: !this.hasError(), errors: this.errors }
+      this.state = validation.valid ? 1 : -1
+      return validation
     },
   },
 }

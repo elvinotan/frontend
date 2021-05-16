@@ -166,8 +166,18 @@
               <tr>
                 <td>Date</td>
                 <td>
-                  <EDate id="date" label="Birth Date" :required="true" />
+                  <EDate
+                    :id="date.id"
+                    :ref="decimal.id"
+                    v-model="date.value"
+                    :label="date.label"
+                    :required="date.required"
+                    :show="date.show"
+                    :vruntime="vruntime"
+                    @blur="blur"
+                  />
                 </td>
+                <td>[{{ date }}]</td>
               </tr>
               <tr>
                 <td>Hour</td>
@@ -278,6 +288,12 @@ export default {
         ...empty,
         id: 'button',
         label: 'Clear Errors',
+      },
+      date: {
+        ...empty,
+        value: new Date(),
+        id: 'date',
+        label: 'Birth Date',
       },
       planets: [],
     }
