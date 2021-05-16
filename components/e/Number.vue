@@ -10,7 +10,7 @@
           class="font-bold rounded-l text-sm text-gray-800 w-auto p-1"
           :class="[_cssLabelBg]"
         >
-          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : '' }}
+          {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
         </span>
         <span
           v-if="label && required"
@@ -136,7 +136,7 @@ export default {
     },
     _input(event) {
       let lvalue = event.target.value
-        .replaceAll(this.separatorSign, '')
+        .replace(new RegExp(this.separatorSign, 'g'), '')
         .toUpperCase()
 
       lvalue = lvalue === '' ? null : +lvalue
@@ -149,7 +149,7 @@ export default {
     _blur(event) {
       let lvalue = event.target.value
         .trim()
-        .replaceAll(this.separatorSign, '')
+        .replace(new RegExp(this.separatorSign, 'g'), '')
         .toUpperCase()
 
       lvalue = lvalue === '' ? null : +lvalue

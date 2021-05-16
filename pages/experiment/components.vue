@@ -168,10 +168,11 @@
                 <td>
                   <EDate
                     :id="date.id"
-                    :ref="decimal.id"
+                    :ref="date.id"
                     v-model="date.value"
                     :label="date.label"
                     :required="date.required"
+                    :disabled="date.disabled"
                     :show="date.show"
                     :vruntime="vruntime"
                     :minimum="date.minimum"
@@ -182,8 +183,23 @@
                 <td>[{{ date }}]</td>
               </tr>
               <tr>
-                <td>Hour</td>
-                <td>&nbsp;</td>
+                <td>Time</td>
+                <td>
+                  <ETime
+                    :id="time.id"
+                    :ref="time.id"
+                    v-model="time.value"
+                    :label="time.label"
+                    :required="time.required"
+                    :disabled="time.disabled"
+                    :show="time.show"
+                    :vruntime="vruntime"
+                    :minimum="time.minimum"
+                    :maximum="time.maximum"
+                    @blur="blur"
+                  />
+                </td>
+                <td>[{{ time }}]</td>
               </tr>
               <tr>
                 <td>Checkbox</td>
@@ -299,6 +315,14 @@ export default {
         id: 'date',
         label: 'Birth Date',
       },
+      time: {
+        ...empty,
+        minimum: new Date(),
+        maximum: new Date(),
+        value: new Date(),
+        id: 'time',
+        label: 'Birth Time',
+      },
       planets: [],
     }
   },
@@ -324,6 +348,10 @@ export default {
       this.shortText.disabled = !this.shortText.disabled
       this.mediumText.disabled = !this.mediumText.disabled
       this.longText.disabled = !this.longText.disabled
+      this.textArea.disabled = !this.textArea.disabled
+      this.number.disabled = !this.number.disabled
+      this.decimal.disabled = !this.decimal.disabled
+      this.date.disabled = !this.date.disabled
       // this.button.disabled = !this.button.disabled
       // this.$refs.firstEntryForm.clearError()
     },

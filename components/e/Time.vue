@@ -10,7 +10,7 @@
           class="font-bold rounded-l text-sm text-gray-800 w-auto p-1"
           :class="[_cssLabelBg]"
         >
-          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : '' }}
+          {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
         </span>
         <span
           v-if="label && required"
@@ -22,7 +22,7 @@
         <input
           :id="id"
           v-model="lvalue"
-          type="date"
+          type="time"
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
@@ -62,7 +62,7 @@ export default {
       maxlength: 10,
       state: 0,
       errors: [],
-      lvalue: this._format(this.value, 'YYYY-MM-DD'), // Masukan dari component adalah YYYY-MM-DD, meski dari component menampilkan DD/MM/YYYY
+      lvalue: this._format(this.value),
     }
   },
   computed: {
@@ -90,8 +90,8 @@ export default {
       return css
     },
     _info() {
-      const min = this._format(this.minimum, 'DD/MM/YYYY')
-      const max = this._format(this.maximum, 'DD/MM/YYYY')
+      const min = this._format(this.minimum)
+      const max = this._format(this.maximum)
       const minimum = this.minimum ? `Min:${min}` : ''
       const maximum = this.maximum ? `Max:${max}` : ''
       const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
@@ -103,26 +103,19 @@ export default {
     },
   },
   methods: {
-    _format(value, pattern) {
-      if (value && pattern) {
-        // Must return YYYY-MM-DD, krn format ini yang di terima oleh input tag dgn tipe date
-        const year = value.getFullYear()
-        const month =
-          value.getMonth().toString().length === 1
-            ? `0${value.getMonth() + 1}`
-            : value.getMonth()
-        const date =
-          value.getDate().toString().length === 1
-            ? `0${value.getDate() + 1}`
-            : value.getDate()
+    _format(value) {
+      if (value) {
+        // Must return HH:mm, krn format ini yang di terima oleh input tag dgn tipe date
+        const hours =
+          value.getHours().toString().length === 1
+            ? `0${value.getHours() + 1}`
+            : value.getHours()
+        const minutes =
+          value.getMinutes().toString().length === 1
+            ? `0${value.getMinutes() + 1}`
+            : value.getMinutes()
 
-        const fmtDate = pattern
-          .replaceAll('YYYY', year)
-          .replaceAll('MM', month)
-          .replaceAll('DD', date)
-
-        // const fmtDate = `${year}-${month}-${date}`
-        return fmtDate
+        return 'HH:mm'.replace(/HH/g, hours).replace(/mm/g, minutes)
       } else {
         return value
       }
@@ -174,7 +167,7 @@ export default {
         this.minimum &&
         this.value.getTime() < this.minimum.getTime()
       ) {
-        const min = this._format(this.minimum, 'DD/MM/YYYY')
+        const min = this._format(this.minimum)
         this.errors.push(`${this.label} can not be less then ${min}`)
       }
       if (
@@ -182,7 +175,7 @@ export default {
         this.maximum &&
         this.value.getTime() > this.maximum.getTime()
       ) {
-        const max = this._format(this.maximum, 'DD/MM/YYYY')
+        const max = this._format(this.maximum)
         this.errors.push(`${this.label} can not be more then ${max}`)
       }
       // add business runtime validation

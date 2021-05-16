@@ -10,7 +10,7 @@
           class="font-bold rounded-l text-sm text-gray-800 w-auto p-1"
           :class="[_cssLabelBg]"
         >
-          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : '' }}
+          {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
         </span>
         <span
           v-if="label && required"
@@ -116,13 +116,10 @@ export default {
             ? `0${value.getDate() + 1}`
             : value.getDate()
 
-        const fmtDate = pattern
-          .replaceAll('YYYY', year)
-          .replaceAll('MM', month)
-          .replaceAll('DD', date)
-
-        // const fmtDate = `${year}-${month}-${date}`
-        return fmtDate
+        return pattern
+          .replace(/YYYY/g, year)
+          .replace(/MM/g, month)
+          .replace(/DD/g, date)
       } else {
         return value
       }

@@ -10,7 +10,7 @@
           class="font-bold rounded-t text-sm text-gray-800 w-auto p-1"
           :class="[_cssLabelBg]"
         >
-          {{ label.replaceAll ? label.replaceAll(' ', '&nbsp;') : '' }}
+          {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
           <span
             v-if="label && required"
             class="font-bold text-center text-sm text-red-800 w-auto p-1"
