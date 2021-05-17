@@ -5,7 +5,7 @@
         :id="id"
         type="button"
         :disabled="disabled"
-        class="text-sm font-bold py-1 px-2 rounded border-0 focus:outline-none outline-none ring-2 ring-gray-500 shadow-lg"
+        class="text-sm font-bold py-1 px-2 rounded border-0 focus:outline-none outline-none ring-2 ring-gray-500"
         :class="[_cssBorder, _cssLabelBg, _cssInputText]"
         @click="_event"
       >
