@@ -393,6 +393,7 @@ export default {
       this.time.disabled = !this.time.disabled
       this.boolean.disabled = !this.boolean.disabled
       this.button.disabled = !this.button.disabled
+      this.select.disabled = !this.select.disabled
       // this.$refs.firstEntryForm.clearError()
     },
   },
