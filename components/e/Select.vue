@@ -55,8 +55,9 @@ export default {
     disabled: { type: Boolean, required: false, default: false },
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
+    as: { type: String, required: false, default: 'string' }, // opsi yang tersedia [string, number]
     vruntime: { type: Function, required: false, default: null },
-    value: { type: String, required: false, default: null },
+    value: { type: [String, Number], required: false, default: null },
     options: {
       type: Array,
       required: false,
@@ -104,12 +105,16 @@ export default {
     _input(event) {
       let lvalue = event.target.value
       lvalue = lvalue || null
+      if (lvalue && this.as === 'string') lvalue = lvalue.toString()
+      if (lvalue && this.as === 'number') lvalue = +lvalue
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
     },
     _blur(event) {
       let lvalue = event.target.value
       lvalue = lvalue || null
+      if (lvalue && this.as === 'string') lvalue = lvalue.toString()
+      if (lvalue && this.as === 'number') lvalue = +lvalue
       this.$emit('input', lvalue)
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
@@ -132,7 +137,7 @@ export default {
       this.clearError()
 
       // General validation base on props
-      if (this.required && this.value === null) {
+      if (this.required && !this.value) {
         this.errors.push(`${this.label} is required`)
       }
 

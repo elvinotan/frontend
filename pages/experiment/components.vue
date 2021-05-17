@@ -239,6 +239,7 @@
                     :show="select.show"
                     :vruntime="vruntime"
                     :options="select.options"
+                    as="number"
                     @blur="blur"
                   />
                 </td>
@@ -371,20 +372,34 @@ export default {
       },
       select: {
         ...empty,
-        value: null,
+        value: 20,
         id: 'select',
         label: 'Lookup',
+        // options: [
+        //   {
+        //     value: 'AAAA',
+        //     description: 'Huruf AAAA',
+        //   },
+        //   {
+        //     value: 'BBBB',
+        //     description: 'Huruf BBBB',
+        //   },
+        //   {
+        //     value: 'CCCC',
+        //     description: 'Huruf CCCC',
+        //   },
+        // ],
         options: [
           {
-            value: 'AAAA',
+            value: 10,
             description: 'Huruf AAAA',
           },
           {
-            value: 'BBBB',
+            value: 20,
             description: 'Huruf BBBB',
           },
           {
-            value: 'CCCC',
+            value: 23.23,
             description: 'Huruf CCCC',
           },
         ],
