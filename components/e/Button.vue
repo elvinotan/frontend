@@ -5,8 +5,8 @@
         :id="id"
         type="button"
         :disabled="disabled"
-        class="text-white text-sm font-bold py-1 px-2 rounded border-0 focus:outline-none outline-none ring-2 ring-gray-500 shadow-lg"
-        :class="[_cssBorder, _cssLabelBg]"
+        class="text-sm font-bold py-1 px-2 rounded border-0 focus:outline-none outline-none ring-2 ring-gray-500 shadow-lg"
+        :class="[_cssBorder, _cssLabelBg, _cssInputText]"
         @click="_event"
       >
         {{ label }}
@@ -35,6 +35,10 @@ export default {
         ? ' opacity-50 cursor-not-allowed '
         : ''
       return `bg-${color}-500 ${disabledClass}`
+    },
+    _cssInputText() {
+      const css = this.disabled ? 'text-gray-200' : 'text-white'
+      return css
     },
   },
   methods: {
