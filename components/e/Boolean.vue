@@ -21,16 +21,20 @@
         </span>
         <select
           :id="id"
-          :value="value"
+          :value="lvalue"
           :disabled="disabled"
           :required="required"
           class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
           @input="_input"
           @blur="_blur"
         >
-          <option value="null">Silakan Pilih</option>
-          <option value="-1">False</option>
-          <option value="1">True</option>
+          <option
+            v-for="option of _options"
+            :key="option.value"
+            :value="option.value"
+          >
+            {{ option.description }}
+          </option>
         </select>
       </span>
       <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
@@ -51,11 +55,13 @@ export default {
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: Boolean, required: false, default: false },
+    type: { type: String, required: false, default: 'TrueFalse' }, // TrueFalse, YesNo, ActiveInActive
   },
   data() {
     return {
       state: 0,
       errors: [],
+      lvalue: this.value === null ? '0' : this.value === true ? '1' : '-1',
     }
   },
   computed: {
@@ -82,17 +88,55 @@ export default {
       const css = this.disabled ? 'text-gray-50' : 'text-gray-700'
       return css
     },
+    _options() {
+      const options = [
+        {
+          value: '0',
+          description: '',
+        },
+        {
+          value: '1',
+          description: '',
+        },
+        {
+          value: '-1',
+          description: '',
+        },
+      ]
+      if (this.type === 'TrueFalse') {
+        options[1].description = 'True'
+        options[2].description = 'False'
+      } else if (this.type === 'YesNo') {
+        options[1].description = 'Yes'
+        options[2].description = 'No'
+      } else if (this.type === 'ActiveInActive') {
+        options[1].description = 'Active'
+        options[2].description = 'InActive'
+      }
+
+      return options
+    },
   },
   methods: {
     _input(event) {
-      const value = event.target.value.toUpperCase()
-      this.$emit(event.type, value)
+      let lvalue = event.target.value
+      if (lvalue) {
+        if (lvalue === '0') lvalue = null
+        if (lvalue === '1') lvalue = true
+        if (lvalue === '-1') lvalue = false
+      }
+      this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
     },
     _blur(event) {
-      const value = event.target.value.toUpperCase().trim()
-      this.$emit('input', value)
-      this.$emit(event.type, value)
+      let lvalue = event.target.value
+      if (lvalue) {
+        if (lvalue === '0') lvalue = null
+        if (lvalue === '1') lvalue = true
+        if (lvalue === '-1') lvalue = false
+      }
+      this.$emit('input', lvalue)
+      this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
     },
     metaData() {
