@@ -27,7 +27,7 @@
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
-          class="field text-sm text-gray-800 rounded-r p-1 px-1 text-sm w-full outline-none uppercase placeholder-blueGray-300 relative"
+          class="field text-sm text-gray-800 rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
           @input="_input"
           @blur="_blur"
