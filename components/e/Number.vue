@@ -27,7 +27,7 @@
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
-          class="text-right field text-sm text-gray-800 rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
+          class="text-right field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
           @keypress="_keypress"
           @input="_input"
@@ -95,7 +95,7 @@ export default {
       return css
     },
     _cssInputText() {
-      const css = this.disabled ? 'text-gray-50' : 'text-gray-700'
+      const css = this.disabled ? 'text-gray-500' : 'text-gray-800'
       return css
     },
     _info() {

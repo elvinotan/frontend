@@ -24,7 +24,8 @@
           v-model="lvalue"
           :disabled="disabled"
           :required="required"
-          class="field text-sm text-gray-800 rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
+          class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
+          :class="[_cssRounded, _cssInputBg, _cssInputText]"
           @input="_input"
           @blur="_blur"
         >
@@ -86,7 +87,7 @@ export default {
       return css
     },
     _cssInputText() {
-      const css = this.disabled ? 'text-gray-50' : 'text-gray-700'
+      const css = this.disabled ? 'text-gray-500' : 'text-gray-800'
       return css
     },
     _options() {
@@ -158,7 +159,7 @@ export default {
       this.clearError()
 
       // General validation base on props
-      if (this.required && !this.value) {
+      if (this.required && this.value === null) {
         this.errors.push(`${this.label} is required`)
       }
 

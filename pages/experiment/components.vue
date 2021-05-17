@@ -372,7 +372,8 @@ export default {
       this.decimal.disabled = !this.decimal.disabled
       this.date.disabled = !this.date.disabled
       this.time.disabled = !this.time.disabled
-      // this.button.disabled = !this.button.disabled
+      this.boolean.disabled = !this.boolean.disabled
+      this.button.disabled = !this.button.disabled
       // this.$refs.firstEntryForm.clearError()
     },
   },
