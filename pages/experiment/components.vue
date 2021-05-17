@@ -115,10 +115,6 @@
                 <td>[{{ button }}]</td>
               </tr>
               <tr>
-                <td>Select</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
                 <td>Number</td>
                 <td>
                   <ENumber
@@ -221,6 +217,23 @@
                   />
                 </td>
                 <td>[{{ boolean }}]</td>
+              </tr>
+              <tr>
+                <td>Select</td>
+                <td>
+                  <ESelect
+                    :id="select.id"
+                    :ref="select.id"
+                    v-model="select.value"
+                    :label="select.label"
+                    :required="select.required"
+                    :disabled="select.disabled"
+                    :show="select.show"
+                    :vruntime="vruntime"
+                    @blur="blur"
+                  />
+                </td>
+                <td>[{{ select }}]</td>
               </tr>
               <tr>
                 <td>PaginationServer</td>
@@ -341,6 +354,12 @@ export default {
         value: true,
         id: 'boolean',
         label: 'Active',
+      },
+      select: {
+        ...empty,
+        value: true,
+        id: 'select',
+        label: 'Lookup',
       },
       planets: [],
     }
