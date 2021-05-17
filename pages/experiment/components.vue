@@ -106,9 +106,17 @@
                   <EButton
                     :id="button.id"
                     :ref="button.id"
-                    label="Approve Proposal"
+                    :label="button.label"
                     :disabled="button.disabled"
                     color="green"
+                    @click="click"
+                  />
+                  <EButton
+                    :id="button2.id"
+                    :ref="button2.id"
+                    :label="button2.label"
+                    :disabled="button2.disabled"
+                    color="red"
                     @click="click"
                   />
                 </td>
@@ -230,6 +238,7 @@
                     :disabled="select.disabled"
                     :show="select.show"
                     :vruntime="vruntime"
+                    :options="select.options"
                     @blur="blur"
                   />
                 </td>
@@ -240,7 +249,7 @@
                 <td>&nbsp;</td>
               </tr>
               <tr>
-                <td>PaginationServer</td>
+                <td>PaginationLocal</td>
                 <td>&nbsp;</td>
               </tr>
               <tr>
@@ -331,7 +340,12 @@ export default {
       button: {
         ...empty,
         id: 'button',
-        label: 'Clear Errors',
+        label: 'Approve',
+      },
+      button2: {
+        ...empty,
+        id: 'button2',
+        label: 'Reject',
       },
       date: {
         ...empty,
@@ -357,9 +371,23 @@ export default {
       },
       select: {
         ...empty,
-        value: true,
+        value: null,
         id: 'select',
         label: 'Lookup',
+        options: [
+          {
+            value: 'AAAA',
+            description: 'Huruf AAAA',
+          },
+          {
+            value: 'BBBB',
+            description: 'Huruf BBBB',
+          },
+          {
+            value: 'CCCC',
+            description: 'Huruf CCCC',
+          },
+        ],
       },
       planets: [],
     }

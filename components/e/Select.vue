@@ -56,14 +56,18 @@ export default {
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
-    value: { type: Boolean, required: false, default: false },
-    type: { type: String, required: false, default: 'TrueFalse' }, // TrueFalse, YesNo, ActiveInActive
+    value: { type: String, required: false, default: null },
+    options: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
   },
   data() {
     return {
       state: 0,
       errors: [],
-      lvalue: this.value === null ? '0' : this.value === true ? '1' : '-1',
+      lvalue: this.value,
     }
   },
   computed: {
@@ -91,30 +95,7 @@ export default {
       return css
     },
     _options() {
-      const options = [
-        {
-          value: '0',
-          description: '',
-        },
-        {
-          value: '1',
-          description: '',
-        },
-        {
-          value: '-1',
-          description: '',
-        },
-      ]
-      if (this.type === 'TrueFalse') {
-        options[1].description = 'True'
-        options[2].description = 'False'
-      } else if (this.type === 'YesNo') {
-        options[1].description = 'Yes'
-        options[2].description = 'No'
-      } else if (this.type === 'ActiveInActive') {
-        options[1].description = 'Active'
-        options[2].description = 'InActive'
-      }
+      const options = [{ value: '', description: '' }, ...this.options]
 
       return options
     },
@@ -122,21 +103,13 @@ export default {
   methods: {
     _input(event) {
       let lvalue = event.target.value
-      if (lvalue) {
-        if (lvalue === '0') lvalue = null
-        if (lvalue === '1') lvalue = true
-        if (lvalue === '-1') lvalue = false
-      }
+      lvalue = lvalue || null
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
     },
     _blur(event) {
       let lvalue = event.target.value
-      if (lvalue) {
-        if (lvalue === '0') lvalue = null
-        if (lvalue === '1') lvalue = true
-        if (lvalue === '-1') lvalue = false
-      }
+      lvalue = lvalue || null
       this.$emit('input', lvalue)
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
