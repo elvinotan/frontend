@@ -106,6 +106,11 @@ export default {
       return minmax + charInfo
     },
   },
+  watch: {
+    value(newVal, oldVal) {
+      this.lvalue = this._format(newVal)
+    },
+  },
   methods: {
     _format(value) {
       if (value && this.separator) {

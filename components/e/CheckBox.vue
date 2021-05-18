@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ $data }}
     <div v-if="show">
       <label class="inline-flex items-center mt-3">
         <input
@@ -14,7 +13,7 @@
           @blur="_blur"
         />
         <span :for="id" class="text-sm px-1" :class="[_cssInputText]">{{
-          option.description
+          label
         }}</span>
       </label>
     </div>
@@ -25,15 +24,20 @@ export default {
   name: 'CheckBox',
   props: {
     id: { type: String, required: true, default: null },
+    label: { type: String, required: false, default: '' },
     disabled: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
-    value: { type: [String, Boolean], required: false, default: null },
-    as: { type: String, required: false, default: 'boolean' }, // as boolean, string, number
-    option: {
-      type: Object,
+    value: { type: [String, Boolean, Number], required: false, default: null },
+    selected: {
+      type: [String, Number, Boolean],
       required: false,
-      default: () => {},
+      default: true,
+    },
+    unselected: {
+      type: [String, Number, Boolean],
+      required: false,
+      default: false,
     },
   },
   data() {
@@ -56,18 +60,21 @@ export default {
       return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
     },
   },
+  watch: {
+    value(newVal, oldVal) {
+      this.lvalue = newVal
+    },
+  },
   methods: {
     _input(event) {
       const value = event.target.checked
-      const cvalue = value ? this.option.selected : this.option.unselected
+      const cvalue = value ? this.selected : this.unselected
       this.$emit(event.type, cvalue)
-      this.$nextTick(this.validate)
     },
     _blur(event) {
       const value = event.target.checked
-      const cvalue = value ? this.option.selected : this.option.unselected
+      const cvalue = value ? this.selected : this.unselected
       this.$emit(event.type, cvalue)
-      this.$nextTick(this.validate)
     },
     metaData() {
       return {
@@ -82,24 +89,6 @@ export default {
     },
     hasError() {
       return this.errors.length > 0
-    },
-    validate() {
-      // this.clearError()
-      // // General validation base on props
-      // if (this.required && !this.value) {
-      //   this.errors.push(`${this.label} is required`)
-      // }
-      // if (this.value && this.value.length > this.maxlength) {
-      //   this.errors.push(`${this.label} is exceeded`)
-      // }
-      // // add business runtime validation
-      // if (this.vruntime) {
-      //   const error = this.vruntime(this.value)
-      //   if (error) this.errors.push(error)
-      // }
-      // const validation = { valid: !this.hasError(), errors: this.errors }
-      // this.state = validation.valid ? 1 : -1
-      // return validation
     },
   },
 }

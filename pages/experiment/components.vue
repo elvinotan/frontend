@@ -117,7 +117,7 @@
                     :label="button2.label"
                     :disabled="button2.disabled"
                     color="red"
-                    @click="click"
+                    @click="changeValue"
                   />
                 </td>
                 <td>[{{ button }}]</td>
@@ -217,7 +217,39 @@
                     :show="checkbox.show"
                     :option="checkbox.option"
                     :vruntime="vruntime"
-                    as="boolean"
+                    @blur="blur"
+                  />
+                  <ECheckBox
+                    :id="checkbox.id"
+                    :ref="checkbox.id"
+                    v-model="checkbox.value"
+                    :label="checkbox.label"
+                    :disabled="checkbox.disabled"
+                    :show="checkbox.show"
+                    :option="checkbox.option"
+                    :vruntime="vruntime"
+                    @blur="blur"
+                  />
+                  <ECheckBox
+                    :id="checkbox.id"
+                    :ref="checkbox.id"
+                    v-model="checkbox.value"
+                    :label="checkbox.label"
+                    :disabled="checkbox.disabled"
+                    :show="checkbox.show"
+                    :option="checkbox.option"
+                    :vruntime="vruntime"
+                    @blur="blur"
+                  />
+                  <ECheckBox
+                    :id="checkbox.id"
+                    :ref="checkbox.id"
+                    v-model="checkbox.value"
+                    :label="checkbox.label"
+                    :disabled="checkbox.disabled"
+                    :show="checkbox.show"
+                    :option="checkbox.option"
+                    :vruntime="vruntime"
                     @blur="blur"
                   />
                 </td>
@@ -258,6 +290,10 @@
                   />
                 </td>
                 <td>[{{ select }}]</td>
+              </tr>
+              <tr>
+                <td>Card Container</td>
+                <td>&nbsp;</td>
               </tr>
               <tr>
                 <td>PaginationServer</td>
@@ -319,13 +355,8 @@ export default {
       checkbox: {
         ...empty,
         id: 'checkBox',
-        label: 'Your Rate',
-        value: false,
-        option: {
-          selected: true,
-          unselected: false,
-          description: 'Indofood corporate',
-        },
+        label: 'Sudah menikah',
+        value: null,
       },
       mediumText: {
         ...empty,
@@ -438,6 +469,19 @@ export default {
     )
   },
   methods: {
+    changeValue() {
+      this.shortText.value = 'Reset'
+      this.mediumText.value = 'Reset'
+      this.longText.value = 'Reset'
+      this.textArea.value = 'Reset'
+      this.number.value = 123
+      this.decimal.value = 123.123
+      this.date.value = new Date('1978-09-19')
+      this.time.value = '19:00'
+      this.boolean.value = false
+      this.select.value = 10
+      this.checkbox.value = true
+    },
     validateAll() {
       const result = this.$refs.firstEntryForm.validate()
       console.log(result)

@@ -101,6 +101,11 @@ export default {
       return options
     },
   },
+  watch: {
+    value(newVal, oldVal) {
+      this.lvalue = newVal
+    },
+  },
   methods: {
     _input(event) {
       let lvalue = event.target.value

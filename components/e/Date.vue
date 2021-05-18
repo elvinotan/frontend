@@ -102,6 +102,11 @@ export default {
       return minmax + charInfo
     },
   },
+  watch: {
+    value(newVal, oldVal) {
+      this.lvalue = this._format(newVal, 'YYYY-MM-DD')
+    },
+  },
   methods: {
     _format(value, pattern) {
       if (value && pattern) {
