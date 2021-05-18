@@ -470,6 +470,7 @@ export default {
   },
   methods: {
     changeValue() {
+      this.click()
       this.shortText.value = 'Reset'
       this.mediumText.value = 'Reset'
       this.longText.value = 'Reset'
