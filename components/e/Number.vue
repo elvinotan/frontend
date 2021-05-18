@@ -148,12 +148,10 @@ export default {
     },
     _blur(event) {
       let lvalue = event.target.value
-        .trim()
         .replace(new RegExp(this.separatorSign, 'g'), '')
         .toUpperCase()
 
       lvalue = lvalue === '' ? null : +lvalue
-      this.$emit('input', lvalue)
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
     },

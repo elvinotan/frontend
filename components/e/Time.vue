@@ -111,7 +111,6 @@ export default {
       let value = event.target.value
       value = value || null
 
-      this.$emit('input', value)
       this.$emit(event.type, value)
       this.$nextTick(this.validate)
     },

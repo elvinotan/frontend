@@ -115,7 +115,6 @@ export default {
       lvalue = lvalue || null
       if (lvalue && this.as === 'string') lvalue = lvalue.toString()
       if (lvalue && this.as === 'number') lvalue = +lvalue
-      this.$emit('input', lvalue)
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
     },

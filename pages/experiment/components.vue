@@ -207,7 +207,21 @@
               </tr>
               <tr>
                 <td>Checkbox</td>
-                <td>&nbsp;</td>
+                <td>
+                  <ECheckBox
+                    :id="checkbox.id"
+                    :ref="checkbox.id"
+                    v-model="checkbox.value"
+                    :label="checkbox.label"
+                    :disabled="checkbox.disabled"
+                    :show="checkbox.show"
+                    :option="checkbox.option"
+                    :vruntime="vruntime"
+                    as="boolean"
+                    @blur="blur"
+                  />
+                </td>
+                <td>{{ checkbox }}</td>
               </tr>
               <tr>
                 <td>Boolean / Radio</td>
@@ -301,6 +315,17 @@ export default {
         label: 'Nick Name',
         value: 'Pipin',
         maxlength: 10,
+      },
+      checkbox: {
+        ...empty,
+        id: 'checkBox',
+        label: 'Your Rate',
+        value: false,
+        option: {
+          selected: true,
+          unselected: false,
+          description: 'Indofood corporate',
+        },
       },
       mediumText: {
         ...empty,
@@ -437,6 +462,7 @@ export default {
       this.boolean.disabled = !this.boolean.disabled
       this.button.disabled = !this.button.disabled
       this.select.disabled = !this.select.disabled
+      this.checkbox.disabled = !this.checkbox.disabled
       // this.$refs.firstEntryForm.clearError()
     },
   },
