@@ -14,13 +14,17 @@ export default {
         show: true,
       }
     },
-    children() {
-      const refs = []
-      for (const ref of this.$children) {
+    children(pRef) {
+      pRef = pRef || this
+      let refs = []
+      for (const ref of pRef.$children) {
         if (ref.metaData) {
           const { type, show } = ref.metaData()
           if (type === 'input' && show) {
             refs.push(ref)
+          }
+          if (type === 'container' && show) {
+            refs = refs.concat(this.children(ref))
           }
         } else {
           throw new Error(
@@ -32,19 +36,28 @@ export default {
       return refs
     },
     clearError() {
-      for (const ref of this.children()) {
-        ref.clearError()
+      for (const ref of this.children(this)) {
+        if (ref.clearError) ref.clearError()
       }
     },
     validate() {
       let allValid = true
       const allErrors = []
-      for (const ref of this.children()) {
-        const { valid, errors } = ref.validate()
-        allValid = allValid && valid
-        if (errors) allErrors.push(...errors)
+      for (const ref of this.children(this)) {
+        if (ref.validate) {
+          const { valid, errors } = ref.validate()
+          allValid = allValid && valid
+          if (errors) allErrors.push(...errors)
+        }
       }
       return { valid: allValid, errors: allErrors }
+    },
+    disabled(disabled) {
+      for (const ref of this.children(this)) {
+        if (ref.disabled) {
+          ref.disabled(disabled)
+        }
+      }
     },
   },
 }

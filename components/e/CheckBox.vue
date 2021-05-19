@@ -56,9 +56,6 @@ export default {
       const css = this.disabled ? 'text-gray-500' : 'text-gray-800'
       return css
     },
-    _info() {
-      return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
-    },
   },
   watch: {
     value(newVal, oldVal) {
@@ -82,13 +79,6 @@ export default {
         type: 'input',
         show: this.show,
       }
-    },
-    clearError() {
-      this.state = 0
-      this.errors = []
-    },
-    hasError() {
-      return this.errors.length > 0
     },
   },
 }

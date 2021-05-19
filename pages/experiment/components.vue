@@ -346,12 +346,45 @@
                 <td>Autocomplete</td>
                 <td>&nbsp;</td>
               </tr>
+              <tr>
+                <td>Card</td>
+                <td>
+                  <ECard id="InformasiDebitur" label="Informasi Debitur">
+                    <EShortText
+                      :id="shortText.id"
+                      :ref="shortText.id"
+                      v-model="shortText.value"
+                      :label="shortText.label"
+                      :maxlength="shortText.maxlength"
+                      :disabled="shortText.disabled"
+                      :show="shortText.show"
+                      placeholder="PlaceHoilder"
+                      :required="shortText.required"
+                      :vruntime="vruntime"
+                      @blur="blur"
+                    />
+                    <EMediumText
+                      :id="mediumText.id"
+                      :ref="mediumText.id"
+                      v-model="mediumText.value"
+                      :label="mediumText.label"
+                      :maxlength="mediumText.maxlength"
+                      :disabled="mediumText.disabled"
+                      :show="mediumText.show"
+                      :required="mediumText.required"
+                      :vruntime="vruntime"
+                      @blur="blur"
+                    />
+                  </ECard>
+                </td>
+              </tr>
             </tbody>
           </table>
         </EForm>
       </EForm>
     </EForm>
     <button ref="buttonOutside" @click="validateAll">Validate</button>
+    <button ref="clearError" @click="clearError">ClearError</button>
   </div>
 </template>
 
@@ -517,6 +550,10 @@ export default {
     validateAll() {
       const result = this.$refs.firstEntryForm.validate()
       console.log(result)
+    },
+    clearError() {
+      this.$refs.firstEntryForm.clearError()
+      this.$refs.firstEntryForm.disabled(true)
     },
     blur(value) {
       console.log('Event.blur ', value)
