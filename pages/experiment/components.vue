@@ -553,8 +553,9 @@ export default {
       console.log(result)
     },
     clearError() {
-      this.$refs.firstEntryForm.clearError()
-      this.$refs.firstEntryForm.disabled(true)
+      // this.$refs.firstEntryForm.clearError()
+      this.$refs.firstEntryForm.to(false)
+      this.$refs.firstEntryForm.disabled(false)
     },
     blur(value) {
       console.log('Event.blur ', value)

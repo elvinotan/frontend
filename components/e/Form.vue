@@ -21,18 +21,20 @@ export default {
         if (ref.metaData) {
           const { type, show } = ref.metaData()
           if (type === 'action' && show) {
+            console.log('looping')
             refs.push(ref) // Button
           }
           if (type === 'input' && show) {
+            console.log('looping')
             refs.push(ref) // ShortText, MediumText ...
           }
           if (type === 'container' && show) {
+            console.log('looping')
             refs = refs.concat(this.children(ref)) // Card
           }
         } else {
           throw new Error(
-            'Warning!!! this component dose not have metaData !!!',
-            ref
+            'Warning!!! this component dose not have metaData !!!'
           )
         }
       }
@@ -42,6 +44,7 @@ export default {
       for (const ref of this.children(this)) {
         if (ref.clearError) ref.clearError()
       }
+      // return this
     },
     validate() {
       let allValid = true
@@ -56,10 +59,19 @@ export default {
       return { valid: allValid, errors: allErrors }
     },
     disabled(disabled) {
+      // Masih masalah saat ambil children
+      console.log('disabled', this.children(this).length)
       for (const ref of this.children(this)) {
         if (ref.disabled) {
           ref.disabled(disabled)
         }
+      }
+      // return this
+    },
+    to(id) {
+      console.log('to', this.children(this).length)
+      for (const ref of this.children(this)) {
+        ref.disabled(id)
       }
     },
   },
