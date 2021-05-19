@@ -548,14 +548,12 @@ export default {
       this.checkbox.value = true
     },
     validateAll() {
-      const result = this.$refs.firstEntryForm.validate()
+      // const result = this.$refs.firstEntryForm.validate()
       this.$refs.firstEntryForm.disabled(false)
-      console.log(result)
     },
     clearError() {
       // this.$refs.firstEntryForm.clearError()
-      this.$refs.firstEntryForm.to(false)
-      this.$refs.firstEntryForm.disabled(false)
+      this.$refs.firstEntryForm.disabled(true)
     },
     blur(value) {
       console.log('Event.blur ', value)
