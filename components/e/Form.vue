@@ -20,11 +20,14 @@ export default {
       for (const ref of pRef.$children) {
         if (ref.metaData) {
           const { type, show } = ref.metaData()
+          if (type === 'action' && show) {
+            refs.push(ref) // Button
+          }
           if (type === 'input' && show) {
-            refs.push(ref)
+            refs.push(ref) // ShortText, MediumText ...
           }
           if (type === 'container' && show) {
-            refs = refs.concat(this.children(ref))
+            refs = refs.concat(this.children(ref)) // Card
           }
         } else {
           throw new Error(

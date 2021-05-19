@@ -25,7 +25,7 @@
           :placeholder="placeholder"
           :value="value"
           :maxlength="maxlength"
-          :disabled="disabled"
+          :disabled="ldisabled"
           :required="required"
           class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
@@ -50,7 +50,6 @@ export default {
     label: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
     maxlength: { type: Number, required: false, default: 10 },
-    disabled: { type: Boolean, required: false, default: false },
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
@@ -60,6 +59,7 @@ export default {
     return {
       state: 0,
       errors: [],
+      ldisabled: false,
     }
   },
   computed: {
@@ -79,11 +79,11 @@ export default {
       return css
     },
     _cssInputBg() {
-      const css = this.disabled ? 'bg-gray-200' : 'bg-white'
+      const css = this.ldisabled ? 'bg-gray-200' : 'bg-white'
       return css
     },
     _cssInputText() {
-      const css = this.disabled ? 'text-gray-500' : 'text-gray-800'
+      const css = this.ldisabled ? 'text-gray-500' : 'text-gray-800'
       return css
     },
     _info() {
@@ -108,6 +108,9 @@ export default {
         type: 'input',
         show: this.show,
       }
+    },
+    disabled(ldisabled) {
+      this.ldisabled = ldisabled
     },
     clearError() {
       this.state = 0

@@ -549,6 +549,7 @@ export default {
     },
     validateAll() {
       const result = this.$refs.firstEntryForm.validate()
+      this.$refs.firstEntryForm.disabled(false)
       console.log(result)
     },
     clearError() {
