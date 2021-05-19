@@ -12,13 +12,36 @@
             </thead>
             <tbody>
               <tr>
+                <td>Password</td>
+                <td>
+                  <EPassword
+                    :id="password.id"
+                    :ref="password.id"
+                    v-model="password.value"
+                    :label="password.label"
+                    :maxlength="password.maxlength"
+                    :disabled="password.disabled"
+                    :show="password.show"
+                    placeholder="Enter Password"
+                    :required="password.required"
+                    :vruntime="vruntime"
+                    @blur="blur"
+                  />
+                </td>
+                <td>
+                  [{{ password }}]/{{
+                    password.value ? password.value.length : 0
+                  }}
+                </td>
+              </tr>
+              <tr>
                 <td>ShortText</td>
                 <td>
                   <EShortText
                     :id="shortText.id"
                     :ref="shortText.id"
                     v-model="shortText.value"
-                    label="Nick Name"
+                    :label="shortText.label"
                     :maxlength="shortText.maxlength"
                     :disabled="shortText.disabled"
                     :show="shortText.show"
@@ -345,6 +368,13 @@ const empty = {
 export default {
   data() {
     return {
+      password: {
+        ...empty,
+        id: 'password',
+        label: 'Enter Password',
+        value: '',
+        maxlength: 10,
+      },
       shortText: {
         ...empty,
         id: 'shortText',
@@ -471,6 +501,7 @@ export default {
   methods: {
     changeValue() {
       this.click()
+      this.password.value = 'Reset'
       this.shortText.value = 'Reset'
       this.mediumText.value = 'Reset'
       this.longText.value = 'Reset'
@@ -496,6 +527,7 @@ export default {
       return null
     },
     click() {
+      this.password.disabled = !this.password.disabled
       this.shortText.disabled = !this.shortText.disabled
       this.mediumText.disabled = !this.mediumText.disabled
       this.longText.disabled = !this.longText.disabled
