@@ -22,7 +22,7 @@
         <select
           :id="id"
           v-model="lvalue"
-          :disabled="disabled"
+          :disabled="ldisabled"
           :required="required"
           class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
@@ -52,7 +52,6 @@ export default {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
-    disabled: { type: Boolean, required: false, default: false },
     required: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
@@ -64,6 +63,7 @@ export default {
       state: 0,
       errors: [],
       lvalue: this.value === null ? '0' : this.value === true ? '1' : '-1',
+      ldisabled: false,
     }
   },
   computed: {
@@ -83,11 +83,11 @@ export default {
       return css
     },
     _cssInputBg() {
-      const css = this.disabled ? 'bg-gray-200' : 'bg-white'
+      const css = this.ldisabled ? 'bg-gray-200' : 'bg-white'
       return css
     },
     _cssInputText() {
-      const css = this.disabled ? 'text-gray-500' : 'text-gray-800'
+      const css = this.ldisabled ? 'text-gray-500' : 'text-gray-800'
       return css
     },
     _options() {
@@ -153,6 +153,9 @@ export default {
         show: this.show,
       }
     },
+    disabled(ldisabled) {
+      this.ldisabled = ldisabled
+    },
     clearError() {
       this.state = 0
       this.errors = []
@@ -180,10 +183,3 @@ export default {
   },
 }
 </script>
-<style scoped>
-/* Toggle B */
-input:checked ~ .dot {
-  transform: translateX(100%);
-  background-color: #48bb78;
-}
-</style>
