@@ -21,7 +21,7 @@ export default {
     id: { type: String, required: true },
     label: { type: String, required: false, default: '' },
     show: { type: Boolean, required: false, default: true },
-    disabled: { type: Boolean, required: false, default: true },
+    disabled: { type: Boolean, required: false, default: false },
     color: { type: String, required: true },
   },
   computed: {

@@ -142,6 +142,17 @@
                     color="red"
                     @click="changeValue"
                   />
+                  <EButton
+                    id="validate"
+                    ref="validate"
+                    label="Validate"
+                    color="yellow"
+                    @click="
+                      () => {
+                        this.$refs.firstEntryForm.validate()
+                      }
+                    "
+                  />
                 </td>
                 <td>[{{ button }}]</td>
               </tr>

@@ -10,7 +10,7 @@ export default {
     metaData() {
       return {
         name: this._name,
-        type: 'input',
+        type: 'container',
         show: true,
       }
     },
@@ -19,15 +19,15 @@ export default {
       let refs = []
       for (const ref of pRef.$children) {
         if (ref.metaData) {
-          const { type, show } = ref.metaData()
-          if (type === 'action' && show) {
+          const { type } = ref.metaData()
+          if (type === 'action') {
             refs.push(ref) // Button
           }
-          if (type === 'input' && show) {
-            refs.push(ref) // ShortText, MediumText ...
+          if (type === 'input') {
+            refs.push(ref) // Password, ShortText, MediumText, LongText, TextArea, Number, Decimal, Date, Time, Checkbox, Boolean, Select
           }
-          if (type === 'container' && show) {
-            refs = refs.concat(this.children(ref)) // Card
+          if (type === 'container') {
+            refs = refs.concat(this.children(ref)) // Card, Form
           }
         } else {
           throw new Error(
@@ -54,14 +54,6 @@ export default {
         }
       }
       return { valid: allValid, errors: allErrors }
-    },
-    disabled(disabled) {
-      for (const ref of this.children(this)) {
-        if (ref.disabled) {
-          ref.disabled(disabled)
-        }
-      }
-      return this
     },
   },
 }

@@ -25,7 +25,7 @@
           :placeholder="placeholder"
           :value="value"
           :maxlength="maxlength"
-          :disabled="ldisabled"
+          :disabled="disabled"
           :required="required"
           class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
