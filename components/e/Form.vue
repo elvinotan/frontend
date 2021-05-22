@@ -6,6 +6,9 @@
 <script>
 export default {
   name: 'Form',
+  mounted() {
+    this.children = this.scan(this)
+  },
   methods: {
     metaData() {
       return {
@@ -14,7 +17,7 @@ export default {
         show: true,
       }
     },
-    children(pRef) {
+    scan(pRef) {
       pRef = pRef || this
       let refs = []
       for (const ref of pRef.$children) {
@@ -27,7 +30,7 @@ export default {
             refs.push(ref) // Password, ShortText, MediumText, LongText, TextArea, Number, Decimal, Date, Time, Checkbox, Boolean, Select
           }
           if (type === 'container') {
-            refs = refs.concat(this.children(ref)) // Card, Form
+            refs = refs.concat(this.scan(ref)) // Card, Form
           }
         } else {
           throw new Error(
@@ -38,7 +41,7 @@ export default {
       return refs
     },
     clearError() {
-      for (const ref of this.children(this)) {
+      for (const ref of this.children) {
         if (ref.clearError) ref.clearError()
       }
       return this
@@ -46,7 +49,7 @@ export default {
     validate() {
       let allValid = true
       const allErrors = []
-      for (const ref of this.children(this)) {
+      for (const ref of this.children) {
         if (ref.validate) {
           const { valid, errors } = ref.validate()
           allValid = allValid && valid

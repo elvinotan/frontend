@@ -12,7 +12,7 @@
         >
           {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
         </div>
-        <div class="p-3 w-full">
+        <div class="rounded p-3 w-full" :class="[_cssRounded, _cssInputBg]">
           <slot />
         </div>
       </div>
@@ -43,9 +43,6 @@ export default {
     },
     _cssInputBg() {
       return this.disabled ? 'bg-gray-200' : 'bg-white'
-    },
-    _cssInputText() {
-      return this.disabled ? 'text-gray-500' : 'text-gray-800'
     },
   },
   methods: {

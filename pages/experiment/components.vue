@@ -153,6 +153,17 @@
                       }
                     "
                   />
+                  <EButton
+                    id="clear"
+                    ref="clear"
+                    label="Clear"
+                    color="blue"
+                    @click="
+                      () => {
+                        this.$refs.firstEntryForm.clearError()
+                      }
+                    "
+                  />
                 </td>
                 <td>[{{ button }}]</td>
               </tr>
@@ -360,7 +371,11 @@
               <tr>
                 <td>Card</td>
                 <td>
-                  <ECard id="InformasiDebitur" label="Informasi Debitur">
+                  <ECard
+                    id="InformasiDebitur"
+                    label="Informasi Debitur"
+                    :disabled="shortText.disabled"
+                  >
                     <EShortText
                       :id="shortText.id"
                       :ref="shortText.id"
