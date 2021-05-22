@@ -6,7 +6,7 @@
           :id="id"
           v-model="lvalue"
           type="checkbox"
-          :disabled="ldisabled"
+          :disabled="disabled"
           class="h-4 w-4 field relative"
           :class="[_cssInputBg]"
           @input="_input"
@@ -26,6 +26,7 @@ export default {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
     show: { type: Boolean, required: false, default: true },
+    disabled: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: [String, Boolean, Number], required: false, default: null },
     selected: {
@@ -44,16 +45,15 @@ export default {
       lvalue: this.value,
       state: 0,
       errors: [],
-      ldisabled: false,
     }
   },
   computed: {
     _cssInputBg() {
-      const css = this.ldisabled ? 'bg-gray-200' : 'bg-white'
+      const css = this.disabled ? 'bg-gray-200' : 'bg-white'
       return css
     },
     _cssInputText() {
-      const css = this.ldisabled ? 'text-gray-500' : 'text-gray-800'
+      const css = this.disabled ? 'text-gray-500' : 'text-gray-800'
       return css
     },
   },
@@ -79,9 +79,6 @@ export default {
         type: 'input',
         show: this.show,
       }
-    },
-    disabled(ldisabled) {
-      this.ldisabled = ldisabled
     },
   },
 }
