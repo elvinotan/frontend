@@ -15,22 +15,22 @@
                 <td>Password</td>
                 <td>
                   <EPassword
-                    :id="password.id"
-                    :ref="password.id"
-                    v-model="password.value"
-                    :label="password.label"
-                    :maxlength="password.maxlength"
-                    :disabled="password.disabled"
-                    :show="password.show"
+                    :id="ui.password.id"
+                    :ref="ui.password.id"
+                    v-model="ui.password.value"
+                    :label="ui.password.label"
+                    :maxlength="ui.password.maxlength"
+                    :disabled="ui.password.disabled"
+                    :show="ui.password.show"
                     placeholder="Enter Password"
-                    :required="password.required"
+                    :required="ui.password.required"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                 </td>
                 <td>
-                  [{{ password }}]/{{
-                    password.value ? password.value.length : 0
+                  [{{ ui.password }}]/{{
+                    ui.password.value ? ui.password.value.length : 0
                   }}
                 </td>
               </tr>
@@ -38,22 +38,22 @@
                 <td>ShortText</td>
                 <td>
                   <EShortText
-                    :id="shortText.id"
-                    :ref="shortText.id"
-                    v-model="shortText.value"
-                    :label="shortText.label"
-                    :maxlength="shortText.maxlength"
-                    :disabled="shortText.disabled"
-                    :show="shortText.show"
+                    :id="ui.shortText.id"
+                    :ref="ui.shortText.id"
+                    v-model="ui.shortText.value"
+                    :label="ui.shortText.label"
+                    :maxlength="ui.shortText.maxlength"
+                    :disabled="ui.shortText.disabled"
+                    :show="ui.shortText.show"
                     placeholder="PlaceHoilder"
-                    :required="shortText.required"
+                    :required="ui.shortText.required"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                 </td>
                 <td>
-                  [{{ shortText }}]/{{
-                    shortText.value ? shortText.value.length : 0
+                  [{{ ui.shortText }}]/{{
+                    ui.shortText.value ? ui.shortText.value.length : 0
                   }}
                 </td>
               </tr>
@@ -61,21 +61,21 @@
                 <td>MediumText</td>
                 <td>
                   <EMediumText
-                    :id="mediumText.id"
-                    :ref="mediumText.id"
-                    v-model="mediumText.value"
-                    :label="mediumText.label"
-                    :maxlength="mediumText.maxlength"
-                    :disabled="mediumText.disabled"
-                    :show="mediumText.show"
-                    :required="mediumText.required"
+                    :id="ui.mediumText.id"
+                    :ref="ui.mediumText.id"
+                    v-model="ui.mediumText.value"
+                    :label="ui.mediumText.label"
+                    :maxlength="ui.mediumText.maxlength"
+                    :disabled="ui.mediumText.disabled"
+                    :show="ui.mediumText.show"
+                    :required="ui.mediumText.required"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                 </td>
                 <td>
-                  [{{ mediumText }}]/{{
-                    mediumText.value ? mediumText.value.length : 0
+                  [{{ ui.mediumText }}]/{{
+                    ui.mediumText.value ? ui.mediumText.value.length : 0
                   }}
                 </td>
               </tr>
@@ -83,21 +83,21 @@
                 <td>LongText</td>
                 <td>
                   <ELongText
-                    :id="longText.id"
-                    :ref="longText.id"
-                    v-model="longText.value"
-                    :label="longText.label"
-                    :maxlength="longText.maxlength"
-                    :disabled="longText.disabled"
-                    :show="longText.show"
-                    :required="longText.required"
+                    :id="ui.longText.id"
+                    :ref="ui.longText.id"
+                    v-model="ui.longText.value"
+                    :label="ui.longText.label"
+                    :maxlength="ui.longText.maxlength"
+                    :disabled="ui.longText.disabled"
+                    :show="ui.longText.show"
+                    :required="ui.longText.required"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                 </td>
                 <td>
-                  [{{ longText }}]/{{
-                    longText.value ? longText.value.length : 0
+                  [{{ ui.longText }}]/{{
+                    ui.longText.value ? ui.longText.value.length : 0
                   }}
                 </td>
               </tr>
@@ -105,21 +105,21 @@
                 <td>Area</td>
                 <td>
                   <ETextArea
-                    :id="textArea.id"
-                    :ref="textArea.id"
-                    v-model="textArea.value"
-                    :label="textArea.label"
-                    :disabled="textArea.disabled"
-                    :show="textArea.show"
-                    :required="textArea.required"
-                    :maxlength="textArea.maxlength"
+                    :id="ui.textArea.id"
+                    :ref="ui.textArea.id"
+                    v-model="ui.textArea.value"
+                    :label="ui.textArea.label"
+                    :disabled="ui.textArea.disabled"
+                    :show="ui.textArea.show"
+                    :required="ui.textArea.required"
+                    :maxlength="ui.textArea.maxlength"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                 </td>
                 <td>
-                  [{{ textArea }}]/{{
-                    textArea.value ? textArea.value.length : 0
+                  [{{ ui.textArea }}]/{{
+                    ui.textArea.value ? ui.textArea.value.length : 0
                   }}
                 </td>
               </tr>
@@ -127,18 +127,18 @@
                 <td>Button</td>
                 <td>
                   <EButton
-                    :id="button.id"
-                    :ref="button.id"
-                    :label="button.label"
-                    :disabled="button.disabled"
+                    :id="ui.button.id"
+                    :ref="ui.button.id"
+                    :label="ui.button.label"
+                    :disabled="ui.button.disabled"
                     color="green"
                     @click="click"
                   />
                   <EButton
-                    :id="button2.id"
-                    :ref="button2.id"
-                    :label="button2.label"
-                    :disabled="button2.disabled"
+                    :id="ui.button2.id"
+                    :ref="ui.button2.id"
+                    :label="ui.button2.label"
+                    :disabled="ui.button2.disabled"
                     color="red"
                     @click="changeValue"
                   />
@@ -165,176 +165,176 @@
                     "
                   />
                 </td>
-                <td>[{{ button }}]</td>
+                <td>[{{ ui.button }}]</td>
               </tr>
               <tr>
                 <td>Number</td>
                 <td>
                   <ENumber
-                    :id="number.id"
-                    :ref="number.id"
-                    v-model="number.value"
-                    :label="number.label"
-                    :disabled="number.disabled"
-                    :show="number.show"
-                    :required="number.required"
-                    :maxlength="number.maxlength"
+                    :id="ui.number.id"
+                    :ref="ui.number.id"
+                    v-model="ui.number.value"
+                    :label="ui.number.label"
+                    :disabled="ui.number.disabled"
+                    :show="ui.number.show"
+                    :required="ui.number.required"
+                    :maxlength="ui.number.maxlength"
                     :vruntime="vruntime"
                     :allow-minus="true"
                     :separator="true"
-                    :minimum="number.minimum"
-                    :maximum="number.maximum"
+                    :minimum="ui.number.minimum"
+                    :maximum="ui.number.maximum"
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ number }}]</td>
+                <td>[{{ ui.number }}]</td>
               </tr>
               <tr>
                 <td>Decimal</td>
                 <td>
                   <EDecimal
-                    :id="decimal.id"
-                    :ref="decimal.id"
-                    v-model="decimal.value"
-                    :label="decimal.label"
-                    :disabled="decimal.disabled"
-                    :show="decimal.show"
-                    :required="decimal.required"
-                    :maxlength="decimal.maxlength"
+                    :id="ui.decimal.id"
+                    :ref="ui.decimal.id"
+                    v-model="ui.decimal.value"
+                    :label="ui.decimal.label"
+                    :disabled="ui.decimal.disabled"
+                    :show="ui.decimal.show"
+                    :required="ui.decimal.required"
+                    :maxlength="ui.decimal.maxlength"
                     :vruntime="vruntime"
                     :allow-minus="true"
-                    :minimum="decimal.minimum"
-                    :maximum="decimal.maximum"
+                    :minimum="ui.decimal.minimum"
+                    :maximum="ui.decimal.maximum"
                     :maximum-fraction-digits="6"
                     :separator="true"
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ decimal }}]</td>
+                <td>[{{ ui.decimal }}]</td>
               </tr>
               <tr>
                 <td>Date</td>
                 <td>
                   <EDate
-                    :id="date.id"
-                    :ref="date.id"
-                    v-model="date.value"
-                    :label="date.label"
-                    :required="date.required"
-                    :disabled="date.disabled"
-                    :show="date.show"
+                    :id="ui.date.id"
+                    :ref="ui.date.id"
+                    v-model="ui.date.value"
+                    :label="ui.date.label"
+                    :required="ui.date.required"
+                    :disabled="ui.date.disabled"
+                    :show="ui.date.show"
                     :vruntime="vruntime"
-                    :minimum="date.minimum"
-                    :maximum="date.maximum"
+                    :minimum="ui.date.minimum"
+                    :maximum="ui.date.maximum"
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ date }}]</td>
+                <td>[{{ ui.date }}]</td>
               </tr>
               <tr>
                 <td>Time</td>
                 <td>
                   <ETime
-                    :id="time.id"
-                    :ref="time.id"
-                    v-model="time.value"
-                    :label="time.label"
-                    :required="time.required"
-                    :disabled="time.disabled"
-                    :show="time.show"
+                    :id="ui.time.id"
+                    :ref="ui.time.id"
+                    v-model="ui.time.value"
+                    :label="ui.time.label"
+                    :required="ui.time.required"
+                    :disabled="ui.time.disabled"
+                    :show="ui.time.show"
                     :vruntime="vruntime"
-                    :minimum="time.minimum"
-                    :maximum="time.maximum"
+                    :minimum="ui.time.minimum"
+                    :maximum="ui.time.maximum"
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ time }}]</td>
+                <td>[{{ ui.time }}]</td>
               </tr>
               <tr>
                 <td>Checkbox</td>
                 <td>
                   <ECheckBox
-                    :id="checkbox.id"
-                    :ref="checkbox.id"
-                    v-model="checkbox.value"
-                    :label="checkbox.label"
-                    :disabled="checkbox.disabled"
-                    :show="checkbox.show"
-                    :option="checkbox.option"
+                    :id="ui.checkbox.id"
+                    :ref="ui.checkbox.id"
+                    v-model="ui.checkbox.value"
+                    :label="ui.checkbox.label"
+                    :disabled="ui.checkbox.disabled"
+                    :show="ui.checkbox.show"
+                    :option="ui.checkbox.option"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                   <ECheckBox
-                    :id="checkbox.id"
-                    :ref="checkbox.id"
-                    v-model="checkbox.value"
-                    :label="checkbox.label"
-                    :disabled="checkbox.disabled"
-                    :show="checkbox.show"
-                    :option="checkbox.option"
+                    :id="ui.checkbox.id"
+                    :ref="ui.checkbox.id"
+                    v-model="ui.checkbox.value"
+                    :label="ui.checkbox.label"
+                    :disabled="ui.checkbox.disabled"
+                    :show="ui.checkbox.show"
+                    :option="ui.checkbox.option"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                   <ECheckBox
-                    :id="checkbox.id"
-                    :ref="checkbox.id"
-                    v-model="checkbox.value"
-                    :label="checkbox.label"
-                    :disabled="checkbox.disabled"
-                    :show="checkbox.show"
-                    :option="checkbox.option"
+                    :id="ui.checkbox.id"
+                    :ref="ui.checkbox.id"
+                    v-model="ui.checkbox.value"
+                    :label="ui.checkbox.label"
+                    :disabled="ui.checkbox.disabled"
+                    :show="ui.checkbox.show"
+                    :option="ui.checkbox.option"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                   <ECheckBox
-                    :id="checkbox.id"
-                    :ref="checkbox.id"
-                    v-model="checkbox.value"
-                    :label="checkbox.label"
-                    :disabled="checkbox.disabled"
-                    :show="checkbox.show"
-                    :option="checkbox.option"
+                    :id="ui.checkbox.id"
+                    :ref="ui.checkbox.id"
+                    v-model="ui.checkbox.value"
+                    :label="ui.checkbox.label"
+                    :disabled="ui.checkbox.disabled"
+                    :show="ui.checkbox.show"
+                    :option="ui.checkbox.option"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                 </td>
-                <td>{{ checkbox }}</td>
+                <td>{{ ui.checkbox }}</td>
               </tr>
               <tr>
                 <td>Boolean / Radio</td>
                 <td>
                   <EBoolean
-                    :id="boolean.id"
-                    :ref="boolean.id"
-                    v-model="boolean.value"
-                    :label="boolean.label"
-                    :required="boolean.required"
-                    :disabled="boolean.disabled"
-                    :show="boolean.show"
+                    :id="ui.boolean.id"
+                    :ref="ui.boolean.id"
+                    v-model="ui.boolean.value"
+                    :label="ui.boolean.label"
+                    :required="ui.boolean.required"
+                    :disabled="ui.boolean.disabled"
+                    :show="ui.boolean.show"
                     :vruntime="vruntime"
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ boolean }}]</td>
+                <td>[{{ ui.boolean }}]</td>
               </tr>
               <tr>
                 <td>Select</td>
                 <td>
                   <ESelect
-                    :id="select.id"
-                    :ref="select.id"
-                    v-model="select.value"
-                    :label="select.label"
-                    :required="select.required"
-                    :disabled="select.disabled"
-                    :show="select.show"
+                    :id="ui.select.id"
+                    :ref="ui.select.id"
+                    v-model="ui.select.value"
+                    :label="ui.select.label"
+                    :required="ui.select.required"
+                    :disabled="ui.select.disabled"
+                    :show="ui.select.show"
                     :vruntime="vruntime"
-                    :options="select.options"
+                    :options="ui.select.options"
                     as="number"
                     @blur="blur"
                   />
                 </td>
-                <td>[{{ select }}]</td>
+                <td>[{{ ui.select }}]</td>
               </tr>
               <tr>
                 <td>Card Container</td>
@@ -374,30 +374,30 @@
                   <ECard
                     id="InformasiDebitur"
                     label="Informasi Debitur"
-                    :disabled="shortText.disabled"
+                    :disabled="ui.shortText.disabled"
                   >
                     <EShortText
-                      :id="shortText.id"
-                      :ref="shortText.id"
-                      v-model="shortText.value"
-                      :label="shortText.label"
-                      :maxlength="shortText.maxlength"
-                      :disabled="shortText.disabled"
-                      :show="shortText.show"
+                      :id="ui.shortText.id"
+                      :ref="ui.shortText.id"
+                      v-model="ui.shortText.value"
+                      :label="ui.shortText.label"
+                      :maxlength="ui.shortText.maxlength"
+                      :disabled="ui.shortText.disabled"
+                      :show="ui.shortText.show"
                       placeholder="PlaceHoilder"
-                      :required="shortText.required"
+                      :required="ui.shortText.required"
                       :vruntime="vruntime"
                       @blur="blur"
                     />
                     <EMediumText
-                      :id="mediumText.id"
-                      :ref="mediumText.id"
-                      v-model="mediumText.value"
-                      :label="mediumText.label"
-                      :maxlength="mediumText.maxlength"
-                      :disabled="mediumText.disabled"
-                      :show="mediumText.show"
-                      :required="mediumText.required"
+                      :id="ui.mediumText.id"
+                      :ref="ui.mediumText.id"
+                      v-model="ui.mediumText.value"
+                      :label="ui.mediumText.label"
+                      :maxlength="ui.mediumText.maxlength"
+                      :disabled="ui.mediumText.disabled"
+                      :show="ui.mediumText.show"
+                      :required="ui.mediumText.required"
                       :vruntime="vruntime"
                       @blur="blur"
                     />
@@ -427,129 +427,131 @@ const empty = {
 export default {
   data() {
     return {
-      password: {
-        ...empty,
-        id: 'password',
-        label: 'Enter Password',
-        value: '',
-        maxlength: 10,
+      ui: {
+        password: {
+          ...empty,
+          id: 'password',
+          label: 'Enter Password',
+          value: '',
+          maxlength: 10,
+        },
+        shortText: {
+          ...empty,
+          id: 'shortText',
+          label: 'Nick Name',
+          value: 'Pipin',
+          maxlength: 10,
+        },
+        checkbox: {
+          ...empty,
+          id: 'checkBox',
+          label: 'Sudah menikah',
+          value: null,
+        },
+        mediumText: {
+          ...empty,
+          id: 'mediumText',
+          label: 'Name',
+          maxlength: 20,
+        },
+        longText: {
+          ...empty,
+          id: 'longText',
+          label: 'Full Name',
+          maxlength: 30,
+        },
+        textArea: {
+          ...empty,
+          id: 'textArea',
+          label: 'Your Profile',
+          maxlength: 50,
+        },
+        number: {
+          ...empty,
+          id: 'number',
+          value: 7562265.15,
+          label: 'Distance',
+          maxlength: 30,
+          minimum: 100,
+          maximum: 200232323232323,
+        },
+        decimal: {
+          ...empty,
+          value: 155142.2365,
+          id: 'decimal',
+          label: 'Weight',
+          maxlength: 30,
+          minimum: -100232323.86,
+          maximum: 202323230.54,
+        },
+        button: {
+          ...empty,
+          id: 'button',
+          label: 'Approve',
+        },
+        button2: {
+          ...empty,
+          id: 'button2',
+          label: 'Reject',
+        },
+        date: {
+          ...empty,
+          minimum: new Date('2021-05-10'),
+          maximum: new Date('2021-05-20'),
+          value: new Date(),
+          id: 'date',
+          label: 'Birth Date',
+        },
+        time: {
+          ...empty,
+          minimum: '19:30',
+          maximum: '23:00',
+          value: '21:00',
+          id: 'time',
+          label: 'Birth Time',
+        },
+        boolean: {
+          ...empty,
+          value: true,
+          id: 'boolean',
+          label: 'Active',
+        },
+        select: {
+          ...empty,
+          value: 20,
+          id: 'select',
+          label: 'Lookup',
+          // options: [
+          //   {
+          //     value: 'AAAA',
+          //     description: 'Huruf AAAA',
+          //   },
+          //   {
+          //     value: 'BBBB',
+          //     description: 'Huruf BBBB',
+          //   },
+          //   {
+          //     value: 'CCCC',
+          //     description: 'Huruf CCCC',
+          //   },
+          // ],
+          options: [
+            {
+              value: 10,
+              description: 'Huruf AAAA',
+            },
+            {
+              value: 20,
+              description: 'Huruf BBBB',
+            },
+            {
+              value: 23.23,
+              description: 'Huruf CCCC',
+            },
+          ],
+        },
+        planets: [],
       },
-      shortText: {
-        ...empty,
-        id: 'shortText',
-        label: 'Nick Name',
-        value: 'Pipin',
-        maxlength: 10,
-      },
-      checkbox: {
-        ...empty,
-        id: 'checkBox',
-        label: 'Sudah menikah',
-        value: null,
-      },
-      mediumText: {
-        ...empty,
-        id: 'mediumText',
-        label: 'Name',
-        maxlength: 20,
-      },
-      longText: {
-        ...empty,
-        id: 'longText',
-        label: 'Full Name',
-        maxlength: 30,
-      },
-      textArea: {
-        ...empty,
-        id: 'textArea',
-        label: 'Your Profile',
-        maxlength: 50,
-      },
-      number: {
-        ...empty,
-        id: 'number',
-        value: 7562265.15,
-        label: 'Distance',
-        maxlength: 30,
-        minimum: 100,
-        maximum: 200232323232323,
-      },
-      decimal: {
-        ...empty,
-        value: 155142.2365,
-        id: 'decimal',
-        label: 'Weight',
-        maxlength: 30,
-        minimum: -100232323.86,
-        maximum: 202323230.54,
-      },
-      button: {
-        ...empty,
-        id: 'button',
-        label: 'Approve',
-      },
-      button2: {
-        ...empty,
-        id: 'button2',
-        label: 'Reject',
-      },
-      date: {
-        ...empty,
-        minimum: new Date('2021-05-10'),
-        maximum: new Date('2021-05-20'),
-        value: new Date(),
-        id: 'date',
-        label: 'Birth Date',
-      },
-      time: {
-        ...empty,
-        minimum: '19:30',
-        maximum: '23:00',
-        value: '21:00',
-        id: 'time',
-        label: 'Birth Time',
-      },
-      boolean: {
-        ...empty,
-        value: true,
-        id: 'boolean',
-        label: 'Active',
-      },
-      select: {
-        ...empty,
-        value: 20,
-        id: 'select',
-        label: 'Lookup',
-        // options: [
-        //   {
-        //     value: 'AAAA',
-        //     description: 'Huruf AAAA',
-        //   },
-        //   {
-        //     value: 'BBBB',
-        //     description: 'Huruf BBBB',
-        //   },
-        //   {
-        //     value: 'CCCC',
-        //     description: 'Huruf CCCC',
-        //   },
-        // ],
-        options: [
-          {
-            value: 10,
-            description: 'Huruf AAAA',
-          },
-          {
-            value: 20,
-            description: 'Huruf BBBB',
-          },
-          {
-            value: 23.23,
-            description: 'Huruf CCCC',
-          },
-        ],
-      },
-      planets: [],
     }
   },
   async fetch() {
@@ -560,18 +562,18 @@ export default {
   methods: {
     changeValue() {
       this.click()
-      this.password.value = 'Reset'
-      this.shortText.value = 'Reset'
-      this.mediumText.value = 'Reset'
-      this.longText.value = 'Reset'
-      this.textArea.value = 'Reset'
-      this.number.value = 123
-      this.decimal.value = 123.123
-      this.date.value = new Date('1978-09-19')
-      this.time.value = '19:00'
-      this.boolean.value = false
-      this.select.value = 10
-      this.checkbox.value = true
+      this.ui.password.value = 'Reset'
+      this.ui.shortText.value = 'Reset'
+      this.ui.mediumText.value = 'Reset'
+      this.ui.longText.value = 'Reset'
+      this.ui.textArea.value = 'Reset'
+      this.ui.number.value = 123
+      this.ui.decimal.value = 123.123
+      this.ui.date.value = new Date('1978-09-19')
+      this.ui.time.value = '19:00'
+      this.ui.boolean.value = false
+      this.ui.select.value = 10
+      this.ui.checkbox.value = true
     },
     validateAll() {
       // const result = this.$refs.firstEntryForm.validate()
@@ -590,19 +592,20 @@ export default {
       return null
     },
     click() {
-      this.password.disabled = !this.password.disabled
-      this.shortText.disabled = !this.shortText.disabled
-      this.mediumText.disabled = !this.mediumText.disabled
-      this.longText.disabled = !this.longText.disabled
-      this.textArea.disabled = !this.textArea.disabled
-      this.number.disabled = !this.number.disabled
-      this.decimal.disabled = !this.decimal.disabled
-      this.date.disabled = !this.date.disabled
-      this.time.disabled = !this.time.disabled
-      this.boolean.disabled = !this.boolean.disabled
-      this.button.disabled = !this.button.disabled
-      this.select.disabled = !this.select.disabled
-      this.checkbox.disabled = !this.checkbox.disabled
+      this.$wrapper.disabled(this.ui, true)
+      // this.password.disabled = !this.password.disabled
+      // this.shortText.disabled = !this.shortText.disabled
+      // this.mediumText.disabled = !this.mediumText.disabled
+      // this.longText.disabled = !this.longText.disabled
+      // this.textArea.disabled = !this.textArea.disabled
+      // this.number.disabled = !this.number.disabled
+      // this.decimal.disabled = !this.decimal.disabled
+      // this.date.disabled = !this.date.disabled
+      // this.time.disabled = !this.time.disabled
+      // this.boolean.disabled = !this.boolean.disabled
+      // this.button.disabled = !this.button.disabled
+      // this.select.disabled = !this.select.disabled
+      // this.checkbox.disabled = !this.checkbox.disabled
       // this.$refs.firstEntryForm.clearError()
     },
   },
