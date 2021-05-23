@@ -329,10 +329,6 @@
                 <td>[{{ ui.select }}]</td>
               </tr>
               <tr>
-                <td>Card Container</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
                 <td>PaginationServer</td>
                 <td>&nbsp;</td>
               </tr>
@@ -402,8 +398,6 @@
         </EForm>
       </EForm>
     </EForm>
-    <button ref="buttonOutside" @click="validateAll">Validate</button>
-    <button ref="clearError" @click="clearError">ClearError</button>
   </div>
 </template>
 

@@ -42,6 +42,7 @@
       <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
         {{ errors[0] }}
       </p>
+      <p v-else class="">&nbsp;</p>
     </div>
   </div>
 </template>
