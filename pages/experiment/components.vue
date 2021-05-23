@@ -147,22 +147,14 @@
                     ref="validate"
                     label="Validate"
                     color="yellow"
-                    @click="
-                      () => {
-                        this.$wrapper.validate(this.$refs.firstEntryForm)
-                      }
-                    "
+                    @click="validateAll"
                   />
                   <EButton
                     id="clear"
                     ref="clear"
                     label="Clear"
                     color="blue"
-                    @click="
-                      () => {
-                        this.$wrapper.clearError(this.$refs.firstEntryForm)
-                      }
-                    "
+                    @click="clearError"
                   />
                 </td>
                 <td>[{{ ui.button }}]</td>
@@ -577,12 +569,10 @@ export default {
       this.ui.checkbox.value = true
     },
     validateAll() {
-      // const result = this.$refs.firstEntryForm.validate()
-      this.$refs.firstEntryForm.disabled(false)
+      this.$wrapper.validate(this.$refs.firstEntryForm)
     },
     clearError() {
-      // this.$refs.firstEntryForm.clearError()
-      this.$refs.firstEntryForm.disabled(true)
+      this.$wrapper.clearError(this.$refs.firstEntryForm)
     },
     blur(value) {
       console.log('Event.blur ', value)
