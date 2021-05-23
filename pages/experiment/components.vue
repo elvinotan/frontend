@@ -354,7 +354,20 @@
               </tr>
               <tr>
                 <td>Information</td>
-                <td>&nbsp;</td>
+                <td>
+                  <EButton
+                    id="showLoader"
+                    label="Show Information"
+                    color="purple"
+                    @click="
+                      () =>
+                        this.$refs.message.error(
+                          'Berhasil Menyimpan Data Informasi Debitur'
+                        )
+                    "
+                  />
+                  <EMessage ref="message" />
+                </td>
               </tr>
               <tr>
                 <td>Confirmation</td>

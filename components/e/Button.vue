@@ -22,12 +22,12 @@ export default {
     label: { type: String, required: false, default: '' },
     show: { type: Boolean, required: false, default: true },
     disabled: { type: Boolean, required: false, default: false },
-    color: { type: String, required: true },
+    color: { type: String, required: false, default: 'gray' },
   },
   computed: {
     _cssBorder() {
       const color = this.color ? this.color : 'gray'
-      return `ring-${color}-800 focus:ring-${color}-600`
+      return `ring-${color}-600 focus:ring-${color}-100`
     },
     _cssLabelBg() {
       const color = this.color ? this.color : 'gray'
