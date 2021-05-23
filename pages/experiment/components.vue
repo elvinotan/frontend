@@ -371,7 +371,20 @@
               </tr>
               <tr>
                 <td>Confirmation</td>
-                <td>&nbsp;</td>
+                <td>
+                  <EButton
+                    id="confirmation"
+                    label="Confirmation"
+                    color="purple"
+                    @click="
+                      () =>
+                        this.$refs.popupConfirmation.error(
+                          'Berhasil Menyimpan Data Informasi Debitur'
+                        )
+                    "
+                  />
+                  <EConfirmation ref="popupConfirmation" />
+                </td>
               </tr>
               <tr>
                 <td>Autocomplete</td>
