@@ -149,7 +149,7 @@
                     color="yellow"
                     @click="
                       () => {
-                        this.$refs.firstEntryForm.validate()
+                        this.$wrapper.validate(this.$refs.firstEntryForm)
                       }
                     "
                   />
@@ -160,7 +160,7 @@
                     color="blue"
                     @click="
                       () => {
-                        this.$refs.firstEntryForm.clearError()
+                        this.$wrapper.clearError(this.$refs.firstEntryForm)
                       }
                     "
                   />
@@ -373,6 +373,7 @@
                 <td>
                   <ECard
                     id="InformasiDebitur"
+                    ref="InformasiDebitur"
                     label="Informasi Debitur"
                     :disabled="ui.shortText.disabled"
                   >
@@ -592,7 +593,6 @@ export default {
       return null
     },
     click() {
-      this.$wrapper.disabled(this.ui, true)
       // this.password.disabled = !this.password.disabled
       // this.shortText.disabled = !this.shortText.disabled
       // this.mediumText.disabled = !this.mediumText.disabled

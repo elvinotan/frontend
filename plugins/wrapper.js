@@ -1,4 +1,4 @@
-export default function ({ app }, inject) {
+export default function (plugin, inject) {
   const wrapper = {
     disabled: (data, condition) => {
       if (data) {
@@ -6,10 +6,47 @@ export default function ({ app }, inject) {
           data[p].disabled = condition
         }
       } else {
-        throw new Error('Undefined data parameter')
+        throw new Error('Undefined ui data parameter')
       }
     },
+    refs(pref) {
+      let refs = [pref]
+      for (const ref of pref.$children) {
+        if (ref.metaData) {
+          const { type } = ref.metaData()
+          if (type === 'container') {
+            refs = refs.concat(plugin.$wrapper.refs(ref)) // Card, Form
+          } else {
+            refs.push(ref) // Button, Password, ShortText, MediumText, LongText, TextArea, Number, Decimal, Date, Time, Checkbox, Boolean, Select
+          }
+        } else {
+          throw new Error(
+            'Warning!!! some component dose not have metaData !!!'
+          )
+        }
+      }
+      return refs
+    },
+    clearError(pref) {
+      for (const ref of plugin.$wrapper.refs(pref)) {
+        if (ref.clearError) ref.clearError()
+      }
+    },
+    validate(pref) {
+      let allValid = true
+      const allErrors = []
+      for (const ref of plugin.$wrapper.refs(pref)) {
+        if (ref.validate) {
+          const { valid, errors } = ref.validate()
+          allValid = allValid && valid
+          if (errors) allErrors.push(...errors)
+        }
+      }
+      return { valid: allValid, errors: allErrors }
+    },
   }
+  // Math Operational
+  //
 
   inject('wrapper', wrapper)
 }
