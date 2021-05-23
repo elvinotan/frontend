@@ -342,7 +342,15 @@
               </tr>
               <tr>
                 <td>Loading</td>
-                <td>&nbsp;</td>
+                <td>
+                  <EButton
+                    id="showLoader"
+                    label="Show Loader"
+                    color="purple"
+                    @click="loading"
+                  />
+                  <ELoading ref="loader" />
+                </td>
               </tr>
               <tr>
                 <td>Information</td>
@@ -561,6 +569,12 @@ export default {
       this.ui.boolean.value = false
       this.ui.select.value = 10
       this.ui.checkbox.value = true
+    },
+    loading() {
+      this.$refs.loader.show('Fetch Data Informasi Debitur')
+      setTimeout(() => {
+        this.$refs.loader.fail()
+      }, 5000)
     },
     validateAll() {
       this.$wrapper.validate(this.$refs.firstEntryForm)
