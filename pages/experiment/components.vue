@@ -338,7 +338,41 @@
               </tr>
               <tr>
                 <td>Dialog</td>
-                <td>&nbsp;</td>
+                <td>
+                  <EButton
+                    id="dialog"
+                    label="Dialog"
+                    color="purple"
+                    @click="openDialog"
+                  />
+                  <EDialog
+                    ref="popupDialog"
+                    :width="1000"
+                    title="Please complete the form"
+                    :buttons="[
+                      { label: 'Simpan', color: 'green' },
+                      { label: 'Generate', color: 'yellow' },
+                    ]"
+                    @Simpan="clickSimpan"
+                    @Generate="clickGenerate"
+                  >
+                    <div>
+                      <ESelect
+                        :id="ui.select.id"
+                        :ref="ui.select.id"
+                        v-model="ui.select.value"
+                        :label="ui.select.label"
+                        :required="ui.select.required"
+                        :disabled="ui.select.disabled"
+                        :show="ui.select.show"
+                        :vruntime="vruntime"
+                        :options="ui.select.options"
+                        as="number"
+                        @blur="blur"
+                      />
+                    </div>
+                  </EDialog>
+                </td>
               </tr>
               <tr>
                 <td>Loading</td>
@@ -571,6 +605,15 @@ export default {
     )
   },
   methods: {
+    clickSimpan() {
+      console.log('Click simpan nih')
+    },
+    clickGenerate() {
+      console.log('Click simpan nih')
+    },
+    openDialog() {
+      this.$refs.popupDialog.open()
+    },
     openMessage() {
       this.$refs.message.success('Berhasil Menyimpan Data Informasi Debitur')
       console.log('dfdfdf')
