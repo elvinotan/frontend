@@ -10,33 +10,41 @@
             <div
               class="font-bold rounded-t text-sm bg-gray-300 text-gray-800 w-auto p-1"
             >
-              Information
+              Confirmation
             </div>
             <div
               class="modal-body p-3 w-full flex justify-start"
               :class="[_cssInputBg]"
             >
               <div>
-                <img
-                  v-if="type === 'success'"
-                  src="~/assets/image/success.jpg"
-                />
-                <img v-if="type === 'error'" src="~/assets/image/error.png" />
+                <img src="~/assets/image/confirm.png" />
               </div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <div class="text-sm">{{ label }}</div>
             </div>
-            <div
-              class="rounded-b bg-gray-100 w-auto p-2 flex justify-end"
-              :class="[_cssLabelBg]"
+            <span
+              class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5"
             >
               <EButton
-                id="'Message' + id"
+                id="'ConfirmationClose' + id"
+                class="w-full justify-start"
                 label="Close"
-                :color="type === 'success' ? 'green' : 'red'"
-                @click="close"
+                color="gray"
+                @click="_button('Close')"
               />
-            </div>
+              <EButton
+                id="'ConfirmationYes' + id"
+                :label="positive"
+                color="green"
+                @click="_button(positive)"
+              />
+              <EButton
+                id="'ConfirmationNo' + id"
+                :label="negative"
+                color="red"
+                @click="_button(negative)"
+              />
+            </span>
           </div>
         </div>
       </div>
@@ -45,26 +53,33 @@
 </template>
 <script>
 export default {
-  name: 'Card',
+  name: 'Confirmation',
+  props: {
+    positive: { type: String, required: false, default: 'Yes' },
+    negative: { type: String, required: false, default: 'No' },
+  },
   data() {
     return {
       visible: false,
       label: '',
-      type: 'success',
+      resolve: null,
     }
   },
   computed: {
     _cssBorder() {
       return 'ring-gray-500'
     },
-    _cssLabelBg() {
-      return this.type === 'success' ? 'bg-green-300' : 'bg-red-300'
-    },
     _cssInputBg() {
       return 'bg-white'
     },
   },
   methods: {
+    _button(prop) {
+      this.visible = false
+      const result = {}
+      result[prop] = true
+      this.resolve(result)
+    },
     metaData() {
       return {
         name: this._name,
@@ -72,15 +87,12 @@ export default {
         show: true,
       }
     },
-    success(label) {
+    confirm(label) {
       this.label = label
-      this.type = 'success'
       this.visible = true
-    },
-    error(label) {
-      this.visible = true
-      this.label = label
-      this.type = 'error'
+      return new Promise((resolve, reject) => {
+        this.resolve = resolve
+      })
     },
     close() {
       this.visible = false

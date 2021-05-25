@@ -67,7 +67,7 @@
 </template>
 <script>
 export default {
-  name: 'Card',
+  name: 'Loading',
   data() {
     return {
       visible: false,

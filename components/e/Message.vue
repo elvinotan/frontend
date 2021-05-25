@@ -34,7 +34,7 @@
                 id="'Message' + id"
                 label="Close"
                 :color="type === 'success' ? 'green' : 'red'"
-                @click="close"
+                @click="_button('Close')"
               />
             </div>
           </div>
@@ -45,12 +45,13 @@
 </template>
 <script>
 export default {
-  name: 'Card',
+  name: 'Message',
   data() {
     return {
       visible: false,
       label: '',
       type: 'success',
+      resolve: null,
     }
   },
   computed: {
@@ -72,15 +73,27 @@ export default {
         show: true,
       }
     },
+    _button(prop) {
+      this.visible = false
+      const result = {}
+      result[prop] = true
+      this.resolve(result)
+    },
     success(label) {
       this.label = label
       this.type = 'success'
       this.visible = true
+      return new Promise((resolve, reject) => {
+        this.resolve = resolve
+      })
     },
     error(label) {
       this.visible = true
       this.label = label
       this.type = 'error'
+      return new Promise((resolve, reject) => {
+        this.resolve = resolve
+      })
     },
     close() {
       this.visible = false

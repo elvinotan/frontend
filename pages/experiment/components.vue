@@ -359,12 +359,7 @@
                     id="showLoader"
                     label="Show Information"
                     color="purple"
-                    @click="
-                      () =>
-                        this.$refs.message.error(
-                          'Berhasil Menyimpan Data Informasi Debitur'
-                        )
-                    "
+                    @click="openMessage"
                   />
                   <EMessage ref="message" />
                 </td>
@@ -376,12 +371,7 @@
                     id="confirmation"
                     label="Confirmation"
                     color="purple"
-                    @click="
-                      () =>
-                        this.$refs.popupConfirmation.error(
-                          'Berhasil Menyimpan Data Informasi Debitur'
-                        )
-                    "
+                    @click="openConfirmation"
                   />
                   <EConfirmation ref="popupConfirmation" />
                 </td>
@@ -581,6 +571,18 @@ export default {
     )
   },
   methods: {
+    openMessage() {
+      this.$refs.message.success('Berhasil Menyimpan Data Informasi Debitur')
+      console.log('dfdfdf')
+    },
+    async openConfirmation() {
+      const data = await this.$refs.popupConfirmation.confirm(
+        'Anda yakin akan hapus data ?'
+      )
+      if (data) {
+        console.log('data ', data)
+      }
+    },
     changeValue() {
       this.click()
       this.ui.password.value = 'Reset'
