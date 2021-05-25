@@ -13,8 +13,9 @@
               {{ title }}
             </div>
             <div
-              class="modal-body p-3 w-full flex justify-start"
+              class="p-3 w-full flex justify-start"
               :class="[_cssInputBg]"
+              :style="_height"
             >
               <slot />
             </div>
@@ -50,6 +51,7 @@ export default {
   props: {
     title: { type: String, required: false, default: 'Please Provide title..' },
     width: { type: Number, required: false, default: 500 },
+    height: { type: Number, required: false, default: 500 },
     buttons: { type: Array, required: false, default: () => [] }, // { label, color}
   },
   data() {
@@ -68,6 +70,9 @@ export default {
     },
     _width() {
       return `width: ${this.width}px`
+    },
+    _height() {
+      return `height: ${this.height}px`
     },
   },
 
@@ -125,7 +130,7 @@ export default {
 
 .modal-body {
   margin: 1px 0;
-  height: 70px;
+  height: 500px;
 }
 
 .modal-default-button {

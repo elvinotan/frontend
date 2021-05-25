@@ -347,7 +347,8 @@
                   />
                   <EDialog
                     ref="popupDialog"
-                    :width="1000"
+                    :width="755"
+                    :height="300"
                     title="Please complete the form"
                     :buttons="[
                       { label: 'Simpan', color: 'green' },
