@@ -5,7 +5,7 @@
         :id="id"
         type="button"
         :disabled="disabled"
-        class="text-sm font-bold py-1 px-2 rounded border-0 focus:outline-none outline-none ring-2 ring-gray-500"
+        class="text-sm font-bold py-1 px-2 rounded border-0 ring-2 ring-gray-500 focus:outline-none"
         :class="[_cssBorder, _cssLabelBg, _cssInputText]"
         @click="_event"
       >
@@ -44,6 +44,8 @@ export default {
   methods: {
     _event(evt) {
       this.$emit(evt.type)
+      const element = document.getElementById('lostFocusComponent')
+      if (element) element.focus()
     },
     metaData() {
       return {

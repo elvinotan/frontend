@@ -736,7 +736,10 @@ export default {
   },
   methods: {
     clickSimpan() {
-      console.log('Click simpan nih')
+      this.$refs.loader.show('Simpan Data')
+      setTimeout(() => {
+        this.$refs.loader.success()
+      }, 5000)
     },
     clickGenerate() {
       console.log('Click simpan nih')
