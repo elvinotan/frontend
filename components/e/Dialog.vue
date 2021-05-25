@@ -12,11 +12,7 @@
             >
               {{ title }}
             </div>
-            <div
-              class="p-3 w-full flex justify-start"
-              :class="[_cssInputBg]"
-              :style="_height"
-            >
+            <div class="p-3 w-full" :class="[_cssInputBg]" :style="_height">
               <slot />
             </div>
             <span
@@ -72,7 +68,7 @@ export default {
       return `width: ${this.width}px`
     },
     _height() {
-      return `height: ${this.height}px`
+      return `overflow-y: scroll; height: ${this.height}px`
     },
   },
 

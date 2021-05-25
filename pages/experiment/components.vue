@@ -357,7 +357,7 @@
                     @Simpan="clickSimpan"
                     @Generate="clickGenerate"
                   >
-                    <div>
+                    <ECol :col="1">
                       <ESelect
                         :id="ui.select.id"
                         :ref="ui.select.id"
@@ -371,7 +371,136 @@
                         as="number"
                         @blur="blur"
                       />
-                    </div>
+                    </ECol>
+                    <ECol :col="2">
+                      <ESelect
+                        :id="ui.select.id"
+                        :ref="ui.select.id"
+                        v-model="ui.select.value"
+                        :label="ui.select.label"
+                        :required="ui.select.required"
+                        :disabled="ui.select.disabled"
+                        :show="ui.select.show"
+                        :vruntime="vruntime"
+                        :options="ui.select.options"
+                        as="number"
+                        @blur="blur"
+                      />
+                      <EShortText
+                        :id="ui.shortText.id"
+                        :ref="ui.shortText.id"
+                        v-model="ui.shortText.value"
+                        :label="ui.shortText.label"
+                        :maxlength="ui.shortText.maxlength"
+                        :disabled="ui.shortText.disabled"
+                        :show="ui.shortText.show"
+                        placeholder="PlaceHoilder"
+                        :required="ui.shortText.required"
+                        :vruntime="vruntime"
+                        @blur="blur"
+                      />
+                    </ECol>
+                    <ECol :col="3">
+                      <EMediumText
+                        :id="ui.mediumText.id"
+                        :ref="ui.mediumText.id"
+                        v-model="ui.mediumText.value"
+                        :label="ui.mediumText.label"
+                        :maxlength="ui.mediumText.maxlength"
+                        :disabled="ui.mediumText.disabled"
+                        :show="ui.mediumText.show"
+                        :required="ui.mediumText.required"
+                        :vruntime="vruntime"
+                        @blur="blur"
+                      />
+                      <ELongText
+                        :id="ui.longText.id"
+                        :ref="ui.longText.id"
+                        v-model="ui.longText.value"
+                        :label="ui.longText.label"
+                        :maxlength="ui.longText.maxlength"
+                        :disabled="ui.longText.disabled"
+                        :show="ui.longText.show"
+                        :required="ui.longText.required"
+                        :vruntime="vruntime"
+                        @blur="blur"
+                      />
+                      <ENumber
+                        :id="ui.number.id"
+                        :ref="ui.number.id"
+                        v-model="ui.number.value"
+                        :label="ui.number.label"
+                        :disabled="ui.number.disabled"
+                        :show="ui.number.show"
+                        :required="ui.number.required"
+                        :maxlength="ui.number.maxlength"
+                        :vruntime="vruntime"
+                        :allow-minus="true"
+                        :separator="true"
+                        :minimum="ui.number.minimum"
+                        :maximum="ui.number.maximum"
+                        @blur="blur"
+                      />
+                    </ECol>
+                    <ECol :col="4">
+                      <EMediumText
+                        :id="ui.mediumText.id"
+                        :ref="ui.mediumText.id"
+                        v-model="ui.mediumText.value"
+                        :label="ui.mediumText.label"
+                        :maxlength="ui.mediumText.maxlength"
+                        :disabled="ui.mediumText.disabled"
+                        :show="ui.mediumText.show"
+                        :required="ui.mediumText.required"
+                        :vruntime="vruntime"
+                        @blur="blur"
+                      />
+                      <ELongText
+                        :id="ui.longText.id"
+                        :ref="ui.longText.id"
+                        v-model="ui.longText.value"
+                        :label="ui.longText.label"
+                        :maxlength="ui.longText.maxlength"
+                        :disabled="ui.longText.disabled"
+                        :show="ui.longText.show"
+                        :required="ui.longText.required"
+                        :vruntime="vruntime"
+                        @blur="blur"
+                      />
+                      <ENumber
+                        :id="ui.number.id"
+                        :ref="ui.number.id"
+                        v-model="ui.number.value"
+                        :label="ui.number.label"
+                        :disabled="ui.number.disabled"
+                        :show="ui.number.show"
+                        :required="ui.number.required"
+                        :maxlength="ui.number.maxlength"
+                        :vruntime="vruntime"
+                        :allow-minus="true"
+                        :separator="true"
+                        :minimum="ui.number.minimum"
+                        :maximum="ui.number.maximum"
+                        @blur="blur"
+                      />
+                      <EDecimal
+                        :id="ui.decimal.id"
+                        :ref="ui.decimal.id"
+                        v-model="ui.decimal.value"
+                        :label="ui.decimal.label"
+                        :disabled="ui.decimal.disabled"
+                        :show="ui.decimal.show"
+                        :required="ui.decimal.required"
+                        :maxlength="ui.decimal.maxlength"
+                        :vruntime="vruntime"
+                        :allow-minus="true"
+                        :minimum="ui.decimal.minimum"
+                        :maximum="ui.decimal.maximum"
+                        :maximum-fraction-digits="6"
+                        :separator="true"
+                        @blur="blur"
+                      />
+                    </ECol>
                   </EDialog>
                 </td>
               </tr>
