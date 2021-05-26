@@ -31,7 +31,7 @@
               :class="[_cssLabelBg]"
             >
               <EButton
-                id="'Message' + id"
+                :id="'Message' + id"
                 label="Close"
                 :color="type === 'success' ? 'green' : 'red'"
                 @click="_button('Close')"
@@ -46,6 +46,9 @@
 <script>
 export default {
   name: 'Message',
+  props: {
+    id: { type: String, required: true },
+  },
   data() {
     return {
       visible: false,

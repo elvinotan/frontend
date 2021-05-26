@@ -19,7 +19,7 @@
               class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5"
             >
               <EButton
-                id="'ConfirmationClose' + id"
+                :id="'DialogClose' + id"
                 class="w-full justify-start"
                 label="Close"
                 color="gray"
@@ -28,7 +28,7 @@
 
               <EButton
                 v-for="button of buttons"
-                :id="'Dialog' + button.label"
+                :id="'Dialog' + button.label + id"
                 :key="button.label"
                 :label="button.label"
                 :color="button.color"
@@ -45,6 +45,7 @@
 export default {
   name: 'Dialog',
   props: {
+    id: { type: String, required: true, default: null },
     title: { type: String, required: false, default: 'Please Provide title..' },
     width: { type: Number, required: false, default: 500 },
     height: { type: Number, required: false, default: 500 },

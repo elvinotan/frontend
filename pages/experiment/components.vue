@@ -352,6 +352,7 @@
                       @click="openDialog"
                     />
                     <EDialog
+                      id="entry"
                       ref="popupDialog"
                       :width="755"
                       :height="300"
@@ -531,7 +532,7 @@
                       color="purple"
                       @click="openMessage"
                     />
-                    <EMessage ref="message" />
+                    <EMessage id="msg" ref="message" />
                   </td>
                 </tr>
                 <tr>
@@ -543,7 +544,7 @@
                       color="purple"
                       @click="openConfirmation"
                     />
-                    <EConfirmation ref="popupConfirmation" />
+                    <EConfirmation id="Conf" ref="popupConfirmation" />
                   </td>
                 </tr>
                 <tr>

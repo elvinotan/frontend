@@ -23,7 +23,6 @@
 export default {
   name: 'Card',
   props: {
-    id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
     disabled: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },

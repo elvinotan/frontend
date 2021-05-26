@@ -26,20 +26,20 @@
               class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5"
             >
               <EButton
-                id="'ConfirmationClose' + id"
+                :id="'ConfirmationClose' + id"
                 class="w-full justify-start"
                 label="Close"
                 color="gray"
                 @click="_button('Close')"
               />
               <EButton
-                id="'ConfirmationYes' + id"
+                :id="'ConfirmationYes' + id"
                 :label="positive"
                 color="green"
                 @click="_button(positive)"
               />
               <EButton
-                id="'ConfirmationNo' + id"
+                :id="'ConfirmationNo' + id"
                 :label="negative"
                 color="red"
                 @click="_button(negative)"
@@ -55,6 +55,7 @@
 export default {
   name: 'Confirmation',
   props: {
+    id: { type: String, required: true },
     positive: { type: String, required: false, default: 'Yes' },
     negative: { type: String, required: false, default: 'No' },
   },
