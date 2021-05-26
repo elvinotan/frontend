@@ -3,7 +3,6 @@
     <Header />
     <Nuxt />
     <Footer />
-    <button id="lostFocusComponent" />
   </div>
 </template>
 

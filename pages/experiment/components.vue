@@ -748,11 +748,9 @@ export default {
       const self = this
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          console.log('self.counter>', self.counter)
-          console.log('comprea', self.counter === 1)
           resolve(self.counter === 1)
           self.counter = 1
-        }, 3000)
+        }, 2000)
       })
     },
     clickSimpan() {

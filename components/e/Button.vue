@@ -11,6 +11,9 @@
       >
         {{ label }}
       </button>
+      <div style="height: 1px; width: 1px">
+        <button :id="'lostFocus' + id" />
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +47,7 @@ export default {
   methods: {
     _event(evt) {
       this.$emit(evt.type)
-      const element = document.getElementById('lostFocusComponent')
+      const element = document.getElementById('lostFocus' + this.id)
       if (element) element.focus()
     },
     metaData() {
