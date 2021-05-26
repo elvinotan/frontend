@@ -20,7 +20,9 @@
                 <img src="~/assets/image/confirm.png" />
               </div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-              <div class="text-sm">{{ label }}</div>
+              <div class="text-sm flex flex-wrap content-center">
+                {{ label }}
+              </div>
             </div>
             <span
               class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5"

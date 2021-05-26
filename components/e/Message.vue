@@ -24,7 +24,9 @@
                 <img v-if="type === 'error'" src="~/assets/image/error.png" />
               </div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-              <div class="text-sm">{{ label }}</div>
+              <div class="text-sm flex flex-wrap content-center">
+                {{ label }}
+              </div>
             </div>
             <div
               class="rounded-b bg-gray-100 w-auto p-2 flex justify-end"
