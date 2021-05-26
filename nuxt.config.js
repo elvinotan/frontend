@@ -12,24 +12,11 @@ export default {
       { hid: 'description', name: 'description', content: '' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: [
-      {
-        src: '/js/jquery-3.5.1.js',
-        type: 'text/javascript',
-      },
-      {
-        src: '/js/jquery.dataTables.min.js',
-        type: 'text/javascript',
-      },
-      {
-        src: '/js/dataTables.jqueryui.min.js',
-        type: 'text/javascript',
-      },
-    ],
+    script: [],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~/assets/css/main.css', '~/assets/css/jquery.dataTables.css'],
+  css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/axios', '~/plugins/wrapper'],
