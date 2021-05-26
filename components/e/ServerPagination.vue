@@ -1,6 +1,10 @@
 <template>
   <div>
-    <table id="example" class="display" style="width: 100%">
+    <table
+      id="example"
+      class="cell-border compact hover stripe order-column"
+      style="width: 100%"
+    >
       <thead>
         <tr>
           <th>Name</th>
@@ -495,3 +499,7 @@ export default {
   },
 }
 </script>
+<style scoped>
+@import '~/assets/css/jquery-ui.css';
+@import '~/assets/css/dataTables.jqueryui.min.css';
+</style>
