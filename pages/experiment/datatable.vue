@@ -1,5 +1,5 @@
 <template>
   <div>
-    <EServerPagination label="Customer List" />
+    <ELocalPagination label="Customer List" />
   </div>
 </template>

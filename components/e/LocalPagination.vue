@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'ServerPagination',
+  name: 'LocalPagination',
   props: {
     show: { type: Boolean, required: false, default: true },
     label: {
