@@ -488,6 +488,7 @@
 </template>
 <script>
 import $ from 'jquery'
+import 'jquery-ui'
 import dt from 'datatables.net'
 
 export default {
@@ -499,7 +500,4 @@ export default {
   },
 }
 </script>
-<style scoped>
-@import '~/assets/css/jquery-ui.css';
-@import '~/assets/css/dataTables.jqueryui.min.css';
-</style>
+<style scoped></style>

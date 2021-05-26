@@ -16,20 +16,14 @@ export default {
       {
         src: '/js/jquery-3.5.1.js',
         type: 'text/javascript',
-        body: true,
-        defer: true,
       },
       {
         src: '/js/jquery.dataTables.min.js',
         type: 'text/javascript',
-        body: true,
-        defer: true,
       },
       {
         src: '/js/dataTables.jqueryui.min.js',
         type: 'text/javascript',
-        body: true,
-        defer: true,
       },
     ],
   },
@@ -38,6 +32,8 @@ export default {
   css: [
     '~/assets/css/main.css',
     '~/assets/css/jquery-ui.css',
+    '~/assets/css/jquery-ui.theme.css',
+    '~/assets/css/jquery-ui.structure.css',
     '~/assets/css/dataTables.jqueryui.min.css',
     '~/assets/css/jquery.dataTables.css',
   ],
