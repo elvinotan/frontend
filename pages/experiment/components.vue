@@ -336,7 +336,7 @@
                 </tr>
                 <tr>
                   <td>PaginationServer</td>
-                  <td>&nbsp;</td>
+                  <td><EServerPagination /></td>
                 </tr>
                 <tr>
                   <td>PaginationLocal</td>

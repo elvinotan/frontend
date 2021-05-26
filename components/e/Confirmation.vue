@@ -17,7 +17,7 @@
               :class="[_cssInputBg]"
             >
               <div>
-                <img src="~/assets/image/confirm.png" />
+                <img src="~/assets/images/confirm.png" />
               </div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <div class="text-sm flex flex-wrap content-center">
