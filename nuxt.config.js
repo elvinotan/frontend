@@ -29,14 +29,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '~/assets/css/main.css',
-    '~/assets/css/jquery-ui.css',
-    '~/assets/css/jquery-ui.theme.css',
-    '~/assets/css/jquery-ui.structure.css',
-    '~/assets/css/dataTables.jqueryui.min.css',
-    '~/assets/css/jquery.dataTables.css',
-  ],
+  css: ['~/assets/css/main.css', '~/assets/css/jquery.dataTables.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/axios', '~/plugins/wrapper'],

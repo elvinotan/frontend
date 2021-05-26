@@ -488,16 +488,16 @@
 </template>
 <script>
 import $ from 'jquery'
-import 'jquery-ui'
+import a from 'jquery-ui'
 import dt from 'datatables.net'
 
 export default {
   mounted() {
     console.log('Jqury ', $)
     console.log('Datatable ', dt)
+    console.log('Datatable a ', a)
 
     $('#example').DataTable()
   },
 }
 </script>
-<style scoped></style>
