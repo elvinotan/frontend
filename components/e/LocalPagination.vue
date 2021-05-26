@@ -15,9 +15,16 @@
           max-height="200px"
           :fixed-header="true"
           :row-style-class="rowStyleClassFn"
+          style-class="vgt-table striped bordered condensed"
+          :search-options="{ enabled: true }"
         >
-          <div slot="emptystate">No Data from Server....</div>
+          <div slot="emptystate">No Data....</div>
         </vue-good-table>
+        <div
+          class="font-bold rounded-b text-sm text-gray-800 w-auto p-1 bg-gray-300"
+        >
+          Bottom
+        </div>
       </div>
     </div>
   </div>
@@ -103,8 +110,14 @@ export default {
   computed: {},
   methods: {
     rowStyleClassFn(row) {
-      return row.originalIndex % 2 === 1 ? 'bg-yellow-300' : 'bg-yellow-red'
+      // return row.originalIndex % 2 === 1 ? 'bg-yellow-300' : 'bg-yellow-red'
+      return ''
     },
   },
 }
 </script>
+<style>
+.vgt-table.striped tbody tr:nth-of-type(odd) {
+  background-color: yellow !important;
+}
+</style>
