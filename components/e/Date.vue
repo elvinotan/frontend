@@ -110,21 +110,7 @@ export default {
   methods: {
     _format(value, pattern) {
       if (value && pattern) {
-        // Must return YYYY-MM-DD, krn format ini yang di terima oleh input tag dgn tipe date
-        const year = value.getFullYear()
-        const month =
-          value.getMonth().toString().length === 1
-            ? `0${value.getMonth() + 1}`
-            : value.getMonth()
-        const date =
-          value.getDate().toString().length === 1
-            ? `0${value.getDate() + 1}`
-            : value.getDate()
-
-        return pattern
-          .replace(/YYYY/g, year)
-          .replace(/MM/g, month)
-          .replace(/DD/g, date)
+        return this.$fmt.date(value, pattern)
       } else {
         return value
       }

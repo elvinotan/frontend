@@ -203,7 +203,7 @@
                       :allow-minus="true"
                       :minimum="ui.decimal.minimum"
                       :maximum="ui.decimal.maximum"
-                      :maximum-fraction-digits="6"
+                      :maximum-fraction-digits="3"
                       :separator="true"
                       @blur="blur"
                     />
@@ -336,7 +336,13 @@
                 </tr>
                 <tr>
                   <td>PaginationServer</td>
-                  <td><ELocalPagination /></td>
+                  <td>
+                    <ELocalPagination
+                      label="Customer"
+                      :columns="ui.localPagination.columns"
+                      :rows="ui.localPagination.rows"
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td>PaginationLocal</td>
@@ -612,6 +618,74 @@ export default {
     return {
       counter: 0,
       ui: {
+        localPagination: {
+          columns: [
+            {
+              label: 'Name',
+              field: 'name',
+              sortable: false,
+            },
+            {
+              label: 'Age',
+              field: 'age',
+              type: 'number',
+            },
+            {
+              label: 'Created On',
+              field: 'createdAt',
+              type: 'date',
+            },
+            {
+              label: 'Percent',
+              field: 'score',
+              type: 'percentage',
+            },
+          ],
+          rows: [
+            {
+              id: 1,
+              name: 'John',
+              age: 20,
+              createdAt: new Date(),
+              score: 0.03343,
+            },
+            {
+              id: 2,
+              name: 'Jane',
+              age: 24,
+              createdAt: new Date(),
+              score: 0.03343,
+            },
+            {
+              id: 3,
+              name: 'Susan',
+              age: 16,
+              createdAt: new Date(),
+              score: 0.03343,
+            },
+            {
+              id: 4,
+              name: 'Chris',
+              age: 55,
+              createdAt: new Date(),
+              score: 0.03343,
+            },
+            {
+              id: 5,
+              name: 'Dan',
+              age: 40,
+              createdAt: new Date(),
+              score: 0.03343,
+            },
+            {
+              id: 6,
+              name: 'John',
+              age: 20,
+              createdAt: new Date(),
+              score: 0.03343,
+            },
+          ],
+        },
         password: {
           ...empty,
           id: 'password',

@@ -65,7 +65,6 @@ export default {
   data() {
     return {
       separatorSign: ',',
-      locale: 'en-US',
       lvalue: this._format(this.value),
       state: 0,
       errors: [],
@@ -114,10 +113,7 @@ export default {
   methods: {
     _format(value) {
       if (value && this.separator) {
-        return new Intl.NumberFormat(this.locale, {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: this.maximumFractionDigits,
-        }).format(value)
+        return this.$fmt.decimal(value, this.maximumFractionDigits)
       } else {
         return value
       }

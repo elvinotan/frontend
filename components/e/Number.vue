@@ -117,10 +117,7 @@ export default {
   methods: {
     _format(value) {
       if (value && this.separator) {
-        return new Intl.NumberFormat(this.locale, {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        }).format(value)
+        return this.$fmt.number(value)
       } else {
         return value
       }
