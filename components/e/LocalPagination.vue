@@ -1,6 +1,7 @@
 <template>
   <div>
     <div v-if="show">
+      {{ lcolumns }}
       <div
         class="text-xs rounded border-0 outline-none ring-2 ring-gray-500 bg-white"
       >
@@ -38,7 +39,7 @@
 // - sortable = support order atau tidak (default true)
 // - width = lebar colum dalam px ('100px')
 // - tooltip = Tooltip header
-// - type = text, date
+// - type = text, date, number, decimal, percentage, boolean
 export default {
   name: 'LocalPagination',
   props: {
@@ -60,33 +61,90 @@ export default {
   computed: {},
   created() {
     for (const column of this.columns) {
-      const lcolumn = { ...column }
+      let lcolumn = { ...column }
       if (!lcolumn.type) lcolumn.type = 'text'
 
       if (lcolumn.type === 'text') {
-        lcolumn.formatFn = this.formatText
-        lcolumn.tdClass = 'vgt-left-align'
+        lcolumn = {
+          ...lcolumn,
+          formatFn: this.formatText,
+          thClass: 'vgt-left-align',
+          tdClass: 'vgt-left-align',
+        }
+        delete lcolumn.type
       }
       if (lcolumn.type === 'date') {
-        lcolumn.formatFn = this.formatDate
-        lcolumn.tdClass = 'vgt-right-align'
+        lcolumn = {
+          ...lcolumn,
+          formatFn: this.formatDate,
+          thClass: 'vgt-center-align',
+          tdClass: 'vgt-center-align',
+        }
+        delete lcolumn.type
+      }
+      if (lcolumn.type === 'number') {
+        lcolumn = {
+          ...lcolumn,
+          formatFn: this.formatNumber,
+          thClass: 'vgt-right-align',
+          tdClass: 'vgt-right-align',
+          type: 'number',
+        }
+      }
+      if (lcolumn.type === 'decimal') {
+        lcolumn = {
+          ...lcolumn,
+          formatFn: this.formatDecimal,
+          thClass: 'vgt-right-align',
+          tdClass: 'vgt-right-align',
+          type: 'number',
+        }
+      }
+      if (lcolumn.type === 'percentage') {
+        lcolumn = {
+          ...lcolumn,
+          formatFn: this.formatPercentage,
+          thClass: 'vgt-right-align',
+          tdClass: 'vgt-right-align',
+          type: 'number',
+        }
+      }
+      if (lcolumn.type === 'boolean') {
+        lcolumn = {
+          ...lcolumn,
+          formatFn: this.formatBoolean,
+          thClass: 'vgt-center-align',
+          tdClass: 'vgt-center-align',
+        }
+        delete lcolumn.type
       }
 
-      delete lcolumn.type
       this.lcolumns.push(lcolumn)
     }
     console.log('this.lcolumns ', this.lcolumns)
   },
   methods: {
     formatText(value) {
-      console.log('formatText.value ', value)
       if (!value) return ''
       return value
     },
     formatDate(value) {
-      console.log('formatDate.value ', value)
       if (!value) return ''
       return this.$fmt.date(new Date(value), 'DD/MM/YYYY')
+    },
+    formatNumber(value) {
+      if (!value) return ''
+      return this.$fmt.number(value)
+    },
+    formatDecimal(value) {
+      if (!value) return ''
+      return this.$fmt.decimal(value, 2, 2)
+    },
+    formatPercentage(value) {
+      return this.formatDecimal(value) + ' %'
+    },
+    formatBoolean(value) {
+      return value ? 'Yes' : 'No'
     },
     rowStyleClassFn(row) {
       // return row.originalIndex % 2 === 1 ? 'bg-yellow-300' : 'bg-yellow-red'

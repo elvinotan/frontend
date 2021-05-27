@@ -31,10 +31,14 @@ export default function (plugin, inject) {
         return value
       }
     },
-    decimal(value = null, maximumFractionDigits = 2) {
+    decimal(
+      value = null,
+      minimumFractionDigits = 0,
+      maximumFractionDigits = 2
+    ) {
       if (value) {
         return new Intl.NumberFormat('en-US', {
-          minimumFractionDigits: 0,
+          minimumFractionDigits,
           maximumFractionDigits,
         }).format(value)
       } else {

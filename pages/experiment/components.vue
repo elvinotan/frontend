@@ -628,7 +628,7 @@ export default {
             {
               label: 'Age',
               field: 'age',
-              type: 'number',
+              type: 'decimal',
             },
             {
               label: 'Created On',
@@ -645,7 +645,7 @@ export default {
             {
               id: 1,
               name: 'John',
-              age: 20,
+              age: 200000.2358445,
               createdAt: new Date(),
               score: 0.03343,
             },

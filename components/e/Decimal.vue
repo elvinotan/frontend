@@ -56,6 +56,7 @@ export default {
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
     value: { type: Number, required: false, default: null },
+    minimumFractionDigits: { type: Number, required: false, default: 0 },
     maximumFractionDigits: { type: Number, required: false, default: 2 },
     allowMinus: { type: Boolean, required: false, default: false },
     separator: { type: Boolean, required: false, default: false },
@@ -113,7 +114,11 @@ export default {
   methods: {
     _format(value) {
       if (value && this.separator) {
-        return this.$fmt.decimal(value, this.maximumFractionDigits)
+        return this.$fmt.decimal(
+          value,
+          this.minimumFractionDigits,
+          this.maximumFractionDigits
+        )
       } else {
         return value
       }
