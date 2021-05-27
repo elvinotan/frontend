@@ -13,7 +13,7 @@
         <vue-good-table
           :columns="lcolumns"
           :rows="rows"
-          max-height="200px"
+          max-height="330px"
           :fixed-header="true"
           :row-style-class="rowStyleClassFn"
           style-class="vgt-table striped bordered condensed"
