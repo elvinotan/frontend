@@ -11,20 +11,99 @@
           {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
         </div>
         <vue-good-table
+          :id="id"
           :columns="lcolumns"
           :rows="rows"
-          max-height="330px"
           :fixed-header="true"
+          :line-numbers="true"
           :row-style-class="rowStyleClassFn"
+          :search-options="{ enabled: true, trigger: 'enter' }"
+          :select-options="{
+            enabled: buttons && buttons.length > 0,
+            selectOnCheckboxOnly: true,
+          }"
+          :sort-options="{
+            enabled: true,
+            multipleColumns: true,
+            initialSortBy: initialSortBy,
+          }"
+          :pagination-options="{
+            enabled: true,
+            mode: 'pages',
+            perPage: 10,
+            position: 'bottom',
+            perPageDropdown: [10, 20, 30],
+            dropdownAllowAll: false,
+            setCurrentPage: 1,
+            nextLabel: 'Next',
+            prevLabel: 'Prev',
+            rowsPerPageLabel: 'Rows per page',
+            ofLabel: 'of',
+            pageLabel: 'Page', // for 'pages' mode
+            allLabel: 'All',
+          }"
           style-class="vgt-table striped bordered condensed"
-          :search-options="{ enabled: true }"
+          @on-select-all="onSelected"
+          @on-selected-rows-change="onSelected"
+          @on-row-click="
+            (params) => {
+              $emit('RowClick', params)
+            }
+          "
         >
           <div slot="emptystate">No Data....</div>
+          <template slot="table-row" slot-scope="props">
+            <span v-if="props.column.field === 'action'">
+              <span v-for="(action, index) of actions" :key="action.field">
+                <button
+                  v-if="disabled || disabledAction(action, props)"
+                  class="font-bold opacity-50 cursor-not-allowed"
+                  disabled
+                >
+                  {{ action.label }}
+                </button>
+                <button
+                  v-else
+                  class="font-bold"
+                  @click="$emit(action.label, props)"
+                >
+                  {{ action.label }}
+                </button>
+                {{ index === actions.length - 1 ? '' : '&nbsp;|' }}
+              </span>
+            </span>
+            <span v-else>
+              {{ props.formattedRow[props.column.field] }}
+            </span>
+          </template>
+          <div slot="table-actions" class="py-0.5 px-2">
+            <EButton
+              :id="'LocalPagination' + id + 'AddNewData'"
+              label="Add New Data"
+              :disabled="disabled"
+              @click="addNewData"
+            />
+          </div>
+          <div
+            v-if="buttons && buttons.length > 0"
+            slot="table-actions-bottom"
+            class="py-1.5 px-2 flex justify-start space-x-5"
+          >
+            <span v-for="button of buttons" :key="button.label">
+              <EButton
+                :id="'LocalPagination' + id + button.label"
+                :label="button.label"
+                :disabled="disabled || disabledButton"
+                :color="button.color"
+                @click="$emit(button.label, selectedRows)"
+              />
+            </span>
+          </div>
         </vue-good-table>
         <div
           class="font-bold rounded-b text-sm text-gray-800 w-auto p-1 bg-gray-300"
         >
-          Bottom
+          &nbsp;
         </div>
       </div>
     </div>
@@ -40,9 +119,22 @@
 // - width = lebar colum dalam px ('100px')
 // - tooltip = Tooltip header
 // - type = text, date, number, decimal, percentage, boolean
+
+// Ini dokumentasi untuk pembuatan actions
+// - label = Label Action
+// - emit = label akan menjadi emit event
+
+// Ini dokumentasi untuk pembuatan Button
+// - label = Label Action
+// - emit = label akan menjadi emit event
+
+// Ini dokumentasi untuk initialSortBy
+// - field = nama field di object
+// - type = asc dan desc
 export default {
   name: 'LocalPagination',
   props: {
+    id: { type: String, required: true, default: null },
     show: { type: Boolean, required: false, default: true },
     label: {
       type: String,
@@ -52,78 +144,113 @@ export default {
     disabled: { type: Boolean, required: false, default: false },
     columns: { type: Array, required: false, default: () => [] },
     rows: { type: Array, required: false, default: () => [] },
+    actions: { type: Array, required: false, default: () => [] },
+    buttons: { type: Array, required: false, default: () => [] },
+    initialSortBy: { type: Array, required: false, default: () => [{}] },
+    disabledAction: {
+      type: Function,
+      required: false,
+      default: () => {
+        return false
+      },
+    },
+    addNewData: {
+      type: Function,
+      required: false,
+      default: () => {
+        return false
+      },
+    },
   },
   data() {
     return {
       lcolumns: [],
+      selectedRows: [],
     }
   },
-  computed: {},
+  computed: {
+    disabledButton() {
+      return this.selectedRows.length === 0
+    },
+  },
   created() {
+    // Gunakan tempoarary colum, krn formatted data kita gax mau gunakan default
     for (const column of this.columns) {
       let lcolumn = { ...column }
       if (!lcolumn.type) lcolumn.type = 'text'
 
       if (lcolumn.type === 'text') {
         lcolumn = {
-          ...lcolumn,
           formatFn: this.formatText,
-          thClass: 'vgt-left-align',
-          tdClass: 'vgt-left-align',
+          thClass: 'vgt-left-align text-sm',
+          tdClass: 'vgt-left-align text-sm',
+          ...lcolumn,
         }
         delete lcolumn.type
       }
       if (lcolumn.type === 'date') {
         lcolumn = {
-          ...lcolumn,
           formatFn: this.formatDate,
-          thClass: 'vgt-center-align',
-          tdClass: 'vgt-center-align',
+          thClass: 'vgt-center-align text-sm',
+          tdClass: 'vgt-center-align text-sm',
+          ...lcolumn,
         }
         delete lcolumn.type
       }
       if (lcolumn.type === 'number') {
         lcolumn = {
-          ...lcolumn,
           formatFn: this.formatNumber,
-          thClass: 'vgt-right-align',
-          tdClass: 'vgt-right-align',
+          thClass: 'vgt-right-align text-sm',
+          tdClass: 'vgt-right-align text-sm',
           type: 'number',
+          ...lcolumn,
         }
       }
       if (lcolumn.type === 'decimal') {
         lcolumn = {
-          ...lcolumn,
           formatFn: this.formatDecimal,
-          thClass: 'vgt-right-align',
-          tdClass: 'vgt-right-align',
+          thClass: 'vgt-right-align text-sm',
+          tdClass: 'vgt-right-align text-sm',
           type: 'number',
+          ...lcolumn,
         }
       }
       if (lcolumn.type === 'percentage') {
         lcolumn = {
-          ...lcolumn,
           formatFn: this.formatPercentage,
-          thClass: 'vgt-right-align',
-          tdClass: 'vgt-right-align',
+          thClass: 'vgt-right-align text-sm',
+          tdClass: 'vgt-right-align text-sm',
           type: 'number',
+          ...lcolumn,
         }
       }
       if (lcolumn.type === 'boolean') {
         lcolumn = {
-          ...lcolumn,
           formatFn: this.formatBoolean,
-          thClass: 'vgt-center-align',
-          tdClass: 'vgt-center-align',
+          thClass: 'vgt-center-align text-sm',
+          tdClass: 'vgt-center-align text-sm',
+          ...lcolumn,
         }
         delete lcolumn.type
       }
 
       this.lcolumns.push(lcolumn)
     }
-    console.log('this.lcolumns ', this.lcolumns)
+
+    if (this.actions && this.actions.length > 0) {
+      this.lcolumns.push({
+        label: 'Action',
+        field: 'action',
+        thClass: 'vgt-center-align text-sm',
+        tdClass: 'vgt-center-align text-sm',
+        sortable: false,
+      })
+    }
   },
   methods: {
+    onSelected(params) {
+      this.selectedRows = params.selectedRows
+    },
     formatText(value) {
       if (!value) return ''
       return value
@@ -147,7 +274,7 @@ export default {
       return value ? 'Yes' : 'No'
     },
     rowStyleClassFn(row) {
-      // return row.originalIndex % 2 === 1 ? 'bg-yellow-300' : 'bg-yellow-red'
+      // specific class berdasarkan data row
       return ''
     },
   },
@@ -156,5 +283,72 @@ export default {
 <style>
 .vgt-table.striped tbody tr:nth-of-type(odd) {
   background-color: yellow !important;
+}
+
+.vgt-table th {
+  padding: 0.35em 1.5em 0.35em 0.75em;
+  vertical-align: middle;
+  position: relative;
+}
+
+.vgt-wrap__footer {
+  color: #606266;
+  font-size: 0.9rem;
+  padding: 0.35em;
+  border: 1px solid #dcdfe6;
+  background: linear-gradient(#f4f5f8, #f1f3f6);
+}
+
+.vgt-wrap__footer .footer__row-count__label {
+  color: #606266;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.vgt-wrap__footer .footer__navigation__page-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: 0 0;
+  border: none;
+  text-decoration: none;
+  color: #606266;
+  font-weight: 700;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.page-info__label {
+  color: #606266;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.vgt-wrap__footer .footer__row-count__select {
+  font-size: 0.9rem;
+  background-color: transparent;
+  width: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  height: auto;
+  margin-left: 8px;
+  color: #606266;
+  font-weight: 700;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 15px;
+  padding-left: 5px;
+}
+
+.vgt-wrap__footer .footer__navigation__info,
+.vgt-wrap__footer .footer__navigation__page-info {
+  font-size: 0.9rem;
+  display: inline-block;
+  margin: 0 16px;
+}
+.line-numbers {
+  width: 586px;
 }
 </style>
