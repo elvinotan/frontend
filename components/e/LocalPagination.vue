@@ -23,7 +23,7 @@
             selectOnCheckboxOnly: true,
           }"
           :sort-options="{
-            enabled: true,
+            enabled: initialSortBy && initialSortBy.length > 0,
             multipleColumns: true,
             initialSortBy: initialSortBy,
           }"
@@ -78,6 +78,7 @@
           </template>
           <div slot="table-actions" class="py-0.5 px-2">
             <EButton
+              v-if="addNewData"
               :id="'LocalPagination' + id + 'AddNewData'"
               label="Add New Data"
               :disabled="disabled"
@@ -146,7 +147,7 @@ export default {
     rows: { type: Array, required: false, default: () => [] },
     actions: { type: Array, required: false, default: () => [] },
     buttons: { type: Array, required: false, default: () => [] },
-    initialSortBy: { type: Array, required: false, default: () => [{}] },
+    initialSortBy: { type: Array, required: false, default: () => [] },
     disabledAction: {
       type: Function,
       required: false,
@@ -157,9 +158,7 @@ export default {
     addNewData: {
       type: Function,
       required: false,
-      default: () => {
-        return false
-      },
+      default: null,
     },
   },
   data() {

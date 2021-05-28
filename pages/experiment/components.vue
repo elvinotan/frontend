@@ -338,6 +338,7 @@
                   <td>PaginationServer</td>
                   <td>
                     <ELocalPagination
+                      id="Customer"
                       label="Customer"
                       :columns="ui.localPagination.columns"
                       :rows="ui.localPagination.rows"
