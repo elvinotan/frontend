@@ -84,94 +84,6 @@ export default {
           score: 0.03343,
           merried: true,
         },
-        {
-          id: 4,
-          name: 'Chris',
-          age: 234.77,
-          createdAt: new Date(),
-          score: 0.03343,
-          merried: false,
-        },
-        {
-          id: 5,
-          name: 'Dan',
-          age: 234567.23545,
-          createdAt: new Date(),
-          score: 12.03343,
-          merried: true,
-        },
-        {
-          id: 6,
-          name: 'John',
-          age: 234.879,
-          createdAt: new Date(),
-          score: 78.03343,
-          merried: true,
-        },
-        {
-          id: 6,
-          name: 'John',
-          age: 234.879,
-          createdAt: new Date(),
-          score: 78.03343,
-          merried: true,
-        },
-        {
-          id: 6,
-          name: 'John',
-          age: 234.879,
-          createdAt: new Date(),
-          score: 78.03343,
-          merried: true,
-        },
-        {
-          id: 6,
-          name: 'John',
-          age: 234.879,
-          createdAt: new Date(),
-          score: 78.03343,
-          merried: true,
-        },
-        {
-          id: 6,
-          name: 'John',
-          age: 234.879,
-          createdAt: new Date(),
-          score: 78.03343,
-          merried: true,
-        },
-        {
-          id: 6,
-          name: 'John',
-          age: 234.879,
-          createdAt: new Date(),
-          score: 78.03343,
-          merried: true,
-        },
-        {
-          id: 6,
-          name: 'John',
-          age: 234.879,
-          createdAt: new Date(),
-          score: 78.03343,
-          merried: true,
-        },
-        {
-          id: 6,
-          name: 'John',
-          age: 234.879,
-          createdAt: new Date(),
-          score: 78.03343,
-          merried: true,
-        },
-        {
-          id: 6,
-          name: 'John',
-          age: 234.879,
-          createdAt: new Date(),
-          score: 78.03343,
-          merried: true,
-        },
       ],
     }
   },
@@ -180,6 +92,14 @@ export default {
       console.log('onRowClick ', params)
     },
     addNewData() {
+      this.rows.push({
+        id: 4,
+        name: 'Elvino Tan',
+        age: 40.5,
+        createdAt: new Date(),
+        score: 150,
+        merried: true,
+      })
       console.log('Add New Data Triggered')
     },
     process(selectedRow) {
@@ -202,6 +122,7 @@ export default {
       console.log('Edit Row ', row)
     },
     deleteRow(row) {
+      this.rows.pop()
       console.log('Delete Row ', row)
     },
   },
