@@ -11,6 +11,11 @@
       :disabled-action="disabledAction"
       :add-new-data="addNewData"
       :initial-sort-by="[{ field: 'name', type: 'desc' }]"
+      :save-state="
+        (props) => {
+          return props.row.id
+        }
+      "
       @Edit="editRow"
       @Delete="deleteRow"
       @Process="process"
@@ -93,7 +98,6 @@ export default {
     },
     addNewData() {
       this.rows.push({
-        id: 4,
         name: 'Elvino Tan',
         age: 40.5,
         createdAt: new Date(),

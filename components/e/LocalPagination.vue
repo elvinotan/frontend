@@ -72,6 +72,9 @@
                 {{ index === actions.length - 1 ? '' : '&nbsp;|' }}
               </span>
             </span>
+            <span v-else-if="saveState && props.column.field === 'saved'">
+              {{ saveState(props) ? 'Saved' : 'Not Saved' }}
+            </span>
             <span v-else>
               {{ props.formattedRow[props.column.field] }}
             </span>
@@ -143,6 +146,11 @@ export default {
       default: 'Please Provide Table title...',
     },
     disabled: { type: Boolean, required: false, default: false },
+    saveState: {
+      type: Function,
+      required: false,
+      default: null,
+    },
     columns: { type: Array, required: false, default: () => [] },
     rows: { type: Array, required: false, default: () => [] },
     actions: { type: Array, required: false, default: () => [] },
@@ -173,6 +181,16 @@ export default {
     },
   },
   created() {
+    if (this.saveState) {
+      this.lcolumns.push({
+        label: 'Saved',
+        field: 'saved',
+        thClass: 'vgt-center-align text-sm',
+        tdClass: 'vgt-center-align text-sm',
+        sortable: false,
+      })
+    }
+
     // Gunakan tempoarary colum, krn formatted data kita gax mau gunakan default
     for (const column of this.columns) {
       let lcolumn = { ...column }
