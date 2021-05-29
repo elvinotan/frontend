@@ -51,7 +51,7 @@
             }
           "
         >
-          <div slot="emptystate">No Data....</div>
+          <div slot="emptystate" class="text-center">No data available</div>
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field === 'action'">
               <span v-for="(action, index) of actions" :key="action.field">

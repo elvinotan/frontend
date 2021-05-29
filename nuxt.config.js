@@ -24,6 +24,7 @@ export default {
     '~/plugins/axios',
     '~/plugins/wrapper',
     '~/plugins/fmt',
+    '~/plugins/rest',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

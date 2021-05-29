@@ -29,9 +29,8 @@
             selectOnCheckboxOnly: true,
           }"
           :sort-options="{
-            enabled: initialSortBy && initialSortBy.length > 0,
+            enabled: true,
             multipleColumns: true,
-            initialSortBy: initialSortBy,
           }"
           :pagination-options="{
             enabled: true,
@@ -61,7 +60,13 @@
             }
           "
         >
-          <div slot="emptystate">No Data....</div>
+          <div slot="emptystate" class="text-center">
+            {{
+              alreadyFetchData
+                ? 'No data available'
+                : 'Click search to get data...'
+            }}
+          </div>
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field === 'action'">
               <span v-for="(action, index) of actions" :key="action.field">
@@ -179,6 +184,7 @@ export default {
       rows: [],
       columns: [],
       totalRows: 0,
+      alreadyFetchData: false,
       serverParams: {
         search: '',
         page: 1,
@@ -194,13 +200,8 @@ export default {
     },
   },
   async created() {
-    this.columns = await this.fetchPicker()
-    this._constractColumns()
-    if (this.autoLoad) {
-      const { totalRows, rows } = await this.fetchData()
-      this.totalRows = totalRows
-      this.rows = rows
-    }
+    await this.fetchPicker()
+    if (this.autoLoad) await this.fetchData()
   },
   methods: {
     _constractColumns() {
@@ -277,127 +278,17 @@ export default {
         })
       }
     },
-    fetchPicker() {
-      // TODO axios fetch picker untuk ambil configuration only not data
+    async fetchPicker() {
       this.isLoading = true
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve([
-            {
-              label: 'Name',
-              field: 'name',
-              sortable: true,
-              width: '1000px',
-              tooltip: 'Ini adalah dafar nama',
-            },
-            {
-              label: 'Umur',
-              field: 'age',
-              sortable: true,
-              type: 'text',
-              width: '500px',
-            },
-          ])
-        }, 5000)
-      })
+      this.columns = await this.$rest.getPicker(this.picker)
+      this._constractColumns()
     },
-    fetchData() {
-      // Yg di perlukan
-      // 1.picker
-      // 2.Search
-      // 3.Sort
-      // 4.Filter
-      // 5.PerPageRow
-      // TODO axios fetch picker untuk ambil configuration only not data
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({
-            totalRows: 35,
-            rows: [
-              {
-                id: 1,
-                name: 'Adam',
-                age: 232323.5656,
-                createdAt: new Date(),
-                score: 231.03343,
-                merried: true,
-              },
-              {
-                id: 2,
-                name: 'Cellox',
-                age: 123123.8989,
-                createdAt: new Date(),
-                score: 0.03343,
-                merried: false,
-              },
-              {
-                id: 3,
-                name: 'Budi',
-                age: 789998.234234,
-                createdAt: new Date(),
-                score: 0.03343,
-                merried: true,
-              },
-              {
-                id: 3,
-                name: 'Budi',
-                age: 789998.234234,
-                createdAt: new Date(),
-                score: 0.03343,
-                merried: true,
-              },
-              {
-                id: 3,
-                name: 'Budi',
-                age: 789998.234234,
-                createdAt: new Date(),
-                score: 0.03343,
-                merried: true,
-              },
-              {
-                id: 3,
-                name: 'Budi',
-                age: 789998.234234,
-                createdAt: new Date(),
-                score: 0.03343,
-                merried: true,
-              },
-              {
-                id: 3,
-                name: 'Budi',
-                age: 789998.234234,
-                createdAt: new Date(),
-                score: 0.03343,
-                merried: true,
-              },
-              {
-                id: 3,
-                name: 'Budi',
-                age: 789998.234234,
-                createdAt: new Date(),
-                score: 0.03343,
-                merried: true,
-              },
-              {
-                id: 3,
-                name: 'Budi',
-                age: 789998.234234,
-                createdAt: new Date(),
-                score: 0.03343,
-                merried: true,
-              },
-              {
-                id: 3,
-                name: 'Budi',
-                age: 789998.234234,
-                createdAt: new Date(),
-                score: 0.03343,
-                merried: true,
-              },
-            ],
-          })
-        }, 5000)
-      })
+    async fetchData() {
+      this.isLoading = true
+      this.alreadyFetchData = true
+      const { totalRows, rows } = await this.$rest.getData(this.serverParams)
+      this.totalRows = totalRows
+      this.rows = rows
     },
     onSelected(params) {
       this.selectedRows = params.selectedRows
@@ -429,29 +320,24 @@ export default {
       return ''
     },
     async onPageChange(params) {
+      console.log('onPageChange')
       this.serverParams.page = params.currentPage
-      const { totalRows, rows } = await this.fetchData()
-      this.totalRows = totalRows
-      this.rows = rows
+      await this.fetchData()
     },
     async onSortChange(params) {
+      console.log('onSortChange')
       this.serverParams.sort = params
-      const { totalRows, rows } = await this.fetchData()
-      this.totalRows = totalRows
-      this.rows = rows
+      await this.fetchData()
     },
     async onPerPageChange(params) {
+      console.log('onPerPageChange')
       this.serverParams.perPage = params.currentPerPage
-      const { totalRows, rows } = await this.fetchData()
-      this.totalRows = totalRows
-      this.rows = rows
+      await this.fetchData()
     },
-
     async onSearch(params) {
+      console.log('onSearch')
       this.serverParams.search = params.searchTerm
-      const { totalRows, rows } = await this.fetchData()
-      this.totalRows = totalRows
-      this.rows = rows
+      await this.fetchData()
     },
   },
 }

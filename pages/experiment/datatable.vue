@@ -6,7 +6,6 @@
       label="Customer List"
       :actions="actions"
       :buttons="buttons"
-      :auto-load="true"
       :disabled-action="disabledAction"
       :add-new-data="addNewData"
       :initial-sort-by="[{ field: 'name', type: 'desc' }]"
