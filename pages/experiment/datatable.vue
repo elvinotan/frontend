@@ -1,5 +1,26 @@
 <template>
   <div class="px-10 py-1">
+    <EServerPagination
+      id="Customer"
+      :disabled="false"
+      label="Customer List"
+      :actions="actions"
+      :buttons="buttons"
+      :auto-load="true"
+      :disabled-action="disabledAction"
+      :add-new-data="addNewData"
+      :initial-sort-by="[{ field: 'name', type: 'desc' }]"
+      :save-state="
+        (props) => {
+          return props.row.id
+        }
+      "
+      picker="pagingCustomer"
+      @Edit="editRow"
+      @Delete="deleteRow"
+      @Process="process"
+      @Generate="generate"
+    />
     <ELocalPagination
       id="Customer"
       :disabled="false"

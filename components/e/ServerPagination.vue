@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="show">
-      {{ lcolumns }}
+      {{ serverParams }}
       <div
         class="text-xs rounded border-0 outline-none ring-2 ring-gray-500 bg-white"
       >
@@ -12,12 +12,18 @@
         </div>
         <vue-good-table
           :id="id"
+          mode="remote"
+          :is-loading.sync="isLoading"
+          :total-rows="totalRows"
           :columns="lcolumns"
           :rows="rows"
           :fixed-header="true"
           :line-numbers="true"
           :row-style-class="rowStyleClassFn"
-          :search-options="{ enabled: true, trigger: 'enter' }"
+          :search-options="{
+            enabled: true,
+            trigger: 'enter',
+          }"
           :select-options="{
             enabled: buttons && buttons.length > 0,
             selectOnCheckboxOnly: true,
@@ -43,6 +49,10 @@
             allLabel: 'All',
           }"
           style-class="vgt-table striped bordered condensed"
+          @on-search="onSearch"
+          @on-page-change="onPageChange"
+          @on-sort-change="onSortChange"
+          @on-per-page-change="onPerPageChange"
           @on-select-all="onSelected"
           @on-selected-rows-change="onSelected"
           @on-row-click="
@@ -72,9 +82,6 @@
                 {{ index === actions.length - 1 ? '' : '&nbsp;|' }}
               </span>
             </span>
-            <span v-else-if="saveState && props.column.field === 'saved'">
-              {{ saveState(props) ? 'Saved' : 'Not Saved' }}
-            </span>
             <span v-else>
               {{ props.formattedRow[props.column.field] }}
             </span>
@@ -82,7 +89,7 @@
           <div slot="table-actions" class="py-0.5 px-2">
             <EButton
               v-if="addNewData"
-              :id="'LocalPagination' + id + 'AddNewData'"
+              :id="'ServerPagination' + id + 'AddNewData'"
               label="Add New Data"
               :disabled="disabled"
               @click="addNewData"
@@ -95,7 +102,7 @@
           >
             <span v-for="button of buttons" :key="button.label">
               <EButton
-                :id="'LocalPagination' + id + button.label"
+                :id="'ServerPagination' + id + button.label"
                 :label="button.label"
                 :disabled="disabled || disabledButton"
                 :color="button.color"
@@ -136,7 +143,7 @@
 // - field = nama field di object
 // - type = asc dan desc
 export default {
-  name: 'LocalPagination',
+  name: 'ServerPagination',
   props: {
     id: { type: String, required: true, default: null },
     show: { type: Boolean, required: false, default: true },
@@ -146,13 +153,8 @@ export default {
       default: 'Please Provide Table title...',
     },
     disabled: { type: Boolean, required: false, default: false },
-    saveState: {
-      type: Function,
-      required: false,
-      default: null,
-    },
-    columns: { type: Array, required: false, default: () => [] },
-    rows: { type: Array, required: false, default: () => [] },
+    autoLoad: { type: Boolean, required: false, default: false },
+    picker: { type: String, required: false, default: '' },
     actions: { type: Array, required: false, default: () => [] },
     buttons: { type: Array, required: false, default: () => [] },
     initialSortBy: { type: Array, required: false, default: () => [] },
@@ -171,8 +173,19 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       lcolumns: [],
       selectedRows: [],
+      rows: [],
+      columns: [],
+      totalRows: 0,
+      serverParams: {
+        search: '',
+        page: 1,
+        perPage: 10,
+        sort: this.initialSortBy,
+        columnFilters: [],
+      },
     }
   },
   computed: {
@@ -180,21 +193,17 @@ export default {
       return this.selectedRows.length === 0
     },
   },
-  created() {
+  async created() {
+    this.columns = await this.fetchPicker()
     this._constractColumns()
+    if (this.autoLoad) {
+      const { totalRows, rows } = await this.fetchData()
+      this.totalRows = totalRows
+      this.rows = rows
+    }
   },
   methods: {
     _constractColumns() {
-      if (this.saveState) {
-        this.lcolumns.push({
-          label: 'Saved',
-          field: 'saved',
-          thClass: 'vgt-center-align text-sm',
-          tdClass: 'vgt-center-align text-sm',
-          sortable: false,
-        })
-      }
-
       // Gunakan tempoarary colum, krn formatted data kita gax mau gunakan default
       for (const column of this.columns) {
         let lcolumn = { ...column }
@@ -268,6 +277,128 @@ export default {
         })
       }
     },
+    fetchPicker() {
+      // TODO axios fetch picker untuk ambil configuration only not data
+      this.isLoading = true
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([
+            {
+              label: 'Name',
+              field: 'name',
+              sortable: true,
+              width: '1000px',
+              tooltip: 'Ini adalah dafar nama',
+            },
+            {
+              label: 'Umur',
+              field: 'age',
+              sortable: true,
+              type: 'text',
+              width: '500px',
+            },
+          ])
+        }, 5000)
+      })
+    },
+    fetchData() {
+      // Yg di perlukan
+      // 1.picker
+      // 2.Search
+      // 3.Sort
+      // 4.Filter
+      // 5.PerPageRow
+      // TODO axios fetch picker untuk ambil configuration only not data
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({
+            totalRows: 35,
+            rows: [
+              {
+                id: 1,
+                name: 'Adam',
+                age: 232323.5656,
+                createdAt: new Date(),
+                score: 231.03343,
+                merried: true,
+              },
+              {
+                id: 2,
+                name: 'Cellox',
+                age: 123123.8989,
+                createdAt: new Date(),
+                score: 0.03343,
+                merried: false,
+              },
+              {
+                id: 3,
+                name: 'Budi',
+                age: 789998.234234,
+                createdAt: new Date(),
+                score: 0.03343,
+                merried: true,
+              },
+              {
+                id: 3,
+                name: 'Budi',
+                age: 789998.234234,
+                createdAt: new Date(),
+                score: 0.03343,
+                merried: true,
+              },
+              {
+                id: 3,
+                name: 'Budi',
+                age: 789998.234234,
+                createdAt: new Date(),
+                score: 0.03343,
+                merried: true,
+              },
+              {
+                id: 3,
+                name: 'Budi',
+                age: 789998.234234,
+                createdAt: new Date(),
+                score: 0.03343,
+                merried: true,
+              },
+              {
+                id: 3,
+                name: 'Budi',
+                age: 789998.234234,
+                createdAt: new Date(),
+                score: 0.03343,
+                merried: true,
+              },
+              {
+                id: 3,
+                name: 'Budi',
+                age: 789998.234234,
+                createdAt: new Date(),
+                score: 0.03343,
+                merried: true,
+              },
+              {
+                id: 3,
+                name: 'Budi',
+                age: 789998.234234,
+                createdAt: new Date(),
+                score: 0.03343,
+                merried: true,
+              },
+              {
+                id: 3,
+                name: 'Budi',
+                age: 789998.234234,
+                createdAt: new Date(),
+                score: 0.03343,
+                merried: true,
+              },
+            ],
+          })
+        }, 5000)
+      })
+    },
     onSelected(params) {
       this.selectedRows = params.selectedRows
     },
@@ -296,6 +427,31 @@ export default {
     rowStyleClassFn(row) {
       // specific class berdasarkan data row
       return ''
+    },
+    async onPageChange(params) {
+      this.serverParams.page = params.currentPage
+      const { totalRows, rows } = await this.fetchData()
+      this.totalRows = totalRows
+      this.rows = rows
+    },
+    async onSortChange(params) {
+      this.serverParams.sort = params
+      const { totalRows, rows } = await this.fetchData()
+      this.totalRows = totalRows
+      this.rows = rows
+    },
+    async onPerPageChange(params) {
+      this.serverParams.perPage = params.currentPerPage
+      const { totalRows, rows } = await this.fetchData()
+      this.totalRows = totalRows
+      this.rows = rows
+    },
+
+    async onSearch(params) {
+      this.serverParams.search = params.searchTerm
+      const { totalRows, rows } = await this.fetchData()
+      this.totalRows = totalRows
+      this.rows = rows
     },
   },
 }
