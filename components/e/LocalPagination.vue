@@ -184,6 +184,13 @@ export default {
     this._constractColumns()
   },
   methods: {
+    metaData() {
+      return {
+        name: this._name,
+        type: 'container',
+        show: true,
+      }
+    },
     _constractColumns() {
       if (this.saveState) {
         this.lcolumns.push({

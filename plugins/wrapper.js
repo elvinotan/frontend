@@ -20,9 +20,11 @@ export default function (plugin, inject) {
             refs.push(ref) // Button, Password, ShortText, MediumText, LongText, TextArea, Number, Decimal, Date, Time, Checkbox, Boolean, Select
           }
         } else {
-          throw new Error(
-            'Warning!!! some component dose not have metaData !!!'
-          )
+          const externals = ['<VueGoodTable>']
+          if (!externals.includes(ref._name))
+            throw new Error(
+              'Warning!!! some component dose not have metaData !!!' + ref._name
+            )
         }
       }
       return refs

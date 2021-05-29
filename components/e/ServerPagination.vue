@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="show">
-      {{ serverParams }}
+      {{ $data }}
       <div
         class="text-xs rounded border-0 outline-none ring-2 ring-gray-500 bg-white"
       >
@@ -204,6 +204,13 @@ export default {
     if (this.autoLoad) await this.fetchData()
   },
   methods: {
+    metaData() {
+      return {
+        name: this._name,
+        type: 'container',
+        show: true,
+      }
+    },
     _constractColumns() {
       // Gunakan tempoarary colum, krn formatted data kita gax mau gunakan default
       for (const column of this.columns) {
