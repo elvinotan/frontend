@@ -44,12 +44,12 @@
 </template>
 <script>
 export default {
-  name: 'LongText',
+  name: 'ShortText',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
-    maxlength: { type: Number, required: false, default: 10 },
+    type: { type: String, required: false, default: 'short' }, // short, medium, long, extralong
     required: { type: Boolean, required: false, default: false },
     disabled: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
@@ -60,6 +60,14 @@ export default {
     return {
       state: 0,
       errors: [],
+      maxlength:
+        this.type === 'short'
+          ? 16
+          : this.type === 'medium'
+          ? 32
+          : this.type === 'long'
+          ? 64
+          : 128,
     }
   },
   computed: {

@@ -43,7 +43,7 @@
                 <tr>
                   <td>ShortText</td>
                   <td>
-                    <EShortText
+                    <EText
                       :id="ui.shortText.id"
                       :ref="ui.shortText.id"
                       v-model="ui.shortText.value"
@@ -54,6 +54,7 @@
                       placeholder="PlaceHoilder"
                       :required="ui.shortText.required"
                       :vruntime="vruntime"
+                      typpe="short"
                       @blur="blur"
                     />
                   </td>
@@ -66,7 +67,7 @@
                 <tr>
                   <td>MediumText</td>
                   <td>
-                    <EMediumText
+                    <EText
                       :id="ui.mediumText.id"
                       :ref="ui.mediumText.id"
                       v-model="ui.mediumText.value"
@@ -76,6 +77,7 @@
                       :show="ui.mediumText.show"
                       :required="ui.mediumText.required"
                       :vruntime="vruntime"
+                      type="medium"
                       @blur="blur"
                     />
                   </td>
@@ -88,7 +90,7 @@
                 <tr>
                   <td>LongText</td>
                   <td>
-                    <ELongText
+                    <EText
                       :id="ui.longText.id"
                       :ref="ui.longText.id"
                       v-model="ui.longText.value"
@@ -98,6 +100,7 @@
                       :show="ui.longText.show"
                       :required="ui.longText.required"
                       :vruntime="vruntime"
+                      type="long"
                       @blur="blur"
                     />
                   </td>
@@ -400,7 +403,7 @@
                           as="number"
                           @blur="blur"
                         />
-                        <EShortText
+                        <EText
                           :id="ui.shortText.id"
                           :ref="ui.shortText.id"
                           v-model="ui.shortText.value"
@@ -411,11 +414,12 @@
                           placeholder="PlaceHoilder"
                           :required="ui.shortText.required"
                           :vruntime="vruntime"
+                          type="short"
                           @blur="blur"
                         />
                       </ECol>
                       <ECol :col="3">
-                        <EMediumText
+                        <EText
                           :id="ui.mediumText.id"
                           :ref="ui.mediumText.id"
                           v-model="ui.mediumText.value"
@@ -427,7 +431,7 @@
                           :vruntime="vruntime"
                           @blur="blur"
                         />
-                        <ELongText
+                        <EText
                           :id="ui.longText.id"
                           :ref="ui.longText.id"
                           v-model="ui.longText.value"
@@ -437,6 +441,7 @@
                           :show="ui.longText.show"
                           :required="ui.longText.required"
                           :vruntime="vruntime"
+                          type="long"
                           @blur="blur"
                         />
                         <ENumber
@@ -457,7 +462,7 @@
                         />
                       </ECol>
                       <ECol :col="4">
-                        <EMediumText
+                        <EText
                           :id="ui.mediumText.id"
                           :ref="ui.mediumText.id"
                           v-model="ui.mediumText.value"
@@ -467,9 +472,10 @@
                           :show="ui.mediumText.show"
                           :required="ui.mediumText.required"
                           :vruntime="vruntime"
+                          type="medium"
                           @blur="blur"
                         />
-                        <ELongText
+                        <EText
                           :id="ui.longText.id"
                           :ref="ui.longText.id"
                           v-model="ui.longText.value"
@@ -479,6 +485,7 @@
                           :show="ui.longText.show"
                           :required="ui.longText.required"
                           :vruntime="vruntime"
+                          type="long"
                           @blur="blur"
                         />
                         <ENumber
@@ -567,7 +574,7 @@
                       label="Informasi Debitur"
                       :disabled="ui.shortText.disabled"
                     >
-                      <EShortText
+                      <EText
                         :id="ui.shortText.id"
                         :ref="ui.shortText.id"
                         v-model="ui.shortText.value"
@@ -578,9 +585,10 @@
                         placeholder="PlaceHoilder"
                         :required="ui.shortText.required"
                         :vruntime="vruntime"
+                        type="short"
                         @blur="blur"
                       />
-                      <EMediumText
+                      <EText
                         :id="ui.mediumText.id"
                         :ref="ui.mediumText.id"
                         v-model="ui.mediumText.value"
@@ -590,6 +598,7 @@
                         :show="ui.mediumText.show"
                         :required="ui.mediumText.required"
                         :vruntime="vruntime"
+                        type="medium"
                         @blur="blur"
                       />
                     </ECard>
