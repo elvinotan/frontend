@@ -15,7 +15,7 @@
     </div>
     <EForm
       :id="'Tabs' + id + 'Content'"
-      ref="constents"
+      ref="contents"
       class="text-xs rounded border-0 outline-none p-2 mt-0.5 ring-2 ring-gray-500 bg-white"
     >
       <slot />
@@ -48,7 +48,7 @@ export default {
     },
     setSelectedTab(lselectedTab) {
       this.lselectedTab = lselectedTab
-      for (const ref of this.$refs.constents.$children) {
+      for (const ref of this.$refs.contents.$children) {
         ref.setShow(this.lselectedTab === ref.id)
       }
     },

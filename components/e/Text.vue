@@ -53,23 +53,17 @@ export default {
     required: { type: Boolean, required: false, default: false },
     disabled: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
-    vruntime: { type: Function, required: false, default: null },
     value: { type: String, required: false, default: '' },
+    vruntime: { type: Function, required: false, default: null },
   },
   data() {
     return {
       state: 0,
       errors: [],
-      maxlength:
-        this.type === 'short'
-          ? 16
-          : this.type === 'medium'
-          ? 32
-          : this.type === 'long'
-          ? 64
-          : 128,
+      maxlength: 0,
     }
   },
+
   computed: {
     _cssRounded() {
       return this.label ? '' : 'rounded'
@@ -98,7 +92,25 @@ export default {
       return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
     },
   },
+  watch: {
+    type(oldVal, newOld) {
+      this._maxlength()
+    },
+  },
+  created() {
+    this._maxlength()
+  },
   methods: {
+    _maxlength() {
+      this.maxlength =
+        this.type === 'short'
+          ? 16
+          : this.type === 'medium'
+          ? 32
+          : this.type === 'long'
+          ? 64
+          : 128
+    },
     _input(event) {
       const value = event.target.value.toUpperCase()
       this.$emit(event.type, value)
