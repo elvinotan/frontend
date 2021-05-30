@@ -1,12 +1,21 @@
 <template>
-  <div>
+  <div v-show="show" :id="id">
     <slot />
   </div>
 </template>
 <script>
 export default {
   name: 'Form',
+  props: {
+    id: { type: String, required: true, default: null },
+  },
+  data() {
+    return { show: true }
+  },
   methods: {
+    setShow(show) {
+      this.show = show
+    },
     metaData() {
       return {
         name: this._name,

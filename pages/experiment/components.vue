@@ -6,9 +6,9 @@
       label="Component Page"
       :fetcher="fetcher"
     >
-      <EForm ref="firstEntryForm">
-        <EForm ref="upperEntryForm">
-          <EForm ref="entryForm">
+      <EForm id="firstEntryForm" ref="firstEntryForm">
+        <EForm id="upperEntryForm" ref="upperEntryForm">
+          <EForm id="entryForm" ref="entryForm">
             <table>
               <thead>
                 <tr>
@@ -604,6 +604,57 @@
                     </ECard>
                   </td>
                 </tr>
+                <tr>
+                  <td>Tabs</td>
+                  <td>
+                    <ETabs
+                      id="MyTab"
+                      :labels="ui.tabs.labels"
+                      selected-tab="Transaction"
+                    >
+                      <EForm id="Customer"
+                        ><EText
+                          :id="ui.shortText.id"
+                          :ref="ui.shortText.id"
+                          v-model="ui.shortText.value"
+                          :label="ui.shortText.label"
+                          :maxlength="ui.shortText.maxlength"
+                          :disabled="ui.shortText.disabled"
+                          :show="ui.shortText.show"
+                          placeholder="PlaceHoilder"
+                          :required="ui.shortText.required"
+                          :vruntime="vruntime"
+                          type="short"
+                          @blur="blur"
+                      /></EForm>
+                      <EForm id="Transaction"
+                        ><EDecimal
+                          :id="ui.decimal.id"
+                          :ref="ui.decimal.id"
+                          v-model="ui.decimal.value"
+                          :label="ui.decimal.label"
+                          :disabled="ui.decimal.disabled"
+                          :show="ui.decimal.show"
+                          :required="ui.decimal.required"
+                          :maxlength="ui.decimal.maxlength"
+                          :vruntime="vruntime"
+                          :allow-minus="true"
+                          :minimum="ui.decimal.minimum"
+                          :maximum="ui.decimal.maximum"
+                          :maximum-fraction-digits="6"
+                          :separator="true"
+                          @blur="blur"
+                      /></EForm>
+                      <EForm id="Orders"
+                        ><EButton
+                          id="confirmation"
+                          label="Confirmation"
+                          color="purple"
+                          @click="openConfirmation"
+                      /></EForm>
+                    </ETabs>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </EForm>
@@ -628,6 +679,13 @@ export default {
     return {
       counter: 0,
       ui: {
+        tabs: {
+          labels: [
+            { label: 'Customer' },
+            { label: 'Transaction' },
+            { label: 'Orders' },
+          ],
+        },
         localPagination: {
           columns: [
             {
