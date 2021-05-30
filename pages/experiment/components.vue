@@ -18,29 +18,6 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Password</td>
-                  <td>
-                    <EPassword
-                      :id="ui.password.id"
-                      :ref="ui.password.id"
-                      v-model="ui.password.value"
-                      :label="ui.password.label"
-                      :maxlength="ui.password.maxlength"
-                      :disabled="ui.password.disabled"
-                      :show="ui.password.show"
-                      placeholder="Enter Password"
-                      :required="ui.password.required"
-                      :vruntime="vruntime"
-                      @blur="blur"
-                    />
-                  </td>
-                  <td>
-                    [{{ ui.password }}]/{{
-                      ui.password.value ? ui.password.value.length : 0
-                    }}
-                  </td>
-                </tr>
-                <tr>
                   <td>Area</td>
                   <td>
                     <ETextArea

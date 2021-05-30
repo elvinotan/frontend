@@ -7,7 +7,7 @@
         v-for="tab of labels"
         :key="tab.label"
         class="font-bold rounded-t-lg text-sm w-auto px-3 mr-0.5 ring-2 ring-gray-500 cursor-pointer"
-        :class="[cssSelectedTab(tab.label)]"
+        :class="[_cssSelectedTab(tab.label)]"
         @click="setSelectedTab(tab.label)"
       >
         {{ tab.label }}
@@ -49,16 +49,15 @@ export default {
     setSelectedTab(lselectedTab) {
       this.lselectedTab = lselectedTab
       for (const ref of this.$refs.contents.$children) {
-        ref.setShow(this.lselectedTab === ref.id)
+        const state = this.lselectedTab === ref.id
+        ref.setShow(state)
+        if (state) this.$emit('selected', ref.id)
       }
     },
-    cssSelectedTab(label) {
+    _cssSelectedTab(label) {
       return this.lselectedTab === label
         ? 'bg-green-500 text-white'
         : 'bg-gray-300 text-gray-800'
-    },
-    showSelectedTab(label) {
-      return this.lselectedTab === label ? 'visible' : 'invisible'
     },
   },
 }
