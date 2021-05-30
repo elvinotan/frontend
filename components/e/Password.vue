@@ -53,8 +53,8 @@ export default {
     required: { type: Boolean, required: false, default: false },
     disabled: { type: Boolean, required: false, default: true },
     show: { type: Boolean, required: false, default: true },
-    vruntime: { type: Function, required: false, default: null },
     value: { type: String, required: false, default: '' },
+    vruntime: { type: Function, required: false, default: null },
   },
   data() {
     return {
