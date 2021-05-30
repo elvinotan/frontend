@@ -12,10 +12,11 @@
           :required="text.required"
           :disabled="text.disabled"
           :show="text.show"
+          :vruntime="text.vruntime"
         />
-        <div class="text-xs">
-          {{ text }}
-        </div>
+        <div class="text-xs">Template : {{ htmlText }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ text }}</div>
         <br />
         <table>
           <thead>
@@ -125,7 +126,7 @@
               <td>Function</td>
               <td>false</td>
               <td>null</td>
-              <td>OnType runtime validation</td>
+              <td>OnType runtime validation, test ketik GAGAL untuk mencoba</td>
             </tr>
           </tbody>
         </table>
@@ -185,6 +186,8 @@
 export default {
   data() {
     return {
+      htmlText:
+        '<EText id="" ref="" v-model="" :label="" :placeholder="" :type="" :required="" :disabled="" :show="" />',
       haserror: null,
       metadata: null,
       valid: null,
@@ -208,6 +211,9 @@ export default {
         { label: 'Confirmation' },
         { label: 'Card' },
         { label: 'Tabs' },
+        { label: 'PageLoader' },
+        { label: 'Form' },
+        { label: 'Col' },
       ],
       text: {
         label: 'Full Name',
@@ -218,7 +224,7 @@ export default {
         show: true,
         value: '',
         vruntime: (data) => {
-          console.log('TextComponent.vruntime ', data)
+          if (data === 'GAGAL') return 'Tidak boleah input GAGAL'
         },
       },
     }
