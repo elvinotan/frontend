@@ -436,7 +436,7 @@
               <td>false</td>
               <td>
                 Boolean untuk menentukan required atau tidak text, error message
-                akan otomatis terisi bila kosong, default:false
+                akan otomatis terisi bila kosong
               </td>
             </tr>
             <tr>
@@ -445,10 +445,7 @@
               <td>Boolean</td>
               <td>false</td>
               <td>false</td>
-              <td>
-                Boolean untuk menentukan disabled atau tidaknya component,
-                default:false
-              </td>
+              <td>Boolean untuk menentukan disabled atau tidaknya component</td>
             </tr>
             <tr>
               <td>show</td>
@@ -457,8 +454,8 @@
               <td>false</td>
               <td>true</td>
               <td>
-                Boolean untuk menentukan component tambil atau tidak, default:
-                true, tag ini menggunakan v-if
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
               </td>
             </tr>
             <tr>
@@ -530,6 +527,108 @@
           </tbody>
         </table>
       </EForm>
+
+      <EForm id="Button">
+        <EButton
+          id="ButtonComponent"
+          ref="ButtonComponent"
+          :label="button.label"
+          :disabled="button.disabled"
+          :show="button.show"
+          :color="button.color"
+        />
+        <div class="text-xs">Template : {{ htmlButton }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ button }}</div>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><input v-model="button.label" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Label untuk component</td>
+            </tr>
+            <tr>
+              <td>color</td>
+              <td>
+                <select v-model="button.color">
+                  <option value="gray">gray</option>
+                  <option value="green">green</option>
+                  <option value="red">red</option>
+                  <option value="yellow">yellow</option>
+                </select>
+              </td>
+              <td>String</td>
+              <td>false</td>
+              <td>gray</td>
+              <td>Component background color</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><input v-model="button.disabled" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan disabled atau tidaknya component,
+              </td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td><input v-model="button.show" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>true</td>
+              <td>
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('ButtonComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -544,6 +643,8 @@ export default {
         '<EPassword id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" />',
       htmlTextarea:
         '<ETextArea id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :cols="" :rows="" :show="" />',
+      htmlButton:
+        '<EButton id="" ref="" :label="" :disabled="" :color="" :show="" />',
       haserror: null,
       metadata: null,
       valid: null,
@@ -608,6 +709,12 @@ export default {
         vruntime: (data) => {
           if (data === 'GAGAL') return 'Tidak boleah input GAGAL'
         },
+      },
+      button: {
+        label: 'Save',
+        color: 'gray',
+        disabled: false,
+        show: true,
       },
     }
   },
