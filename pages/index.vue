@@ -45,7 +45,7 @@
               <td>false</td>
               <td>''</td>
               <td>
-                Label untuk Text Input, bila tidak di bind maka sign * tidak di
+                Label untuk component, bila tidak di bind maka sign * tidak di
                 tampilkan
               </td>
             </tr>
@@ -84,7 +84,7 @@
               <td>false</td>
               <td>
                 Boolean untuk menentukan required atau tidak text, error message
-                akan otomatis terisi bila kosong, default:false
+                akan otomatis terisi bila kosong
               </td>
             </tr>
             <tr>
@@ -93,10 +93,7 @@
               <td>Boolean</td>
               <td>false</td>
               <td>false</td>
-              <td>
-                Boolean untuk menentukan disabled atau tidaknya component,
-                default:false
-              </td>
+              <td>Boolean untuk menentukan disabled atau tidaknya component</td>
             </tr>
             <tr>
               <td>show</td>
@@ -105,8 +102,8 @@
               <td>false</td>
               <td>true</td>
               <td>
-                Boolean untuk menentukan component tambil atau tidak, defaut:
-                true, tag ini menggunakan v-if
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
               </td>
             </tr>
             <tr>
@@ -222,7 +219,7 @@
               <td>false</td>
               <td>''</td>
               <td>
-                Label untuk Text Input, bila tidak di bind maka sign * tidak di
+                Label untuk component, bila tidak di bind maka sign * tidak di
                 tampilkan
               </td>
             </tr>
@@ -241,7 +238,7 @@
               </td>
               <td>Number</td>
               <td>false</td>
-              <td>10</td>
+              <td>16</td>
               <td>Maxiumum charater yang bisa di terima oleh component</td>
             </tr>
             <tr>
@@ -252,7 +249,7 @@
               <td>false</td>
               <td>
                 Boolean untuk menentukan required atau tidak text, error message
-                akan otomatis terisi bila kosong, default:false
+                akan otomatis terisi bila kosong
               </td>
             </tr>
             <tr>
@@ -261,10 +258,7 @@
               <td>Boolean</td>
               <td>false</td>
               <td>false</td>
-              <td>
-                Boolean untuk menentukan disabled atau tidaknya component,
-                default:false
-              </td>
+              <td>Boolean untuk menentukan disabled atau tidaknya component</td>
             </tr>
             <tr>
               <td>show</td>
@@ -273,8 +267,8 @@
               <td>false</td>
               <td>true</td>
               <td>
-                Boolean untuk menentukan component tambil atau tidak, defaut:
-                true, tag ini menggunakan v-if
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
               </td>
             </tr>
             <tr>
@@ -346,6 +340,196 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="TextArea">
+        <ETextArea
+          id="TextAreaComponent"
+          ref="TextAreaComponent"
+          v-model="textarea.value"
+          :label="textarea.label"
+          :placeholder="textarea.placeholder"
+          :maxlength="textarea.maxlength"
+          :required="textarea.required"
+          :disabled="textarea.disabled"
+          :show="textarea.show"
+          :cols="textarea.cols"
+          :rows="textarea.rows"
+          :vruntime="textarea.vruntime"
+        />
+        <div class="text-xs">Template : {{ htmlTextarea }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ textarea }}</div>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><input v-model="textarea.label" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>
+                Label untuk component, bila tidak di bind maka sign * tidak di
+                tampilkan
+              </td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td><input v-model="textarea.placeholder" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Place holder component, akan tampil bila data kosong</td>
+            </tr>
+            <tr>
+              <td>maxlength</td>
+              <td>
+                <input v-model.number="textarea.maxlength" type="number" />
+              </td>
+              <td>Number</td>
+              <td>false</td>
+              <td>100</td>
+              <td>Maxiumum charater yang bisa di terima oleh component</td>
+            </tr>
+            <tr>
+              <td>cols</td>
+              <td>
+                <input v-model.number="textarea.cols" type="number" />
+              </td>
+              <td>Number</td>
+              <td>false</td>
+              <td>50</td>
+              <td>component width display</td>
+            </tr>
+            <tr>
+              <td>rows</td>
+              <td>
+                <input v-model.number="textarea.rows" type="number" />
+              </td>
+              <td>Number</td>
+              <td>false</td>
+              <td>4</td>
+              <td>component height display</td>
+            </tr>
+            <tr>
+              <td>required</td>
+              <td><input v-model="textarea.required" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan required atau tidak text, error message
+                akan otomatis terisi bila kosong, default:false
+              </td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><input v-model="textarea.disabled" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan disabled atau tidaknya component,
+                default:false
+              </td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td><input v-model="textarea.show" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>true</td>
+              <td>
+                Boolean untuk menentukan component tambil atau tidak, default:
+                true, tag ini menggunakan v-if
+              </td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td><input v-model="textarea.value" type="input" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>
+                Two way data binding, saat ini data yang di input dalam bentuk
+                upprcase, customize sesuai kebutuhan
+              </td>
+            </tr>
+            <tr>
+              <td>vruntime</td>
+              <td>Function Callback</td>
+              <td>Function</td>
+              <td>false</td>
+              <td>null</td>
+              <td>OnType runtime validation, test ketik GAGAL untuk mencoba</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('TextAreaComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+            <tr>
+              <td>clearError</td>
+              <td>
+                <button @click="clearError('TextAreaComponent')">Click</button>
+              </td>
+              <td>Void</td>
+              <td>Hapus error, kembalikan ke state component semula</td>
+            </tr>
+            <tr>
+              <td>hasError</td>
+              <td>
+                <button @click="hasError('TextAreaComponent')">Click</button>
+              </td>
+              <td>{{ haserror }}</td>
+              <td>
+                Flag untuk menandakan apakah component pass validasi atau tidak
+              </td>
+            </tr>
+            <tr>
+              <td>validate</td>
+              <td>
+                <button @click="validate('TextAreaComponent')">Click</button>
+              </td>
+              <td>{{ valid }}</td>
+              <td>Lakukan validasi berdasarkan required dan vruntime</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -358,6 +542,8 @@ export default {
         '<EText id="" ref="" v-model="" :label="" :placeholder="" :type="" :required="" :disabled="" :show="" />',
       htmlPassword:
         '<EPassword id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" />',
+      htmlTextarea:
+        '<ETextArea id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :cols="" :rows="" :show="" />',
       haserror: null,
       metadata: null,
       valid: null,
@@ -405,6 +591,20 @@ export default {
         disabled: false,
         show: true,
         value: '',
+        vruntime: (data) => {
+          if (data === 'GAGAL') return 'Tidak boleah input GAGAL'
+        },
+      },
+      textarea: {
+        label: 'Blog',
+        placeholder: 'Placeholder',
+        maxlength: 100,
+        required: true,
+        disabled: false,
+        show: true,
+        value: '',
+        cols: 50,
+        rows: 4,
         vruntime: (data) => {
           if (data === 'GAGAL') return 'Tidak boleah input GAGAL'
         },

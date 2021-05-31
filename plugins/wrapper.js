@@ -48,7 +48,6 @@ export default function (plugin, inject) {
     },
   }
   // Math Operational
-  //
 
   inject('wrapper', wrapper)
 }

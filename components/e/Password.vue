@@ -49,7 +49,7 @@ export default {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
-    maxlength: { type: Number, required: false, default: 10 },
+    maxlength: { type: Number, required: false, default: 16 },
     required: { type: Boolean, required: false, default: false },
     disabled: { type: Boolean, required: false, default: true },
     show: { type: Boolean, required: false, default: true },
