@@ -54,7 +54,7 @@ export default {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
-    maxlength: { type: Number, required: false, default: 10 },
+    maxlength: { type: Number, required: false, default: 15 },
     required: { type: Boolean, required: false, default: false },
     disabled: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
@@ -103,7 +103,7 @@ export default {
       const maximum = this.maximum ? `Max:${this._format(this.maximum)}` : ''
       const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
 
-      const charInfo = `${this.lvalue ? this.lvalue.length : 0} / ${
+      const charInfo = `${this.lvalue ? this.lvalue.toString().length : 0} / ${
         this.maxlength
       } Char`
       return minmax + charInfo
@@ -112,6 +112,9 @@ export default {
   watch: {
     value(newVal, oldVal) {
       this.lvalue = this._format(newVal)
+    },
+    separator(newVal, oldVal) {
+      this.lvalue = this._format(this.value)
     },
   },
   methods: {
@@ -142,6 +145,8 @@ export default {
         .toUpperCase()
 
       lvalue = lvalue === '' ? null : +lvalue
+      lvalue = isNaN(lvalue) ? null : lvalue
+      lvalue = isFinite(lvalue) ? lvalue : null
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
       if (lvalue && this.separator) {
@@ -182,10 +187,14 @@ export default {
         this.errors.push(`${this.label} is exceeded`)
       }
       if (this.minimum && this.value < this.minimum) {
-        this.errors.push(`${this.label} can not be less then ${this.minimum}`)
+        this.errors.push(
+          `${this.label} can not be less then ${this._format(this.minimum)}`
+        )
       }
       if (this.maximum && this.value > this.maximum) {
-        this.errors.push(`${this.label} can not be more then ${this.maximum}`)
+        this.errors.push(
+          `${this.label} can not be more then ${this._format(this.maximum)}`
+        )
       }
 
       // add business runtime validation
