@@ -50,7 +50,7 @@ export default {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
-    maxlength: { type: Number, required: false, default: 10 },
+    maxlength: { type: Number, required: false, default: 18 },
     required: { type: Boolean, required: false, default: false },
     disabled: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
