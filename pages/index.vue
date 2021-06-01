@@ -786,7 +786,7 @@
               </td>
               <td>Number</td>
               <td>false</td>
-              <td>15</td>
+              <td>null</td>
               <td>Validasi maximum angka yang bisa di input</td>
             </tr>
           </tbody>
