@@ -164,6 +164,8 @@ export default {
         .toUpperCase()
 
       lvalue = lvalue === '' ? null : +lvalue
+      lvalue = isNaN(lvalue) ? null : lvalue
+      lvalue = isFinite(lvalue) ? lvalue : null
       this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
       if (lvalue && this.separator) {
@@ -205,10 +207,14 @@ export default {
         this.errors.push(`${this.label} is exceeded`)
       }
       if (this.minimum && this.value < this.minimum) {
-        this.errors.push(`${this.label} can not be less then ${this.minimum}`)
+        this.errors.push(
+          `${this.label} can not be less then ${this._format(this.minimum)}`
+        )
       }
       if (this.maximum && this.value > this.maximum) {
-        this.errors.push(`${this.label} can not be more then ${this.maximum}`)
+        this.errors.push(
+          `${this.label} can not be more then ${this._format(this.maximum)}`
+        )
       }
 
       // add business runtime validation
