@@ -27,7 +27,7 @@
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
-          class="text-right field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
+          class="text-left field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
           @keypress="_keypress"
           @input="_input"

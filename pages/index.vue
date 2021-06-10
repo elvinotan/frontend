@@ -855,6 +855,8 @@
           :separator="decimal.separator"
           :minimum="decimal.minimum"
           :maximum="decimal.maximum"
+          :minimum-fraction-digits="decimal.minimumFractionDigits"
+          :maximum-fraction-digits="decimal.maximumFractionDigits"
         />
         <div class="text-xs">Template : {{ htmlDecimal }}</div>
         <br />
@@ -999,6 +1001,33 @@
               <td>null</td>
               <td>Validasi maximum angka yang bisa di input</td>
             </tr>
+            <tr>
+              <td>minimumFractionDigits</td>
+              <td>
+                <input
+                  v-model.number="decimal.minimumFractionDigits"
+                  type="number"
+                />
+              </td>
+              <td>Number</td>
+              <td>false</td>
+              <td>0</td>
+              <td>Minimum fraksi digit</td>
+            </tr>
+
+            <tr>
+              <td>maximumFractionDigits</td>
+              <td>
+                <input
+                  v-model.number="decimal.maximumFractionDigits"
+                  type="number"
+                />
+              </td>
+              <td>Number</td>
+              <td>false</td>
+              <td>2</td>
+              <td>Maximum fraksi digit</td>
+            </tr>
           </tbody>
         </table>
         <br />
@@ -1068,7 +1097,7 @@ export default {
       htmlNumber:
         '<ENumber id="" ref="" v-model=""  :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum=""/>',
       htmlDecimal:
-        '<EDecimal id="" ref="" v-model=""  :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum=""/>',
+        '<EDecimal id="" ref="" v-model=""  :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum="" :minimumFractionDigits="" :maximumFractionDigits=""/>',
       haserror: null,
       metadata: null,
       valid: null,
@@ -1168,6 +1197,8 @@ export default {
         separator: false,
         minimum: null,
         maximum: null,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 5,
         vruntime: (data) => {
           if (data === 666) return 'Tidak boleah input 666'
         },
