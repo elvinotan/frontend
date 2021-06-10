@@ -181,6 +181,14 @@ export default {
         this.lvalue = this._format(lvalue)
         if (endWithPeriode) this.lvalue += '.'
       }
+
+      // code ini untuk me-reposisikan kembali lokasi cursor yang caretnya sudah berubah krn ada perubahan format data
+      const cursorIdx = event.target.selectionStart
+      const count = this.lvalue.length - event.target.value.length
+      this.$nextTick(() => {
+        event.target.focus()
+        event.target.setSelectionRange(cursorIdx + count, cursorIdx + count)
+      })
     },
     _blur(event) {
       let lvalue = event.target.value
