@@ -1078,6 +1078,168 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="Date">
+        <EDate
+          id="DateComponent"
+          ref="DateComponent"
+          v-model="date.value"
+          :label="date.label"
+          :required="date.required"
+          :disabled="date.disabled"
+          :show="date.show"
+          :vruntime="date.vruntime"
+          :minimum="date.minimum"
+          :maximum="date.maximum"
+        />
+        <div class="text-xs">Template : {{ htmlDate }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ date }}</div>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><input v-model="date.label" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Label untuk component</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><input v-model="date.disabled" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan disabled atau tidaknya component,
+              </td>
+            </tr>
+            <tr>
+              <td>required</td>
+              <td><input v-model="date.required" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan required atau tidak text, error message
+                akan otomatis terisi bila kosong
+              </td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td><input v-model="date.show" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>true</td>
+              <td>
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
+              </td>
+            </tr>
+            <tr>
+              <td>vruntime</td>
+              <td>Function Callback</td>
+              <td>Function</td>
+              <td>false</td>
+              <td>null</td>
+              <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td><input v-model.number="date.value" type="input" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>
+                Two way data binding, saat ini data yang di input dalam bentuk
+                upprcase, customize sesuai kebutuhan
+              </td>
+            </tr>
+            <tr>
+              <td>minimum</td>
+              <td>2021-09-01</td>
+              <td>Number</td>
+              <td>false</td>
+              <td>null</td>
+              <td>Validasi minumum tanggal yang bisa di input</td>
+            </tr>
+            <tr>
+              <td>maxlength</td>
+              <td>2021-09-30</td>
+              <td>Number</td>
+              <td>false</td>
+              <td>null</td>
+              <td>Validasi maximum tanggal yang bisa di input</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('DateComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+            <tr>
+              <td>clearError</td>
+              <td>
+                <button @click="clearError('DateComponent')">Click</button>
+              </td>
+              <td>Void</td>
+              <td>Hapus error, kembalikan ke state component semula</td>
+            </tr>
+            <tr>
+              <td>hasError</td>
+              <td>
+                <button @click="hasError('DateComponent')">Click</button>
+              </td>
+              <td>{{ haserror }}</td>
+              <td>
+                Flag untuk menandakan apakah component pass validasi atau tidak
+              </td>
+            </tr>
+            <tr>
+              <td>validate</td>
+              <td>
+                <button @click="validate('DateComponent')">Click</button>
+              </td>
+              <td>{{ valid }}</td>
+              <td>Lakukan validasi berdasarkan required dan vruntime</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -1095,9 +1257,11 @@ export default {
       htmlButton:
         '<EButton id="" ref="" :label="" :disabled="" :color="" :show="" />',
       htmlNumber:
-        '<ENumber id="" ref="" v-model=""  :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum=""/>',
+        '<ENumber id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum=""/>',
       htmlDecimal:
-        '<EDecimal id="" ref="" v-model=""  :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum="" :minimumFractionDigits="" :maximumFractionDigits=""/>',
+        '<EDecimal id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum="" :minimumFractionDigits="" :maximumFractionDigits=""/>',
+      htmlDate:
+        '<EDate id="" ref="" v-model="" :label="" :required="" :disabled="" :show="" :minimum="" :maximum=""/>',
       haserror: null,
       metadata: null,
       valid: null,
@@ -1199,6 +1363,19 @@ export default {
         maximum: null,
         minimumFractionDigits: 0,
         maximumFractionDigits: 5,
+        vruntime: (data) => {
+          if (data === 666) return 'Tidak boleah input 666'
+        },
+      },
+      date: {
+        label: 'BirthDate',
+        placeholder: 'Happy Birthday',
+        required: false,
+        disabled: false,
+        show: true,
+        value: new Date(),
+        minimum: new Date(2021, 9, 15),
+        maximum: new Date(2021, 9, 20),
         vruntime: (data) => {
           if (data === 666) return 'Tidak boleah input 666'
         },
