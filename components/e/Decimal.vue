@@ -100,7 +100,7 @@ export default {
       const maximum = this.maximum ? `Max:${this._format(this.maximum)}` : ''
       const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
 
-      const charInfo = `${this.lvalue ? this.lvalue.length : 0} / ${
+      const charInfo = `${this.lvalue ? this.lvalue.toString().length : 0} / ${
         this.maxlength
       } Char`
       return minmax + charInfo
@@ -109,6 +109,9 @@ export default {
   watch: {
     value(newVal, oldVal) {
       this.lvalue = this._format(newVal)
+    },
+    separator(newVal, oldVal) {
+      this.lvalue = this._format(this.value)
     },
   },
   methods: {
@@ -128,7 +131,7 @@ export default {
       const expression = this.allowMinus ? '-.0123456789' : '.0123456789'
       const cursorIdx = event.target.selectionStart
       const char = event.key
-      const lvalue = this.lvalue
+      const lvalue = this.lvalue ? this.lvalue.toString() : ''
 
       if (!expression.includes(event.key)) {
         // Bila character tidak termasuk dalam expression maka di batalkan
@@ -145,7 +148,7 @@ export default {
       } else if (char === '.' && lvalue === '-') {
         // bila mencoba untuk entry . tapi di depan hanya ada minus jadi '-.', maka di batalkan
         event.preventDefault()
-      } else if (lvalue && lvalue.includes && lvalue.includes('.')) {
+      } else if (lvalue && lvalue.includes('.')) {
         // validasi kalo setalah . jumlah panjang tidak boleh lebih banyak dari maximumFractionDigits
         const splits = lvalue.split('.')
 
@@ -206,12 +209,12 @@ export default {
       if (this.value && this.value.length > this.maxlength) {
         this.errors.push(`${this.label} is exceeded`)
       }
-      if (this.minimum && this.value < this.minimum) {
+      if (this.value && this.minimum && this.value < this.minimum) {
         this.errors.push(
           `${this.label} can not be less then ${this._format(this.minimum)}`
         )
       }
-      if (this.maximum && this.value > this.maximum) {
+      if (this.value && this.maximum && this.value > this.maximum) {
         this.errors.push(
           `${this.label} can not be more then ${this._format(this.maximum)}`
         )

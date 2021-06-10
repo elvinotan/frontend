@@ -633,7 +633,7 @@
         <ENumber
           id="NumberComponent"
           ref="NumberComponent"
-          v-model="number.value"
+          v-model.number="number.value"
           :label="number.label"
           :placeholder="number.placeholder"
           :maxlength="number.maxlength"
@@ -839,6 +839,216 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="Decimal">
+        <EDecimal
+          id="DecimalComponent"
+          ref="DecimalComponent"
+          v-model.number="decimal.value"
+          :label="decimal.label"
+          :placeholder="decimal.placeholder"
+          :maxlength="decimal.maxlength"
+          :required="decimal.required"
+          :disabled="decimal.disabled"
+          :show="decimal.show"
+          :vruntime="decimal.vruntime"
+          :allow-minus="decimal.allowMinus"
+          :separator="decimal.separator"
+          :minimum="decimal.minimum"
+          :maximum="decimal.maximum"
+        />
+        <div class="text-xs">Template : {{ htmlDecimal }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ decimal }}</div>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><input v-model="decimal.label" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Label untuk component</td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td><input v-model="decimal.placeholder" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Place holder input, akan tampil bila data kosong</td>
+            </tr>
+            <tr>
+              <td>maxlength</td>
+              <td>
+                <input v-model.number="decimal.maxlength" type="number" />
+              </td>
+              <td>Number</td>
+              <td>false</td>
+              <td>18</td>
+              <td>
+                Maxiumum charater yang bisa di terima oleh component, termasuk
+                separarator and sign
+              </td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><input v-model="decimal.disabled" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan disabled atau tidaknya component,
+              </td>
+            </tr>
+            <tr>
+              <td>required</td>
+              <td><input v-model="decimal.required" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan required atau tidak text, error message
+                akan otomatis terisi bila kosong
+              </td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td><input v-model="decimal.show" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>true</td>
+              <td>
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
+              </td>
+            </tr>
+            <tr>
+              <td>vruntime</td>
+              <td>Function Callback</td>
+              <td>Function</td>
+              <td>false</td>
+              <td>null</td>
+              <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td><input v-model.number="decimal.value" type="input" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>
+                Two way data binding, saat ini data yang di input dalam bentuk
+                upprcase, customize sesuai kebutuhan
+              </td>
+            </tr>
+            <tr>
+              <td>allowMinus</td>
+              <td><input v-model="decimal.allowMinus" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>Boleah tidaknya menggunakan sign minus(-)</td>
+            </tr>
+            <tr>
+              <td>separator</td>
+              <td><input v-model="decimal.separator" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Number formated dengan separator default menggunakan config US,
+                koma untuk ribuan dan . untuk fraksi
+              </td>
+            </tr>
+            <tr>
+              <td>minimum</td>
+              <td>
+                <input v-model.number="decimal.minimum" type="number" />
+              </td>
+              <td>Number</td>
+              <td>false</td>
+              <td>null</td>
+              <td>Validasi minumum angka yang bisa di input</td>
+            </tr>
+            <tr>
+              <td>maxlength</td>
+              <td>
+                <input v-model.number="decimal.maximum" type="number" />
+              </td>
+              <td>Number</td>
+              <td>false</td>
+              <td>null</td>
+              <td>Validasi maximum angka yang bisa di input</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('DecimalComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+            <tr>
+              <td>clearError</td>
+              <td>
+                <button @click="clearError('DecimalComponent')">Click</button>
+              </td>
+              <td>Void</td>
+              <td>Hapus error, kembalikan ke state component semula</td>
+            </tr>
+            <tr>
+              <td>hasError</td>
+              <td>
+                <button @click="hasError('DecimalComponent')">Click</button>
+              </td>
+              <td>{{ haserror }}</td>
+              <td>
+                Flag untuk menandakan apakah component pass validasi atau tidak
+              </td>
+            </tr>
+            <tr>
+              <td>validate</td>
+              <td>
+                <button @click="validate('DecimalComponent')">Click</button>
+              </td>
+              <td>{{ valid }}</td>
+              <td>Lakukan validasi berdasarkan required dan vruntime</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -857,6 +1067,8 @@ export default {
         '<EButton id="" ref="" :label="" :disabled="" :color="" :show="" />',
       htmlNumber:
         '<ENumber id="" ref="" v-model=""  :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum=""/>',
+      htmlDecimal:
+        '<EDecimal id="" ref="" v-model=""  :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum=""/>',
       haserror: null,
       metadata: null,
       valid: null,
@@ -932,6 +1144,22 @@ export default {
         label: 'Tax',
         placeholder: 'Input you yearly Tax',
         maxlength: 15,
+        required: false,
+        disabled: false,
+        show: true,
+        value: 0,
+        allowMinus: false,
+        separator: false,
+        minimum: null,
+        maximum: null,
+        vruntime: (data) => {
+          if (data === 666) return 'Tidak boleah input 666'
+        },
+      },
+      decimal: {
+        label: 'Price',
+        placeholder: 'Input your price',
+        maxlength: 18,
         required: false,
         disabled: false,
         show: true,
