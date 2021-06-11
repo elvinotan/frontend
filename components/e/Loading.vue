@@ -97,6 +97,9 @@ export default {
       this.visible = true
       this.label = label
     },
+    hide() {
+      this.visible = false
+    },
     success() {
       this.label = (this.label + ' success').trim()
       const self = this

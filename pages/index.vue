@@ -1985,10 +1985,63 @@
             <tr>
               <td>close</td>
               <td>
-                <button @click="closDialog('DialogComponent')">Click</button>
+                <button @click="closeDialog('DialogComponent')">Click</button>
               </td>
               <td>Void</td>
               <td>Hide popup dialog container</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
+      <EForm id="Loading">
+        <ELoading ref="LoadingComponent" />
+        <div class="text-xs">Template : {{ htmlLoading }}</div>
+        <br />
+        <div class="text-xs">Data Object : none</div>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('LoadingComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td>
+                <button @click="showLoading('LoadingComponent')">Click</button>
+              </td>
+              <td>Void</td>
+              <td>Show popup loading</td>
+            </tr>
+            <tr>
+              <td>success</td>
+              <td>
+                <button @click="successLoading('LoadingComponent')">
+                  Click
+                </button>
+              </td>
+              <td>Void</td>
+              <td>Close Loading dan info operation success label</td>
+            </tr>
+            <tr>
+              <td>fail</td>
+              <td>
+                <button @click="failLoading('LoadingComponent')">Click</button>
+              </td>
+              <td>Void</td>
+              <td>Close Loading dan info operation fail label</td>
             </tr>
           </tbody>
         </table>
@@ -2025,6 +2078,7 @@ export default {
         '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[{ value: null, description: null }] />',
       htmlDialog:
         '<EDialog id="" ref="" :title="" :width="" :height="" :buttons=[{ label: null, color: null }]> Contents </EDialog>',
+      htmlLoading: '<ELoading ref="loader" />',
       haserror: null,
       metadata: null,
       valid: null,
@@ -2231,6 +2285,27 @@ export default {
     },
     closeDialog(ref) {
       this.$refs[ref].close()
+    },
+    showLoading(ref) {
+      this.$refs[ref].show('Fetch Data Customer')
+      const self = this
+      setTimeout(() => {
+        self.$refs[ref].hide()
+      }, 5000)
+    },
+    successLoading(ref) {
+      this.$refs[ref].show('Success Operation Example')
+      const self = this
+      setTimeout(() => {
+        self.$refs[ref].success()
+      }, 5000)
+    },
+    failLoading(ref) {
+      this.$refs[ref].show('Fail Operation Example')
+      const self = this
+      setTimeout(() => {
+        self.$refs[ref].fail()
+      }, 5000)
     },
   },
 }
