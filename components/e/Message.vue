@@ -9,6 +9,7 @@
           >
             <div
               class="font-bold rounded-t text-sm bg-gray-300 text-gray-800 w-auto p-1"
+              :class="[_cssLabelBg]"
             >
               Information
             </div>
@@ -28,10 +29,7 @@
                 {{ label }}
               </div>
             </div>
-            <div
-              class="rounded-b bg-gray-100 w-auto p-2 flex justify-end"
-              :class="[_cssLabelBg]"
-            >
+            <div class="rounded-b bg-gray-100 w-auto p-2 flex justify-end">
               <EButton
                 :id="'Message' + id"
                 label="Close"

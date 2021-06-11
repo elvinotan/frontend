@@ -2046,6 +2046,81 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="Message">
+        <EMessage id="MessageComponent" ref="MessageComponent" />
+        <div class="text-xs">Template : {{ htmlMessage }}</div>
+        <br />
+        <div class="text-xs">Data Object : none</div>
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('MessageComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+            <tr>
+              <td>success</td>
+              <td>
+                <button @click="successMessage('MessageComponent')">
+                  Click
+                </button>
+              </td>
+              <td>Promise</td>
+              <td>Tampilkan success message</td>
+            </tr>
+            <tr>
+              <td>error</td>
+              <td>
+                <button @click="errorMessage('MessageComponent')">Click</button>
+              </td>
+              <td>Promise</td>
+              <td>Tampilkan error message</td>
+            </tr>
+            <tr>
+              <td>close</td>
+              <td>
+                <button @click="closeMessage('MessageComponent')">Click</button>
+              </td>
+              <td>Void</td>
+              <td>Tutup popup message</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -2079,6 +2154,7 @@ export default {
       htmlDialog:
         '<EDialog id="" ref="" :title="" :width="" :height="" :buttons=[{ label: null, color: null }]> Contents </EDialog>',
       htmlLoading: '<ELoading ref="loader" />',
+      htmlMessage: '<EMessage id="" ref="" />',
       haserror: null,
       metadata: null,
       valid: null,
@@ -2306,6 +2382,15 @@ export default {
       setTimeout(() => {
         self.$refs[ref].fail()
       }, 5000)
+    },
+    successMessage(ref) {
+      this.$refs[ref].success('Berhasil mengambil data customer')
+    },
+    errorMessage(ref) {
+      this.$refs[ref].error('Gagal mengambil data customer')
+    },
+    closeMessage(ref) {
+      this.$refs[ref].close()
     },
   },
 }
