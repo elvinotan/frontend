@@ -1406,6 +1406,132 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="Checkbox">
+        <ECheckBox
+          id="CheckboxComponent"
+          ref="CheckboxComponent"
+          v-model.number="checkbox.value"
+          :label="checkbox.label"
+          :disabled="checkbox.disabled"
+          :show="checkbox.show"
+          :vruntime="checkbox.vruntime"
+          :selected="checkbox.selected"
+          :unselected="checkbox.unselected"
+        />
+        <div class="text-xs">Template : {{ htmlCheckbox }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ checkbox }}</div>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><input v-model="checkbox.label" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Label untuk component</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><input v-model="checkbox.disabled" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan disabled atau tidaknya component,
+              </td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td><input v-model="checkbox.show" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>true</td>
+              <td>
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
+              </td>
+            </tr>
+            <tr>
+              <td>vruntime</td>
+              <td>Function Callback</td>
+              <td>Function</td>
+              <td>false</td>
+              <td>null</td>
+              <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td><input v-model="checkbox.value" type="input" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>
+                Two way data binding, saat ini data yang di input dalam bentuk
+                upprcase, customize sesuai kebutuhan
+              </td>
+            </tr>
+            <tr>
+              <td>selected</td>
+              <td><input v-model="checkbox.selected" type="text" /></td>
+              <td>[String, Number, Boolean]</td>
+              <td>false</td>
+              <td>true</td>
+              <td>Value yang ke set pada model, apabila checkbok terpilih</td>
+            </tr>
+            <tr>
+              <td>unselected</td>
+              <td><input v-model="checkbox.unselected" type="text" /></td>
+              <td>[String, Number, Boolean]</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Value yang ke set pada model, apabila checkbok tidak terpilih
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('CheckboxComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -1430,6 +1556,8 @@ export default {
         '<EDate id="" ref="" v-model="" :label="" :required="" :disabled="" :show="" :minimum="" :maximum=""/>',
       htmlTime:
         '<ETime id="" ref="" v-model="" :label="" :required="" :disabled="" :show="" :minimum="" :maximum=""/>',
+      htmlCheckbox:
+        '<ECheckBox id="" ref="" v-model="" :label="" :disabled="" :show="" :selected="" :unselected=""/>',
       haserror: null,
       metadata: null,
       valid: null,
@@ -1559,6 +1687,17 @@ export default {
         maximum: '11:15',
         vruntime: (data) => {
           if (data === 666) return 'Tidak boleah input 666'
+        },
+      },
+      checkbox: {
+        label: 'Active',
+        disabled: false,
+        show: true,
+        value: null,
+        selected: 'Yes, Active',
+        unselected: 'No, Inactive',
+        vruntime: (data) => {
+          console.log(data)
         },
       },
     }
