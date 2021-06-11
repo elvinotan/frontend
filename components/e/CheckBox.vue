@@ -27,7 +27,6 @@ export default {
     label: { type: String, required: false, default: '' },
     show: { type: Boolean, required: false, default: true },
     disabled: { type: Boolean, required: false, default: true },
-    vruntime: { type: Function, required: false, default: null },
     value: { type: [String, Boolean, Number], required: false, default: null },
     selected: {
       type: [String, Number, Boolean],

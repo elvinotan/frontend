@@ -95,7 +95,7 @@ export default {
       const options = [
         {
           value: '0',
-          description: '',
+          description: this.placeholder,
         },
         {
           value: '1',
