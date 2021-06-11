@@ -2213,6 +2213,228 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="Card">
+        <ECard
+          id="CardComponent"
+          ref="CardComponent"
+          :label="card.label"
+          :disabled="card.disabled"
+          :show="card.show"
+        >
+          <EText
+            id="TextComponent"
+            ref="TextComponent"
+            v-model="text.value"
+            :label="text.label"
+            :placeholder="text.placeholder"
+            :type="text.type"
+            :required="text.required"
+            :disabled="text.disabled"
+            :show="text.show"
+            :vruntime="text.vruntime"
+          />
+        </ECard>
+        <div class="text-xs">Template : {{ htmlCard }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ card }}</div>
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>label</td>
+              <td><input v-model="card.label" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Label untuk component</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><input v-model="card.disabled" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>Boolean untuk menentukan disabled atau tidaknya component</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td><input v-model="card.show" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>true</td>
+              <td>
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('ConfirmationComponent')">
+                  Click
+                </button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
+      <EForm id="Tabs">
+        <ETabs
+          id="TabsComponent"
+          ref="TabsComponent"
+          :labels="tabss.labels"
+          :selected-tab="tabss.selectedTab"
+          :show="tabss.show"
+          :disabled="tabss.disabled"
+        >
+          <EForm id="Customer">
+            <div>Customer</div>
+          </EForm>
+          <EForm id="Order">
+            <div>Order</div>
+          </EForm>
+          <EForm id="Transaction">
+            <div>Transaction</div>
+          </EForm>
+          <EForm id="Delivery">
+            <div>Delivery</div>
+          </EForm>
+        </ETabs>
+        <div class="text-xs">Template : {{ htmlTabs }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ tabss }}</div>
+        <br />
+        <div class="text-xs">
+          Important !! Untuk masing-masing content pada Tab, gunakan EForm dgn
+          id sesuai dengan label tabs, menggunakan EForm agar behaviour ui bisa
+          di buat central
+        </div>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>labels</td>
+              <td>-</td>
+              <td>Arrays</td>
+              <td>false</td>
+              <td>[]</td>
+              <td>Label untuk tab name, berupa arrays string</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><input v-model="tabss.disabled" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>Boolean untuk menentukan disabled atau tidaknya component</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td><input v-model="tabss.show" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>true</td>
+              <td>
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
+              </td>
+            </tr>
+            <tr>
+              <td>selectedTab</td>
+              <td>
+                <select v-model="tabss.selectedTab">
+                  <option value="Customer">Customer</option>
+                  <option value="Order">Order</option>
+                  <option value="Transaction">Transaction</option>
+                </select>
+              </td>
+              <td>String</td>
+              <td>false</td>
+              <td>null</td>
+              <td>Set default selected tab for the first time</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('TabsComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+            <tr>
+              <td>setSelectedTab</td>
+              <td>
+                <button @click="setSelectedTab('TabsComponent')">Click</button>
+              </td>
+              <td>Transaction Tab selected</td>
+              <td>Set selected tab progamatically</td>
+            </tr>
+            <tr>
+              <td>-</td>
+              <td>
+                <button @click="addNewTab()">Click</button>
+              </td>
+              <td>Tambah new Tab, Customer Tab Enabled, Order Tab Disabled</td>
+              <td>Ini bukan component ini hanya untuk test saja</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -2247,8 +2469,13 @@ export default {
         '<EDialog id="" ref="" :title="" :width="" :height="" :buttons=[{ label: null, color: null }]> Contents </EDialog>',
       htmlConfirmation:
         '<EConfirmation id="" ref="" :positive="" :negative="" />',
+
       htmlLoading: '<ELoading ref="loader" />',
       htmlMessage: '<EMessage id="" ref="" />',
+      htmlCard:
+        '<ECard ref="" :label="" :disabled="" :show="" >Contents </EDialog>',
+      htmlTabs:
+        '<ETabs id="" ref="" :labels=[{label:null}] :disabled="" :show="" >Contents </ETabs>',
       haserror: null,
       metadata: null,
       valid: null,
@@ -2433,6 +2660,21 @@ export default {
         positive: 'Tentu',
         negative: 'Gax',
       },
+      card: {
+        label: 'Card Label',
+        show: true,
+        disabled: false,
+      },
+      tabss: {
+        labels: [
+          { label: 'Customer', disabled: true },
+          { label: 'Order', disabled: false },
+          { label: 'Transaction', disabled: false },
+        ],
+        show: true,
+        disabled: false,
+        selectedTab: 'Order',
+      },
     }
   },
   methods: {
@@ -2498,6 +2740,14 @@ export default {
     },
     closeConfirmation(ref) {
       this.$refs[ref].close()
+    },
+    setSelectedTab(ref) {
+      this.$refs[ref].setSelectedTab('Transaction')
+    },
+    addNewTab() {
+      this.tabss.labels[0].disabled = false
+      this.tabss.labels[1].disabled = true
+      this.tabss.labels.push({ label: 'Delivery', disabled: false })
     },
   },
 }

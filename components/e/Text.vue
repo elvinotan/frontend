@@ -93,7 +93,7 @@ export default {
     },
   },
   watch: {
-    type(oldVal, newOld) {
+    type(newVal, oldVal) {
       this._maxlength()
     },
   },
