@@ -72,6 +72,7 @@ export default {
     return {
       visible: false,
       label: '',
+      state: 0,
     }
   },
   computed: {
@@ -79,7 +80,11 @@ export default {
       return 'ring-gray-500'
     },
     _cssLabelBg() {
-      return 'bg-gray-300'
+      return this.state === 1
+        ? 'bg-green-300'
+        : this.state === -1
+        ? 'bg-red-300'
+        : 'bg-gray-300'
     },
     _cssInputBg() {
       return 'bg-white'
@@ -96,24 +101,29 @@ export default {
     show(label) {
       this.visible = true
       this.label = label
+      this.state = 0
     },
     hide() {
       this.visible = false
     },
     success() {
+      this.state = 1
       this.label = (this.label + ' success').trim()
       const self = this
       setTimeout(() => {
         self.visible = false
         self.label = ''
+        this.state = 0
       }, 1000)
     },
     fail() {
+      this.state = -1
       this.label = (this.label + ' fail').trim()
       const self = this
       setTimeout(() => {
         self.visible = false
         self.label = ''
+        this.state = 0
       }, 1000)
     },
   },
