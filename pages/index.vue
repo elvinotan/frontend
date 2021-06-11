@@ -2121,6 +2121,98 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="Confirmation">
+        <EConfirmation
+          id="ConfirmationComponent"
+          ref="ConfirmationComponent"
+          :positive="confirmation.positive"
+          :negative="confirmation.negative"
+        />
+        <div class="text-xs">Template : {{ htmlConfirmation }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ confirmation }}</div>
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>positive</td>
+              <td><input v-model="confirmation.positive" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>Yes</td>
+              <td>Positive label button</td>
+            </tr>
+            <tr>
+              <td>negative</td>
+              <td><input v-model="confirmation.negative" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>No</td>
+              <td>Negative label button</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('ConfirmationComponent')">
+                  Click
+                </button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+            <tr>
+              <td>confirm</td>
+              <td>
+                <button @click="confirmConfirmation('ConfirmationComponent')">
+                  Click
+                </button>
+              </td>
+              <td>Promise</td>
+              <td>Tampilkan success message</td>
+            </tr>
+            <tr>
+              <td>close</td>
+              <td>
+                <button @click="closeConfirmation('ConfirmationComponent')">
+                  Click
+                </button>
+              </td>
+              <td>Promise</td>
+              <td>Tutup confimration dialog</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -2153,6 +2245,8 @@ export default {
         '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[{ value: null, description: null }] />',
       htmlDialog:
         '<EDialog id="" ref="" :title="" :width="" :height="" :buttons=[{ label: null, color: null }]> Contents </EDialog>',
+      htmlConfirmation:
+        '<EConfirmation id="" ref="" :positive="" :negative="" />',
       htmlLoading: '<ELoading ref="loader" />',
       htmlMessage: '<EMessage id="" ref="" />',
       haserror: null,
@@ -2335,6 +2429,10 @@ export default {
           { label: 'Submit', color: 'purple' },
         ],
       },
+      confirmation: {
+        positive: 'Tentu',
+        negative: 'Gax',
+      },
     }
   },
   methods: {
@@ -2390,6 +2488,15 @@ export default {
       this.$refs[ref].error('Gagal mengambil data customer')
     },
     closeMessage(ref) {
+      this.$refs[ref].close()
+    },
+    async confirmConfirmation(ref) {
+      const result = await this.$refs[ref].confirm(
+        'Anda yakin akan memprocess data ini ?'
+      )
+      alert('Return object ' + JSON.stringify(result))
+    },
+    closeConfirmation(ref) {
       this.$refs[ref].close()
     },
   },
