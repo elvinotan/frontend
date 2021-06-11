@@ -87,6 +87,13 @@ export default {
     await this._fetcher()
   },
   methods: {
+    metaData() {
+      return {
+        name: this._name,
+        type: 'container',
+        show: true,
+      }
+    },
     async _fetcher() {
       this.fetched = true
       this.fetched = await this.fetcher()

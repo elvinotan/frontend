@@ -2435,6 +2435,85 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="PageLoader">
+        <EPageLoader
+          id="PageLoaderComponent"
+          ref="PageLoaderComponent"
+          :label="pageLoader.label"
+          :fetcher="pageLoaderfetcher"
+        >
+          <div>
+            Content ini akan di tampil, Bila EPageLoader success melakukan rest
+            call
+          </div>
+        </EPageLoader>
+        <br />
+        <div class="text-xs">Template : {{ htmlPageLoader }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ pageLoader }}</div>
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><input v-model="pageLoader.label" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Label untuk component</td>
+            </tr>
+            <tr>
+              <td>fetcher</td>
+              <td>-</td>
+              <td>Function</td>
+              <td>true</td>
+              <td>Empty Function</td>
+              <td>
+                Server Call yang returnnya harus berupa boolean, true bila
+                success, dan false bila gagal
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('PageLoaderComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -2469,16 +2548,18 @@ export default {
         '<EDialog id="" ref="" :title="" :width="" :height="" :buttons=[{ label: null, color: null }]> Contents </EDialog>',
       htmlConfirmation:
         '<EConfirmation id="" ref="" :positive="" :negative="" />',
-
       htmlLoading: '<ELoading ref="loader" />',
       htmlMessage: '<EMessage id="" ref="" />',
       htmlCard:
         '<ECard ref="" :label="" :disabled="" :show="" >Contents </EDialog>',
       htmlTabs:
         '<ETabs id="" ref="" :labels=[{label:null}] :disabled="" :show="" >Contents </ETabs>',
+      htmlPageLoader:
+        '<EPageLoader id="" ref="" :labels="" :fetcher=()>Contents</EPageLoader>',
       haserror: null,
       metadata: null,
       valid: null,
+      fetchedData: false,
       tabs: [
         { label: 'Text' },
         { label: 'Password' },
@@ -2675,6 +2756,9 @@ export default {
         disabled: false,
         selectedTab: 'Order',
       },
+      pageLoader: {
+        label: 'Tab PageLoder',
+      },
     }
   },
   methods: {
@@ -2748,6 +2832,15 @@ export default {
       this.tabss.labels[0].disabled = false
       this.tabss.labels[1].disabled = true
       this.tabss.labels.push({ label: 'Delivery', disabled: false })
+    },
+    pageLoaderfetcher() {
+      const self = this
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(self.fetchedData)
+          self.fetchedData = true
+        }, 3000)
+      })
     },
   },
 }
