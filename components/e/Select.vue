@@ -97,7 +97,10 @@ export default {
       return css
     },
     _options() {
-      const options = [{ value: '', description: '' }, ...this.options]
+      const options = [
+        { value: null, description: this.placeholder },
+        ...this.options,
+      ]
       return options
     },
   },

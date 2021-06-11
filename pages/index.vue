@@ -1700,6 +1700,188 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="Select">
+        <ESelect
+          id="SelectComponent"
+          ref="SelectComponent"
+          v-model="select.value"
+          :label="select.label"
+          :placeholder="select.placeholder"
+          :required="select.required"
+          :disabled="select.disabled"
+          :show="select.show"
+          :as="select.as"
+          :vruntime="select.vruntime"
+          :options="select.options"
+        />
+        <div class="text-xs">Template : {{ htmlSelect }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ select }}</div>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><input v-model="select.label" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Label untuk component</td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td><input v-model="select.placeholder" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>Place holder input, akan tampil bila data kosong</td>
+            </tr>
+            <tr>
+              <td>required</td>
+              <td><input v-model="select.required" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan required atau tidak text, error message
+                akan otomatis terisi bila kosong
+              </td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><input v-model="select.disabled" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan disabled atau tidaknya component,
+              </td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td><input v-model="select.show" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>true</td>
+              <td>
+                Boolean untuk menentukan component tambil atau tidak. tag ini
+                menggunakan v-if
+              </td>
+            </tr>
+            <tr>
+              <td>as</td>
+              <td>
+                <select v-model="select.as">
+                  <option value="string">string</option>
+                  <option value="number">number</option>
+                </select>
+              </td>
+              <td>String</td>
+              <td>false</td>
+              <td>string</td>
+              <td>
+                Tipe data converter, bila tidak di provide maka tipe data sesuai
+                option, bila di sediakan makan nilai value akan di convert
+              </td>
+            </tr>
+            <tr>
+              <td>vruntime</td>
+              <td>Function Callback</td>
+              <td>Function</td>
+              <td>false</td>
+              <td>null</td>
+              <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td><input v-model="select.value" type="input" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>''</td>
+              <td>
+                Two way data binding, saat ini data yang di input dalam bentuk
+                upprcase, customize sesuai kebutuhan
+              </td>
+            </tr>
+            <tr>
+              <td>options</td>
+              <td>-</td>
+              <td>Array</td>
+              <td>false</td>
+              <td>''</td>
+              <td>
+                Data Option pilihan dengan format { value: null, description:
+                null }
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('SelectComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+            <tr>
+              <td>clearError</td>
+              <td>
+                <button @click="clearError('SelectComponent')">Click</button>
+              </td>
+              <td>Void</td>
+              <td>Hapus error, kembalikan ke state component semula</td>
+            </tr>
+            <tr>
+              <td>hasError</td>
+              <td>
+                <button @click="hasError('SelectComponent')">Click</button>
+              </td>
+              <td>{{ haserror }}</td>
+              <td>
+                Flag untuk menandakan apakah component pass validasi atau tidak
+              </td>
+            </tr>
+            <tr>
+              <td>validate</td>
+              <td>
+                <button @click="validate('SelectComponent')">Click</button>
+              </td>
+              <td>{{ valid }}</td>
+              <td>Lakukan validasi berdasarkan required dan vruntime</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -1728,6 +1910,8 @@ export default {
         '<ECheckBox id="" ref="" v-model="" :label="" :disabled="" :show="" :selected="" :unselected=""/>',
       htmlBoolean:
         '<EBoolean id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :type="" />',
+      htmlSelect:
+        '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[] />',
       haserror: null,
       metadata: null,
       valid: null,
@@ -1743,8 +1927,6 @@ export default {
         { label: 'Checkbox' },
         { label: 'Boolean' },
         { label: 'Select' },
-        { label: 'LocalPagination' },
-        { label: 'ServerPagination' },
         { label: 'Dialog' },
         { label: 'Loading' },
         { label: 'Message' },
@@ -1752,6 +1934,8 @@ export default {
         { label: 'Card' },
         { label: 'Tabs' },
         { label: 'PageLoader' },
+        { label: 'LocalPagination' },
+        { label: 'ServerPagination' },
         { label: 'Form' },
         { label: 'Col' },
       ],
@@ -1878,6 +2062,23 @@ export default {
         show: true,
         value: null,
         type: 'TrueFalse',
+        vruntime: (data) => {
+          console.log(data)
+        },
+      },
+      select: {
+        label: 'Jenis Kelamin',
+        placeholder: 'Please Select...',
+        required: false,
+        disabled: false,
+        show: true,
+        value: null,
+        as: 'string',
+        options: [
+          { value: 'M', description: 'Male' },
+          { value: 'F', description: 'Female' },
+          { value: 'X', description: 'Unknown' },
+        ],
         vruntime: (data) => {
           console.log(data)
         },
