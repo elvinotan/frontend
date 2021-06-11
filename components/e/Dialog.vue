@@ -50,7 +50,7 @@ export default {
     title: { type: String, required: false, default: 'Please Provide title..' },
     width: { type: Number, required: false, default: 500 },
     height: { type: Number, required: false, default: 500 },
-    buttons: { type: Array, required: false, default: () => [] }, // { label, color}
+    buttons: { type: Array, required: false, default: () => [] }, // { label, color }
   },
   data() {
     return {

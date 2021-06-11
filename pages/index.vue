@@ -1882,6 +1882,117 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="Dialog">
+        <EDialog
+          id="DialogComponent"
+          ref="DialogComponent"
+          :title="dialog.title"
+          :width="dialog.width"
+          :height="dialog.height"
+          :buttons="dialog.buttons"
+          @Simpan="SimpanClicked"
+          @Submit="SubmitClicked"
+        />
+        <div class="text-xs">Template : {{ htmlDialog }}</div>
+        <br />
+        <div class="text-xs">Data Object : {{ dialog }}</div>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td><input v-model="dialog.title" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>Please Provide title..</td>
+              <td>Title dari dialog</td>
+            </tr>
+            <tr>
+              <td>width</td>
+              <td><input v-model="dialog.width" type="number" /></td>
+              <td>Number</td>
+              <td>false</td>
+              <td>500</td>
+              <td>Lebar dari dialog</td>
+            </tr>
+            <tr>
+              <td>height</td>
+              <td><input v-model="dialog.height" type="number" /></td>
+              <td>Number</td>
+              <td>false</td>
+              <td>500</td>
+              <td>Tinggi dari dialog</td>
+            </tr>
+            <tr>
+              <td>buttons</td>
+              <td><input v-model="dialog.height" type="number" /></td>
+              <td>Array</td>
+              <td>false</td>
+              <td>[{ label: null, color: null }]</td>
+              <td>
+                List of button yang akan muncul pada dialog, untuk close sudah
+                ada default button, untuk masing-masing button akan trigger emit
+                berdadarkan label buttons.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('DialogComponent')">Click</button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+            <tr>
+              <td>open</td>
+              <td>
+                <button @click="openDialog('DialogComponent')">Click</button>
+              </td>
+              <td>Void</td>
+              <td>Show popup dialog container</td>
+            </tr>
+            <tr>
+              <td>close</td>
+              <td>
+                <button @click="closDialog('DialogComponent')">Click</button>
+              </td>
+              <td>Void</td>
+              <td>Hide popup dialog container</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -1911,7 +2022,9 @@ export default {
       htmlBoolean:
         '<EBoolean id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :type="" />',
       htmlSelect:
-        '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[] />',
+        '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[{ value: null, description: null }] />',
+      htmlDialog:
+        '<EDialog id="" ref="" :title="" :width="" :height="" :buttons=[{ label: null, color: null }]> Contents </EDialog>',
       haserror: null,
       metadata: null,
       valid: null,
@@ -2083,9 +2196,24 @@ export default {
           console.log(data)
         },
       },
+      dialog: {
+        title: 'Dialog Title',
+        width: 600,
+        height: 100,
+        buttons: [
+          { label: 'Simpan', color: 'green' },
+          { label: 'Submit', color: 'purple' },
+        ],
+      },
     }
   },
   methods: {
+    SimpanClicked() {
+      alert('Simpan Clicked')
+    },
+    SubmitClicked() {
+      alert('Submit Clicked')
+    },
     clearError(ref) {
       this.$refs[ref].clearError()
     },
@@ -2097,6 +2225,12 @@ export default {
     },
     hasError(ref) {
       this.haserror = this.$refs[ref].hasError()
+    },
+    openDialog(ref) {
+      this.$refs[ref].open()
+    },
+    closeDialog(ref) {
+      this.$refs[ref].close()
     },
   },
 }
