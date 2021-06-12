@@ -2528,6 +2528,7 @@
           :initial-sort-by="localPagination.initialSortBy"
           :disabled-action="localPaginationDisabledAction"
           :add-new-data="localPaginationAddNewData"
+          :save-state="localPaginationSaveState"
           @Delete="localPaginationDelete"
           @Edit="localPaginationEdit"
           @View="localPaginationView"
@@ -2681,6 +2682,18 @@
                 action Tambah data
               </td>
             </tr>
+            <tr>
+              <td>saveState</td>
+              <td>-</td>
+              <td>Function</td>
+              <td>false</td>
+              <td>null</td>
+              <td>
+                Penambahan colum pada sisi kiri, untuk menandakan apakah data
+                sudah terpersist ke db atau belum, agar user tau yang mana yang
+                sudah ke save dan blm
+              </td>
+            </tr>
           </tbody>
         </table>
         <br />
@@ -2750,7 +2763,7 @@ export default {
       htmlPageLoader:
         '<EPageLoader id="" ref="" :labels="" :fetcher=() >Contents</EPageLoader>',
       htmlLocalPagination:
-        '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :columns=[] :rows=[] :actions=[] :disabledAction=() :buttons:[] :initialSortBy=[] />',
+        '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction=() :addNewData=() :saveState=() :columns=[] :rows=[] :actions=[] :buttons:[] :initialSortBy=[] />',
       htmlLocalPaginationColumn:
         '{ label:"", field:"", sortable: true, width:"100px" tooltip:"" type:"" } // type = text, number, decimal, percentage, boolean',
       htmlLocalPaginationinitialSortBy:
@@ -3058,7 +3071,6 @@ export default {
             merried: true,
           },
           {
-            id: 545,
             name: 'Carinnia Untoro',
             birthDate: new Date(),
             age: 41,
@@ -3067,7 +3079,6 @@ export default {
             merried: true,
           },
           {
-            id: 546,
             name: 'Constantine Davin Ethan',
             birthDate: new Date(),
             age: 15,
@@ -3236,6 +3247,9 @@ export default {
 
     localPaginationAddNewData() {
       alert('Add New Data')
+    },
+    localPaginationSaveState(prop) {
+      return prop.row.id
     },
   },
 }
