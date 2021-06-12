@@ -2524,8 +2524,10 @@
           :columns="localPagination.columns"
           :rows="localPagination.rows"
           :actions="localPagination.actions"
-          :disabled-action="localPaginationDisabledAction"
           :buttons="localPagination.buttons"
+          :initial-sort-by="localPagination.initialSortBy"
+          :disabled-action="localPaginationDisabledAction"
+          :add-new-data="localPaginationAddNewData"
           @Delete="localPaginationDelete"
           @Edit="localPaginationEdit"
           @View="localPaginationView"
@@ -2534,6 +2536,18 @@
         />
         <br />
         <div class="text-xs">Template : {{ htmlLocalPagination }}</div>
+        <br />
+        <div class="text-xs">Column : {{ htmlLocalPaginationColumn }}</div>
+        <br />
+        <div class="text-xs">Actions : {{ htmlLocalPaginationActions }}</div>
+        <br />
+        <div class="text-xs">
+          initialSortBy : {{ htmlLocalPaginationButtons }}
+        </div>
+        <br />
+        <div class="text-xs">
+          Buttons : {{ htmlLocalPaginationinitialSortBy }}
+        </div>
         <br />
         <div class="text-xs">Data Object : {{ localPagination }}</div>
         <table>
@@ -2641,7 +2655,30 @@
               <td>[]</td>
               <td>
                 Button pada footer, yang bertujuan untuk execute process secara
-                bulk, bukan per-row, formatnya [{label: null}]
+                bulk, bukan per-row, dimana akan tigger emit berdasarkan label
+                button, dan akan mengirim selectedData, checkbox hanya akan
+                muncul bila buttons di provide
+              </td>
+            </tr>
+            <tr>
+              <td>initialSortBy</td>
+              <td>-</td>
+              <td>Array</td>
+              <td>false</td>
+              <td>[]</td>
+              <td>
+                Configurasi, untuk sort data pada saat pertama kali di tampilkan
+              </td>
+            </tr>
+            <tr>
+              <td>addNewData</td>
+              <td>-</td>
+              <td>Function</td>
+              <td>false</td>
+              <td>null</td>
+              <td>
+                Akan menambahkan button pada header table, yang bertujuan untuk
+                action Tambah data
               </td>
             </tr>
           </tbody>
@@ -2713,7 +2750,13 @@ export default {
       htmlPageLoader:
         '<EPageLoader id="" ref="" :labels="" :fetcher=() >Contents</EPageLoader>',
       htmlLocalPagination:
-        '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :columns=[] :rows=[] :actions=[] :disabledAction=() :buttons:[] />',
+        '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :columns=[] :rows=[] :actions=[] :disabledAction=() :buttons:[] :initialSortBy=[] />',
+      htmlLocalPaginationColumn:
+        '{ label:"", field:"", sortable: true, width:"100px" tooltip:"" type:"" } // type = text, number, decimal, percentage, boolean',
+      htmlLocalPaginationinitialSortBy:
+        '{ field: "", type:"" } // type = asc/desc',
+      htmlLocalPaginationActions: '{ label:"" }',
+      htmlLocalPaginationButtons: '{ label:"" }',
       haserror: null,
       metadata: null,
       valid: null,
@@ -2922,6 +2965,11 @@ export default {
         show: true,
         disabled: false,
         buttons: [{ label: 'Process' }, { label: 'Migrate' }],
+        actions: [{ label: 'Delete' }, { label: 'Edit' }, { label: 'View' }],
+        initialSortBy: [
+          { field: 'age', type: 'asc' },
+          { field: 'name', type: 'asc' },
+        ],
         columns: [
           {
             label: 'Name',
@@ -3082,7 +3130,6 @@ export default {
             merried: true,
           },
         ],
-        actions: [{ label: 'Delete' }, { label: 'Edit' }, { label: 'View' }],
       },
     }
   },
@@ -3185,6 +3232,10 @@ export default {
     },
     localPaginationMigrate(selectedRow) {
       alert('Migrate ' + JSON.stringify(selectedRow))
+    },
+
+    localPaginationAddNewData() {
+      alert('Add New Data')
     },
   },
 }
