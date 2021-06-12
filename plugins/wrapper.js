@@ -6,7 +6,16 @@ export default function (plugin, inject) {
           data[p].disabled = condition
         }
       } else {
-        throw new Error('Undefined ui data parameter')
+        throw new Error('UnIdentified ui data parameter')
+      }
+    },
+    show: (data, condition) => {
+      if (data) {
+        for (const p in data) {
+          data[p].show = condition
+        }
+      } else {
+        throw new Error('UnIdentified ui data parameter')
       }
     },
     refs(pref) {
