@@ -44,11 +44,8 @@
           style-class="vgt-table striped bordered condensed"
           @on-select-all="_onSelected"
           @on-selected-rows-change="_onSelected"
-          @on-row-click="
-            (params) => {
-              $emit('RowClick', params)
-            }
-          "
+          @on-cell-click="_onCellClick"
+          @on-row-click="_onRowClick"
         >
           <div slot="emptystate" class="text-center">No data available</div>
           <template slot="table-row" slot-scope="props">
@@ -281,6 +278,18 @@ export default {
           tdClass: 'vgt-center-align text-sm',
           sortable: false,
         })
+      }
+    },
+    _onCellClick(params) {
+      this.columnClick = params.column
+    },
+    _onRowClick(params) {
+      if (this.columnClick) {
+        if (this.columnClick.field === 'action') {
+          // Do nothing, krn ini column action, bisa ke trigger 2 kali, bila action ke click
+        } else {
+          this.$emit('RowClick', params)
+        }
       }
     },
     _onSelected(params) {

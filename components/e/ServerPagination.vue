@@ -1,7 +1,6 @@
 <template>
   <div>
     <div v-if="show">
-      {{ $data }}
       <div
         class="text-xs rounded border-0 outline-none ring-2 ring-gray-500 bg-white"
       >
@@ -54,11 +53,8 @@
           @on-per-page-change="_onPerPageChange"
           @on-select-all="_onSelected"
           @on-selected-rows-change="_onSelected"
-          @on-row-click="
-            (params) => {
-              $emit('RowClick', params)
-            }
-          "
+          @on-cell-click="_onCellClick"
+          @on-row-click="_onRowClick"
         >
           <div slot="emptystate" class="text-center">
             {{
@@ -218,6 +214,7 @@ export default {
         name: this._name,
         type: 'container',
         show: true,
+        columnClick: null,
       }
     },
     _constractColumns() {
@@ -307,6 +304,18 @@ export default {
       )
       this.totalRows = totalRows
       this.rows = rows
+    },
+    _onCellClick(params) {
+      this.columnClick = params.column
+    },
+    _onRowClick(params) {
+      if (this.columnClick) {
+        if (this.columnClick.field === 'action') {
+          // Do nothing, krn ini column action, bisa ke trigger 2 kali, bila action ke click
+        } else {
+          this.$emit('RowClick', params)
+        }
+      }
     },
     _onSelected(params) {
       this.selectedRows = params.selectedRows

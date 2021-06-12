@@ -2808,6 +2808,25 @@
               </td>
             </tr>
             <tr>
+              <td>autoLoad</td>
+              <td>-</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan apakah data langsung di fetch pada
+                inital atau lewat progamatically
+              </td>
+            </tr>
+            <tr>
+              <td>picker</td>
+              <td>-</td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>Picker server name</td>
+            </tr>
+            <tr>
               <td>actions</td>
               <td>-</td>
               <td>Array</td>
@@ -3462,7 +3481,6 @@ export default {
       alert('Migrate ' + JSON.stringify(selectedRow))
     },
     serverPaginationRowClick(prop) {
-      console.log('prop ', prop)
       alert('Click ' + JSON.stringify(prop))
     },
     serverPaginationAddNewData() {
