@@ -2721,6 +2721,175 @@
           </tbody>
         </table>
       </EForm>
+      <EForm id="ServerPagination">
+        <EServerPagination
+          id="ServerPaginationComponent"
+          ref="ServerPaginationComponent"
+          :label="serverPagination.label"
+          :show="serverPagination.show"
+          :disabled="serverPagination.disabled"
+          :auto-load="serverPagination.autoLoad"
+          :picker="serverPagination.picker"
+          :actions="serverPagination.actions"
+          :buttons="serverPagination.buttons"
+          :initial-sort-by="serverPagination.initialSortBy"
+          :disabled-action="serverPaginationDisabledAction"
+          :add-new-data="serverPaginationAddNewData"
+          @RowClick="serverPaginationRowClick"
+          @Delete="serverPaginationDelete"
+          @Edit="serverPaginationEdit"
+          @View="serverPaginationView"
+          @Process="serverPaginationProcess"
+          @Migrate="serverPaginationMigrate"
+        />
+        <br />
+        <div class="text-xs">Template : {{ htmlServerPagination }}</div>
+        <br />
+        <div class="text-xs">Actions : {{ htmlServerPaginationActions }}</div>
+        <br />
+        <div class="text-xs">
+          initialSortBy : {{ htmlServerPaginationButtons }}
+        </div>
+        <br />
+        <div class="text-xs">
+          Buttons : {{ htmlServerPaginationinitialSortBy }}
+        </div>
+        <br />
+        <div class="text-xs">Data Object : {{ serverPagination }}</div>
+        <table>
+          <thead>
+            <tr>
+              <td>Props</td>
+              <td>Try</td>
+              <td>Type</td>
+              <td>Required</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>-</td>
+              <td>String</td>
+              <td>true</td>
+              <td>null</td>
+              <td>id dari component, gax perlu di binding</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><input v-model="serverPagination.label" type="text" /></td>
+              <td>String</td>
+              <td>false</td>
+              <td>Please Provide Table title...</td>
+              <td>Label untuk component</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td><input v-model="serverPagination.show" type="checkbox" /></td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>true</td>
+              <td>
+                Boolean untuk menentukan component tampil atau tidak. tag ini
+                menggunakan v-if
+              </td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td>
+                <input v-model="serverPagination.disabled" type="checkbox" />
+              </td>
+              <td>Boolean</td>
+              <td>false</td>
+              <td>false</td>
+              <td>
+                Boolean untuk menentukan disabled atau tidaknya component,
+              </td>
+            </tr>
+            <tr>
+              <td>actions</td>
+              <td>-</td>
+              <td>Array</td>
+              <td>false</td>
+              <td>[]</td>
+              <td>
+                Action/ Tindakan yang bisa di perlakukan terhadap data, dimana
+                akan tigger emit berdasarkan label button
+              </td>
+            </tr>
+            <tr>
+              <td>disabledAction</td>
+              <td>-</td>
+              <td>Function</td>
+              <td>false</td>
+              <td>() => return false</td>
+              <td>
+                Function callback untuk menentukan apakah button action enabled
+                atau disabled Ex : disabledAction(action: { label}, prop: {
+                column, row })
+              </td>
+            </tr>
+            <tr>
+              <td>buttons</td>
+              <td>-</td>
+              <td>Array</td>
+              <td>false</td>
+              <td>[]</td>
+              <td>
+                Button pada footer, yang bertujuan untuk execute process secara
+                bulk, bukan per-row, dimana akan tigger emit berdasarkan label
+                button, dan akan mengirim selectedData, checkbox hanya akan
+                muncul bila buttons di provide
+              </td>
+            </tr>
+            <tr>
+              <td>initialSortBy</td>
+              <td>-</td>
+              <td>Array</td>
+              <td>false</td>
+              <td>[]</td>
+              <td>
+                Configurasi, untuk sort data pada saat pertama kali di tampilkan
+              </td>
+            </tr>
+            <tr>
+              <td>addNewData</td>
+              <td>-</td>
+              <td>Function</td>
+              <td>false</td>
+              <td>null</td>
+              <td>
+                Akan menambahkan button pada header table, yang bertujuan untuk
+                action Tambah data
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Try</td>
+              <td>Result</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>metaData</td>
+              <td>
+                <button @click="metaData('ServerPaginationComponent')">
+                  Click
+                </button>
+              </td>
+              <td>{{ metadata }}</td>
+              <td>Component Information</td>
+            </tr>
+          </tbody>
+        </table>
+      </EForm>
     </ETabs>
   </div>
 </template>
@@ -2771,6 +2940,12 @@ export default {
         '{ field: "", type:"" } // type = asc/desc',
       htmlLocalPaginationActions: '{ label:"" }',
       htmlLocalPaginationButtons: '{ label:"" }',
+      htmlServerPagination:
+        '<EServerPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction=() :addNewData=() :actions=[] :buttons:[] :initialSortBy=[] @RowClick=() />',
+      htmlServerPaginationActions: '{ label:"" }',
+      htmlServerPaginationButtons: '{ label:"" }',
+      htmlServerPaginationinitialSortBy:
+        '{ field: "", type:"" } // type = asc/desc',
       haserror: null,
       metadata: null,
       valid: null,
@@ -3143,6 +3318,19 @@ export default {
           },
         ],
       },
+      serverPagination: {
+        label: 'List of Customer',
+        show: true,
+        disabled: false,
+        autoLoad: true,
+        picker: 'pagingCustomer',
+        buttons: [{ label: 'Process' }, { label: 'Migrate' }],
+        actions: [{ label: 'Delete' }, { label: 'Edit' }, { label: 'View' }],
+        initialSortBy: [
+          { field: 'age', type: 'asc' },
+          { field: 'name', type: 'asc' },
+        ],
+      },
     }
   },
   methods: {
@@ -3253,6 +3441,32 @@ export default {
     },
     localPaginationSaveState(prop) {
       return prop.row.id
+    },
+    serverPaginationDelete(props) {
+      alert('Delete ' + JSON.stringify(props))
+    },
+    serverPaginationEdit(props) {
+      alert('Edit ' + JSON.stringify(props))
+    },
+    serverPaginationView(props) {
+      alert('View ' + JSON.stringify(props))
+    },
+    serverPaginationDisabledAction(action, prop) {
+      if (action.label === 'Delete' && prop.row.age > 50) return true
+      return false
+    },
+    serverPaginationProcess(selectedRow) {
+      alert('Process ' + JSON.stringify(selectedRow))
+    },
+    serverPaginationMigrate(selectedRow) {
+      alert('Migrate ' + JSON.stringify(selectedRow))
+    },
+    serverPaginationRowClick(prop) {
+      console.log('prop ', prop)
+      alert('Click ' + JSON.stringify(prop))
+    },
+    serverPaginationAddNewData() {
+      alert('Add New Data')
     },
   },
 }

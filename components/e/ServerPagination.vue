@@ -48,10 +48,10 @@
             allLabel: 'All',
           }"
           style-class="vgt-table striped bordered condensed"
-          @on-search="onSearch"
-          @on-page-change="onPageChange"
-          @on-sort-change="onSortChange"
-          @on-per-page-change="onPerPageChange"
+          @on-search="_onSearch"
+          @on-page-change="_onPageChange"
+          @on-sort-change="_onSortChange"
+          @on-per-page-change="_onPerPageChange"
           @on-select-all="_onSelected"
           @on-selected-rows-change="_onSelected"
           @on-row-click="
@@ -209,8 +209,8 @@ export default {
     },
   },
   async created() {
-    await this.fetchPicker()
-    if (this.autoLoad) await this.fetchData()
+    await this._fetchPicker()
+    if (this.autoLoad) await this._fetchData()
   },
   methods: {
     metaData() {
@@ -294,19 +294,21 @@ export default {
         })
       }
     },
-    async fetchPicker() {
+    async _fetchPicker() {
       this.isLoading = true
       this.columns = await this.$rest.getPicker(this.picker)
       this._constractColumns()
     },
-    async fetchData() {
+    async _fetchData() {
       this.isLoading = true
       this.alreadyFetchData = true
-      const { totalRows, rows } = await this.$rest.getData(this.serverParams)
+      const { totalRows, rows } = await this.$rest.getPaginationData(
+        this.serverParams
+      )
       this.totalRows = totalRows
       this.rows = rows
     },
-    __onSelected(params) {
+    _onSelected(params) {
       this.selectedRows = params.selectedRows
     },
     _formatText(value) {
@@ -335,25 +337,21 @@ export default {
       // specific class berdasarkan data row
       return ''
     },
-    async onPageChange(params) {
-      console.log('onPageChange')
+    async _onPageChange(params) {
       this.serverParams.page = params.currentPage
-      await this.fetchData()
+      await this._fetchData()
     },
-    async onSortChange(params) {
-      console.log('onSortChange')
+    async _onSortChange(params) {
       this.serverParams.sort = params
-      await this.fetchData()
+      await this._fetchData()
     },
-    async onPerPageChange(params) {
-      console.log('onPerPageChange')
+    async _onPerPageChange(params) {
       this.serverParams.perPage = params.currentPerPage
-      await this.fetchData()
+      await this._fetchData()
     },
-    async onSearch(params) {
-      console.log('onSearch')
+    async _onSearch(params) {
       this.serverParams.search = params.searchTerm
-      await this.fetchData()
+      await this._fetchData()
     },
   },
 }
