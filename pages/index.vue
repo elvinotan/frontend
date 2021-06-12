@@ -2529,6 +2529,7 @@
           :disabled-action="localPaginationDisabledAction"
           :add-new-data="localPaginationAddNewData"
           :save-state="localPaginationSaveState"
+          @RowClick="localPaginationRowClick"
           @Delete="localPaginationDelete"
           @Edit="localPaginationEdit"
           @View="localPaginationView"
@@ -2763,7 +2764,7 @@ export default {
       htmlPageLoader:
         '<EPageLoader id="" ref="" :labels="" :fetcher=() >Contents</EPageLoader>',
       htmlLocalPagination:
-        '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction=() :addNewData=() :saveState=() :columns=[] :rows=[] :actions=[] :buttons:[] :initialSortBy=[] />',
+        '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction=() :addNewData=() :saveState=() :columns=[] :rows=[] :actions=[] :buttons:[] :initialSortBy=[] @RowClick=() />',
       htmlLocalPaginationColumn:
         '{ label:"", field:"", sortable: true, width:"100px" tooltip:"" type:"" } // type = text, number, decimal, percentage, boolean',
       htmlLocalPaginationinitialSortBy:
@@ -3244,7 +3245,9 @@ export default {
     localPaginationMigrate(selectedRow) {
       alert('Migrate ' + JSON.stringify(selectedRow))
     },
-
+    localPaginationRowClick(prop) {
+      alert('Click ' + JSON.stringify(prop))
+    },
     localPaginationAddNewData() {
       alert('Add New Data')
     },

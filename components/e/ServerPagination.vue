@@ -19,7 +19,7 @@
           :rows="rows"
           :fixed-header="true"
           :line-numbers="true"
-          :row-style-class="rowStyleClassFn"
+          :row-style-class="_rowStyleClassFn"
           :search-options="{
             enabled: true,
             trigger: 'enter',
@@ -52,8 +52,8 @@
           @on-page-change="onPageChange"
           @on-sort-change="onSortChange"
           @on-per-page-change="onPerPageChange"
-          @on-select-all="onSelected"
-          @on-selected-rows-change="onSelected"
+          @on-select-all="_onSelected"
+          @on-selected-rows-change="_onSelected"
           @on-row-click="
             (params) => {
               $emit('RowClick', params)
@@ -219,7 +219,7 @@ export default {
 
         if (lcolumn.type === 'text') {
           lcolumn = {
-            formatFn: this.formatText,
+            formatFn: this._formatText,
             thClass: 'vgt-left-align text-sm',
             tdClass: 'vgt-left-align text-sm',
             ...lcolumn,
@@ -228,7 +228,7 @@ export default {
         }
         if (lcolumn.type === 'date') {
           lcolumn = {
-            formatFn: this.formatDate,
+            formatFn: this._formatDate,
             thClass: 'vgt-center-align text-sm',
             tdClass: 'vgt-center-align text-sm',
             ...lcolumn,
@@ -237,7 +237,7 @@ export default {
         }
         if (lcolumn.type === 'number') {
           lcolumn = {
-            formatFn: this.formatNumber,
+            formatFn: this._formatNumber,
             thClass: 'vgt-right-align text-sm',
             tdClass: 'vgt-right-align text-sm',
             type: 'number',
@@ -246,7 +246,7 @@ export default {
         }
         if (lcolumn.type === 'decimal') {
           lcolumn = {
-            formatFn: this.formatDecimal,
+            formatFn: this._formatDecimal,
             thClass: 'vgt-right-align text-sm',
             tdClass: 'vgt-right-align text-sm',
             type: 'number',
@@ -255,7 +255,7 @@ export default {
         }
         if (lcolumn.type === 'percentage') {
           lcolumn = {
-            formatFn: this.formatPercentage,
+            formatFn: this._formatPercentage,
             thClass: 'vgt-right-align text-sm',
             tdClass: 'vgt-right-align text-sm',
             type: 'number',
@@ -264,7 +264,7 @@ export default {
         }
         if (lcolumn.type === 'boolean') {
           lcolumn = {
-            formatFn: this.formatBoolean,
+            formatFn: this._formatBoolean,
             thClass: 'vgt-center-align text-sm',
             tdClass: 'vgt-center-align text-sm',
             ...lcolumn,
@@ -297,32 +297,32 @@ export default {
       this.totalRows = totalRows
       this.rows = rows
     },
-    onSelected(params) {
+    __onSelected(params) {
       this.selectedRows = params.selectedRows
     },
-    formatText(value) {
+    _formatText(value) {
       if (!value) return ''
       return value
     },
-    formatDate(value) {
+    _formatDate(value) {
       if (!value) return ''
       return this.$fmt.date(new Date(value), 'DD/MM/YYYY')
     },
-    formatNumber(value) {
+    _formatNumber(value) {
       if (!value) return ''
       return this.$fmt.number(value)
     },
-    formatDecimal(value) {
+    _formatDecimal(value) {
       if (!value) return ''
       return this.$fmt.decimal(value, 2, 2)
     },
-    formatPercentage(value) {
-      return this.formatDecimal(value) + ' %'
+    _formatPercentage(value) {
+      return this._formatDecimal(value) + ' %'
     },
-    formatBoolean(value) {
+    _formatBoolean(value) {
       return value ? 'Yes' : 'No'
     },
-    rowStyleClassFn(row) {
+    _rowStyleClassFn(row) {
       // specific class berdasarkan data row
       return ''
     },
