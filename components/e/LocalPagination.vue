@@ -1,7 +1,6 @@
 <template>
   <div>
     <div v-if="show">
-      {{ lcolumns }}
       <div
         class="text-xs rounded border-0 outline-none ring-2 ring-gray-500 bg-white"
       >
@@ -146,16 +145,9 @@ export default {
       default: 'Please Provide Table title...',
     },
     disabled: { type: Boolean, required: false, default: false },
-    saveState: {
-      type: Function,
-      required: false,
-      default: null,
-    },
     columns: { type: Array, required: false, default: () => [] },
     rows: { type: Array, required: false, default: () => [] },
     actions: { type: Array, required: false, default: () => [] },
-    buttons: { type: Array, required: false, default: () => [] },
-    initialSortBy: { type: Array, required: false, default: () => [] },
     disabledAction: {
       type: Function,
       required: false,
@@ -163,7 +155,14 @@ export default {
         return false
       },
     },
+    buttons: { type: Array, required: false, default: () => [] },
+    initialSortBy: { type: Array, required: false, default: () => [] },
     addNewData: {
+      type: Function,
+      required: false,
+      default: null,
+    },
+    saveState: {
       type: Function,
       required: false,
       default: null,
