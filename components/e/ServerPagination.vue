@@ -87,6 +87,15 @@
                 {{ index === actions.length - 1 ? '' : '&nbsp;|' }}
               </span>
             </span>
+            <span v-else-if="props.column.ltype === 'boolean'">
+              <input
+                v-if="props.row[props.column.field]"
+                type="checkbox"
+                disabled
+                checked
+              />
+              <input v-else type="checkbox" disabled />
+            </span>
             <span v-else>
               {{ props.formattedRow[props.column.field] }}
             </span>
@@ -214,7 +223,7 @@ export default {
     _constractColumns() {
       // Gunakan tempoarary colum, krn formatted data kita gax mau gunakan default
       for (const column of this.columns) {
-        let lcolumn = { ...column }
+        let lcolumn = { ...column, ltype: column.type }
         if (!lcolumn.type) lcolumn.type = 'text'
 
         if (lcolumn.type === 'text') {
