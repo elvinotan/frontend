@@ -3228,8 +3228,143 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="wrapper"> </EForm>
-          <EForm id="rest"> </EForm>
+          <EForm id="string">
+            <div>
+              Plugin ini bertujuan untuk melakukan menipulasi untuk tipe data
+              string , plugin ini dapat di access melalui this.$string
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Return</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </EForm>
+          <EForm id="number">
+            <div>
+              Plugin ini bertujuan untuk melakukan menipulasi untuk tipe data
+              number dan aritmatic oprational , plugin ini dapat di access
+              melalui this.$number
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Return</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </EForm>
+          <EForm id="array">
+            <div>
+              Plugin ini bertujuan untuk melakukan menipulasi untuk tipe data
+              array , plugin ini dapat di access melalui this.$array
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Return</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </EForm>
+          <EForm id="wrapper">
+            <div>
+              Plugin ini bertujuan untuk melakukan behaviour yang seragam
+              terhadap ui, plugin ini dapat di access melakui this.$wrapper
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Return</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>disabled: (data = null, condition = false) => {}</td>
+                  <td>Void</td>
+                  <td>
+                    data: Object with property disabled <br />
+                    condition: Boolean <br />
+                    Akan meng-set component menjadi disabled atau enabeld, dgn
+                    melaukan manipulasi property disabled
+                  </td>
+                </tr>
+                <tr>
+                  <td>show: (data = null, condition = false) => {}</td>
+                  <td>Void</td>
+                  <td>
+                    data: Object with property show <br />
+                    condition: Boolean <br />
+                    Akan meng-set component menjadi visible atau invisible, dgn
+                    melaukan manipulasi property show
+                  </td>
+                </tr>
+                <tr>
+                  <td>refs: (pref) => {}</td>
+                  <td>Array</td>
+                  <td>
+                    pref: Pointer <br />
+                    Akan mengambil semua children pointer, apabila terdapat
+                    container, maka akan masuk lagi untuk mengambil children
+                    pointer lagi (recursive) Ex :
+                    this.$wrapper.refs(this.$refs.entryEForm)
+                  </td>
+                </tr>
+                <tr>
+                  <td>clearError: (pref) => {}</td>
+                  <td>Void</td>
+                  <td>
+                    pref: Pointer <br />
+                    Akan mengambil semua children pointer, dan akan memanggil
+                    method clearError one by one Tujuan dari method ini adalah
+                    untuk menghapus semua error message dan mengambalikan ke
+                    state original
+                    this.$wrapper.clearError(this.$refs.entryEForm)
+                  </td>
+                </tr>
+                <tr>
+                  <td>validate: (pref) => {}</td>
+                  <td>{ valid: boolean, errors: Array }</td>
+                  <td>
+                    pref: Pointer <br />
+                    Akan mengambil semua children pointer, dan akan memanggil
+                    method validate one by one Tujuan dari method ini adalah
+                    untuk melakukan validasi pada masing masing komponent sesuai
+                    dengan rule yang di terapkan
+                    this.$wrapper.validate(this.$refs.entryEForm)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </EForm>
+          <EForm id="rest">
+            <div>
+              Plugin ini bertujuan untuk melakukan oprational komunikasi dgn
+              server , plugin ini dapat di access melalui this.$rest
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Return</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </EForm>
         </ETabs>
       </EForm>
     </ETabs>

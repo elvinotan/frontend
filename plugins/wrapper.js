@@ -1,6 +1,6 @@
 export default function (plugin, inject) {
   const wrapper = {
-    disabled: (data, condition) => {
+    disabled: (data = null, condition = false) => {
       if (data) {
         for (const p in data) {
           if (data[p].disabled) data[p].disabled = condition
@@ -9,7 +9,7 @@ export default function (plugin, inject) {
         throw new Error('UnIdentified ui data parameter')
       }
     },
-    show: (data, condition) => {
+    show: (data = null, condition = false) => {
       if (data) {
         for (const p in data) {
           if (data[p].show) data[p].show = condition
@@ -18,7 +18,7 @@ export default function (plugin, inject) {
         throw new Error('UnIdentified ui data parameter')
       }
     },
-    refs(pref) {
+    refs: (pref) => {
       let refs = [pref]
       for (const ref of pref.$children) {
         if (ref.metaData) {
@@ -38,12 +38,12 @@ export default function (plugin, inject) {
       }
       return refs
     },
-    clearError(pref) {
+    clearError: (pref) => {
       for (const ref of plugin.$wrapper.refs(pref)) {
         if (ref.clearError) ref.clearError()
       }
     },
-    validate(pref) {
+    validate: (pref) => {
       let allValid = true
       const allErrors = []
       for (const ref of plugin.$wrapper.refs(pref)) {
