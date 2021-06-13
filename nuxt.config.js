@@ -18,12 +18,18 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/css/main.css'],
 
+  publicRuntimeConfig: {
+    base_url: process.env.base_url || 'https://gorest.co.in',
+    test_api_key: process.env.test_api_key || 'abxkd-dfkhe-fdmkwh-djdf',
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/component',
     '~/plugins/axios',
     '~/plugins/wrapper',
     '~/plugins/fmt',
+    '~/plugins/string',
     '~/plugins/rest',
   ],
 

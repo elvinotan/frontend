@@ -1,0 +1,10 @@
+{
+  "url": "{base_url}",
+  "user": {
+    "getUser": ["/public-api/users/{id}/posts", {
+      "gateway-url": "http://gateways",
+      "btpn-api-key": "{test_api_key}"
+    }],
+    "getUserComment": ["/public-api/users/{userId}/posts"]
+  }
+}

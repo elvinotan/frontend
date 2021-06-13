@@ -3353,6 +3353,8 @@
             <div>
               Plugin ini bertujuan untuk melakukan oprational komunikasi dgn
               server , plugin ini dapat di access melalui this.$rest
+              <button @click="getUser">getUser</button>
+              <button @click="getUserComment">getUserComment</button>
             </div>
             <table>
               <thead>
@@ -3818,6 +3820,14 @@ export default {
     }
   },
   methods: {
+    async getUser() {
+      const user = await this.$rest.user.getUser({ id: 19 })
+      console.log('user ', user)
+    },
+    async getUserComment() {
+      const userComment = await this.$rest.user.getUserComment({ userId: 898 })
+      console.log('userComment ', userComment)
+    },
     SimpanClicked() {
       alert('Simpan Clicked')
     },

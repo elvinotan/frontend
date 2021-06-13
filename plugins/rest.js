@@ -1,4 +1,6 @@
-export default function (plugin, inject) {
+import example from '~/plugins/json/example.json'
+
+export default function ({ $axios, $config, $string }, inject) {
   const rest = {
     getPicker(picker) {
       return new Promise((resolve, reject) => {
@@ -178,8 +180,50 @@ export default function (plugin, inject) {
       })
     },
   }
-  // Math Operational
-  //
+
+  const rests = [example]
+  rests.forEach((file) => {
+    // Looping pada high level untuk mendapatkan key dan value nya, ini level File
+    for (const [key, value] of Object.entries(file)) {
+      // Looping pada method level, untuk mendapatkan key dan value nya, ini level Methods
+      if (typeof value === 'object' && value !== null) {
+        rest[key] = value
+
+        for (const [methodKey, methodValue] of Object.entries(value)) {
+          if (methodKey.startsWith('get')) {
+            const header = methodValue[1]
+
+            file.url = $string.replaceByProperty(file.url, $config)
+
+            // Replace all parameter and header with enviroment variable if exist
+            if (header) {
+              for (const [hKey, hValue] of Object.entries(header)) {
+                header[hKey] = $string.replaceByProperty(hValue, $config)
+              }
+            }
+
+            value[methodKey + '_URL'] = file.url + methodValue[0]
+            value[methodKey + '_HEADER'] = header
+            value[methodKey] = function (body) {
+              const newUrl = $string.replaceByProperty(
+                value[methodKey + '_URL'],
+                body
+              )
+              if (value[methodKey + '_HEADER']) {
+                return $axios.$get(newUrl, {
+                  headers: value[methodKey + '_HEADER'],
+                })
+              } else {
+                return $axios.$get(newUrl)
+              }
+            }
+          }
+        }
+      }
+
+      console.log(rest)
+    }
+  })
 
   inject('rest', rest)
 }
