@@ -21,7 +21,7 @@ export default function (plugin, inject) {
         return value
       }
     },
-    number(value = null) {
+    number: (value = null) => {
       if (value) {
         return new Intl.NumberFormat('en-US', {
           minimumFractionDigits: 0,
@@ -31,11 +31,11 @@ export default function (plugin, inject) {
         return value
       }
     },
-    decimal(
+    decimal: (
       value = null,
       minimumFractionDigits = 0,
       maximumFractionDigits = 2
-    ) {
+    ) => {
       if (value) {
         return new Intl.NumberFormat('en-US', {
           minimumFractionDigits,

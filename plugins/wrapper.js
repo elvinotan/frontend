@@ -3,7 +3,7 @@ export default function (plugin, inject) {
     disabled: (data, condition) => {
       if (data) {
         for (const p in data) {
-          data[p].disabled = condition
+          if (data[p].disabled) data[p].disabled = condition
         }
       } else {
         throw new Error('UnIdentified ui data parameter')
@@ -12,7 +12,7 @@ export default function (plugin, inject) {
     show: (data, condition) => {
       if (data) {
         for (const p in data) {
-          data[p].show = condition
+          if (data[p].show) data[p].show = condition
         }
       } else {
         throw new Error('UnIdentified ui data parameter')
