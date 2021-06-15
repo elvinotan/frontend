@@ -33,7 +33,7 @@
                 class="flex justify-end"
                 :label="button.label"
                 :color="button.color"
-                @click="$emit(button.label)"
+                @click="$emit(button.emit ? button.emit : button.label)"
               />
             </span>
           </div>

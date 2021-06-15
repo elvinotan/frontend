@@ -61,7 +61,9 @@
                 <button
                   v-else
                   class="font-bold"
-                  @click="$emit(action.label, props)"
+                  @click="
+                    $emit(action.emit ? action.emit : action.label, props)
+                  "
                 >
                   {{ action.label }}
                 </button>
@@ -104,7 +106,9 @@
                 :label="button.label"
                 :disabled="disabled || disabledButton"
                 :color="button.color"
-                @click="$emit(button.label, selectedRows)"
+                @click="
+                  $emit(button.emit ? button.emit : button.label, selectedRows)
+                "
               />
             </span>
           </div>

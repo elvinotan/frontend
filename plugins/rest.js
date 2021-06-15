@@ -2,62 +2,6 @@ import example from '~/plugins/json/example.json'
 
 export default function ({ $axios, $config, $string }, inject) {
   const rest = {
-    getPicker(picker) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve([
-            {
-              label: 'Name',
-              field: 'name',
-              sortable: true,
-              width: '750px',
-              tooltip: 'Column Name',
-              type: 'text',
-            },
-            {
-              label: 'Bith Date',
-              field: 'birthDate',
-              sortable: false,
-              width: '200px',
-              tooltip: 'Tanggal Lahir Customer',
-              type: 'date',
-            },
-            {
-              label: 'Age',
-              field: 'age',
-              sortable: true,
-              width: '100px',
-              tooltip: 'Umur Customer ',
-              type: 'number',
-            },
-            {
-              label: 'Saving ($)',
-              field: 'saving',
-              sortable: true,
-              width: '200px',
-              tooltip: 'Simpanan Dalam mata uang dollar',
-              type: 'decimal',
-            },
-            {
-              label: 'Loan Alocate',
-              field: 'loanPct',
-              sortable: true,
-              width: '150px',
-              tooltip: 'Alokasi jatah pinjaman',
-              type: 'percentage',
-            },
-            {
-              label: 'Merried',
-              field: 'merried',
-              sortable: true,
-              width: '100px',
-              tooltip: 'Sudah menikah atau belum',
-              type: 'boolean',
-            },
-          ])
-        }, 1000)
-      })
-    },
     getPaginationData(params) {
       console.log('params ', params)
       const datas = [

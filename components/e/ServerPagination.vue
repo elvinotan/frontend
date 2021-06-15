@@ -76,7 +76,9 @@
                 <button
                   v-else
                   class="font-bold"
-                  @click="$emit(action.label, props)"
+                  @click="
+                    $emit(action.emit ? action.emit : action.label, props)
+                  "
                 >
                   {{ action.label }}
                 </button>
@@ -116,7 +118,9 @@
                 :label="button.label"
                 :disabled="disabled || disabledButton"
                 :color="button.color"
-                @click="$emit(button.label, selectedRows)"
+                @click="
+                  $emit(button.emit ? button.emit : button.label, selectedRows)
+                "
               />
             </span>
           </div>
@@ -163,11 +167,13 @@ export default {
       default: 'Please Provide Table title...',
     },
     disabled: { type: Boolean, required: false, default: false },
+    columns: { type: Array, required: false, default: () => [] },
     autoLoad: { type: Boolean, required: false, default: false },
     picker: { type: String, required: false, default: '' },
     actions: { type: Array, required: false, default: () => [] },
     buttons: { type: Array, required: false, default: () => [] },
     initialSortBy: { type: Array, required: false, default: () => [] },
+    filter: { type: Object, required: false, default: () => {} },
     disabledAction: {
       type: Function,
       required: false,
@@ -187,15 +193,14 @@ export default {
       lcolumns: [],
       selectedRows: [],
       rows: [],
-      columns: [],
       totalRows: 0,
       alreadyFetchData: false,
       serverParams: {
+        picker: this.picker,
         search: '',
         page: 1,
         perPage: 10,
         sort: this.initialSortBy,
-        columnFilters: [],
       },
     }
   },
@@ -205,8 +210,8 @@ export default {
     },
   },
   async created() {
-    await this._fetchPicker()
-    if (this.autoLoad) await this._fetchData()
+    this._constractColumns()
+    if (this.autoLoad) await this.fetchData()
   },
   methods: {
     metaData() {
@@ -291,19 +296,24 @@ export default {
         })
       }
     },
-    async _fetchPicker() {
-      this.isLoading = true
-      this.columns = await this.$rest.getPicker(this.picker)
-      this._constractColumns()
-    },
-    async _fetchData() {
+    async fetchData() {
       this.isLoading = true
       this.alreadyFetchData = true
+      this.serverParams.filter = this._cleanFilter()
       const { totalRows, rows } = await this.$rest.getPaginationData(
         this.serverParams
       )
       this.totalRows = totalRows
       this.rows = rows
+    },
+    _cleanFilter() {
+      const filter = {}
+      for (const [key, value] of Object.entries(this.filter)) {
+        if (value) {
+          filter[key] = value
+        }
+      }
+      return filter
     },
     _onCellClick(params) {
       this.columnClick = params.column
@@ -348,19 +358,19 @@ export default {
     },
     async _onPageChange(params) {
       this.serverParams.page = params.currentPage
-      await this._fetchData()
+      await this.fetchData()
     },
     async _onSortChange(params) {
       this.serverParams.sort = params
-      await this._fetchData()
+      await this.fetchData()
     },
     async _onPerPageChange(params) {
       this.serverParams.perPage = params.currentPerPage
-      await this._fetchData()
+      await this.fetchData()
     },
     async _onSearch(params) {
       this.serverParams.search = params.searchTerm
-      await this._fetchData()
+      await this.fetchData()
     },
   },
 }

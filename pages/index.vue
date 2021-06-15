@@ -1964,7 +1964,7 @@
               :width="dialog.width"
               :height="dialog.height"
               :buttons="dialog.buttons"
-              @Simpan="SimpanClicked"
+              @EmitSimpan="SimpanClicked"
               @Submit="SubmitClicked"
             />
             <div class="text-xs">Template : {{ htmlDialog }}</div>
@@ -2020,7 +2020,7 @@
                   <td><input v-model="dialog.height" type="number" /></td>
                   <td>Array</td>
                   <td>false</td>
-                  <td>[{ label: null, color: null }]</td>
+                  <td>[{ label: null, color: null, emit: optional }]</td>
                   <td>
                     List of button yang akan muncul pada dialog, untuk close
                     sudah ada default button, untuk masing-masing button akan
@@ -2644,11 +2644,11 @@
             </div>
             <br />
             <div class="text-xs">
-              initialSortBy : {{ htmlLocalPaginationButtons }}
+              initialSortBy : {{ htmlLocalPaginationinitialSortBy }}
             </div>
             <br />
             <div class="text-xs">
-              Buttons : {{ htmlLocalPaginationinitialSortBy }}
+              Buttons : {{ htmlLocalPaginationButtons }}
             </div>
             <br />
             <div class="text-xs">Data Object : {{ localPagination }}</div>
@@ -2829,6 +2829,7 @@
             <EServerPagination
               id="ServerPaginationComponent"
               ref="ServerPaginationComponent"
+              :columns="serverPagination.columns"
               :label="serverPagination.label"
               :show="serverPagination.show"
               :disabled="serverPagination.disabled"
@@ -2836,6 +2837,7 @@
               :picker="serverPagination.picker"
               :actions="serverPagination.actions"
               :buttons="serverPagination.buttons"
+              :filter="serverPagination.filter"
               :initial-sort-by="serverPagination.initialSortBy"
               :disabled-action="serverPaginationDisabledAction"
               :add-new-data="serverPaginationAddNewData"
@@ -2854,11 +2856,11 @@
             </div>
             <br />
             <div class="text-xs">
-              initialSortBy : {{ htmlServerPaginationButtons }}
+              initialSortBy : {{ htmlServerPaginationinitialSortBy }}
             </div>
             <br />
             <div class="text-xs">
-              Buttons : {{ htmlServerPaginationinitialSortBy }}
+              Buttons : {{ htmlServerPaginationButtons }}
             </div>
             <br />
             <div class="text-xs">Data Object : {{ serverPagination }}</div>
@@ -3418,11 +3420,11 @@ export default {
       htmlLocalPaginationinitialSortBy:
         '{ field: "", type:"" } // type = asc/desc',
       htmlLocalPaginationActions: '{ label:"" }',
-      htmlLocalPaginationButtons: '{ label:"" }',
+      htmlLocalPaginationButtons: '{ label:"", color:"", emit:"" }',
       htmlServerPagination:
         '<EServerPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction=() :addNewData=() :actions=[] :buttons:[] :initialSortBy=[] @RowClick=() />',
       htmlServerPaginationActions: '{ label:"" }',
-      htmlServerPaginationButtons: '{ label:"" }',
+      htmlServerPaginationButtons: '{ label:"", color:"", emit:"" }',
       htmlServerPaginationinitialSortBy:
         '{ field: "", type:"" } // type = asc/desc',
       htmlForm: '<EForm id="" ref="" />',
@@ -3604,8 +3606,8 @@ export default {
         width: 600,
         height: 100,
         buttons: [
-          { label: 'Simpan', color: 'green' },
-          { label: 'Submit', color: 'purple' },
+          { label: 'Simpan', color: 'green', emit: 'EmitSimpan' },
+          { label: 'Submit', color: 'purple', emit: 'Submit' },
         ],
       },
       confirmation: {
@@ -3634,7 +3636,10 @@ export default {
         label: 'List of Customer',
         show: true,
         disabled: false,
-        buttons: [{ label: 'Process' }, { label: 'Migrate' }],
+        buttons: [
+          { label: 'Process', color: 'red' },
+          { label: 'Migrate', color: 'green' },
+        ],
         actions: [{ label: 'Delete' }, { label: 'Edit' }, { label: 'View' }],
         initialSortBy: [
           { field: 'age', type: 'asc' },
@@ -3805,11 +3810,69 @@ export default {
         disabled: false,
         autoLoad: true,
         picker: 'pagingCustomer',
-        buttons: [{ label: 'Process' }, { label: 'Migrate' }],
+        buttons: [
+          { label: 'Process', color: 'red' },
+          { label: 'Migrate', color: 'green' },
+        ],
         actions: [{ label: 'Delete' }, { label: 'Edit' }, { label: 'View' }],
         initialSortBy: [
           { field: 'age', type: 'asc' },
           { field: 'name', type: 'asc' },
+        ],
+        filter: {
+          age: 12,
+          birthDate: undefined,
+          name: 'elvino',
+        },
+        columns: [
+          {
+            label: 'Name',
+            field: 'name',
+            sortable: true,
+            width: '750px',
+            tooltip: 'Column Name',
+            type: 'text',
+          },
+          {
+            label: 'Bith Date',
+            field: 'birthDate',
+            sortable: false,
+            width: '200px',
+            tooltip: 'Tanggal Lahir Customer',
+            type: 'date',
+          },
+          {
+            label: 'Age',
+            field: 'age',
+            sortable: true,
+            width: '100px',
+            tooltip: 'Umur Customer ',
+            type: 'number',
+          },
+          {
+            label: 'Saving ($)',
+            field: 'saving',
+            sortable: true,
+            width: '200px',
+            tooltip: 'Simpanan Dalam mata uang dollar',
+            type: 'decimal',
+          },
+          {
+            label: 'Loan Alocate',
+            field: 'loanPct',
+            sortable: true,
+            width: '150px',
+            tooltip: 'Alokasi jatah pinjaman',
+            type: 'percentage',
+          },
+          {
+            label: 'Merried',
+            field: 'merried',
+            sortable: true,
+            width: '100px',
+            tooltip: 'Sudah menikah atau belum',
+            type: 'boolean',
+          },
         ],
       },
       col: {
