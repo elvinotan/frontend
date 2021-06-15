@@ -1,7 +1,76 @@
-import example from '~/plugins/json/example.json'
-
-export default function ({ $axios, $config, $string }, inject) {
+export default function ({ $axios, $config, $string, store }, inject) {
+  console.log('ini storea khan $store sds', store)
   const rest = {
+    // Local Storage
+    setLocalStorage(key, object) {
+      window.localStorage.setItem(key, JSON.stringify(object))
+    },
+    getLocalStorage(key) {
+      return JSON.parse(window.localStorage.getItem(key))
+    },
+    delLocalStorage(key) {
+      window.localStorage.removeItem(key)
+    },
+
+    // Vuex
+    setVuex(key, object) {
+      store.commit('setItem', { key, object })
+    },
+    getVuex(key) {
+      return store.getters.getItem(key)
+    },
+    delVuex(key) {
+      store.commit('removeItem', key)
+    },
+
+    // Rest Call base on type
+    async get(url = '', headers = {}) {
+      const newHeaders = { ...headers }
+      const newUrl = $string.replaceByProperty(url, $config)
+
+      const localStorage = newHeaders.localStorage
+      if (localStorage) {
+        delete newHeaders.localStorage
+
+        // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
+        const result = this.getLocalStorage(localStorage)
+        if (result) return result
+      }
+
+      const vuex = newHeaders.vuex
+      if (vuex) {
+        delete newHeaders.vuex
+
+        // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
+        const result = this.getVuex(vuex)
+        if (result) return result
+      }
+
+      for (const [key, value] of Object.entries(newHeaders)) {
+        newHeaders[key] = $string.replaceByProperty(value, $config)
+      }
+
+      try {
+        const result = await $axios.$get(newUrl, { headers: newHeaders })
+
+        if (result) {
+          // hanya di simpanan bila data ok dan valid
+          if (localStorage) {
+            // Simpan data ke localStorage
+            this.setLocalStorage(localStorage, JSON.stringify(result))
+          }
+          if (vuex) {
+            // Simpan data ke vuex
+            this.setVuex(vuex, result)
+          }
+        }
+
+        return { result }
+      } catch (error) {
+        return { error }
+      }
+    },
+
     getPaginationData(params) {
       console.log('params ', params)
       const datas = [
@@ -124,50 +193,6 @@ export default function ({ $axios, $config, $string }, inject) {
       })
     },
   }
-
-  const rests = [example]
-  rests.forEach((file) => {
-    // Looping pada high level untuk mendapatkan key dan value nya, ini level File
-    for (const [key, value] of Object.entries(file)) {
-      // Looping pada method level, untuk mendapatkan key dan value nya, ini level Methods
-      if (typeof value === 'object' && value !== null) {
-        rest[key] = value
-
-        for (const [methodKey, methodValue] of Object.entries(value)) {
-          if (methodKey.startsWith('get')) {
-            const header = methodValue[1]
-
-            file.url = $string.replaceByProperty(file.url, $config)
-
-            // Replace all parameter and header with enviroment variable if exist
-            if (header) {
-              for (const [hKey, hValue] of Object.entries(header)) {
-                header[hKey] = $string.replaceByProperty(hValue, $config)
-              }
-            }
-
-            value[methodKey + '_URL'] = file.url + methodValue[0]
-            value[methodKey + '_HEADER'] = header
-            value[methodKey] = function (body) {
-              const newUrl = $string.replaceByProperty(
-                value[methodKey + '_URL'],
-                body
-              )
-              if (value[methodKey + '_HEADER']) {
-                return $axios.$get(newUrl, {
-                  headers: value[methodKey + '_HEADER'],
-                })
-              } else {
-                return $axios.$get(newUrl)
-              }
-            }
-          }
-        }
-      }
-
-      console.log(rest)
-    }
-  })
 
   inject('rest', rest)
 }

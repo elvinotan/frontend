@@ -3,10 +3,10 @@ export default function (plugin, inject) {
     // ini khsusu untuk rest plugin
     replaceByProperty: (string, object) => {
       let temp = string
-      if (temp.includes('{')) {
+      if (temp.includes('[')) {
         for (const [key, value] of Object.entries(object)) {
           if (typeof value !== 'object') {
-            temp = temp.replace('{' + key + '}', value)
+            temp = temp.replace('[' + key + ']', value)
           }
         }
       }

@@ -3452,6 +3452,7 @@
               server , plugin ini dapat di access melalui this.$rest
               <button @click="getUser">getUser</button>
               <button @click="getUserComment">getUserComment</button>
+              {{ getUserComputed }}
             </div>
             <table>
               <thead>
@@ -3985,10 +3986,24 @@ export default {
       },
     }
   },
+  computed: {
+    getUserComputed() {
+      return this.$store.getters.getAllItem()
+    },
+  },
   methods: {
     async getUser() {
-      const user = await this.$rest.user.getUser({ id: 19 })
-      console.log('user ', user)
+      const { error } = await this.$rest.get(
+        `[base_url]/public-api/users/19/posts`,
+        {
+          btpnApiKey: '[test_api_key]',
+          vuex: 'User_Vuex',
+        }
+      )
+      console.log('result before delete', this.$rest.getVuex('User_Vuex'))
+      this.$rest.delVuex('User_Vuex')
+      console.log('result after delete', this.$rest.getVuex('User_Vuex'))
+      console.log('error ', error)
     },
     async getUserComment() {
       const userComment = await this.$rest.user.getUserComment({ userId: 898 })
