@@ -30,6 +30,8 @@ export default {
     '~/plugins/wrapper',
     '~/plugins/fmt',
     '~/plugins/string',
+    '~/plugins/number',
+    '~/plugins/enum',
     '~/plugins/rest',
   ],
 
