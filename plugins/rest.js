@@ -71,6 +71,55 @@ export default function ({ $axios, $config, $string, store }, inject) {
       }
     },
 
+    async post(url = '', payload = {}, headers = {}) {
+      const newHeaders = { ...headers }
+      const newUrl = $string.replaceByProperty(url, $config)
+
+      const localStorage = newHeaders.localStorage
+      if (localStorage) {
+        delete newHeaders.localStorage
+
+        // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
+        const result = this.getLocalStorage(localStorage)
+        if (result) return result
+      }
+
+      const vuex = newHeaders.vuex
+      if (vuex) {
+        delete newHeaders.vuex
+
+        // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
+        const result = this.getVuex(vuex)
+        if (result) return result
+      }
+
+      for (const [key, value] of Object.entries(newHeaders)) {
+        newHeaders[key] = $string.replaceByProperty(value, $config)
+      }
+
+      try {
+        const result = await $axios.$post(newUrl, payload, {
+          headers: newHeaders,
+        })
+
+        if (result) {
+          // hanya di simpanan bila data ok dan valid
+          if (localStorage) {
+            // Simpan data ke localStorage
+            this.setLocalStorage(localStorage, JSON.stringify(result))
+          }
+          if (vuex) {
+            // Simpan data ke vuex
+            this.setVuex(vuex, result)
+          }
+        }
+
+        return { result }
+      } catch (error) {
+        return { error }
+      }
+    },
+
     getPaginationData(params) {
       console.log('params ', params)
       const datas = [
