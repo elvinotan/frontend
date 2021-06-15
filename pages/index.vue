@@ -2531,6 +2531,101 @@
               </tbody>
             </table>
           </EForm>
+          <EForm id="Filter">
+            <EFilter
+              id="FilterComponent"
+              :title="filter.title"
+              :disabled="filter.disabled"
+              :show="filter.show"
+              @Clear="filterClear"
+              @Search="filterSearch"
+            >
+              <ECol :col="3">
+                <div style="background: yellow">Filter Component 1</div>
+                <div style="background: yellow">Filter Component 2</div>
+                <ECol :col="2">
+                  <div style="background: yellow">Filter Component 3</div>
+                  <div style="background: yellow">Filter Component 4</div>
+                </ECol>
+              </ECol>
+            </EFilter>
+            <br />
+            <div class="text-xs">Template : {{ htmlFilter }}</div>
+            <br />
+            <div class="text-xs">Data Object : {{ filter }}</div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Props</td>
+                  <td>Try</td>
+                  <td>Type</td>
+                  <td>Required</td>
+                  <td>Default</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>id</td>
+                  <td>-</td>
+                  <td>String</td>
+                  <td>true</td>
+                  <td>null</td>
+                  <td>id dari component, gax perlu di binding</td>
+                </tr>
+                <tr>
+                  <td>title</td>
+                  <td><input v-model="filter.title" type="text" /></td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>''</td>
+                  <td>Title untuk search pane</td>
+                </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td><input v-model="filter.disabled" type="checkbox" /></td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>false</td>
+                  <td>
+                    Boolean untuk menentukan disabled atau tidaknya component
+                  </td>
+                </tr>
+                <tr>
+                  <td>show</td>
+                  <td><input v-model="filter.show" type="checkbox" /></td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>true</td>
+                  <td>
+                    Boolean untuk menentukan component tampil atau tidak. tag
+                    ini menggunakan v-if
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Try</td>
+                  <td>Result</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>metaData</td>
+                  <td>
+                    <button @click="metaData('FilterComponent')">Click</button>
+                  </td>
+                  <td>{{ metadata }}</td>
+                  <td>Component Information</td>
+                </tr>
+              </tbody>
+            </table>
+          </EForm>
           <EForm id="PageLoader">
             <EPageLoader
               id="PageLoaderComponent"
@@ -3408,9 +3503,11 @@ export default {
       htmlLoading: '<ELoading ref="loader" />',
       htmlMessage: '<EMessage id="" ref="" />',
       htmlCard:
-        '<ECard ref="" :label="" :disabled="" :show="" >Contents </EDialog>',
+        '<ECard ref="" :label="" :disabled="" :show="" >Contents </ECard>',
       htmlTabs:
         '<ETabs id="" ref="" :labels=[{label:null}] :disabled="" :show="" >Contents </ETabs>',
+      htmlFilter:
+        '<EFilter id="" ref="" :title="" :disabled="" :show="" @Clear="" @Search="">Contents </EFilter>',
       htmlPageLoader:
         '<EPageLoader id="" ref="" :labels="" :fetcher=() >Contents</EPageLoader>',
       htmlLocalPagination:
@@ -3451,6 +3548,7 @@ export default {
         { label: 'Confirmation' },
         { label: 'Card' },
         { label: 'Tabs' },
+        { label: 'Filter' },
         { label: 'PageLoader' },
         { label: 'LocalPagination' },
         { label: 'ServerPagination' },
@@ -3628,6 +3726,11 @@ export default {
         show: true,
         disabled: false,
         selectedTab: 'Order',
+      },
+      filter: {
+        title: 'Customer Search',
+        disabled: false,
+        show: true,
       },
       pageLoader: {
         label: 'Tab PageLoder',
@@ -4026,6 +4129,12 @@ export default {
     },
     setShow(ref) {
       this.$refs[ref].setShow(false)
+    },
+    filterClear() {
+      alert('Button Clear clicked')
+    },
+    filterSearch() {
+      alert('Button Search clicked')
     },
   },
 }
