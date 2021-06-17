@@ -1,5 +1,4 @@
 export default function ({ $axios, $config, $string, store }, inject) {
-  console.log('ini storea khan $store sds', store)
   const rest = {
     // Local Storage
     setLocalStorage(key, object) {
@@ -8,7 +7,7 @@ export default function ({ $axios, $config, $string, store }, inject) {
     getLocalStorage(key) {
       return JSON.parse(window.localStorage.getItem(key))
     },
-    delLocalStorage(key) {
+    removeLocalStorage(key) {
       window.localStorage.removeItem(key)
     },
 
@@ -19,49 +18,40 @@ export default function ({ $axios, $config, $string, store }, inject) {
     getVuex(key) {
       return store.getters.getItem(key)
     },
-    delVuex(key) {
+    removeVuex(key) {
       store.commit('removeItem', key)
     },
 
     // Rest Call base on type
-    async get(url = '', headers = {}) {
-      const newHeaders = { ...headers }
-      const newUrl = $string.replaceByProperty(url, $config)
+    async get(pUrl = '', pHeaders = {}) {
+      const { localStorage, vuex, ...headers } = pHeaders
 
-      const localStorage = newHeaders.localStorage
-      if (localStorage) {
-        delete newHeaders.localStorage
-
-        // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
-        const result = this.getLocalStorage(localStorage)
-        if (result) return result
-      }
-
-      const vuex = newHeaders.vuex
       if (vuex) {
-        delete newHeaders.vuex
-
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getVuex(vuex)
         if (result) return result
       }
 
-      for (const [key, value] of Object.entries(newHeaders)) {
-        newHeaders[key] = $string.replaceByProperty(value, $config)
+      if (localStorage) {
+        // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
+        const result = this.getLocalStorage(localStorage)
+        if (result) return result
+      }
+
+      for (const [key, value] of Object.entries(headers)) {
+        headers[key] = $string.replaceByProperty(value, $config)
       }
 
       try {
-        const result = await $axios.$get(newUrl, { headers: newHeaders })
+        const url = $string.replaceByProperty(pUrl, $config)
+        const result = await $axios.$get(url, { headers })
 
         if (result) {
-          // hanya di simpanan bila data ok dan valid
-          if (localStorage) {
-            // Simpan data ke localStorage
-            this.setLocalStorage(localStorage, JSON.stringify(result))
-          }
           if (vuex) {
-            // Simpan data ke vuex
             this.setVuex(vuex, result)
+          }
+          if (localStorage) {
+            this.setLocalStorage(localStorage, JSON.stringify(result))
           }
         }
 
@@ -71,46 +61,35 @@ export default function ({ $axios, $config, $string, store }, inject) {
       }
     },
 
-    async post(url = '', payload = {}, headers = {}) {
-      const newHeaders = { ...headers }
-      const newUrl = $string.replaceByProperty(url, $config)
+    async post(pUrl = '', payload = {}, pHeaders = {}) {
+      const { localStorage, vuex, ...headers } = pHeaders
 
-      const localStorage = newHeaders.localStorage
-      if (localStorage) {
-        delete newHeaders.localStorage
-
-        // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
-        const result = this.getLocalStorage(localStorage)
-        if (result) return result
-      }
-
-      const vuex = newHeaders.vuex
       if (vuex) {
-        delete newHeaders.vuex
-
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getVuex(vuex)
         if (result) return result
       }
 
-      for (const [key, value] of Object.entries(newHeaders)) {
-        newHeaders[key] = $string.replaceByProperty(value, $config)
+      if (localStorage) {
+        // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
+        const result = this.getLocalStorage(localStorage)
+        if (result) return result
+      }
+
+      for (const [key, value] of Object.entries(headers)) {
+        headers[key] = $string.replaceByProperty(value, $config)
       }
 
       try {
-        const result = await $axios.$post(newUrl, payload, {
-          headers: newHeaders,
-        })
+        const url = $string.replaceByProperty(pUrl, $config)
+        const result = await $axios.$post(url, payload, { headers })
 
         if (result) {
-          // hanya di simpanan bila data ok dan valid
-          if (localStorage) {
-            // Simpan data ke localStorage
-            this.setLocalStorage(localStorage, JSON.stringify(result))
-          }
           if (vuex) {
-            // Simpan data ke vuex
             this.setVuex(vuex, result)
+          }
+          if (localStorage) {
+            this.setLocalStorage(localStorage, JSON.stringify(result))
           }
         }
 

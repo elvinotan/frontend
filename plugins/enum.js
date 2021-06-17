@@ -1,5 +1,8 @@
 export default function (plugin, inject) {
-  const enumm = {}
+  const enumm = {
+    LOCAL_STORAGE: {},
+    VUEX: {},
+  }
 
   inject('enum', enumm)
 }

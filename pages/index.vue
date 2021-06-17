@@ -3450,7 +3450,7 @@
             <div>
               Plugin ini bertujuan untuk melakukan oprational komunikasi dgn
               server , plugin ini dapat di access melalui this.$rest
-              <button @click="getUser">getUser</button>
+              <button @click="restGetExample">getUser</button>
               <button @click="getUserComment">getUserComment</button>
               {{ getUserComputed }}
             </div>
@@ -3458,11 +3458,77 @@
               <thead>
                 <tr>
                   <td>Method</td>
+                  <td>Try</td>
                   <td>Return</td>
                   <td>Description</td>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                <tr>
+                  <td>setLocalStorage</td>
+                  <td>
+                    <button @click="restSetLocalStorage">Click</button>
+                  </td>
+                  <td>Void</td>
+                  <td>
+                    Akan menyimpan object { id: 1, name: 'nuxt', description:
+                    'vue next framework' } dengan id USER_FRAMEWORK, silakan
+                    lihat pada browser localStorage
+                  </td>
+                </tr>
+                <tr>
+                  <td>getLocalStorage</td>
+                  <td>
+                    <button @click="restGetLocalStorage">Click</button>
+                  </td>
+                  <td>Object</td>
+                  <td>
+                    Akan mengambil object { id: 1, name: 'nuxt', description:
+                    'vue next framework' } dengan id USER_FRAMEWORK, silakan
+                    lihat console
+                  </td>
+                </tr>
+                <tr>
+                  <td>removeLocalStorage</td>
+                  <td>
+                    <button @click="restRemoveLocalStorage">Click</button>
+                  </td>
+                  <td>Void</td>
+                  <td>Menghapus object yang di simpan pada local storage</td>
+                </tr>
+                <tr>
+                  <td>setVuex</td>
+                  <td>
+                    <button @click="restSetVuex">Click</button>
+                  </td>
+                  <td>Void</td>
+                  <td>
+                    Akan menyimpan object { id: 1, name: 'nuxt', description:
+                    'vue next framework' } dengan id USER_FRAMEWORK, silakan
+                    lihat pada browser Vuex debugger
+                  </td>
+                </tr>
+                <tr>
+                  <td>getVuex</td>
+                  <td>
+                    <button @click="restGetVuex">Click</button>
+                  </td>
+                  <td>Object</td>
+                  <td>
+                    Akan mengambil object { id: 1, name: 'nuxt', description:
+                    'vue next framework' } dengan id USER_FRAMEWORK, silakan
+                    lihat console
+                  </td>
+                </tr>
+                <tr>
+                  <td>removeVuex</td>
+                  <td>
+                    <button @click="restRemoveVuex">Click</button>
+                  </td>
+                  <td>Void</td>
+                  <td>Menghapus object yang di simpan pada vuex</td>
+                </tr>
+              </tbody>
             </table>
           </EForm>
         </ETabs>
@@ -3992,17 +4058,18 @@ export default {
     },
   },
   methods: {
-    async getUser() {
+    async restGetExample() {
+      const userId = 19
       const { error } = await this.$rest.get(
-        `[base_url]/public-api/users/19/posts`,
+        `[base_url]/public-api/users/${userId}/posts`,
         {
           btpnApiKey: '[test_api_key]',
           vuex: 'User_Vuex',
         }
       )
       console.log('result before delete', this.$rest.getVuex('User_Vuex'))
-      this.$rest.delVuex('User_Vuex')
-      console.log('result after delete', this.$rest.getVuex('User_Vuex'))
+      // this.$rest.delVuex('User_Vuex')
+      // console.log('result after delete', this.$rest.getVuex('User_Vuex'))
       console.log('error ', error)
     },
     async getUserComment() {
@@ -4150,6 +4217,36 @@ export default {
     },
     filterSearch() {
       alert('Button Search clicked')
+    },
+    restSetLocalStorage() {
+      this.$rest.setLocalStorage('USER_FRAMEWORK', {
+        id: 1,
+        name: 'nuxt',
+        description: 'vue next framework',
+      })
+    },
+    restGetLocalStorage() {
+      const object = this.$rest.getLocalStorage('USER_FRAMEWORK')
+      console.log('Object USER_FRAMEWORK ', object)
+    },
+    restRemoveLocalStorage() {
+      this.$rest.removeLocalStorage('USER_FRAMEWORK')
+      console.log('Object USER_FRAMEWORK removed')
+    },
+    restSetVuex() {
+      this.$rest.setVuex('USER_FRAMEWORK', {
+        id: 1,
+        name: 'nuxt',
+        description: 'vue next framework',
+      })
+    },
+    restGetVuex() {
+      const object = this.$rest.getVuex('USER_FRAMEWORK')
+      console.log('Object USER_FRAMEWORK ', object)
+    },
+    restRemoveVuex() {
+      this.$rest.removeVuex('USER_FRAMEWORK')
+      console.log('Object USER_FRAMEWORK removed')
     },
   },
 }
