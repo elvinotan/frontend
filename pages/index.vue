@@ -3449,11 +3449,53 @@
           <EForm id="rest">
             <div>
               Plugin ini bertujuan untuk melakukan oprational komunikasi dgn
-              server , plugin ini dapat di access melalui this.$rest
-              <button @click="restGetExample">getUser</button>
-              <button @click="getUserComment">getUserComment</button>
-              {{ getUserComputed }}
+              server , plugin ini dapat di access melalui this.$rest. Url dan
+              header props dapat menggunakan enviroment variable dgn menggunakan
+              tag [] contoh : https://[base_url]/users
             </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Prop</td>
+                  <td>Type</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>localStorage</td>
+                  <td>String</td>
+                  <td>
+                    Hasil restcall akan di simpan ke localstorage menggunakan id
+                    = localStorage, option ini dapat di gunakan dgn cara
+                    menyertakan props localStorage pada headers, bila
+                    operational yang sama dilakukan, tidak akan melakukan
+                    restcall kembali apabila data di localStorage sudah ada
+                  </td>
+                </tr>
+                <tr>
+                  <td>vuex</td>
+                  <td>String</td>
+                  <td>
+                    Hasil restcall akan di simpan ke vuex menggunakan id = vuex,
+                    option ini dapat di gunakan dgn cara menyertakan props vuex
+                    pada headers, bila operational yang sama dilakukan, tidak
+                    akan melakukan restcall kembali apabila data di vuex sudah
+                    ada
+                  </td>
+                </tr>
+                <tr>
+                  <td>forceUpdate</td>
+                  <td>String</td>
+                  <td>
+                    forceUpdate akan memaksa untuk melakukan restCall meskipun
+                    data di localStorage/vuex tersedia, dan akan di replace oleh
+                    next restCall
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
             <table>
               <thead>
                 <tr>
@@ -3527,6 +3569,30 @@
                   </td>
                   <td>Void</td>
                   <td>Menghapus object yang di simpan pada vuex</td>
+                </tr>
+                <tr>
+                  <td>get</td>
+                  <td>
+                    <button @click="restGetExample">Click</button>
+                  </td>
+                  <td>Object</td>
+                  <td>
+                    Oprational rest call get, yang meng-support property
+                    localStorage, vuex dan forceUpdate, lihat console. Hasil
+                    oprational ini akan menghasilkan object { result, error }
+                  </td>
+                </tr>
+                <tr>
+                  <td>post</td>
+                  <td>
+                    <button @click="restPostExample">Click</button>
+                  </td>
+                  <td>Object</td>
+                  <td>
+                    Oprational rest call post, yang meng-support property
+                    localStorage, vuex dan forceUpdate, lihat console. Hasil
+                    oprational ini akan menghasilkan object { result, error }
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -4058,24 +4124,6 @@ export default {
     },
   },
   methods: {
-    async restGetExample() {
-      const userId = 19
-      const { error } = await this.$rest.get(
-        `[base_url]/public-api/users/${userId}/posts`,
-        {
-          btpnApiKey: '[test_api_key]',
-          vuex: 'User_Vuex',
-        }
-      )
-      console.log('result before delete', this.$rest.getVuex('User_Vuex'))
-      // this.$rest.delVuex('User_Vuex')
-      // console.log('result after delete', this.$rest.getVuex('User_Vuex'))
-      console.log('error ', error)
-    },
-    async getUserComment() {
-      const userComment = await this.$rest.user.getUserComment({ userId: 898 })
-      console.log('userComment ', userComment)
-    },
     SimpanClicked() {
       alert('Simpan Clicked')
     },
@@ -4217,6 +4265,29 @@ export default {
     },
     filterSearch() {
       alert('Button Search clicked')
+    },
+    async restGetExample() {
+      console.log('Lakukan get dgn opsi localStorage: User_LocalStorage')
+      await this.$rest.get(`[base_url]/public-api/users/19/posts`, {
+        btpnApiKey: '[test_api_key]',
+        localStorage: 'User_LocalStorage',
+      })
+      console.log(
+        'Fetch melalui getLocalStorage',
+        this.$rest.getLocalStorage('User_LocalStorage')
+      )
+    },
+    async restPostExample() {
+      console.log('Lakukan post dgn opsi vuex: User_Vuex')
+      await this.$rest.post(
+        `[base_url]/public-api/users`,
+        { id: 1, name: 'nuxt' },
+        {
+          btpnApiKey: '[test_api_key]',
+          vuex: 'User_Vuex',
+        }
+      )
+      console.log('Fetch melalui getVuex', this.$rest.getVuex('User_Vuex'))
     },
     restSetLocalStorage() {
       this.$rest.setLocalStorage('USER_FRAMEWORK', {

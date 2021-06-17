@@ -24,15 +24,15 @@ export default function ({ $axios, $config, $string, store }, inject) {
 
     // Rest Call base on type
     async get(pUrl = '', pHeaders = {}) {
-      const { localStorage, vuex, ...headers } = pHeaders
+      const { forceUpdate, vuex, localStorage, ...headers } = pHeaders
 
-      if (vuex) {
+      if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getVuex(vuex)
         if (result) return result
       }
 
-      if (localStorage) {
+      if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getLocalStorage(localStorage)
         if (result) return result
@@ -45,6 +45,7 @@ export default function ({ $axios, $config, $string, store }, inject) {
       try {
         const url = $string.replaceByProperty(pUrl, $config)
         const result = await $axios.$get(url, { headers })
+        // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
           if (vuex) {
@@ -62,15 +63,15 @@ export default function ({ $axios, $config, $string, store }, inject) {
     },
 
     async post(pUrl = '', payload = {}, pHeaders = {}) {
-      const { localStorage, vuex, ...headers } = pHeaders
+      const { forceUpdate, vuex, localStorage, ...headers } = pHeaders
 
-      if (vuex) {
+      if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getVuex(vuex)
         if (result) return result
       }
 
-      if (localStorage) {
+      if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getLocalStorage(localStorage)
         if (result) return result
@@ -83,6 +84,7 @@ export default function ({ $axios, $config, $string, store }, inject) {
       try {
         const url = $string.replaceByProperty(pUrl, $config)
         const result = await $axios.$post(url, payload, { headers })
+        // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
           if (vuex) {
