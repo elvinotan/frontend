@@ -3266,6 +3266,7 @@
           id="Plugin"
           :labels="[
             { label: 'fmt' },
+            { label: 'enum' },
             { label: 'string' },
             { label: 'number' },
             { label: 'array' },
@@ -4267,27 +4268,29 @@ export default {
       alert('Button Search clicked')
     },
     async restGetExample() {
-      console.log('Lakukan get dgn opsi localStorage: User_LocalStorage')
+      const localStorageId = this.$enum.LOCAL_STORAGE.USER
+      console.log('Lakukan get dgn opsi localStorage: ', localStorageId)
       await this.$rest.get(`[base_url]/public-api/users/19/posts`, {
         btpnApiKey: '[test_api_key]',
-        localStorage: 'User_LocalStorage',
+        localStorage: localStorageId,
       })
       console.log(
         'Fetch melalui getLocalStorage',
-        this.$rest.getLocalStorage('User_LocalStorage')
+        this.$rest.getLocalStorage(localStorageId)
       )
     },
     async restPostExample() {
-      console.log('Lakukan post dgn opsi vuex: User_Vuex')
+      const vuexId = this.$enum.VUEX.USER
+      console.log('Lakukan post dgn opsi vuex: ', vuexId)
       await this.$rest.post(
         `[base_url]/public-api/users`,
         { id: 1, name: 'nuxt' },
         {
           btpnApiKey: '[test_api_key]',
-          vuex: 'User_Vuex',
+          vuex: vuexId,
         }
       )
-      console.log('Fetch melalui getVuex', this.$rest.getVuex('User_Vuex'))
+      console.log('Fetch melalui getVuex', this.$rest.getVuex(vuexId))
     },
     restSetLocalStorage() {
       this.$rest.setLocalStorage('USER_FRAMEWORK', {
