@@ -22,6 +22,7 @@
 
         <textarea
           :id="id"
+          autocomplete="off"
           type="text"
           :placeholder="placeholder"
           :value="value"

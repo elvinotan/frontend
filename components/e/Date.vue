@@ -22,6 +22,7 @@
         <input
           :id="id"
           v-model="lvalue"
+          autocomplete="off"
           type="date"
           :maxlength="maxlength"
           :disabled="disabled"

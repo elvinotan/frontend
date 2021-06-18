@@ -21,6 +21,7 @@
         </span>
         <input
           :id="id"
+          autocomplete="off"
           type="password"
           :placeholder="placeholder"
           :value="value"

@@ -21,6 +21,7 @@
         </span>
         <input
           :id="id"
+          autocomplete="off"
           type="text"
           :placeholder="placeholder"
           :value="value"
