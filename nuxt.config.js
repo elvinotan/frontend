@@ -53,16 +53,19 @@ export default {
     '@nuxtjs/axios',
   ],
 
-  //  Used as fallback if no runtime config is provided
+  // Used as fallback if no runtime config is provided
+  // https://axios.nuxtjs.org
   axios: {
-    baseURL: 'http://example.com',
-    browserBaseURL: 'http://localhost:3000',
+    progress: true,
+    debug: true,
   },
 
   // ini yang akan di ambil pada saat production, akan ambil dari enviroment variable
   // BILA tidak ada dan tidak tersedia, maka akan ambil dari configurasi diatas yaitu axios {}
   publicRuntimeConfig: {
-    base_url: process.env.base_url || 'https://gorest.co.in',
+    API_HOST: process.env.API_HOST || 'localhost',
+    API_PORT: process.env.API_PORT || '3000',
+    API_PREFIX: process.env.API_PREFIX || '/',
     test_api_key: process.env.test_api_key || 'abxkd-dfkhe-fdmkwh-djdf',
   },
 

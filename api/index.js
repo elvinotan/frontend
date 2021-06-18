@@ -151,13 +151,11 @@ app.get('/general/lookup/:group', function (req, res) {
     ])
   }
   if (group === 'EXP') {
-    throw new Error('Sengaja aku errirn')
-
-    // res.json([
-    //   { value: 1, description: '1 Th' },
-    //   { value: 2, description: '2 Th' },
-    //   { value: 3, description: '3 Th' },
-    // ])
+    res.json([
+      { value: 1, description: '1 Th' },
+      { value: 2, description: '2 Th' },
+      { value: 3, description: '3 Th' },
+    ])
   }
 })
 
