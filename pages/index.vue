@@ -1956,6 +1956,194 @@
               </tbody>
             </table>
           </EForm>
+          <EForm id="Lookup">
+            <ELookup
+              id="LookupComponent"
+              ref="LookupComponent"
+              v-model="lookup.value"
+              :group="lookup.group"
+              :placeholder="lookup.placeholder"
+              :required="lookup.required"
+              :disabled="lookup.disabled"
+              :show="lookup.show"
+              :as="lookup.as"
+              :vruntime="lookup.vruntime"
+              :options="lookup.options"
+            />
+            <div class="text-xs">Template : {{ htmlLookup }}</div>
+            <br />
+            <div class="text-xs">Data Object : {{ lookup }}</div>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <td>Props</td>
+                  <td>Try</td>
+                  <td>Type</td>
+                  <td>Required</td>
+                  <td>Default</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>id</td>
+                  <td>-</td>
+                  <td>String</td>
+                  <td>true</td>
+                  <td>null</td>
+                  <td>id dari component, gax perlu di binding</td>
+                </tr>
+                <tr>
+                  <td>label</td>
+                  <td><input v-model="lookup.label" type="text" /></td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>''</td>
+                  <td>Label untuk component</td>
+                </tr>
+                <tr>
+                  <td>placeholder</td>
+                  <td><input v-model="lookup.placeholder" type="text" /></td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>''</td>
+                  <td>Place holder input, akan tampil bila data kosong</td>
+                </tr>
+                <tr>
+                  <td>required</td>
+                  <td><input v-model="lookup.required" type="checkbox" /></td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>false</td>
+                  <td>
+                    Boolean untuk menentukan required atau tidak text, error
+                    message akan otomatis terisi bila kosong
+                  </td>
+                </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td><input v-model="lookup.disabled" type="checkbox" /></td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>false</td>
+                  <td>
+                    Boolean untuk menentukan disabled atau tidaknya component,
+                  </td>
+                </tr>
+                <tr>
+                  <td>show</td>
+                  <td><input v-model="lookup.show" type="checkbox" /></td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>true</td>
+                  <td>
+                    Boolean untuk menentukan component tampil atau tidak. tag
+                    ini menggunakan v-if
+                  </td>
+                </tr>
+                <tr>
+                  <td>as</td>
+                  <td>
+                    <select v-model="lookup.as">
+                      <option value="string">string</option>
+                      <option value="number">number</option>
+                    </select>
+                  </td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>string</td>
+                  <td>
+                    Tipe data converter, bila tidak di provide maka tipe data
+                    sesuai option, bila di sediakan makan nilai value akan di
+                    convert
+                  </td>
+                </tr>
+                <tr>
+                  <td>vruntime</td>
+                  <td>Function Callback</td>
+                  <td>Function</td>
+                  <td>false</td>
+                  <td>null</td>
+                  <td>
+                    OnType runtime validation, test ketik 666 untuk mencoba
+                  </td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td><input v-model="lookup.value" type="input" /></td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>''</td>
+                  <td>
+                    Two way data binding, saat ini data yang di input dalam
+                    bentuk upprcase, customize sesuai kebutuhan
+                  </td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td>-</td>
+                  <td>Array</td>
+                  <td>false</td>
+                  <td>''</td>
+                  <td>
+                    Data Option pilihan dengan format { value: null,
+                    description: null }
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Try</td>
+                  <td>Result</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>metaData</td>
+                  <td>
+                    <button @click="metaData('LookupComponent')">Click</button>
+                  </td>
+                  <td>{{ metadata }}</td>
+                  <td>Component Information</td>
+                </tr>
+                <tr>
+                  <td>clearError</td>
+                  <td>
+                    <button @click="clearError('LookupComponent')">
+                      Click
+                    </button>
+                  </td>
+                  <td>Void</td>
+                  <td>Hapus error, kembalikan ke state component semula</td>
+                </tr>
+                <tr>
+                  <td>hasError</td>
+                  <td>
+                    <button @click="hasError('LookupComponent')">Click</button>
+                  </td>
+                  <td>{{ haserror }}</td>
+                  <td>
+                    Flag untuk menandakan apakah component pass validasi atau
+                    tidak
+                  </td>
+                </tr>
+                <tr>
+                  <td>validate</td>
+                  <td>
+                    <button @click="validate('LookupComponent')">Click</button>
+                  </td>
+                  <td>{{ valid }}</td>
+                  <td>Lakukan validasi berdasarkan required dan vruntime</td>
+                </tr>
+              </tbody>
+            </table>
+          </EForm>
           <EForm id="Dialog">
             <EDialog
               id="DialogComponent"
@@ -3630,6 +3818,8 @@ export default {
         '<EBoolean id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :type="" />',
       htmlSelect:
         '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[{ value: null, description: null }] />',
+      htmlLookup:
+        '<ELookup id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[{ value: null, description: null }] />',
       htmlDialog:
         '<EDialog id="" ref="" :title="" :width="" :height="" :buttons=[{ label: null, color: null }]> Contents </EDialog>',
       htmlConfirmation:
@@ -3676,6 +3866,7 @@ export default {
         { label: 'Checkbox' },
         { label: 'Boolean' },
         { label: 'Select' },
+        { label: 'Lookup' },
         { label: 'Dialog' },
         { label: 'Loading' },
         { label: 'Message' },
@@ -3818,6 +4009,26 @@ export default {
       },
       select: {
         label: 'Jenis Kelamin',
+        placeholder: 'Please Select...',
+        required: false,
+        disabled: false,
+        show: true,
+        value: null,
+        as: 'string',
+        options: [
+          { value: 'M', description: 'Male' },
+          { value: 'F', description: 'Female' },
+          { value: 'X', description: 'Unknown' },
+        ],
+        vruntime: (data) => {
+          console.log(data)
+        },
+      },
+      lookup: {
+        lookup: {
+          label: 'Jenis Kelamin',
+          group: 'SEX',
+        },
         placeholder: 'Please Select...',
         required: false,
         disabled: false,
