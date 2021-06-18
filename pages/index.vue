@@ -3373,6 +3373,16 @@
               </tbody>
             </table>
           </EForm>
+          <EForm id="PopupPagination">
+            <EPopupPagination
+              id="PopupPaginationComponent"
+              ref="PopupPaginationComponent"
+              v-model="popupPagination.value"
+              label="Code"
+              placeholder="Input Code"
+              :required="true"
+            />
+          </EForm>
           <EForm id="Col">
             <ECol
               id="ColComponent"
@@ -3884,6 +3894,7 @@ export default {
         { label: 'PageLoader' },
         { label: 'LocalPagination' },
         { label: 'ServerPagination' },
+        { label: 'PopupPagination' },
         { label: 'Form' },
         { label: 'Col' },
       ],
@@ -4327,6 +4338,9 @@ export default {
         col: 1,
         gapX: 3,
         gapY: 2,
+      },
+      popupPagination: {
+        value: null,
       },
     }
   },
