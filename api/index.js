@@ -21,6 +21,7 @@ app.post('/general/pagination', function (req, res) {
   const datas = [
     {
       id: 541,
+      code: 'JAHF',
       name: 'John Mecan',
       birthDate: new Date(),
       age: 15,
@@ -30,6 +31,7 @@ app.post('/general/pagination', function (req, res) {
     },
     {
       id: 542,
+      code: 'IYHF',
       name: 'Agus sulisanto',
       birthDate: new Date(),
       age: 54,
@@ -39,6 +41,7 @@ app.post('/general/pagination', function (req, res) {
     },
     {
       id: 543,
+      code: 'UYHB',
       name: 'Hero ranto',
       birthDate: new Date(),
       age: 26,
@@ -48,6 +51,7 @@ app.post('/general/pagination', function (req, res) {
     },
     {
       id: 544,
+      code: 'RBVC',
       name: 'Elvino Tan',
       birthDate: new Date(),
       age: 42,
@@ -56,6 +60,7 @@ app.post('/general/pagination', function (req, res) {
       merried: true,
     },
     {
+      code: 'IKKH',
       name: 'Carinnia Untoro',
       birthDate: new Date(),
       age: 41,
@@ -64,6 +69,7 @@ app.post('/general/pagination', function (req, res) {
       merried: true,
     },
     {
+      code: 'LBVF',
       name: 'Constantine Davin Ethan',
       birthDate: new Date(),
       age: 15,
@@ -73,6 +79,7 @@ app.post('/general/pagination', function (req, res) {
     },
     {
       id: 547,
+      code: 'RNVF',
       name: 'Yanto ono',
       birthDate: new Date(),
       age: 74,
@@ -82,6 +89,7 @@ app.post('/general/pagination', function (req, res) {
     },
     {
       id: 548,
+      code: 'YNBV',
       name: 'Cristina ',
       birthDate: new Date(),
       age: 45,
@@ -91,6 +99,7 @@ app.post('/general/pagination', function (req, res) {
     },
     {
       id: 549,
+      code: 'UJNB',
       name: 'Urika ikada',
       birthDate: new Date(),
       age: 56,
@@ -100,6 +109,7 @@ app.post('/general/pagination', function (req, res) {
     },
     {
       id: 550,
+      code: 'KHDN',
       name: 'Sulitaianto Aryo',
       birthDate: new Date(),
       age: 54,
@@ -109,6 +119,7 @@ app.post('/general/pagination', function (req, res) {
     },
     {
       id: 551,
+      code: 'PKDK',
       name: 'Brima doa',
       birthDate: new Date(),
       age: 95,
@@ -118,6 +129,7 @@ app.post('/general/pagination', function (req, res) {
     },
     {
       id: 551,
+      code: 'ODKD',
       name: 'Ibna uban',
       birthDate: new Date(),
       age: 74,

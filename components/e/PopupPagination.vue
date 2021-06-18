@@ -3,7 +3,7 @@
     <div v-if="show">
       <span
         class="flex text-xs rounded border-0 outline-none ring-2"
-        :class="[_cssBorder]"
+        :class="[_cssBorder, _cssLabelBg]"
       >
         <span
           v-if="label"
@@ -21,19 +21,32 @@
         </span>
         <input
           :id="id"
+          v-model="lvalue"
           autocomplete="off"
           type="text"
           :placeholder="placeholder"
-          :value="value"
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
-          class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
+          class="field text-sm p-1 px-1 outline-none w-16 uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
-          @input="_input"
           @blur="_blur"
         />
+        <span
+          class="font-bold text-center text-sm w-10 p-1 border-l-2 border-r-2"
+          :class="[_cssBorderBox, _cssLabelBg, _cssCursor, _cssInputText]"
+          @click="_showPopup"
+        >
+          ?
+        </span>
+        <span
+          class="text-left w-full text-sm w-auto p-1"
+          :class="[_cssLabelBg, _cssInputText]"
+        >
+          {{ description }}
+        </span>
       </span>
+
       <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
         {{ errors[0] }}
       </p>
@@ -59,8 +72,10 @@ export default {
   },
   data() {
     return {
+      lvalue: this.value,
       state: 0,
       errors: [],
+      description: '',
     }
   },
 
@@ -74,6 +89,12 @@ export default {
       if (this.state === -1) css = 'ring-red-500'
       return css
     },
+    _cssBorderBox() {
+      let css = 'border-gray-500'
+      if (this.state === 1) css = 'border-green-500'
+      if (this.state === -1) css = 'border-red-500'
+      return css
+    },
     _cssLabelBg() {
       let css = 'bg-gray-300'
       if (this.state === 1) css = 'bg-green-300'
@@ -84,6 +105,10 @@ export default {
       const css = this.disabled ? 'bg-gray-200' : 'bg-white'
       return css
     },
+    _cssCursor() {
+      const css = this.disabled ? 'cursor-not-allowed' : 'cursor-pointer'
+      return css
+    },
     _cssInputText() {
       const css = this.disabled ? 'text-gray-500' : 'text-gray-800'
       return css
@@ -92,15 +117,23 @@ export default {
       return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
     },
   },
+  watch: {
+    value(newVal, oldVal) {
+      this.lvalue = newVal
+    },
+  },
   methods: {
-    _input(event) {
+    _showPopup() {
+      if (this.disabled) return
+      alert('Haloooos')
+    },
+    _enter(event) {
       const value = event.target.value.toUpperCase()
       this.$emit(event.type, value)
       this.$nextTick(this.validate)
     },
     _blur(event) {
       const value = event.target.value.toUpperCase().trim()
-      this.$emit('input', value)
       this.$emit(event.type, value)
       this.$nextTick(this.validate)
     },
