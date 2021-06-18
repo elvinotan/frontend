@@ -4479,9 +4479,9 @@ export default {
       alert('Button Search clicked')
     },
     async restGetExample() {
-      const localStorageId = this.$enum.LOCAL_STORAGE.USER
+      const localStorageId = this.$enum.LOCAL_STORAGE.EXAMPLE
       console.log('Lakukan get dgn opsi localStorage: ', localStorageId)
-      await this.$rest.get(`[base_url]/public-api/users/19/posts`, {
+      await this.$rest.get(`/api/example/biodata/10`, {
         btpnApiKey: '[test_api_key]',
         localStorage: localStorageId,
       })
@@ -4491,10 +4491,10 @@ export default {
       )
     },
     async restPostExample() {
-      const vuexId = this.$enum.VUEX.USER
+      const vuexId = this.$enum.VUEX.EXAMPLE
       console.log('Lakukan post dgn opsi vuex: ', vuexId)
       await this.$rest.post(
-        `[base_url]/public-api/users`,
+        `/api/example/biodata`,
         { id: 1, name: 'nuxt' },
         {
           btpnApiKey: '[test_api_key]',

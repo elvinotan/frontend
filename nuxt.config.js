@@ -18,11 +18,6 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/css/main.css'],
 
-  publicRuntimeConfig: {
-    base_url: process.env.base_url || 'https://gorest.co.in',
-    test_api_key: process.env.test_api_key || 'abxkd-dfkhe-fdmkwh-djdf',
-  },
-
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/component',
@@ -58,10 +53,17 @@ export default {
     '@nuxtjs/axios',
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  //  Used as fallback if no runtime config is provided
   axios: {
     baseURL: 'http://example.com',
     browserBaseURL: 'http://localhost:3000',
+  },
+
+  // ini yang akan di ambil pada saat production, akan ambil dari enviroment variable
+  // BILA tidak ada dan tidak tersedia, maka akan ambil dari configurasi diatas yaitu axios {}
+  publicRuntimeConfig: {
+    base_url: process.env.base_url || 'https://gorest.co.in',
+    test_api_key: process.env.test_api_key || 'abxkd-dfkhe-fdmkwh-djdf',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

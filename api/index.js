@@ -4,8 +4,14 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.get('/test', function (req, res) {
-  res.send('Test successful')
+app.get('/example/biodata/:id', function (req, res) {
+  console.log('Get ', req.params.id)
+  res.json({ id: 1, name: 'yanto', as: 'developer' })
+})
+
+app.post('/example/biodata', function (req, res) {
+  console.log('Post ', req.body)
+  res.json(req.body)
 })
 
 app.post('/general/pagination', function (req, res) {
@@ -145,11 +151,13 @@ app.get('/general/lookup/:group', function (req, res) {
     ])
   }
   if (group === 'EXP') {
-    res.json([
-      { value: 1, description: '1 Th' },
-      { value: 2, description: '2 Th' },
-      { value: 3, description: '3 Th' },
-    ])
+    throw new Error('Sengaja aku errirn')
+
+    // res.json([
+    //   { value: 1, description: '1 Th' },
+    //   { value: 2, description: '2 Th' },
+    //   { value: 3, description: '3 Th' },
+    // ])
   }
 })
 
