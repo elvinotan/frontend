@@ -9,7 +9,7 @@
         :disabled="disabled"
         color="gray"
         :show="true"
-        @click="$emit('Clear')"
+        @click="_clear"
       />
       <EButton
         :id="id + 'Search'"
@@ -17,7 +17,7 @@
         :disabled="disabled"
         color="green"
         :show="true"
-        @click="$emit('Search')"
+        @click="_search"
       />
     </span>
   </ECard>
@@ -30,6 +30,14 @@ export default {
     title: { type: String, required: false, default: 'Please Provide title..' },
     disabled: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
+  },
+  methods: {
+    _search() {
+      this.$emit('Search')
+    },
+    _clear() {
+      this.$emit('Clear')
+    },
   },
 }
 </script>
