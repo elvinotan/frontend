@@ -103,25 +103,31 @@ export default function ({ $axios, $config, $string, store }, inject) {
 
     getLookup(lookupGroup) {
       if (lookupGroup === 'SEX') {
-        return [
-          { value: 'M', description: 'Male' },
-          { value: 'F', description: 'Female' },
-          { value: 'X', description: 'Unknown' },
-        ]
+        return {
+          result: [
+            { value: 'M', description: 'Male' },
+            { value: 'F', description: 'Female' },
+            { value: 'X', description: 'Unknown' },
+          ],
+        }
       }
       if (lookupGroup === 'EDUCATION') {
-        return [
-          { value: 'SD', description: 'SD' },
-          { value: 'SMP', description: 'SMP' },
-          { value: 'SMA', description: 'SMA' },
-        ]
+        return {
+          result: [
+            { value: 'SD', description: 'SD' },
+            { value: 'SMP', description: 'SMP' },
+            { value: 'SMA', description: 'SMA' },
+          ],
+        }
       }
       if (lookupGroup === 'EXP') {
-        return [
-          { value: 1, description: '1 Th' },
-          { value: 2, description: '2 Th' },
-          { value: 3, description: '3 Th' },
-        ]
+        return {
+          result: [
+            { value: 1, description: '1 Th' },
+            { value: 2, description: '2 Th' },
+            { value: 3, description: '3 Th' },
+          ],
+        }
       }
     },
 

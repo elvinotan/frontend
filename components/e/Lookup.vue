@@ -6,14 +6,14 @@
         :class="[_cssBorder]"
       >
         <span
-          v-if="group.label"
+          v-if="label"
           class="font-bold rounded-l text-sm text-gray-800 w-auto p-1"
           :class="[_cssLabelBg]"
         >
-          {{ group.label ? group.label.replace(/\s/g, '&nbsp;') : '' }}
+          {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
         </span>
         <span
-          v-if="group.label && required"
+          v-if="label && required"
           class="font-bold text-center text-sm text-red-800 w-auto p-1"
           :class="[_cssLabelBg]"
         >
@@ -48,16 +48,11 @@
 </template>
 <script>
 export default {
-  name: 'Select',
+  name: 'Lookup',
   props: {
     id: { type: String, required: true, default: null },
-    group: {
-      type: Object,
-      required: false,
-      default: () => {
-        return { label: '', lookup: undefined }
-      },
-    },
+    label: { type: String, required: false, default: '' },
+    lookupGroup: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
     required: { type: Boolean, required: false, default: false },
     disabled: { type: Boolean, required: false, default: false },
@@ -65,22 +60,18 @@ export default {
     as: { type: String, required: false, default: 'string' }, // opsi yang tersedia [string, number]
     vruntime: { type: Function, required: false, default: null },
     value: { type: [String, Number], required: false, default: null },
-    options: {
-      type: Array,
-      required: false,
-      default: () => [],
-    },
   },
   data() {
     return {
       state: 0,
       errors: [],
       lvalue: this.value,
+      options: [],
     }
   },
   computed: {
     _cssRounded() {
-      return this.group.label ? '' : 'rounded'
+      return this.label ? '' : 'rounded'
     },
     _cssBorder() {
       let css = 'ring-gray-500'
@@ -114,8 +105,20 @@ export default {
     value(newVal, oldVal) {
       this.lvalue = newVal
     },
+    lookupGroup(newVal, oldVal) {
+      this._fetchData()
+    },
+  },
+  async created() {
+    await this._fetchData()
   },
   methods: {
+    _fetchData() {
+      if (this.lookupGroup) {
+        const { result } = this.$rest.getLookup(this.lookupGroup)
+        if (result) this.options = result
+      }
+    },
     _input(event) {
       let lvalue = event.target.value
       lvalue = lvalue || null
@@ -151,7 +154,7 @@ export default {
 
       // General validation base on props
       if (this.required && !this.value) {
-        this.errors.push(`${this.group.label} is required`)
+        this.errors.push(`${this.label} is required`)
       }
 
       // add business runtime validation

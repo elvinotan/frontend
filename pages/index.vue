@@ -1961,6 +1961,7 @@
               id="LookupComponent"
               ref="LookupComponent"
               v-model="lookup.value"
+              :label="lookup.label"
               :group="lookup.group"
               :placeholder="lookup.placeholder"
               :required="lookup.required"
@@ -1968,7 +1969,7 @@
               :show="lookup.show"
               :as="lookup.as"
               :vruntime="lookup.vruntime"
-              :options="lookup.options"
+              :lookup-group="lookup.lookupGroup"
             />
             <div class="text-xs">Template : {{ htmlLookup }}</div>
             <br />
@@ -2060,6 +2061,23 @@
                   </td>
                 </tr>
                 <tr>
+                  <td>lookupGrup</td>
+                  <td>
+                    <select v-model="lookup.lookupGroup">
+                      <option value="SEX">SEX</option>
+                      <option value="EDUCATION">EDUCATION</option>
+                      <option value="EXP">EXP</option>
+                    </select>
+                  </td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>''</td>
+                  <td>
+                    Tipe Lookup Group yang akan di fetching dari server,
+                    kemudaian di cache di sisi vuex
+                  </td>
+                </tr>
+                <tr>
                   <td>vruntime</td>
                   <td>Function Callback</td>
                   <td>Function</td>
@@ -2078,17 +2096,6 @@
                   <td>
                     Two way data binding, saat ini data yang di input dalam
                     bentuk upprcase, customize sesuai kebutuhan
-                  </td>
-                </tr>
-                <tr>
-                  <td>options</td>
-                  <td>-</td>
-                  <td>Array</td>
-                  <td>false</td>
-                  <td>''</td>
-                  <td>
-                    Data Option pilihan dengan format { value: null,
-                    description: null }
                   </td>
                 </tr>
               </tbody>
@@ -3819,7 +3826,7 @@ export default {
       htmlSelect:
         '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[{ value: null, description: null }] />',
       htmlLookup:
-        '<ELookup id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[{ value: null, description: null }] />',
+        '<ELookup id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :lookupGroup="" />',
       htmlDialog:
         '<EDialog id="" ref="" :title="" :width="" :height="" :buttons=[{ label: null, color: null }]> Contents </EDialog>',
       htmlConfirmation:
@@ -4025,10 +4032,8 @@ export default {
         },
       },
       lookup: {
-        lookup: {
-          label: 'Jenis Kelamin',
-          group: 'SEX',
-        },
+        label: 'Jenis Kelamin',
+        lookupGroup: 'SEX',
         placeholder: 'Please Select...',
         required: false,
         disabled: false,
