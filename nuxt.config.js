@@ -35,6 +35,10 @@ export default {
     '~/plugins/rest',
   ],
 
+  serverMiddleware: {
+    '/api': '~/api',
+  },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -55,7 +59,10 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://example.com',
+    browserBaseURL: 'http://localhost:3000',
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

@@ -57,11 +57,7 @@
           @on-row-click="_onRowClick"
         >
           <div slot="emptystate" class="text-center">
-            {{
-              alreadyFetchData
-                ? 'No data available'
-                : 'Click search to get data...'
-            }}
+            {{ _dataEmptyDescription }}
           </div>
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field === 'action'">
@@ -202,11 +198,20 @@ export default {
         perPage: 10,
         sort: this.initialSortBy,
       },
+      columnClick: null,
+      error: null,
     }
   },
   computed: {
     disabledButton() {
       return this.selectedRows.length === 0
+    },
+    _dataEmptyDescription() {
+      return this.error
+        ? 'Fail to fetch data, please try again'
+        : this.alreadyFetchData
+        ? 'No data available'
+        : 'Click search to get data...'
     },
   },
   async created() {
@@ -219,7 +224,6 @@ export default {
         name: this._name,
         type: 'container',
         show: true,
-        columnClick: null,
       }
     },
     _constractColumns() {
@@ -297,14 +301,20 @@ export default {
       }
     },
     async fetchData() {
+      this.error = null
       this.isLoading = true
       this.alreadyFetchData = true
       this.serverParams.filter = this._cleanFilter()
-      const { totalRows, rows } = await this.$rest.getPaginationData(
+      const { result, error } = await this.$rest.post(
+        '/api/general/pagination',
         this.serverParams
       )
-      this.totalRows = totalRows
-      this.rows = rows
+      if (result) {
+        this.totalRows = result.totalRows
+        this.rows = result.rows
+      }
+      this.error = error
+      this.isLoading = false
     },
     _cleanFilter() {
       const filter = {}

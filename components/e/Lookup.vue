@@ -106,16 +106,23 @@ export default {
       this.lvalue = newVal
     },
     lookupGroup(newVal, oldVal) {
+      this.options = []
       this._fetchData()
     },
   },
-  async created() {
-    await this._fetchData()
+  created() {
+    this._fetchData()
   },
   methods: {
-    _fetchData() {
+    async _fetchData() {
       if (this.lookupGroup) {
-        const { result } = this.$rest.getLookup(this.lookupGroup)
+        const { result } = await this.$rest.get(
+          `api/general/lookup/${this.lookupGroup}`,
+          {
+            vuex: this.$enum.VUEX.LOOKUP_PREFIX + this.lookupGroup,
+          }
+        )
+
         if (result) this.options = result
       }
     },

@@ -29,13 +29,13 @@ export default function ({ $axios, $config, $string, store }, inject) {
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getVuex(vuex)
-        if (result) return result
+        if (result) return { result }
       }
 
       if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getLocalStorage(localStorage)
-        if (result) return result
+        if (result) return { result }
       }
 
       for (const [key, value] of Object.entries(headers)) {
@@ -68,13 +68,13 @@ export default function ({ $axios, $config, $string, store }, inject) {
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getVuex(vuex)
-        if (result) return result
+        if (result) return { result }
       }
 
       if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
         const result = this.getLocalStorage(localStorage)
-        if (result) return result
+        if (result) return { result }
       }
 
       for (const [key, value] of Object.entries(headers)) {
@@ -98,36 +98,6 @@ export default function ({ $axios, $config, $string, store }, inject) {
         return { result }
       } catch (error) {
         return { error }
-      }
-    },
-
-    getLookup(lookupGroup) {
-      if (lookupGroup === 'SEX') {
-        return {
-          result: [
-            { value: 'M', description: 'Male' },
-            { value: 'F', description: 'Female' },
-            { value: 'X', description: 'Unknown' },
-          ],
-        }
-      }
-      if (lookupGroup === 'EDUCATION') {
-        return {
-          result: [
-            { value: 'SD', description: 'SD' },
-            { value: 'SMP', description: 'SMP' },
-            { value: 'SMA', description: 'SMA' },
-          ],
-        }
-      }
-      if (lookupGroup === 'EXP') {
-        return {
-          result: [
-            { value: 1, description: '1 Th' },
-            { value: 2, description: '2 Th' },
-            { value: 3, description: '3 Th' },
-          ],
-        }
       }
     },
 

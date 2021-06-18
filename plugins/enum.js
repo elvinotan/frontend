@@ -4,7 +4,7 @@ export default function (plugin, inject) {
       USER: 'USER',
     },
     VUEX: {
-      USER: 'USER',
+      LOOKUP_PREFIX: 'LOOKUP_', // Ini adalah prefix untuk component Lookup
     },
   }
 

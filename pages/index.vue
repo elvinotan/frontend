@@ -4040,11 +4040,6 @@ export default {
         show: true,
         value: null,
         as: 'string',
-        options: [
-          { value: 'M', description: 'Male' },
-          { value: 'F', description: 'Female' },
-          { value: 'X', description: 'Unknown' },
-        ],
         vruntime: (data) => {
           console.log(data)
         },
