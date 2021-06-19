@@ -4343,7 +4343,7 @@ export default {
         gapY: 2,
       },
       popupPagination: {
-        value: null,
+        value: 'JAHF',
       },
     }
   },

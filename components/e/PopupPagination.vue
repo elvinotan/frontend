@@ -30,7 +30,7 @@
           :required="required"
           class="field text-sm p-1 px-1 outline-none w-16 uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
-          @keyup.enter="_fetchDataOne"
+          @blur="_blur"
         />
         <span
           class="font-bold text-center text-sm w-10 p-1 border-l-2 border-r-2"
@@ -161,12 +161,7 @@ export default {
       return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
     },
   },
-  watch: {
-    value(newVal, oldVal) {
-      this.lvalue = newVal
-      this._fetchDataOne()
-    },
-  },
+
   mounted() {
     this._fetchDataOne()
   },
@@ -190,35 +185,24 @@ export default {
       if (this.disabled) return
       this.pagination.show = false
     },
+    _blur(event) {
+      const value = event.target.value.toUpperCase().trim()
+      this.$emit('input', value)
+      this.$emit(event.type, value)
+      this.$nextTick(this.validate)
+    },
     async _fetchDataOne(event) {
-      if (!this.lvalue) return
+      if (!this.value) return
 
-      const lvalue = this.lvalue.toUpperCase().trim()
+      const lvalue = this.value.toUpperCase().trim()
       const { result } = await this.$rest.post(`api/general/pagination/popup`, {
         code: lvalue,
         picker: this.picker,
       })
 
       if (result) {
-        if (result.length === 0) {
-          // Data tidak terdapat di db
-          this.description = 'Data Not Found'
-          this.$emit('input', null)
-          this.$nextTick(this.validate)
-          this._showPopup()
-        }
         if (result.length === 1) {
-          // Tepat Data terdapat di dalam db dan ukurannya 1
           this.description = result[0].codeDescription
-          this.$emit('input', lvalue)
-          this.$nextTick(this.validate)
-          this._hidePopup()
-        }
-        if (result.length > 1) {
-          this.description = 'Multipe Data Found'
-          this.$emit('input', null)
-          this.$nextTick(this.validate)
-          this._showPopup()
         }
       }
     },
@@ -236,7 +220,7 @@ export default {
     hasError() {
       return this.errors.length > 0
     },
-    validate() {
+    async validate() {
       this.clearError()
 
       // General validation base on props
@@ -252,6 +236,37 @@ export default {
         const error = this.vruntime(this.value)
         if (error) this.errors.push(error)
       }
+
+      if (this.errors.length === 0) {
+        // lakukan validasi untuk code
+        const { result, error } = await this.$rest.post(
+          `api/general/pagination/popup`,
+          {
+            code: this.value,
+            picker: this.picker,
+          }
+        )
+
+        if (error) {
+          this.errors.push('Fail to validate code')
+        }
+
+        if (result) {
+          if (result.length === 1) {
+            // Success schenario
+            this.description = result[0].codeDescription
+          }
+          if (result.length === 0) {
+            this.description = ''
+            this.errors.push(`Code ${this.value}, Data Not Found`)
+          }
+          if (result.length > 1) {
+            this.description = ''
+            this.errors.push(`Code ${this.value}, Multipe Data Found`)
+          }
+        }
+      }
+
       const validation = { valid: !this.hasError(), errors: this.errors }
       this.state = validation.valid ? 1 : -1
       return validation

@@ -13,6 +13,10 @@
           :rows="rows"
           :fixed-header="true"
           :row-style-class="_rowStyleClassFn"
+          :search-options="{
+            enabled: true,
+            trigger: 'enter',
+          }"
           :pagination-options="{
             enabled: true,
             perPageDropdownEnabled: false,
@@ -28,6 +32,7 @@
           }"
           style-class="vgt-table striped bordered condensed"
           class="border-2"
+          @on-search="_onSearch"
           @on-page-change="_onPageChange"
           @on-sort-change="_onSortChange"
           @on-cell-click="_onCellClick"
@@ -258,6 +263,10 @@ export default {
     },
     async _onSortChange(params) {
       this.serverParams.sort = params
+      await this.fetchData()
+    },
+    async _onSearch(params) {
+      this.serverParams.search = params.searchTerm
       await this.fetchData()
     },
   },
