@@ -179,7 +179,7 @@ export default {
       if (this.disabled) return
       this.pagination.show = true
       const lvalue = this.lvalue ? this.lvalue.toUpperCase().trim() : ''
-      this.$refs[this.id + 'PopupPaginationHeaderless'].fetchData(lvalue)
+      this.$refs[this.id + 'PopupPaginationHeaderless'].onSearch(lvalue)
       // this.$nextTick(() => {
       //   const htmlContent = this.$wrapper
       //     .jquery('#' + this.id + 'PopupPaginationHeaderless div div div form')

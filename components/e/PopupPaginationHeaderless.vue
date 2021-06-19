@@ -28,7 +28,6 @@
           }"
           style-class="vgt-table striped bordered condensed"
           class="border-2"
-          @on-search="_onSearch"
           @on-page-change="_onPageChange"
           @on-sort-change="_onSortChange"
           @on-cell-click="_onCellClick"
@@ -38,13 +37,28 @@
             {{ _dataEmptyDescription }}
           </div>
           <div slot="table-actions" class="py-0.5 px-2">
-            <input v-model="searchTerm" type="text" />
-            <EButton
-              :id="'PopupPaginationHeaderless' + id + 'Close'"
-              label="Close"
-              class="w-full"
-              @click="$emit('Close')"
-            />
+            <ECol :col="2">
+              <span
+                class="flex text-xs rounded border-0 outline-none ring-2"
+                :class="[_cssBorder]"
+              >
+                <input
+                  :id="id + 'SearchTerm'"
+                  v-model="lsearchTerm"
+                  autocomplete="off"
+                  type="text"
+                  :maxlength="4"
+                  class="field text-sm rounded p-1 px-1 w-auto outline-none uppercase placeholder-blueGray-300 relative"
+                  @keyup.enter="onSearchEvent"
+                />
+              </span>
+              <EButton
+                :id="'PopupPaginationHeaderless' + id + 'Close'"
+                label="Close"
+                class="w-full"
+                @click="$emit('Close')"
+              />
+            </ECol>
           </div>
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.ltype === 'boolean'">
@@ -80,6 +94,7 @@ export default {
   name: 'PopupPaginationHeaderless',
   props: {
     id: { type: String, required: true, default: null },
+    searchTerm: { type: String, required: false, default: null },
     show: { type: Boolean, required: false, default: true },
     disabled: { type: Boolean, required: false, default: false },
     columns: { type: Array, required: false, default: () => [] },
@@ -95,7 +110,7 @@ export default {
       rows: [],
       totalRows: 0,
       alreadyFetchData: false,
-      searchTerm: '',
+      lsearchTerm: this.searchTerm,
       serverParams: {
         picker: this.picker,
         search: '',
@@ -109,6 +124,12 @@ export default {
   computed: {
     disabledButton() {
       return this.selectedRows.length === 0
+    },
+    _cssBorder() {
+      let css = 'ring-gray-500'
+      if (this.state === 1) css = 'ring-green-500'
+      if (this.state === -1) css = 'ring-red-500'
+      return css
     },
     _dataEmptyDescription() {
       return this.error
@@ -194,13 +215,22 @@ export default {
         this.lcolumns.push(lcolumn)
       }
     },
-    async fetchData(searchTerm = '') {
+    async onSearchEvent() {
+      await this.onSearch()
+    },
+    async onSearch(lsearchTerm = '') {
+      this.lsearchTerm = lsearchTerm || this.lsearchTerm
+      this.serverParams.search = this.lsearchTerm.toUpperCase().trim()
+
+      await this.fetchData()
+    },
+
+    async fetchData() {
       this.error = null
       this.isLoading = true
       this.alreadyFetchData = true
       this.serverParams.page = 1
       this.serverParams.filter = this._cleanFilter()
-      this.serverParams.search = searchTerm
       const { result, error } = await this.$rest.post(
         '/api/general/pagination/page',
         this.serverParams
@@ -261,10 +291,6 @@ export default {
     },
     async _onSortChange(params) {
       this.serverParams.sort = params
-      await this.fetchData()
-    },
-    async _onSearch(params) {
-      this.serverParams.search = params.searchTerm
       await this.fetchData()
     },
   },
