@@ -30,7 +30,8 @@
           :required="required"
           class="field text-sm p-1 px-1 outline-none w-16 uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
-          @blur="_blur"
+          @keyup.enter="_fetchDataOne"
+          @_blur="_fetchDataOne"
         />
         <span
           class="font-bold text-center text-sm w-10 p-1 border-l-2 border-r-2"
@@ -53,16 +54,16 @@
         {{ _info }}
       </p>
       <EServerPagination
-        id="ServerPaginationComponent"
-        ref="ServerPaginationComponent"
+        :id="id + `ServerPagination`"
+        :ref="id + `ServerPagination`"
         :label="label"
         :columns="pagination.columns"
         :show="pagination.show"
-        :disabled="pagination.disabled"
-        :auto-load="pagination.autoLoad"
+        :disabled="false"
+        :auto-load="false"
         :picker="pagination.picker"
         :filter="pagination.filter"
-        @RowClick="pagination"
+        @RowClick="_rowClick"
       />
     </div>
   </div>
@@ -73,6 +74,7 @@ export default {
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
+    picker: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
     required: { type: Boolean, required: false, default: false },
     maxlength: { type: Number, required: false, default: 4 },
@@ -88,9 +90,7 @@ export default {
       errors: [],
       description: '',
       pagination: {
-        show: true,
-        disabled: false,
-        autoLoad: true,
+        show: false,
         picker: 'pagingCustomer',
         filter: {
           age: 12,
@@ -99,52 +99,20 @@ export default {
         },
         columns: [
           {
+            label: 'Code',
+            field: 'code',
+            sortable: false,
+            width: '200px',
+            tooltip: 'Tanggal Lahir Customer',
+            type: 'text',
+          },
+          {
             label: 'Name',
             field: 'name',
             sortable: true,
             width: '750px',
             tooltip: 'Column Name',
             type: 'text',
-          },
-          {
-            label: 'Bith Date',
-            field: 'birthDate',
-            sortable: false,
-            width: '200px',
-            tooltip: 'Tanggal Lahir Customer',
-            type: 'date',
-          },
-          {
-            label: 'Age',
-            field: 'age',
-            sortable: true,
-            width: '100px',
-            tooltip: 'Umur Customer ',
-            type: 'number',
-          },
-          {
-            label: 'Saving ($)',
-            field: 'saving',
-            sortable: true,
-            width: '200px',
-            tooltip: 'Simpanan Dalam mata uang dollar',
-            type: 'decimal',
-          },
-          {
-            label: 'Loan Alocate',
-            field: 'loanPct',
-            sortable: true,
-            width: '150px',
-            tooltip: 'Alokasi jatah pinjaman',
-            type: 'percentage',
-          },
-          {
-            label: 'Merried',
-            field: 'merried',
-            sortable: true,
-            width: '100px',
-            tooltip: 'Sudah menikah atau belum',
-            type: 'boolean',
           },
         ],
       },
@@ -194,20 +162,60 @@ export default {
       this.lvalue = newVal
     },
   },
+  mounted() {
+    this._fetchDataOne()
+  },
   methods: {
+    _rowClick({ row }) {
+      if (row && row.code) {
+        this.lvalue = row.code
+        this.description = row.codeDescription
+        this.$emit('input', this.lvalue)
+        this.$nextTick(this.validate)
+        this.pagination.show = false
+      }
+    },
     _showPopup() {
       if (this.disabled) return
-      alert('Haloooos')
+      this.pagination.show = true
+      const lvalue = this.lvalue ? this.lvalue.toUpperCase().trim() : ''
+      this.$refs[this.id + 'ServerPagination'].fetchData(lvalue)
     },
-    _enter(event) {
-      const value = event.target.value.toUpperCase()
-      this.$emit(event.type, value)
-      this.$nextTick(this.validate)
+    _hidePopup() {
+      if (this.disabled) return
+      this.pagination.show = false
     },
-    _blur(event) {
-      const value = event.target.value.toUpperCase().trim()
-      this.$emit(event.type, value)
-      this.$nextTick(this.validate)
+    async _fetchDataOne(event) {
+      if (!this.lvalue) return
+
+      const lvalue = this.lvalue.toUpperCase().trim()
+      const { result } = await this.$rest.post(`api/general/pagination/popup`, {
+        code: lvalue,
+        picker: this.picker,
+      })
+
+      if (result) {
+        if (result.length === 0) {
+          // Data tidak terdapat di db
+          this.description = 'Data Not Found'
+          this.$emit('input', null)
+          this.$nextTick(this.validate)
+          this._showPopup()
+        }
+        if (result.length === 1) {
+          // Tepat Data terdapat di dalam db dan ukurannya 1
+          this.description = result[0].codeDescription
+          this.$emit('input', lvalue)
+          this.$nextTick(this.validate)
+          this._hidePopup()
+        }
+        if (result.length > 1) {
+          this.description = 'Multipe Data Found'
+          this.$emit('input', null)
+          this.$nextTick(this.validate)
+          this._showPopup()
+        }
+      }
     },
     metaData() {
       return {

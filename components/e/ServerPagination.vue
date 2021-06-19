@@ -300,13 +300,14 @@ export default {
         })
       }
     },
-    async fetchData() {
+    async fetchData(searchTerm = '') {
       this.error = null
       this.isLoading = true
       this.alreadyFetchData = true
       this.serverParams.filter = this._cleanFilter()
+      if (searchTerm) this.serverParams.search = searchTerm
       const { result, error } = await this.$rest.post(
-        '/api/general/pagination',
+        '/api/general/pagination/page',
         this.serverParams
       )
       if (result) {
