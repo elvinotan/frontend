@@ -3383,46 +3383,7 @@
                 placeholder="Code"
                 :required="true"
               />
-              <EPopupPagination
-                id="PopupPaginationComponent"
-                ref="PopupPaginationComponent"
-                v-model="popupPagination.value"
-                label="Kode Kendaraan"
-                placeholder="Code"
-                :required="true"
-              />
-              <EPopupPagination
-                id="PopupPaginationComponent"
-                ref="PopupPaginationComponent"
-                v-model="popupPagination.value"
-                label="Kode Kendaraan"
-                placeholder="Code"
-                :required="true"
-              />
-              <EPopupPagination
-                id="PopupPaginationComponent"
-                ref="PopupPaginationComponent"
-                v-model="popupPagination.value"
-                label="Kode Kendaraan"
-                placeholder="Code"
-                :required="true"
-              />
-              <EPopupPagination
-                id="PopupPaginationComponent"
-                ref="PopupPaginationComponent"
-                v-model="popupPagination.value"
-                label="Kode Kendaraan"
-                placeholder="Code"
-                :required="true"
-              />
-              <EPopupPagination
-                id="PopupPaginationComponent"
-                ref="PopupPaginationComponent"
-                v-model="popupPagination.value"
-                label="Kode Kendaraan"
-                placeholder="Code"
-                :required="true"
-              />
+              {{ popupPagination }}
             </ECol>
           </EForm>
           <EForm id="Col">
