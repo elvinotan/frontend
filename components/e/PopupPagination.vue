@@ -180,13 +180,6 @@ export default {
       this.pagination.show = true
       const lvalue = this.lvalue ? this.lvalue.toUpperCase().trim() : ''
       this.$refs[this.id + 'PopupPaginationHeaderless'].onSearch(lvalue)
-      // this.$nextTick(() => {
-      //   const htmlContent = this.$wrapper
-      //     .jquery('#' + this.id + 'PopupPaginationHeaderless div div div form')
-      //     .children()[1]
-      //   const searchId = this.$wrapper.jquery(htmlContent).attr('id')
-      //   this.$wrapper.jquery('#' + searchId).val('ABC')
-      // })
     },
     _hidePopup() {
       if (this.disabled) return
@@ -232,6 +225,7 @@ export default {
 
       // General validation base on props
       if (this.required && !this.value) {
+        this.description = ''
         this.errors.push(`${this.label} is required`)
       }
       if (this.value && this.value.length > this.maxlength) {
@@ -255,6 +249,7 @@ export default {
         )
 
         if (error) {
+          this.description = ''
           this.errors.push('Fail to validate code')
         }
 
