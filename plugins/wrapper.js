@@ -1,5 +1,10 @@
+const $ = require('jquery')
+
 export default function (plugin, inject) {
   const wrapper = {
+    jquery() {
+      return $
+    },
     disabled: (data = null, condition = false) => {
       if (data) {
         for (const p in data) {
