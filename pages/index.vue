@@ -3374,14 +3374,56 @@
             </table>
           </EForm>
           <EForm id="PopupPagination">
-            <EPopupPagination
-              id="PopupPaginationComponent"
-              ref="PopupPaginationComponent"
-              v-model="popupPagination.value"
-              label="Kode Kendaraan"
-              placeholder="Code"
-              :required="true"
-            />
+            <ECol :col="3">
+              <EPopupPagination
+                id="PopupPaginationComponent"
+                ref="PopupPaginationComponent"
+                v-model="popupPagination.value"
+                label="Kode Kendaraan"
+                placeholder="Code"
+                :required="true"
+              />
+              <EPopupPagination
+                id="PopupPaginationComponent"
+                ref="PopupPaginationComponent"
+                v-model="popupPagination.value"
+                label="Kode Kendaraan"
+                placeholder="Code"
+                :required="true"
+              />
+              <EPopupPagination
+                id="PopupPaginationComponent"
+                ref="PopupPaginationComponent"
+                v-model="popupPagination.value"
+                label="Kode Kendaraan"
+                placeholder="Code"
+                :required="true"
+              />
+              <EPopupPagination
+                id="PopupPaginationComponent"
+                ref="PopupPaginationComponent"
+                v-model="popupPagination.value"
+                label="Kode Kendaraan"
+                placeholder="Code"
+                :required="true"
+              />
+              <EPopupPagination
+                id="PopupPaginationComponent"
+                ref="PopupPaginationComponent"
+                v-model="popupPagination.value"
+                label="Kode Kendaraan"
+                placeholder="Code"
+                :required="true"
+              />
+              <EPopupPagination
+                id="PopupPaginationComponent"
+                ref="PopupPaginationComponent"
+                v-model="popupPagination.value"
+                label="Kode Kendaraan"
+                placeholder="Code"
+                :required="true"
+              />
+            </ECol>
           </EForm>
           <EForm id="Col">
             <ECol

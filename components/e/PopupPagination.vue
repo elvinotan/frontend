@@ -41,21 +41,25 @@
           ?
         </span>
         <span
-          class="text-left w-full text-sm w-auto p-1"
+          class="text-left w-full text-sm w-auto p-1 rounded-r"
           :class="[_cssLabelBg, _cssInputText]"
         >
           {{ description }}
         </span>
       </span>
-      <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
+      <p
+        v-if="!pagination.show && hasError()"
+        class="text-red-500 text-right text-xs italic"
+      >
         {{ errors[0] }}
       </p>
-      <p v-else class="text-right text-xs italic">
+      <p v-else-if="!pagination.show" class="text-right text-xs italic">
         {{ _info }}
       </p>
-      <EServerPagination
-        :id="id + `ServerPagination`"
-        :ref="id + `ServerPagination`"
+      <EPopupPaginationHeaderless
+        :id="id + `PopupPaginationHeaderless`"
+        :ref="id + `PopupPaginationHeaderless`"
+        class="absolute overflow-hidden w-auto p-px z-10"
         :label="label"
         :columns="pagination.columns"
         :show="pagination.show"
@@ -64,6 +68,7 @@
         :picker="pagination.picker"
         :filter="pagination.filter"
         @RowClick="_rowClick"
+        @Close="_hidePopup"
       />
     </div>
   </div>
@@ -102,7 +107,7 @@ export default {
             label: 'Code',
             field: 'code',
             sortable: false,
-            width: '200px',
+            width: '100px',
             tooltip: 'Tanggal Lahir Customer',
             type: 'text',
           },
@@ -110,7 +115,7 @@ export default {
             label: 'Name',
             field: 'name',
             sortable: true,
-            width: '750px',
+            width: '150px',
             tooltip: 'Column Name',
             type: 'text',
           },
@@ -160,6 +165,7 @@ export default {
   watch: {
     value(newVal, oldVal) {
       this.lvalue = newVal
+      this._fetchDataOne()
     },
   },
   mounted() {
@@ -179,7 +185,7 @@ export default {
       if (this.disabled) return
       this.pagination.show = true
       const lvalue = this.lvalue ? this.lvalue.toUpperCase().trim() : ''
-      this.$refs[this.id + 'ServerPagination'].fetchData(lvalue)
+      this.$refs[this.id + 'PopupPaginationHeaderless'].fetchData(lvalue)
     },
     _hidePopup() {
       if (this.disabled) return
