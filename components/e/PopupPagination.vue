@@ -180,6 +180,13 @@ export default {
       this.pagination.show = true
       const lvalue = this.lvalue ? this.lvalue.toUpperCase().trim() : ''
       this.$refs[this.id + 'PopupPaginationHeaderless'].fetchData(lvalue)
+      // this.$nextTick(() => {
+      //   const htmlContent = this.$wrapper
+      //     .jquery('#' + this.id + 'PopupPaginationHeaderless div div div form')
+      //     .children()[1]
+      //   const searchId = this.$wrapper.jquery(htmlContent).attr('id')
+      //   this.$wrapper.jquery('#' + searchId).val('ABC')
+      // })
     },
     _hidePopup() {
       if (this.disabled) return

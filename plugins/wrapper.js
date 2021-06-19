@@ -2,8 +2,8 @@ const $ = require('jquery')
 
 export default function (plugin, inject) {
   const wrapper = {
-    jquery() {
-      return $
+    jquery(selector) {
+      return $(selector)
     },
     disabled: (data = null, condition = false) => {
       if (data) {

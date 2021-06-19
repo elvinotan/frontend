@@ -13,10 +13,6 @@
           :rows="rows"
           :fixed-header="true"
           :row-style-class="_rowStyleClassFn"
-          :search-options="{
-            enabled: true,
-            trigger: 'enter',
-          }"
           :pagination-options="{
             enabled: true,
             perPageDropdownEnabled: false,
@@ -42,6 +38,7 @@
             {{ _dataEmptyDescription }}
           </div>
           <div slot="table-actions" class="py-0.5 px-2">
+            <input v-model="searchTerm" type="text" />
             <EButton
               :id="'PopupPaginationHeaderless' + id + 'Close'"
               label="Close"
@@ -98,6 +95,7 @@ export default {
       rows: [],
       totalRows: 0,
       alreadyFetchData: false,
+      searchTerm: '',
       serverParams: {
         picker: this.picker,
         search: '',
