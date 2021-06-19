@@ -31,7 +31,6 @@
           class="field text-sm p-1 px-1 outline-none w-16 uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
           @keyup.enter="_fetchDataOne"
-          @_blur="_fetchDataOne"
         />
         <span
           class="font-bold text-center text-sm w-10 p-1 border-l-2 border-r-2"

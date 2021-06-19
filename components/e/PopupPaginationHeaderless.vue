@@ -28,7 +28,6 @@
           }"
           style-class="vgt-table striped bordered condensed"
           class="border-2"
-          @on-search="_onSearch"
           @on-page-change="_onPageChange"
           @on-sort-change="_onSortChange"
           @on-cell-click="_onCellClick"
@@ -196,8 +195,9 @@ export default {
       this.error = null
       this.isLoading = true
       this.alreadyFetchData = true
+      this.serverParams.page = 1
       this.serverParams.filter = this._cleanFilter()
-      if (searchTerm) this.serverParams.search = searchTerm
+      this.serverParams.search = searchTerm
       const { result, error } = await this.$rest.post(
         '/api/general/pagination/page',
         this.serverParams
@@ -258,10 +258,6 @@ export default {
     },
     async _onSortChange(params) {
       this.serverParams.sort = params
-      await this.fetchData()
-    },
-    async _onSearch(params) {
-      this.serverParams.search = params.searchTerm
       await this.fetchData()
     },
   },
