@@ -3378,8 +3378,8 @@
               id="PopupPaginationComponent"
               ref="PopupPaginationComponent"
               v-model="popupPagination.value"
-              label="Code"
-              placeholder="Input Code"
+              label="Kode Kendaraan"
+              placeholder="Code"
               :required="true"
             />
           </EForm>

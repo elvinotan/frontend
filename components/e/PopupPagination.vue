@@ -46,13 +46,24 @@
           {{ description }}
         </span>
       </span>
-
       <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
         {{ errors[0] }}
       </p>
       <p v-else class="text-right text-xs italic">
         {{ _info }}
       </p>
+      <EServerPagination
+        id="ServerPaginationComponent"
+        ref="ServerPaginationComponent"
+        :label="label"
+        :columns="pagination.columns"
+        :show="pagination.show"
+        :disabled="pagination.disabled"
+        :auto-load="pagination.autoLoad"
+        :picker="pagination.picker"
+        :filter="pagination.filter"
+        @RowClick="pagination"
+      />
     </div>
   </div>
 </template>
@@ -76,6 +87,67 @@ export default {
       state: 0,
       errors: [],
       description: '',
+      pagination: {
+        show: true,
+        disabled: false,
+        autoLoad: true,
+        picker: 'pagingCustomer',
+        filter: {
+          age: 12,
+          birthDate: undefined,
+          name: 'elvino',
+        },
+        columns: [
+          {
+            label: 'Name',
+            field: 'name',
+            sortable: true,
+            width: '750px',
+            tooltip: 'Column Name',
+            type: 'text',
+          },
+          {
+            label: 'Bith Date',
+            field: 'birthDate',
+            sortable: false,
+            width: '200px',
+            tooltip: 'Tanggal Lahir Customer',
+            type: 'date',
+          },
+          {
+            label: 'Age',
+            field: 'age',
+            sortable: true,
+            width: '100px',
+            tooltip: 'Umur Customer ',
+            type: 'number',
+          },
+          {
+            label: 'Saving ($)',
+            field: 'saving',
+            sortable: true,
+            width: '200px',
+            tooltip: 'Simpanan Dalam mata uang dollar',
+            type: 'decimal',
+          },
+          {
+            label: 'Loan Alocate',
+            field: 'loanPct',
+            sortable: true,
+            width: '150px',
+            tooltip: 'Alokasi jatah pinjaman',
+            type: 'percentage',
+          },
+          {
+            label: 'Merried',
+            field: 'merried',
+            sortable: true,
+            width: '100px',
+            tooltip: 'Sudah menikah atau belum',
+            type: 'boolean',
+          },
+        ],
+      },
     }
   },
 
