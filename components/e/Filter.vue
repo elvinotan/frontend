@@ -2,7 +2,7 @@
   <ECard :label="title" :disabled="disabled" :show="show">
     <slot />
 
-    <span class="w-auto p-2 flex justify-end space-x-5 content-start">
+    <span class="w-full p-1 flex justify-end space-x-5 content-start">
       <EButton
         :id="id + 'Clear'"
         label="Clear"

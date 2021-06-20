@@ -297,16 +297,17 @@ export default {
           field: 'action',
           thClass: 'vgt-center-align text-sm',
           tdClass: 'vgt-center-align text-sm',
+          width: '100px',
           sortable: false,
         })
       }
     },
-    async fetchData(searchTerm = '') {
+    async fetchData() {
+      // TODO Ambil search yang ada Seach component di atas, agar saat click search on filter, search text ke bawa
       this.error = null
       this.isLoading = true
       this.alreadyFetchData = true
       this.serverParams.filter = this._cleanFilter()
-      if (searchTerm) this.serverParams.search = searchTerm
       const { result, error } = await this.$rest.post(
         '/api/general/pagination/page',
         this.serverParams
