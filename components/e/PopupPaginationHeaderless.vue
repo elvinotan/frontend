@@ -61,7 +61,7 @@
                 <EButton
                   :id="'PopupPaginationHeaderless' + id + 'Close'"
                   label="Close"
-                  @click="$emit('Close')"
+                  @click="_onClose"
                 />
               </ECol>
             </ECol>
@@ -92,7 +92,6 @@ export default {
   props: {
     id: { type: String, required: true, default: null },
     show: { type: Boolean, required: false, default: true },
-    disabled: { type: Boolean, required: false, default: false },
     columns: { type: Array, required: false, default: () => [] },
     picker: { type: String, required: false, default: '' },
     filter: {
@@ -122,9 +121,6 @@ export default {
     }
   },
   computed: {
-    disabledButton() {
-      return this.selectedRows.length === 0
-    },
     _cssBorder() {
       let css = 'ring-gray-500'
       if (this.state === 1) css = 'ring-green-500'
@@ -212,7 +208,6 @@ export default {
         this.lcolumns.push(lcolumn)
       }
     },
-
     async fetchData() {
       this.error = null
       this.isLoading = true
@@ -289,7 +284,13 @@ export default {
     },
     async _onSearch() {
       this.serverParams.search = this.search
+        ? this.search.toUpperCase().trim()
+        : this.search
       await this.fetchData()
+    },
+    _onClose() {
+      this.$emit('Close')
+      this.rows = []
     },
   },
 }

@@ -169,7 +169,13 @@ export default {
     actions: { type: Array, required: false, default: () => [] },
     buttons: { type: Array, required: false, default: () => [] },
     initialSortBy: { type: Array, required: false, default: () => [] },
-    filter: { type: Object, required: false, default: () => {} },
+    filter: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {}
+      },
+    },
     disabledAction: {
       type: Function,
       required: false,

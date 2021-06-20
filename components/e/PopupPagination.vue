@@ -173,53 +173,62 @@ export default {
       return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
     },
   },
-
   mounted() {
     this._fetchDataOne()
   },
   methods: {
     _rowClick({ row }) {
       if (row && row.popupCode) {
+        this.pagination.show = false
+
         this.lvalue = row.popupCode
         this.$emit('input', this.lvalue)
         this.$nextTick(this.validate)
-        this.pagination.show = false
       } else {
         console.log(
-          'Pastikan hasil query megembalikan popupCode dan popupDescription'
+          'WARNING !!!!, Pastikan hasil query mengembalikan popupCode dan popupDescription'
         )
       }
     },
     _showPopup() {
       if (this.disabled) return
+
       this.pagination.show = true
+
       const lvalue = this.lvalue ? this.lvalue.toUpperCase().trim() : null
       this.$refs[this.id + 'PopupPaginationHeaderless'].onSearch(lvalue)
     },
     _hidePopup() {
-      if (this.disabled) return
       this.pagination.show = false
     },
     _blur(event) {
-      let value = event.target.value.toUpperCase().trim()
-      value = value || null
-      this.$emit('input', value)
-      this.$emit(event.type, value)
+      let lvalue = event.target.value.toUpperCase().trim()
+      lvalue = lvalue || null
+      this.$emit('input', lvalue)
+      this.$emit(event.type, lvalue)
       this.$nextTick(this.validate)
     },
     async _fetchDataOne(event) {
       if (!this.value) return
 
       const lvalue = this.value.toUpperCase().trim()
-      const { result } = await this.$rest.post(`api/general/pagination/popup`, {
-        code: lvalue,
-        picker: this.picker,
-      })
-
-      if (result) {
-        if (result.length === 1) {
-          this.description = result[0].popupDescription
+      const { result } = await this.$rest.post(
+        `api/general/pagination/popup`,
+        {
+          code: lvalue,
+          picker: this.picker,
+        },
+        {
+          vuex:
+            this.$enum.VUEX.POPUPPAGINATION_PREFIX + this.picker + '_' + lvalue,
+          vuexFn: (result) => {
+            return result.length === 1
+          },
         }
+      )
+
+      if (result && result.length === 1) {
+        this.description = result[0].popupDescription
       }
     },
     metaData() {
@@ -261,6 +270,16 @@ export default {
           {
             code: this.value,
             picker: this.picker,
+          },
+          {
+            vuex:
+              this.$enum.VUEX.POPUPPAGINATION_PREFIX +
+              this.picker +
+              '_' +
+              this.value,
+            vuexFn: (result) => {
+              return result.length === 1
+            },
           }
         )
 

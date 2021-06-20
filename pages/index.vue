@@ -3381,7 +3381,9 @@
                 v-model="popupPagination.value"
                 label="Kode Kendaraan"
                 placeholder="Code"
-                :required="true"
+                picker="Customer"
+                :required="false"
+                :disabled="false"
               />
               {{ popupPagination }}
             </ECol>
@@ -4343,7 +4345,7 @@ export default {
         gapY: 2,
       },
       popupPagination: {
-        value: 'JAHF',
+        value: 'JAH',
       },
     }
   },

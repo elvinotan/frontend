@@ -6,6 +6,7 @@ export default function (plugin, inject) {
     VUEX: {
       EXAMPLE: 'EXAMPLE',
       LOOKUP_PREFIX: 'LOOKUP_', // Ini adalah prefix untuk component Lookup
+      POPUPPAGINATION_PREFIX: 'POPUPPAGINATION_', // Ini adalah prefix untuk componentn popupPagination
     },
   }
 

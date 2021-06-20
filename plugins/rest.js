@@ -24,7 +24,14 @@ export default function ({ $axios, $config, $string, store }, inject) {
 
     // Rest Call base on type
     async get(pUrl = '', pHeaders = {}) {
-      const { forceUpdate, vuex, localStorage, ...headers } = pHeaders
+      const {
+        forceUpdate,
+        vuex,
+        vuexFn,
+        localStorage,
+        localStorageFn,
+        ...headers
+      } = pHeaders
 
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
@@ -49,10 +56,16 @@ export default function ({ $axios, $config, $string, store }, inject) {
 
         if (result) {
           if (vuex) {
-            this.setVuex(vuex, result)
+            const isSave = vuexFn ? vuexFn(result) : true
+            if (isSave) {
+              this.setVuex(vuex, result)
+            }
           }
           if (localStorage) {
-            this.setLocalStorage(localStorage, JSON.stringify(result))
+            const isSave = localStorageFn ? localStorageFn(result) : true
+            if (isSave) {
+              this.setLocalStorage(localStorage, JSON.stringify(result))
+            }
           }
         }
 
@@ -63,7 +76,14 @@ export default function ({ $axios, $config, $string, store }, inject) {
     },
 
     async post(pUrl = '', payload = {}, pHeaders = {}) {
-      const { forceUpdate, vuex, localStorage, ...headers } = pHeaders
+      const {
+        forceUpdate,
+        vuex,
+        vuexFn,
+        localStorage,
+        localStorageFn,
+        ...headers
+      } = pHeaders
 
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
@@ -88,10 +108,17 @@ export default function ({ $axios, $config, $string, store }, inject) {
 
         if (result) {
           if (vuex) {
-            this.setVuex(vuex, result)
+            const isSave = vuexFn ? vuexFn(result) : true
+            if (isSave) {
+              this.setVuex(vuex, result)
+            }
           }
+
           if (localStorage) {
-            this.setLocalStorage(localStorage, JSON.stringify(result))
+            const isSave = localStorageFn ? localStorageFn(result) : true
+            if (isSave) {
+              this.setLocalStorage(localStorage, JSON.stringify(result))
+            }
           }
         }
 
