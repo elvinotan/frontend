@@ -30,6 +30,7 @@
           :required="required"
           class="field text-sm p-1 px-1 outline-none w-16 uppercase placeholder-blueGray-300 relative"
           :class="[_cssRounded, _cssInputBg, _cssInputText]"
+          @keyup.enter="_blur"
           @blur="_blur"
         />
         <span
@@ -78,7 +79,6 @@ export default {
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
-    picker: { type: String, required: false, default: '' },
     placeholder: { type: String, required: false, default: '' },
     required: { type: Boolean, required: false, default: false },
     maxlength: { type: Number, required: false, default: 4 },
@@ -86,6 +86,39 @@ export default {
     show: { type: Boolean, required: false, default: true },
     value: { type: String, required: false, default: '' },
     vruntime: { type: Function, required: false, default: null },
+
+    picker: { type: String, required: false, default: '' },
+    filter: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {}
+      },
+    },
+    columns: {
+      type: Array,
+      required: false,
+      default: () => {
+        return [
+          {
+            label: 'Code',
+            field: 'popupCode',
+            sortable: true,
+            width: '75px',
+            tooltip: 'Code',
+            type: 'text',
+          },
+          {
+            label: 'Description',
+            field: 'popupDescription',
+            sortable: true,
+            width: '150px',
+            tooltip: 'Description',
+            type: 'text',
+          },
+        ]
+      },
+    },
   },
   data() {
     return {
@@ -95,30 +128,9 @@ export default {
       description: '',
       pagination: {
         show: false,
-        picker: 'pagingCustomer',
-        filter: {
-          age: 12,
-          birthDate: undefined,
-          name: 'elvino',
-        },
-        columns: [
-          {
-            label: 'Code',
-            field: 'code',
-            sortable: false,
-            width: '100px',
-            tooltip: 'Tanggal Lahir Customer',
-            type: 'text',
-          },
-          {
-            label: 'Name',
-            field: 'name',
-            sortable: true,
-            width: '150px',
-            tooltip: 'Column Name',
-            type: 'text',
-          },
-        ],
+        picker: this.picker,
+        filter: this.filter,
+        columns: this.columns,
       },
     }
   },
@@ -167,18 +179,21 @@ export default {
   },
   methods: {
     _rowClick({ row }) {
-      if (row && row.code) {
-        this.lvalue = row.code
-        this.description = row.codeDescription
+      if (row && row.popupCode) {
+        this.lvalue = row.popupCode
         this.$emit('input', this.lvalue)
         this.$nextTick(this.validate)
         this.pagination.show = false
+      } else {
+        console.log(
+          'Pastikan hasil query megembalikan popupCode dan popupDescription'
+        )
       }
     },
     _showPopup() {
       if (this.disabled) return
       this.pagination.show = true
-      const lvalue = this.lvalue ? this.lvalue.toUpperCase().trim() : ''
+      const lvalue = this.lvalue ? this.lvalue.toUpperCase().trim() : null
       this.$refs[this.id + 'PopupPaginationHeaderless'].onSearch(lvalue)
     },
     _hidePopup() {
@@ -186,7 +201,8 @@ export default {
       this.pagination.show = false
     },
     _blur(event) {
-      const value = event.target.value.toUpperCase().trim()
+      let value = event.target.value.toUpperCase().trim()
+      value = value || null
       this.$emit('input', value)
       this.$emit(event.type, value)
       this.$nextTick(this.validate)
@@ -202,7 +218,7 @@ export default {
 
       if (result) {
         if (result.length === 1) {
-          this.description = result[0].codeDescription
+          this.description = result[0].popupDescription
         }
       }
     },
@@ -256,14 +272,16 @@ export default {
         if (result) {
           if (result.length === 1) {
             // Success schenario
-            this.description = result[0].codeDescription
+            this.description = result[0].popupDescription
           }
           if (result.length === 0) {
             this.description = ''
+            this.$emit('input', null)
             this.errors.push(`Code ${this.value}, Data Not Found`)
           }
           if (result.length > 1) {
             this.description = ''
+            this.$emit('input', null)
             this.errors.push(`Code ${this.value}, Multipe Data Found`)
           }
         }

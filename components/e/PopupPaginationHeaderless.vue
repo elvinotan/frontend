@@ -39,25 +39,31 @@
           <div slot="table-actions" class="py-0.5 px-2">
             <ECol :col="2">
               <span
-                class="flex text-xs rounded border-0 outline-none ring-2"
+                class="flex w-full text-xs rounded border-0 outline-none ring-2"
                 :class="[_cssBorder]"
               >
                 <input
                   :id="id + 'SearchTerm'"
-                  v-model="lsearchTerm"
+                  v-model="search"
                   autocomplete="off"
                   type="text"
                   :maxlength="4"
-                  class="field text-sm rounded p-1 px-1 w-auto outline-none uppercase placeholder-blueGray-300 relative"
-                  @keyup.enter="onSearchEvent"
+                  class="field w-full text-sm rounded p-1 px-1 w-auto outline-none uppercase placeholder-blueGray-300 relative"
+                  @keyup.enter="_onSearch"
                 />
               </span>
-              <EButton
-                :id="'PopupPaginationHeaderless' + id + 'Close'"
-                label="Close"
-                class="w-full"
-                @click="$emit('Close')"
-              />
+              <ECol :col="2">
+                <EButton
+                  :id="'PopupPaginationHeaderless' + id + 'Search'"
+                  label="Search"
+                  @click="_onSearch"
+                />
+                <EButton
+                  :id="'PopupPaginationHeaderless' + id + 'Close'"
+                  label="Close"
+                  @click="$emit('Close')"
+                />
+              </ECol>
             </ECol>
           </div>
           <template slot="table-row" slot-scope="props">
@@ -81,26 +87,21 @@
 </template>
 
 <script>
-// Untuk columns kita tidak menggunakan fungsi formatter dr vue-good-table
-// Ini dokumentasi untuk pembuatan column
-// - label = Nama header di table
-// - field = nama field data dalam row
-// - sortable = support order atau tidak (default true)
-// - width = lebar colum dalam px ('100px')
-// - tooltip = Tooltip header
-// - type = text, date, number, decimal, percentage, boolean
-
 export default {
   name: 'PopupPaginationHeaderless',
   props: {
     id: { type: String, required: true, default: null },
-    searchTerm: { type: String, required: false, default: null },
     show: { type: Boolean, required: false, default: true },
     disabled: { type: Boolean, required: false, default: false },
     columns: { type: Array, required: false, default: () => [] },
-    autoLoad: { type: Boolean, required: false, default: false },
     picker: { type: String, required: false, default: '' },
-    filter: { type: Object, required: false, default: () => {} },
+    filter: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {}
+      },
+    },
   },
   data() {
     return {
@@ -109,8 +110,7 @@ export default {
       selectedRows: [],
       rows: [],
       totalRows: 0,
-      alreadyFetchData: false,
-      lsearchTerm: this.searchTerm,
+      search: '',
       serverParams: {
         picker: this.picker,
         search: '',
@@ -134,14 +134,11 @@ export default {
     _dataEmptyDescription() {
       return this.error
         ? 'Fail to fetch data, please try again'
-        : this.alreadyFetchData
-        ? 'No data available'
-        : 'Click search to get data...'
+        : 'No data available'
     },
   },
-  async created() {
+  created() {
     this._constractColumns()
-    if (this.autoLoad) await this.fetchData()
   },
   methods: {
     metaData() {
@@ -215,32 +212,29 @@ export default {
         this.lcolumns.push(lcolumn)
       }
     },
-    async onSearchEvent() {
-      await this.onSearch()
-    },
-    async onSearch(lsearchTerm = '') {
-      this.lsearchTerm = lsearchTerm || this.lsearchTerm
-      this.serverParams.search = this.lsearchTerm.toUpperCase().trim()
-
-      await this.fetchData()
-    },
 
     async fetchData() {
       this.error = null
       this.isLoading = true
-      this.alreadyFetchData = true
-      this.serverParams.page = 1
       this.serverParams.filter = this._cleanFilter()
+
       const { result, error } = await this.$rest.post(
         '/api/general/pagination/page',
         this.serverParams
       )
+
+      this.isLoading = false
+      this.error = error
       if (result) {
         this.totalRows = result.totalRows
         this.rows = result.rows
       }
-      this.error = error
-      this.isLoading = false
+    },
+    async onSearch(search = '', page = 1) {
+      this.search = search
+      this.serverParams.page = page
+
+      await this._onSearch()
     },
     _cleanFilter() {
       const filter = {}
@@ -291,6 +285,10 @@ export default {
     },
     async _onSortChange(params) {
       this.serverParams.sort = params
+      await this.fetchData()
+    },
+    async _onSearch() {
+      this.serverParams.search = this.search
       await this.fetchData()
     },
   },

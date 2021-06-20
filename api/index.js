@@ -7,9 +7,9 @@ app.use(express.urlencoded({ extended: false }))
 const datas = [
   {
     id: 541,
-    code: 'JAHF',
+    popupCode: 'JAHF',
     name: 'John Mecan',
-    codeDescription: 'John Mecan',
+    popupDescription: 'John Mecan',
     birthDate: new Date(),
     age: 15,
     saving: 158.514,
@@ -18,9 +18,9 @@ const datas = [
   },
   {
     id: 542,
-    code: 'IYHF',
+    popupCode: 'IYHF',
     name: 'Agus sulisanto',
-    codeDescription: 'Agus sulisanto',
+    popupDescription: 'Agus sulisanto',
     birthDate: new Date(),
     age: 54,
     saving: 9816.55,
@@ -29,9 +29,9 @@ const datas = [
   },
   {
     id: 543,
-    code: 'UYHB',
+    popupCode: 'UYHB',
     name: 'Hero ranto',
-    codeDescription: 'Hero ranto',
+    popupDescription: 'Hero ranto',
     birthDate: new Date(),
     age: 26,
     saving: 9845.54,
@@ -40,9 +40,9 @@ const datas = [
   },
   {
     id: 544,
-    code: 'RBVC',
+    popupCode: 'RBVC',
     name: 'Elvino Tan',
-    codeDescription: 'Elvino Tan',
+    popupDescription: 'Elvino Tan',
     birthDate: new Date(),
     age: 42,
     saving: 158.95,
@@ -50,9 +50,9 @@ const datas = [
     merried: true,
   },
   {
-    code: 'IKKH',
+    popupCode: 'IKKH',
     name: 'Carinnia Untoro',
-    codeDescription: 'Carinnia Untoro',
+    popupDescription: 'Carinnia Untoro',
     birthDate: new Date(),
     age: 41,
     saving: 9444.112,
@@ -60,9 +60,9 @@ const datas = [
     merried: true,
   },
   {
-    code: 'LBVF',
+    popupCode: 'LBVF',
     name: 'Constantine Davin Ethan',
-    codeDescription: 'Constantine Davin Ethan',
+    popupDescription: 'Constantine Davin Ethan',
     birthDate: new Date(),
     age: 15,
     saving: 9841618.564198,
@@ -71,9 +71,9 @@ const datas = [
   },
   {
     id: 547,
-    code: 'RNVF',
+    popupCode: 'RNVF',
     name: 'Yanto ono',
-    codeDescription: 'Yanto ono',
+    popupDescription: 'Yanto ono',
     birthDate: new Date(),
     age: 74,
     saving: 581458.8841894,
@@ -82,9 +82,9 @@ const datas = [
   },
   {
     id: 548,
-    code: 'YNBV',
+    popupCode: 'YNBV',
     name: 'Cristina ',
-    codeDescription: 'Cristina ',
+    popupDescription: 'Cristina ',
     birthDate: new Date(),
     age: 45,
     saving: 7545775.755,
@@ -93,9 +93,9 @@ const datas = [
   },
   {
     id: 549,
-    code: 'YNBV',
+    popupCode: 'YNBV',
     name: 'Urika ikada',
-    codeDescription: 'Urika ikada',
+    popupDescription: 'Urika ikada',
     birthDate: new Date(),
     age: 56,
     saving: 5873.85636,
@@ -104,9 +104,9 @@ const datas = [
   },
   {
     id: 550,
-    code: 'KHDN',
+    popupCode: 'KHDN',
     name: 'Sulitaianto Aryo',
-    codeDescription: 'Sulitaianto Aryo',
+    popupDescription: 'Sulitaianto Aryo',
     birthDate: new Date(),
     age: 54,
     saving: 8852.44,
@@ -115,9 +115,9 @@ const datas = [
   },
   {
     id: 551,
-    code: 'PKDK',
+    popupCode: 'PKDK',
     name: 'Brima doa',
-    codeDescription: 'Brima doa',
+    popupDescription: 'Brima doa',
     birthDate: new Date(),
     age: 95,
     saving: 8638.77418,
@@ -126,9 +126,9 @@ const datas = [
   },
   {
     id: 551,
-    code: 'ODKD',
+    popupCode: 'ODKD',
     name: 'Ibna uban',
-    codeDescription: 'Ibna uban',
+    popupDescription: 'Ibna uban',
     birthDate: new Date(),
     age: 74,
     saving: 2356.258,
@@ -152,7 +152,7 @@ app.post('/general/pagination/popup', function (req, res) {
   const { code, picker } = req.body
   // Lakukan query bila code berhasil di dapat dan berhasil di dapat 1, maka return ini
   const filtered = datas.filter((e) => {
-    return e.code === code
+    return e.popupCode === code
   })
   res.json(filtered)
 })
@@ -164,7 +164,7 @@ app.post('/general/pagination/page', function (req, res) {
 
   if (search) {
     const filtered = datas.filter((e) => {
-      return e.code.includes(search)
+      return e.popupCode.includes(search)
     })
     res.json({
       totalRows: filtered.length,
