@@ -2907,6 +2907,7 @@
               </tbody>
             </table>
           </EForm>
+          <EForm id="Upload"> </EForm>
           <EForm id="LocalPagination">
             <ELocalPagination
               id="LocalPaginationComponent"
@@ -4163,6 +4164,7 @@ export default {
         { label: 'Tabs' },
         { label: 'Filter' },
         { label: 'PageLoader' },
+        { label: 'Upload' },
         { label: 'LocalPagination' },
         { label: 'ServerPagination' },
         { label: 'PopupPagination' },
