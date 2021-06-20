@@ -244,6 +244,8 @@ export default {
     hasError() {
       return this.errors.length > 0
     },
+    // ini nanti di perbaiki validate dari luar akan memunculkan error is required padahal di ui ada isinya
+    // error ini terjadi krn niloai model gax ke set, beda dgn yg biasa, yang biasa ke set tapi nanti di reset null
     async validate() {
       this.clearError()
 
