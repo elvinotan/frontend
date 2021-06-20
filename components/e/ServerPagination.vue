@@ -121,11 +121,6 @@
             </span>
           </div>
         </vue-good-table>
-        <div
-          class="font-bold rounded-b text-sm text-gray-800 w-auto p-1 bg-gray-300"
-        >
-          &nbsp;
-        </div>
       </div>
     </div>
   </div>
