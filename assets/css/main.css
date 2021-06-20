@@ -93,3 +93,8 @@
   vertical-align: middle !important;
   font-size: 0.9rem !important;
 }
+
+.vgt-table.condensed td,
+.vgt-table.condensed th.vgt-row-header {
+  padding: 0.15em 0.15em 0.4em 0.4em !important;
+}
