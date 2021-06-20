@@ -3685,6 +3685,15 @@
                   </td>
                 </tr>
                 <tr>
+                  <td>localStorageFn</td>
+                  <td>Function</td>
+                  <td>
+                    Logic untuk menentukan apakah suatu data layak untuk di
+                    simpan dalam localStorage atau tidak, function ini menerima
+                    oparan parameter result dan wajib mengembalikan boolean
+                  </td>
+                </tr>
+                <tr>
                   <td>vuex</td>
                   <td>String</td>
                   <td>
@@ -3693,6 +3702,15 @@
                     pada headers, bila operational yang sama dilakukan, tidak
                     akan melakukan restcall kembali apabila data di vuex sudah
                     ada
+                  </td>
+                </tr>
+                <tr>
+                  <td>vuexFn</td>
+                  <td>Function</td>
+                  <td>
+                    Logic untuk menentukan apakah suatu data layak untuk di
+                    simpan dalam vuex atau tidak, function ini menerima oparan
+                    parameter result dan wajib mengembalikan boolean
                   </td>
                 </tr>
                 <tr>
