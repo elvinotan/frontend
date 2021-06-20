@@ -4593,7 +4593,7 @@ export default {
         maxlength: 6,
         show: true,
         vruntime: (data) => {
-          console.log('Passing Data ', data)
+          console.log('vruntime ', data)
         },
         picker: 'popupCustomer',
         filter: { age: 17 },

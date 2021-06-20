@@ -182,7 +182,7 @@ export default {
 
         this.lvalue = row.popupCode
         this.$emit('input', this.lvalue)
-        this.$nextTick(this.validate)
+        this.$nextTick(this._validate)
       } else {
         console.log(
           'WARNING !!!!, Pastikan hasil query mengembalikan popupCode dan popupDescription'
@@ -205,7 +205,7 @@ export default {
       lvalue = lvalue || null
       this.$emit('input', lvalue)
       this.$emit(event.type, lvalue)
-      this.$nextTick(this.validate)
+      this.$nextTick(this._validate)
     },
     async _fetchDataOne(event) {
       if (!this.value) return
@@ -244,9 +244,12 @@ export default {
     hasError() {
       return this.errors.length > 0
     },
-    // ini nanti di perbaiki validate dari luar akan memunculkan error is required padahal di ui ada isinya
-    // error ini terjadi krn niloai model gax ke set, beda dgn yg biasa, yang biasa ke set tapi nanti di reset null
     async validate() {
+      this.$emit('input', this.lvalue)
+      await this.$nextTick()
+      return await this._validate()
+    },
+    async _validate() {
       this.clearError()
 
       // General validation base on props
