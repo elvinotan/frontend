@@ -2,7 +2,12 @@
   <div>
     <ETabs
       id="Showroom"
-      :labels="[{ label: 'Component' }, { label: 'Plugin' }]"
+      :labels="[
+        { label: 'Component' },
+        { label: 'Plugin' },
+        { label: 'Demo List' },
+        { label: 'Demo Entry' },
+      ]"
       selected-tab="Component"
     >
       <EForm id="Component">
@@ -3774,7 +3779,18 @@
                   <td>Description</td>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                <tr>
+                  <td>replaceByProperty: (string, object) => {}</td>
+                  <td>String</td>
+                  <td>
+                    Akan mereplace operan data string dgn property yang ada di
+                    object, dengan menggunakan parameter []. Ex:
+                    http://[base_url]/user/profile, akan di repalce dgn {
+                    base_url: 'localhost' }
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </EForm>
           <EForm id="number">
@@ -3877,6 +3893,16 @@
                     untuk melakukan validasi pada masing masing komponent sesuai
                     dengan rule yang di terapkan
                     this.$wrapper.validate(this.$refs.entryEForm)
+                  </td>
+                </tr>
+                <tr>
+                  <td>jquery(selector)</td>
+                  <td>instance</td>
+                  <td>
+                    Akan mengambalikan jquery instance, sebisa mungkin fungsi
+                    ini jgn pernah di pake. Hanya gunakan fungsi ini untuk
+                    manipulasi ui saja bukan data atau business dapat di access
+                    dari this.$wrapper.jquery()
                   </td>
                 </tr>
               </tbody>
