@@ -74,6 +74,24 @@
   </div>
 </template>
 <script>
+const initColumns = [
+  {
+    label: 'Code',
+    field: 'popupCode',
+    sortable: true,
+    width: '75px',
+    tooltip: 'Code',
+    type: 'text',
+  },
+  {
+    label: 'Description',
+    field: 'popupDescription',
+    sortable: true,
+    width: '150px',
+    tooltip: 'Description',
+    type: 'text',
+  },
+]
 export default {
   name: 'PopupPagination',
   props: {
@@ -87,7 +105,7 @@ export default {
     value: { type: String, required: false, default: '' },
     vruntime: { type: Function, required: false, default: null },
 
-    picker: { type: String, required: false, default: '' },
+    picker: { type: String, required: true, default: '' },
     filter: {
       type: Object,
       required: false,
@@ -98,26 +116,7 @@ export default {
     columns: {
       type: Array,
       required: false,
-      default: () => {
-        return [
-          {
-            label: 'Code',
-            field: 'popupCode',
-            sortable: true,
-            width: '75px',
-            tooltip: 'Code',
-            type: 'text',
-          },
-          {
-            label: 'Description',
-            field: 'popupDescription',
-            sortable: true,
-            width: '150px',
-            tooltip: 'Description',
-            type: 'text',
-          },
-        ]
-      },
+      default: () => [],
     },
   },
   data() {
@@ -130,7 +129,7 @@ export default {
         show: false,
         picker: this.picker,
         filter: this.filter,
-        columns: this.columns,
+        columns: [...initColumns, ...this.columns],
       },
     }
   },
@@ -263,7 +262,7 @@ export default {
         if (error) this.errors.push(error)
       }
 
-      if (this.errors.length === 0) {
+      if (this.errors.length === 0 && this.value) {
         // lakukan validasi untuk code
         const { result, error } = await this.$rest.post(
           `api/general/pagination/popup`,

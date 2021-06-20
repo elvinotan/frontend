@@ -3141,6 +3141,8 @@
             <br />
             <div class="text-xs">Template : {{ htmlServerPagination }}</div>
             <br />
+            <div class="text-xs">Colums : {{ htmlServerPaginationColumn }}</div>
+            <br />
             <div class="text-xs">
               Actions : {{ htmlServerPaginationActions }}
             </div>
@@ -3230,6 +3232,31 @@
                   <td>false</td>
                   <td>false</td>
                   <td>Picker server name</td>
+                </tr>
+                <tr>
+                  <td>filter</td>
+                  <td>-</td>
+                  <td>Object</td>
+                  <td>false</td>
+                  <td>{}</td>
+                  <td>
+                    Ini adalah object filter, bukan berupa array tapi berupa
+                    object dimana nama props akan menjadi key mapping dengan
+                    server configuration
+                  </td>
+                </tr>
+                <tr>
+                  <td>columns</td>
+                  <td>-</td>
+                  <td>Array</td>
+                  <td>false</td>
+                  <td>[]</td>
+                  <td>
+                    Colum configuration berupa array dgn format { label: null,
+                    field: null, sortable: null, width: null, tooltip: null,
+                    type: null} untuk type meng-support text, date, number,
+                    decimal, percentage, boolean
+                  </td>
                 </tr>
                 <tr>
                   <td>actions</td>
@@ -3374,19 +3401,210 @@
             </table>
           </EForm>
           <EForm id="PopupPagination">
-            <ECol :col="3">
-              <EPopupPagination
-                id="PopupPaginationComponent"
-                ref="PopupPaginationComponent"
-                v-model="popupPagination.value"
-                label="Kode Kendaraan"
-                placeholder="Code"
-                picker="Customer"
-                :required="false"
-                :disabled="false"
-              />
-              {{ popupPagination }}
-            </ECol>
+            <EPopupPagination
+              id="PopupPaginationComponent"
+              ref="PopupPaginationComponent"
+              v-model="popupPagination.value"
+              :label="popupPagination.label"
+              :placeholder="popupPagination.placeholder"
+              :required="popupPagination.required"
+              :disabled="popupPagination.disabled"
+              :maxlength="popupPagination.maxlength"
+              :show="popupPagination.show"
+              :vruntime="popupPagination.vruntime"
+              :picker="popupPagination.picker"
+              :filter="popupPagination.filter"
+              :columns="popupPagination.columns"
+            />
+            <br />
+            <div class="text-xs">Template : {{ htmlPopupPagination }}</div>
+            <br />
+            <div class="text-xs">Colums : {{ htmlPopupPaginationColumn }}</div>
+            <br />
+            <div class="text-xs">Data Object : {{ popupPagination }}</div>
+
+            <table>
+              <thead>
+                <tr>
+                  <td>Props</td>
+                  <td>Try</td>
+                  <td>Type</td>
+                  <td>Required</td>
+                  <td>Default</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>id</td>
+                  <td>-</td>
+                  <td>String</td>
+                  <td>true</td>
+                  <td>null</td>
+                  <td>id dari component, gax perlu di binding</td>
+                </tr>
+                <tr>
+                  <td>label</td>
+                  <td>
+                    <input v-model="popupPagination.label" type="text" />
+                  </td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>Please Provide Table title...</td>
+                  <td>Label untuk component</td>
+                </tr>
+                <tr>
+                  <td>placeholder</td>
+                  <td>
+                    <input v-model="popupPagination.placeholder" type="text" />
+                  </td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>''</td>
+                  <td>Place holder input, akan tampil bila data kosong</td>
+                </tr>
+                <tr>
+                  <td>show</td>
+                  <td>
+                    <input v-model="popupPagination.show" type="checkbox" />
+                  </td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>true</td>
+                  <td>
+                    Boolean untuk menentukan component tampil atau tidak. tag
+                    ini menggunakan v-if
+                  </td>
+                </tr>
+                <tr>
+                  <td>required</td>
+                  <td>
+                    <input v-model="popupPagination.required" type="checkbox" />
+                  </td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>false</td>
+                  <td>
+                    Boolean untuk menentukan required atau tidak text, error
+                    message akan otomatis terisi bila kosong
+                  </td>
+                </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td>
+                    <input v-model="popupPagination.disabled" type="checkbox" />
+                  </td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>false</td>
+                  <td>
+                    Boolean untuk menentukan disabled atau tidaknya component,
+                  </td>
+                </tr>
+                <tr>
+                  <td>maxlength</td>
+                  <td>
+                    <input
+                      v-model.number="popupPagination.maxlength"
+                      type="number"
+                    />
+                  </td>
+                  <td>Number</td>
+                  <td>false</td>
+                  <td>16</td>
+                  <td>Maxiumum charater yang bisa di terima oleh component</td>
+                </tr>
+                <tr>
+                  <td>picker</td>
+                  <td>-</td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>false</td>
+                  <td>Picker server name</td>
+                </tr>
+                <tr>
+                  <td>filter</td>
+                  <td>-</td>
+                  <td>Object</td>
+                  <td>false</td>
+                  <td>{}</td>
+                  <td>
+                    Ini adalah object filter, bukan berupa array tapi berupa
+                    object dimana nama props akan menjadi key mapping dengan
+                    server configuration
+                  </td>
+                </tr>
+                <tr>
+                  <td>columns</td>
+                  <td>-</td>
+                  <td>Array</td>
+                  <td>false</td>
+                  <td>[]</td>
+                  <td>
+                    Colum configuration berupa array dgn format { label: null,
+                    field: null, sortable: null, width: null, tooltip: null,
+                    type: null} untuk type meng-support text, date, number,
+                    decimal, percentage, boolean
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Try</td>
+                  <td>Result</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>metaData</td>
+                  <td>
+                    <button @click="metaData('PopupPaginationComponent')">
+                      Click
+                    </button>
+                  </td>
+                  <td>{{ metadata }}</td>
+                  <td>Component Information</td>
+                </tr>
+                <tr>
+                  <td>clearError</td>
+                  <td>
+                    <button @click="clearError('PopupPaginationComponent')">
+                      Click
+                    </button>
+                  </td>
+                  <td>Void</td>
+                  <td>Hapus error, kembalikan ke state component semula</td>
+                </tr>
+                <tr>
+                  <td>hasError</td>
+                  <td>
+                    <button @click="hasError('PopupPaginationComponent')">
+                      Click
+                    </button>
+                  </td>
+                  <td>{{ haserror }}</td>
+                  <td>
+                    Flag untuk menandakan apakah component pass validasi atau
+                    tidak
+                  </td>
+                </tr>
+                <tr>
+                  <td>validate</td>
+                  <td>
+                    <button @click="validate('PopupPaginationComponent')">
+                      Click
+                    </button>
+                  </td>
+                  <td>{{ valid }}</td>
+                  <td>Lakukan validasi berdasarkan required dan vruntime</td>
+                </tr>
+              </tbody>
+            </table>
           </EForm>
           <EForm id="Col">
             <ECol
@@ -3882,10 +4100,16 @@ export default {
       htmlLocalPaginationButtons: '{ label:"", color:"", emit:"" }',
       htmlServerPagination:
         '<EServerPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction=() :addNewData=() :actions=[] :buttons:[] :initialSortBy=[] @RowClick=() />',
+      htmlServerPaginationColumn:
+        '{ label:"", field:"", sortable: true, width:"100px" tooltip:"" type:"" } // type = text, number, decimal, percentage, boolean',
       htmlServerPaginationActions: '{ label:"" }',
       htmlServerPaginationButtons: '{ label:"", color:"", emit:"" }',
       htmlServerPaginationinitialSortBy:
         '{ field: "", type:"" } // type = asc/desc',
+      htmlPopupPagination:
+        '<EPopupPagination id="" ref="" v-model="" :label="" :placeholder="" :show="" :required="" :disabled="" :show="" :maxlength="" :picker="" :filter="" :columns="[]"  />',
+      htmlPopupPaginationColumn:
+        '{ label:"", field:"", sortable: true, width:"100px" tooltip:"" type:"" } // type = text, number, decimal, percentage, boolean',
       htmlForm: '<EForm id="" ref="" />',
       htmlCol: '<ECol :col="" :gapX="" :gapY="" />',
       haserror: null,
@@ -4362,6 +4586,27 @@ export default {
       },
       popupPagination: {
         value: 'JAH',
+        label: 'Customer',
+        placeholder: 'Code',
+        required: true,
+        disabled: false,
+        maxlength: 6,
+        show: true,
+        vruntime: (data) => {
+          console.log('Passing Data ', data)
+        },
+        picker: 'popupCustomer',
+        filter: { age: 17 },
+        columns: [
+          {
+            label: 'Age',
+            field: 'age',
+            sortable: true,
+            width: '50px',
+            tooltip: 'Customer Age',
+            type: 'number',
+          },
+        ],
       },
     }
   },
