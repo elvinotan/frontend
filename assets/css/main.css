@@ -19,7 +19,7 @@
 }
 
 .vgt-table.striped tbody tr:nth-of-type(odd) {
-  background-color: yellow !important;
+  background-color: #ffff99 !important;
 }
 
 .vgt-table th {
@@ -30,7 +30,7 @@
 
 .vgt-wrap__footer {
   color: #606266 !important;
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
   padding: 0.35em !important;
   border: 1px solid #dcdfe6 !important;
   background: linear-gradient(#f4f5f8, #f1f3f6) !important;
@@ -40,7 +40,7 @@
 
 .vgt-wrap__footer .footer__row-count__label {
   color: #606266 !important;
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
   font-weight: bold !important;
 }
 
@@ -59,13 +59,13 @@
 
 .page-info__label {
   color: #606266 !important;
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
   font-weight: bold !important;
   padding: 0em 5em 0em 0em !important;
 }
 
 .vgt-wrap__footer .footer__row-count__select {
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
   background-color: transparent !important;
   width: auto !important;
   padding: 0 !important;
@@ -84,14 +84,14 @@
 
 .vgt-wrap__footer .footer__navigation__info,
 .vgt-wrap__footer .footer__navigation__page-info {
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
   display: inline-block !important;
   margin: 0 16px !important;
 }
 .vgt-wrap__footer .footer__navigation__page-btn span {
   display: inline-block !important;
   vertical-align: middle !important;
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
 }
 
 .vgt-table.condensed td,
