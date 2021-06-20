@@ -221,7 +221,7 @@ export default {
         {
           vuex:
             this.$enum.VUEX.POPUPPAGINATION_PREFIX + this.picker + '_' + lvalue,
-          vuexFn: (result) => {
+          saveFn: (result) => {
             return result.length === 1
           },
         }
@@ -277,7 +277,7 @@ export default {
               this.picker +
               '_' +
               this.value,
-            vuexFn: (result) => {
+            saveFn: (result) => {
               return result.length === 1
             },
           }

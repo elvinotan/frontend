@@ -3485,6 +3485,13 @@
           ]"
           selected-tab="fmt"
         >
+          <EForm id="enum">
+            <div>
+              Plugin ini hanya berupa constant placeholder, dimana data data
+              constant di simpanan plugin dapat di access lewat this.$enum. Saat
+              ini sudah terdapat 2 constant utama yaitu VUEX dan LOCAL_STORAGE
+            </div>
+          </EForm>
           <EForm id="fmt">
             <div>
               Plugin ini bertujuan untuk memformat data sebagai presentasi ke
@@ -3685,15 +3692,6 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>localStorageFn</td>
-                  <td>Function</td>
-                  <td>
-                    Logic untuk menentukan apakah suatu data layak untuk di
-                    simpan dalam localStorage atau tidak, function ini menerima
-                    oparan parameter result dan wajib mengembalikan boolean
-                  </td>
-                </tr>
-                <tr>
                   <td>vuex</td>
                   <td>String</td>
                   <td>
@@ -3705,12 +3703,12 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>vuexFn</td>
+                  <td>saveFn</td>
                   <td>Function</td>
                   <td>
                     Logic untuk menentukan apakah suatu data layak untuk di
-                    simpan dalam vuex atau tidak, function ini menerima oparan
-                    parameter result dan wajib mengembalikan boolean
+                    simpan atau tidak, function ini menerima oparan parameter
+                    result dan wajib mengembalikan boolean
                   </td>
                 </tr>
                 <tr>
