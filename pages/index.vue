@@ -2907,7 +2907,9 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Upload"> </EForm>
+          <EForm id="Upload">
+            https://medium.com/js-dojo/how-to-upload-base64-images-in-vue-nodejs-4e89635daebc
+          </EForm>
           <EForm id="LocalPagination">
             <ELocalPagination
               id="LocalPaginationComponent"
