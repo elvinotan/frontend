@@ -115,6 +115,7 @@ export default {
     _clearInput() {
       this.lvalue = null
       this.$emit('input', this.lvalue)
+      this.$nextTick(this.validate)
     },
     _maxlength() {
       this.maxlength =
