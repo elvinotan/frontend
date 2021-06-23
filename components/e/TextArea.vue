@@ -7,16 +7,24 @@
       >
         <div
           v-if="label"
-          class="font-bold rounded-t text-sm text-gray-800 w-auto p-1"
+          class="font-bold rounded-t text-sm text-gray-800 w-auto p-1 flex justify-start"
           :class="[_cssLabelBg]"
         >
           {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
           <span
             v-if="label && required"
-            class="font-bold text-center text-sm text-red-800 w-auto p-1"
+            class="font-bold text-center text-sm text-red-800 w-full flex justify-start"
             :class="[_cssLabelBg]"
           >
             *
+          </span>
+          <span
+            v-if="!disabled"
+            class="font-bold text-right text-sm text-center text-gray-800 w-7 px-1 cursor-pointer flex justify-end"
+            :class="[_cssLabelBg]"
+            @click="_clearInput"
+          >
+            X
           </span>
         </div>
 
@@ -97,6 +105,16 @@ export default {
     },
   },
   methods: {
+    _clearInput() {
+      this.lvalue = null
+      this.$emit('input', this.lvalue)
+      this.$nextTick(this.validate)
+    },
+    clearInput() {
+      this.lvalue = null
+      this.$emit('input', this.lvalue)
+      this.$nextTick(this.validate)
+    },
     _input(event) {
       const value = event.target.value.toUpperCase()
       this.$emit(event.type, value)

@@ -46,6 +46,14 @@
         >
           {{ description }}
         </span>
+        <span
+          v-if="!disabled"
+          class="font-bold rounded-r text-sm text-center text-gray-800 w-7 p-1 cursor-pointer"
+          :class="[_cssLabelBg]"
+          @click="_clearInput"
+        >
+          X
+        </span>
       </span>
       <p
         v-if="!pagination.show && hasError()"
@@ -176,6 +184,11 @@ export default {
     this._fetchDataOne()
   },
   methods: {
+    _clearInput() {
+      this.lvalue = null
+      this.$emit('input', this.lvalue)
+      this.$nextTick(this.validate)
+    },
     _rowClick({ row }) {
       if (row && row.popupCode) {
         this.pagination.show = false
