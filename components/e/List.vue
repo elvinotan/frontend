@@ -164,7 +164,11 @@ export default {
       }
       return false
     },
-    rowClick() {},
+    rowClick(data) {
+      this.$refs.customerMessage.success(
+        `Delete data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`
+      )
+    },
     hapus(data) {
       this.$refs.customerMessage.success(
         `Delete data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`

@@ -21,10 +21,10 @@
         </span>
         <input
           :id="id"
+          v-model="lvalue"
           autocomplete="off"
           type="text"
           :placeholder="placeholder"
-          :value="value"
           :maxlength="maxlength"
           :disabled="disabled"
           :required="required"
@@ -33,7 +33,16 @@
           @input="_input"
           @blur="_blur"
         />
+        <span
+          v-if="!disabled"
+          class="font-bold rounded-r text-sm text-center text-gray-800 w-7 p-1 cursor-pointer"
+          :class="[_cssLabelBg]"
+          @click="_clearInput"
+        >
+          X
+        </span>
       </span>
+
       <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
         {{ errors[0] }}
       </p>
@@ -59,6 +68,7 @@ export default {
   },
   data() {
     return {
+      lvalue: this.value,
       state: 0,
       errors: [],
       maxlength: 0,
@@ -102,6 +112,10 @@ export default {
     this._maxlength()
   },
   methods: {
+    _clearInput() {
+      this.lvalue = null
+      this.$emit('input', this.lvalue)
+    },
     _maxlength() {
       this.maxlength =
         this.type === 'short'
