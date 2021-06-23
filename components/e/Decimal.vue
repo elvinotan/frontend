@@ -34,6 +34,14 @@
           @input="_input"
           @blur="_blur"
         />
+        <span
+          v-if="!disabled"
+          class="font-bold rounded-r text-sm text-center text-gray-800 w-7 p-1 cursor-pointer"
+          :class="[_cssLabelBg]"
+          @click="_clearInput"
+        >
+          X
+        </span>
       </span>
       <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
         {{ errors[0] }}
@@ -122,6 +130,11 @@ export default {
     },
   },
   methods: {
+    _clearInput() {
+      this.lvalue = null
+      this.$emit('input', this.lvalue)
+      this.$nextTick(this.validate)
+    },
     _format(value) {
       if (value && this.separator) {
         return this.$fmt.decimal(
