@@ -1,4 +1,4 @@
-export default function ({ $axios, $config, $string, store }, inject) {
+export default function ({ $axios, $config, $string, $number, store }, inject) {
   const rest = {
     // Local Storage
     setLocalStorage(key, object) {
@@ -25,33 +25,30 @@ export default function ({ $axios, $config, $string, store }, inject) {
     // Rest Call base on type
     async get(pUrl = '', pHeaders = {}) {
       const {
-        forceUpdate,
+        forceUpdate = false,
         vuex,
         localStorage,
-        expired,
-        saveFn,
+        expired = 0,
+        saveFn = () => {
+          return true
+        },
         ...headers
       } = pHeaders
 
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
-        const data = this.getVuex(vuex)
-        if (data) {
-          const { expiredOn, ...result } = data
-          if (new Date().getTime() < expiredOn) {
-            return { result }
-          }
+        const { expiredOn, ...result } = this.getVuex(vuex) || {}
+        if (result && $number.lt(new Date().getTime(), expiredOn)) {
+          return { result }
         }
       }
 
       if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
-        const data = this.getLocalStorage(localStorage)
-        if (data) {
-          const { expiredOn, ...result } = data
-          if (new Date().getTime() < expiredOn) {
-            return { result }
-          }
+        const { expiredOn, ...result } =
+          this.getLocalStorage(localStorage) || {}
+        if (result && $number.lt(new Date().getTime(), expiredOn)) {
+          return { result }
         }
       }
 
@@ -65,22 +62,17 @@ export default function ({ $axios, $config, $string, store }, inject) {
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
-          const expiredOn = new Date().getTime() + (expired || 0)
+          const expiredOn = $number.add(new Date().getTime(), expired || 0)
+          const isSave = saveFn(result)
 
-          if (vuex) {
-            const isSave = saveFn ? saveFn(result) : true
-            if (isSave) {
-              this.setVuex(vuex, { expiredOn, result })
-            }
+          if (vuex && isSave) {
+            this.setVuex(vuex, { expiredOn, result })
           }
-          if (localStorage) {
-            const isSave = saveFn ? saveFn(result) : true
-            if (isSave) {
-              this.setLocalStorage(
-                localStorage,
-                JSON.stringify({ expiredOn, result })
-              )
-            }
+          if (localStorage && isSave) {
+            this.setLocalStorage(
+              localStorage,
+              JSON.stringify({ expiredOn, result })
+            )
           }
         }
 
@@ -92,33 +84,30 @@ export default function ({ $axios, $config, $string, store }, inject) {
 
     async post(pUrl = '', payload = {}, pHeaders = {}) {
       const {
-        forceUpdate,
+        forceUpdate = false,
         vuex,
         localStorage,
-        expired,
-        saveFn,
+        expired = 0,
+        saveFn = () => {
+          return true
+        },
         ...headers
       } = pHeaders
 
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
-        const data = this.getVuex(vuex)
-        if (data) {
-          const { expiredOn, ...result } = data
-          if (new Date().getTime() < expiredOn) {
-            return { result }
-          }
+        const { expiredOn, ...result } = this.getVuex(vuex) || {}
+        if (result && $number.lt(new Date().getTime(), expiredOn)) {
+          return { result }
         }
       }
 
       if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
-        const data = this.getLocalStorage(localStorage)
-        if (data) {
-          const { expiredOn, ...result } = data
-          if (new Date().getTime() < expiredOn) {
-            return { result }
-          }
+        const { expiredOn, ...result } =
+          this.getLocalStorage(localStorage) || {}
+        if (result && $number.lt(new Date().getTime(), expiredOn)) {
+          return { result }
         }
       }
 
@@ -132,23 +121,18 @@ export default function ({ $axios, $config, $string, store }, inject) {
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
-          const expiredOn = new Date().getTime() + (expired || 0)
+          const expiredOn = $number.add(new Date().getTime(), expired || 0)
+          const isSave = saveFn(result)
 
-          if (vuex) {
-            const isSave = saveFn ? saveFn(result) : true
-            if (isSave) {
-              this.setVuex(vuex, { expiredOn, ...result })
-            }
+          if (vuex && isSave) {
+            this.setVuex(vuex, { expiredOn, ...result })
           }
 
-          if (localStorage) {
-            const isSave = saveFn ? saveFn(result) : true
-            if (isSave) {
-              this.setLocalStorage(
-                localStorage,
-                JSON.stringify({ expiredOn, ...result })
-              )
-            }
+          if (localStorage && isSave) {
+            this.setLocalStorage(
+              localStorage,
+              JSON.stringify({ expiredOn, ...result })
+            )
           }
         }
 
