@@ -1974,6 +1974,7 @@
               :show="lookup.show"
               :as="lookup.as"
               :vruntime="lookup.vruntime"
+              :filter="lookup.filter"
               :lookup-group="lookup.lookupGroup"
             />
             <div class="text-xs">Template : {{ htmlLookup }}</div>
@@ -2101,6 +2102,18 @@
                   <td>
                     Two way data binding, saat ini data yang di input dalam
                     bentuk upprcase, customize sesuai kebutuhan
+                  </td>
+                </tr>
+                <tr>
+                  <td>filter</td>
+                  <td>-</td>
+                  <td>Function</td>
+                  <td>false</td>
+                  <td>(lookupGroup, options) => { return options }</td>
+                  <td>
+                    Kadang kita tidak ingin menampilkan seluruh data lookup, krn
+                    logic businsess, pd function ini kita dapat melakukan
+                    filtering tambahan
                   </td>
                 </tr>
               </tbody>
@@ -4339,6 +4352,11 @@ export default {
         as: 'string',
         vruntime: (data) => {
           console.log(data)
+        },
+        filter: (lookupGroup, options) => {
+          console.log('lookupGroup ', lookupGroup)
+          options.pop()
+          return options
         },
       },
       dialog: {

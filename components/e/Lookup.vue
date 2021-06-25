@@ -68,6 +68,13 @@ export default {
     as: { type: String, required: false, default: 'string' }, // opsi yang tersedia [string, number]
     vruntime: { type: Function, required: false, default: null },
     value: { type: [String, Number], required: false, default: null },
+    filter: {
+      type: Function,
+      required: false,
+      default: (lookupGroup, options) => {
+        return options
+      },
+    },
   },
   data() {
     return {
@@ -136,7 +143,9 @@ export default {
           }
         )
 
-        if (result) this.options = result
+        if (result) {
+          this.options = this.filter(this.lookupGroup, result)
+        }
       }
     },
     _input(event) {
