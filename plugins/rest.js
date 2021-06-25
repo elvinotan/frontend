@@ -24,18 +24,35 @@ export default function ({ $axios, $config, $string, store }, inject) {
 
     // Rest Call base on type
     async get(pUrl = '', pHeaders = {}) {
-      const { forceUpdate, vuex, localStorage, saveFn, ...headers } = pHeaders
+      const {
+        forceUpdate,
+        vuex,
+        localStorage,
+        expired,
+        saveFn,
+        ...headers
+      } = pHeaders
 
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
-        const result = this.getVuex(vuex)
-        if (result) return { result }
+        const data = this.getVuex(vuex)
+        if (data) {
+          const { expiredOn, ...result } = data
+          if (new Date().getTime() < expiredOn) {
+            return { result }
+          }
+        }
       }
 
       if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
-        const result = this.getLocalStorage(localStorage)
-        if (result) return { result }
+        const data = this.getLocalStorage(localStorage)
+        if (data) {
+          const { expiredOn, ...result } = data
+          if (new Date().getTime() < expiredOn) {
+            return { result }
+          }
+        }
       }
 
       for (const [key, value] of Object.entries(headers)) {
@@ -48,16 +65,21 @@ export default function ({ $axios, $config, $string, store }, inject) {
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
+          const expiredOn = new Date().getTime() + (expired || 0)
+
           if (vuex) {
             const isSave = saveFn ? saveFn(result) : true
             if (isSave) {
-              this.setVuex(vuex, result)
+              this.setVuex(vuex, { expiredOn, result })
             }
           }
           if (localStorage) {
             const isSave = saveFn ? saveFn(result) : true
             if (isSave) {
-              this.setLocalStorage(localStorage, JSON.stringify(result))
+              this.setLocalStorage(
+                localStorage,
+                JSON.stringify({ expiredOn, result })
+              )
             }
           }
         }
@@ -69,18 +91,35 @@ export default function ({ $axios, $config, $string, store }, inject) {
     },
 
     async post(pUrl = '', payload = {}, pHeaders = {}) {
-      const { forceUpdate, vuex, localStorage, saveFn, ...headers } = pHeaders
+      const {
+        forceUpdate,
+        vuex,
+        localStorage,
+        expired,
+        saveFn,
+        ...headers
+      } = pHeaders
 
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
-        const result = this.getVuex(vuex)
-        if (result) return { result }
+        const data = this.getVuex(vuex)
+        if (data) {
+          const { expiredOn, ...result } = data
+          if (new Date().getTime() < expiredOn) {
+            return { result }
+          }
+        }
       }
 
       if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
-        const result = this.getLocalStorage(localStorage)
-        if (result) return { result }
+        const data = this.getLocalStorage(localStorage)
+        if (data) {
+          const { expiredOn, ...result } = data
+          if (new Date().getTime() < expiredOn) {
+            return { result }
+          }
+        }
       }
 
       for (const [key, value] of Object.entries(headers)) {
@@ -93,17 +132,22 @@ export default function ({ $axios, $config, $string, store }, inject) {
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
+          const expiredOn = new Date().getTime() + (expired || 0)
+
           if (vuex) {
             const isSave = saveFn ? saveFn(result) : true
             if (isSave) {
-              this.setVuex(vuex, result)
+              this.setVuex(vuex, { expiredOn, ...result })
             }
           }
 
           if (localStorage) {
             const isSave = saveFn ? saveFn(result) : true
             if (isSave) {
-              this.setLocalStorage(localStorage, JSON.stringify(result))
+              this.setLocalStorage(
+                localStorage,
+                JSON.stringify({ expiredOn, ...result })
+              )
             }
           }
         }

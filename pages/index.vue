@@ -3970,6 +3970,14 @@
                     next restCall
                   </td>
                 </tr>
+                <tr>
+                  <td>expired</td>
+                  <td>number</td>
+                  <td>
+                    Number in milisecond, timout of expired object in vuex or
+                    storage
+                  </td>
+                </tr>
               </tbody>
             </table>
             <br />
@@ -4812,6 +4820,7 @@ export default {
         {
           btpnApiKey: '[test_api_key]',
           vuex: vuexId,
+          expired: 5000,
         }
       )
       console.log('Fetch melalui getVuex', this.$rest.getVuex(vuexId))
