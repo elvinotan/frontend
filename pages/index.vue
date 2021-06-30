@@ -3713,6 +3713,9 @@
       <EForm id="Demo List">
         <EList />
       </EForm>
+      <EForm id="Demo Entry">
+        <EEntry />
+      </EForm>
       <EForm id="Plugin">
         <ETabs
           id="Plugin"
@@ -4126,11 +4129,11 @@ export default {
       htmlBoolean:
         '<EBoolean id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :type="" />',
       htmlSelect:
-        '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options=[{ value: null, description: null }] />',
+        '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options="[{ value: null, description: null }]" />',
       htmlLookup:
         '<ELookup id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :lookupGroup="" />',
       htmlDialog:
-        '<EDialog id="" ref="" :title="" :width="" :height="" :buttons=[{ label: null, color: null }]> Contents </EDialog>',
+        '<EDialog id="" ref="" :title="" :width="" :height="" :buttons="[{ label:"", emit:"", color: null }]"> Contents </EDialog>',
       htmlConfirmation:
         '<EConfirmation id="" ref="" :positive="" :negative="" />',
       htmlLoading: '<ELoading ref="loader" />',
@@ -4138,13 +4141,13 @@ export default {
       htmlCard:
         '<ECard ref="" :label="" :disabled="" :show="" >Contents </ECard>',
       htmlTabs:
-        '<ETabs id="" ref="" :labels=[{label:null}] :disabled="" :show="" >Contents </ETabs>',
+        '<ETabs id="" ref="" :labels="[{ label:null , disabled: false }]" :disabled="" :show="" >Contents </ETabs>',
       htmlFilter:
         '<EFilter id="" ref="" :title="" :disabled="" :show="" @Clear="" @Search="">Contents </EFilter>',
       htmlPageLoader:
-        '<EPageLoader id="" ref="" :labels="" :fetcher=() >Contents</EPageLoader>',
+        '<EPageLoader id="" ref="" :labels="" :fetcher="()=>{}" >Contents</EPageLoader>',
       htmlLocalPagination:
-        '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction=() :addNewData=() :saveState=() :columns=[] :rows=[] :actions=[] :buttons:[] :initialSortBy=[] @RowClick=() />',
+        '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction="()=>{}" :addNewData="()=>" :saveState="()=>" :columns="[]" :rows="[]" :actions="[]" :buttons="[]" :initialSortBy="[]" @RowClick="()=>{}" />',
       htmlLocalPaginationColumn:
         "{ label:'', field:'', sortable: true, width:'100px', tooltip:'', type:'' } // type = text, number, decimal, percentage, boolean",
       htmlLocalPaginationinitialSortBy:
@@ -4152,7 +4155,7 @@ export default {
       htmlLocalPaginationActions: "{ label:'', emit:'' }",
       htmlLocalPaginationButtons: '{ label:"", color:"", emit:"" }',
       htmlServerPagination:
-        '<EServerPagination id="" ref="" :label="" :show="" :disabled="" :columns="[]" :autoLoad="" :picker="" :filter="" ::addNewData=() :disabledAction=() :actions=[] :buttons:[] :initialSortBy=[] @RowClick=() />',
+        '<EServerPagination id="" ref="" :label="" :show="" :disabled="" :columns="[]" :autoLoad="" :picker="" :filter="" ::addNewData="()=>{}" :disabledAction="()=>{}" :actions="[]" :buttons="[]" :initialSortBy="[]" @RowClick="()=>{}" />',
       htmlServerPaginationColumn:
         "{ label:'', field:'', sortable: true, width:'100px', tooltip:'', type:'' } // type = text, number, decimal, percentage, boolean",
       htmlServerPaginationActions: "{ label:'', emit:'' }",

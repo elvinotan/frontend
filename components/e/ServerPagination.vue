@@ -295,9 +295,9 @@ export default {
         this.lcolumns.push({
           label: 'Action',
           field: 'action',
+          width: '100px',
           thClass: 'vgt-center-align text-sm',
           tdClass: 'vgt-center-align text-sm',
-          width: '100px',
           sortable: false,
         })
       }

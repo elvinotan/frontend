@@ -194,6 +194,18 @@ app.get('/general/lookup/:group', function (req, res) {
       { value: 'SD', description: 'SD' },
       { value: 'SMP', description: 'SMP' },
       { value: 'SMA', description: 'SMA' },
+      { value: 'S1', description: 'S1' },
+      { value: 'S2', description: 'S2' },
+    ])
+  }
+  if (group === 'RELIGION') {
+    res.json([
+      { value: 'ISLAM', description: 'ISLAM' },
+      { value: 'KATOLIK', description: 'KATOLIK' },
+      { value: 'KRISTEN', description: 'KRISTEN' },
+      { value: 'BUDHA', description: 'BUDHA' },
+      { value: 'HINDU', description: 'HINDU' },
+      { value: 'KONGHUCU', description: 'KONGHUCU' },
     ])
   }
   if (group === 'EXP') {
@@ -201,6 +213,13 @@ app.get('/general/lookup/:group', function (req, res) {
       { value: 1, description: '1 Th' },
       { value: 2, description: '2 Th' },
       { value: 3, description: '3 Th' },
+    ])
+  }
+  if (group === 'JOB') {
+    res.json([
+      { value: 1, description: 'Karyawan' },
+      { value: 2, description: 'Ibu Rumah Tangga' },
+      { value: 3, description: 'Penganguran' },
     ])
   }
 })

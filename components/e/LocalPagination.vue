@@ -200,6 +200,7 @@ export default {
         this.lcolumns.push({
           label: 'Saved',
           field: 'saved',
+          width: '100px',
           thClass: 'vgt-center-align text-sm',
           tdClass: 'vgt-center-align text-sm',
           sortable: false,
@@ -273,6 +274,7 @@ export default {
         this.lcolumns.push({
           label: 'Action',
           field: 'action',
+          width: '100px',
           thClass: 'vgt-center-align text-sm',
           tdClass: 'vgt-center-align text-sm',
           sortable: false,

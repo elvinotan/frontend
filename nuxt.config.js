@@ -26,6 +26,7 @@ export default {
     '~/plugins/fmt',
     '~/plugins/string',
     '~/plugins/number',
+    '~/plugins/object',
     '~/plugins/enum',
     '~/plugins/rest',
   ],
