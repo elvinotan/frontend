@@ -57,7 +57,7 @@ export default {
   // Used as fallback if no runtime config is provided
   // https://axios.nuxtjs.org
   axios: {
-    progress: true,
+    progress: false,
     debug: true,
   },
 

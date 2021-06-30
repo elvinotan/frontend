@@ -28,7 +28,6 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         forceUpdate = false,
         vuex,
         localStorage,
-        expired = 0,
         saveFn = () => {
           return true
         },
@@ -37,19 +36,14 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
-        const { expiredOn, ...result } = this.getVuex(vuex) || {}
-        if (result && $number.lt(new Date().getTime(), expiredOn)) {
-          return { result }
-        }
+        const result = this.getVuex(vuex)
+        if (result) return { result }
       }
 
       if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
-        const { expiredOn, ...result } =
-          this.getLocalStorage(localStorage) || {}
-        if (result && $number.lt(new Date().getTime(), expiredOn)) {
-          return { result }
-        }
+        const result = this.getLocalStorage(localStorage)
+        if (result) return { result }
       }
 
       for (const [key, value] of Object.entries(headers)) {
@@ -62,17 +56,13 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
-          const expiredOn = $number.add(new Date().getTime(), expired || 0)
           const isSave = saveFn(result)
 
           if (vuex && isSave) {
-            this.setVuex(vuex, { expiredOn, result })
+            this.setVuex(vuex, result)
           }
           if (localStorage && isSave) {
-            this.setLocalStorage(
-              localStorage,
-              JSON.stringify({ expiredOn, result })
-            )
+            this.setLocalStorage(localStorage, JSON.stringify(result))
           }
         }
 
@@ -87,7 +77,6 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         forceUpdate = false,
         vuex,
         localStorage,
-        expired = 0,
         saveFn = () => {
           return true
         },
@@ -96,19 +85,14 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
       if (!forceUpdate && vuex) {
         // Apakah ada data di vuex, bila ada maka tidak perlu melakukan rest call, just return data
-        const { expiredOn, ...result } = this.getVuex(vuex) || {}
-        if (result && $number.lt(new Date().getTime(), expiredOn)) {
-          return { result }
-        }
+        const result = this.getVuex(vuex)
+        if (result) return { result }
       }
 
       if (!forceUpdate && localStorage) {
         // Apakah ada data di localStorage, bila ada maka tidak perlu melakukan rest call, just return data
-        const { expiredOn, ...result } =
-          this.getLocalStorage(localStorage) || {}
-        if (result && $number.lt(new Date().getTime(), expiredOn)) {
-          return { result }
-        }
+        const result = this.getLocalStorage(localStorage)
+        if (result) return { result }
       }
 
       for (const [key, value] of Object.entries(headers)) {
@@ -121,18 +105,14 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
-          const expiredOn = $number.add(new Date().getTime(), expired || 0)
           const isSave = saveFn(result)
 
           if (vuex && isSave) {
-            this.setVuex(vuex, { expiredOn, ...result })
+            this.setVuex(vuex, result)
           }
 
           if (localStorage && isSave) {
-            this.setLocalStorage(
-              localStorage,
-              JSON.stringify({ expiredOn, ...result })
-            )
+            this.setLocalStorage(localStorage, JSON.stringify(result))
           }
         }
 

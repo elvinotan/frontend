@@ -224,7 +224,7 @@
           sortable: true,
           width: '100px',
           tooltip: 'Jenis Kelamin',
-          type: 'string',
+          type: 'SEX',
         },
         {
           label: 'Tempat Lahir',
@@ -256,7 +256,7 @@
           sortable: true,
           width: '100px',
           tooltip: 'Agama',
-          type: 'String',
+          type: 'RELIGION',
         },
         {
           label: 'Pendidikan',
@@ -264,7 +264,7 @@
           sortable: true,
           width: '100px',
           tooltip: 'Pendidikan',
-          type: 'String',
+          type: 'EDUCATION',
         },
         {
           label: 'Pekerjaan',
@@ -272,7 +272,11 @@
           sortable: true,
           width: '100px',
           tooltip: 'Pekerjaan',
-          type: 'String',
+          type: 'JOB',
+        },
+        {
+          field: 'action',
+          width: '200px',
         },
       ]"
       :actions="[{ label: 'Delete', emit: 'removeChildren' }]"

@@ -83,11 +83,7 @@
               <input v-else type="checkbox" disabled />
             </span>
             <span v-else>
-              {{
-                props.column.format
-                  ? props.column.format(props)
-                  : props.formattedRow[props.column.field]
-              }}
+              {{ _renderCell(props) }}
             </span>
           </template>
           <div slot="table-actions" class="py-0.5 px-2">
@@ -176,7 +172,6 @@ export default {
       required: false,
       default: null,
     },
-    lookupGroups: { type: Array, required: false, default: () => [] },
   },
   data() {
     return {
@@ -201,9 +196,48 @@ export default {
         show: true,
       }
     },
-    async _loadLookupGroups() {
-      for (const lookupGroup of this.lookupGroups) {
-        await this.$rest.get(`api/general/lookup/${lookupGroup}`, {
+    _isColumLookup(column) {
+      return ![
+        'text',
+        'date',
+        'number',
+        'decimal',
+        'percentage',
+        'boolean',
+      ].includes(column.type)
+    },
+    _renderCell(props) {
+      if (this._isColumLookup(props.column)) {
+        const vuex = this.$rest.getVuex(
+          this.$enum.VUEX.LOOKUP_PREFIX + props.column.type
+        )
+        if (props.column.format) {
+          return props.column.format(props, vuex)
+        } else if (vuex) {
+          const value = props.formattedRow[props.column.field]
+          const selected = vuex.find(
+            (lookup) => lookup.value + '' === value + ''
+          )
+          return selected ? selected.description : value
+        } else {
+          return props.formattedRow[props.column.field]
+        }
+      } else if (props.column.format) {
+        return props.column.format(props)
+      } else {
+        return props.formattedRow[props.column.field]
+      }
+    },
+    _loadLookupGroups() {
+      const lookupGroups = []
+      for (const column of this.columns) {
+        if (this._isColumLookup(column)) {
+          lookupGroups.push(column.type)
+        }
+      }
+
+      for (const lookupGroup of lookupGroups) {
+        this.$rest.get(`api/general/lookup/${lookupGroup}`, {
           vuex: this.$enum.VUEX.LOOKUP_PREFIX + lookupGroup,
         })
       }
@@ -280,10 +314,13 @@ export default {
           delete lcolumn.type
         }
 
-        this.lcolumns.push(lcolumn)
+        if (lcolumn.field !== 'action') this.lcolumns.push(lcolumn)
       }
 
       if (this.actions && this.actions.length > 0) {
+        const actionColumn =
+          this.columns.find((column) => column.field === 'action') || {}
+
         this.lcolumns.push({
           label: 'Action',
           field: 'action',
@@ -291,6 +328,7 @@ export default {
           thClass: 'vgt-center-align text-sm',
           tdClass: 'vgt-center-align text-sm',
           sortable: false,
+          ...actionColumn,
         })
       }
     },
