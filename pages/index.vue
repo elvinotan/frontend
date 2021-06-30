@@ -4149,7 +4149,7 @@ export default {
       htmlLocalPagination:
         '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction="()=>{}" :addNewData="()=>" :saveState="()=>" :columns="[]" :rows="[]" :actions="[]" :buttons="[]" :initialSortBy="[]" @RowClick="()=>{}" />',
       htmlLocalPaginationColumn:
-        "{ label:'', field:'', sortable: true, width:'100px', tooltip:'', type:'' } // type = text, number, decimal, percentage, boolean",
+        '{ label:"", field:"", sortable: true, width:"100px", tooltip:"", type:"", :format="()=>{}" } // type = text, number, decimal, percentage, boolean',
       htmlLocalPaginationinitialSortBy:
         "{ field: '', type:'' } // type = asc/desc",
       htmlLocalPaginationActions: "{ label:'', emit:'' }",
@@ -4157,7 +4157,7 @@ export default {
       htmlServerPagination:
         '<EServerPagination id="" ref="" :label="" :show="" :disabled="" :columns="[]" :autoLoad="" :picker="" :filter="" ::addNewData="()=>{}" :disabledAction="()=>{}" :actions="[]" :buttons="[]" :initialSortBy="[]" @RowClick="()=>{}" />',
       htmlServerPaginationColumn:
-        "{ label:'', field:'', sortable: true, width:'100px', tooltip:'', type:'' } // type = text, number, decimal, percentage, boolean",
+        '{ label:"", field:"", sortable: true, width:"100px", tooltip:"", type:"", :format="()=>{}" } // type = text, number, decimal, percentage, boolean',
       htmlServerPaginationActions: "{ label:'', emit:'' }",
       htmlServerPaginationButtons: '{ label:"", color:"", emit:"" }',
       htmlServerPaginationinitialSortBy:
@@ -4419,6 +4419,9 @@ export default {
             width: '750px',
             tooltip: 'Column Name',
             type: 'text',
+            format: (props) => {
+              return 'Nama-nya ' + props.formattedRow[props.column.field]
+            },
           },
           {
             label: 'Bith Date',

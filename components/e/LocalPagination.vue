@@ -83,7 +83,11 @@
               <input v-else type="checkbox" disabled />
             </span>
             <span v-else>
-              {{ props.formattedRow[props.column.field] }}
+              {{
+                props.column.format
+                  ? props.column.format(props)
+                  : props.formattedRow[props.column.field]
+              }}
             </span>
           </template>
           <div slot="table-actions" class="py-0.5 px-2">
@@ -172,6 +176,7 @@ export default {
       required: false,
       default: null,
     },
+    lookupGroups: { type: Array, required: false, default: () => [] },
   },
   data() {
     return {
@@ -186,6 +191,7 @@ export default {
   },
   created() {
     this._constractColumns()
+    this._loadLookupGroups()
   },
   methods: {
     metaData() {
@@ -193,6 +199,13 @@ export default {
         name: this._name,
         type: 'container',
         show: true,
+      }
+    },
+    async _loadLookupGroups() {
+      for (const lookupGroup of this.lookupGroups) {
+        await this.$rest.get(`api/general/lookup/${lookupGroup}`, {
+          vuex: this.$enum.VUEX.LOOKUP_PREFIX + lookupGroup,
+        })
       }
     },
     _constractColumns() {

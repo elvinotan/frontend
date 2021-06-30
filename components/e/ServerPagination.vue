@@ -91,7 +91,11 @@
               <input v-else type="checkbox" disabled />
             </span>
             <span v-else>
-              {{ props.formattedRow[props.column.field] }}
+              {{
+                props.column.format
+                  ? props.column.format(props)
+                  : props.formattedRow[props.column.field]
+              }}
             </span>
           </template>
           <div slot="table-actions" class="py-0.5 px-2">
