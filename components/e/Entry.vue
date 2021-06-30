@@ -289,6 +289,14 @@
       @RowClick="() => {}"
       @removeChildren="removeChildren"
     />
+    <br />
+    <EButton
+      id="save"
+      ref="save"
+      label="Simpan"
+      color="green"
+      @click="saveBiodata"
+    />
 
     <EDialog
       id="childrenDlg"
@@ -454,6 +462,15 @@ export default {
     this.ui.mother.sex.disabled = true
   },
   methods: {
+    saveBiodata() {
+      console.log('clicked')
+      const { valid, errors } = this.$wrapper.validate(this.$refs.customerEntry)
+      if (valid) {
+        alert('Valid')
+      } else {
+        console.log('errors ', errors)
+      }
+    },
     addChildren() {
       this.child = this.$object.clone(emptyDialogModel)
       this.$refs.childrenDlg.open()

@@ -24,13 +24,13 @@ export default function (plugin, inject) {
       }
     },
     refs: (pref) => {
-      let refs = [pref]
+      let refs = []
       for (const ref of pref.$children) {
         if (ref.metaData) {
           const { type } = ref.metaData()
           if (type === 'container') {
             refs = refs.concat(plugin.$wrapper.refs(ref)) // Card, Form
-          } else {
+          } else if (type === 'input') {
             refs.push(ref) // Button, Password, ShortText, MediumText, LongText, TextArea, Number, Decimal, Date, Time, Checkbox, Boolean, Select
           }
         } else {
