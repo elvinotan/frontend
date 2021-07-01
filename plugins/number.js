@@ -1,7 +1,16 @@
 export default function (plugin, inject) {
   const number = {
-    add(obj1, obj2) {
+    addition(obj1, obj2) {
       return obj1 + obj2
+    },
+    subtract(obj1, obj2) {
+      return obj1 - obj2
+    },
+    multiply(obj1, obj2) {
+      return obj1 * obj2
+    },
+    division(obj1, obj2) {
+      return obj1 / obj2
     },
     gt(obj1, obj2) {
       return obj1 > obj2
