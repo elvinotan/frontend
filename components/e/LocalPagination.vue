@@ -61,9 +61,7 @@
                 <button
                   v-else
                   class="font-bold"
-                  @click="
-                    $emit(action.emit ? action.emit : action.label, props)
-                  "
+                  @click="_action(action, props)"
                 >
                   {{ action.label }}
                 </button>
@@ -92,7 +90,7 @@
               :id="'LocalPagination' + id + 'AddNewData'"
               label="Add New Data"
               :disabled="disabled"
-              @click="addNewData"
+              @click="_addNewData"
             />
           </div>
           <div
@@ -175,6 +173,7 @@ export default {
   },
   data() {
     return {
+      reference: undefined,
       lcolumns: [],
       selectedRows: [],
     }
@@ -195,6 +194,28 @@ export default {
         type: 'container',
         show: true,
       }
+    },
+    addOrReplace(object) {
+      if (this.reference) {
+        Object.assign(this.reference.row, object)
+      } else {
+        // eslint-disable-next-line vue/no-mutating-props
+        this.rows.push(object)
+      }
+    },
+    remove() {
+      if (this.reference) {
+        // eslint-disable-next-line vue/no-mutating-props
+        this.rows.splice(this.reference.row.originalIndex, 1)
+      }
+    },
+    _addNewData() {
+      this.reference = undefined
+      this.addNewData()
+    },
+    _action(action, props) {
+      this.reference = props
+      this.$emit(action.emit ? action.emit : action.label, props)
     },
     _renderCell(props) {
       if (props.column.type === 'lookup') {

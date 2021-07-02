@@ -5,20 +5,28 @@ export default function (plugin, inject) {
     jquery(selector) {
       return $(selector)
     },
-    disabled: (data = null, condition = false) => {
-      if (data) {
-        for (const p in data) {
-          data[p].disabled = condition
-        }
+    disabled: (datas = [], condition = false) => {
+      if (!Array.isArray(datas)) datas = [datas]
+
+      if (datas) {
+        datas.forEach((data) => {
+          for (const p in data) {
+            data[p].disabled = condition
+          }
+        })
       } else {
         throw new Error('UnIdentified ui data parameter')
       }
     },
-    show: (data = null, condition = false) => {
-      if (data) {
-        for (const p in data) {
-          data[p].show = condition
-        }
+    show: (datas = [], condition = false) => {
+      if (!Array.isArray(datas)) datas = [datas]
+
+      if (datas) {
+        datas.forEach((data) => {
+          for (const p in data) {
+            data[p].show = condition
+          }
+        })
       } else {
         throw new Error('UnIdentified ui data parameter')
       }

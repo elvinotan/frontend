@@ -283,7 +283,10 @@
           width: '200px',
         },
       ]"
-      :actions="[{ label: 'Delete', emit: 'removeChildren' }]"
+      :actions="[
+        { label: 'Delete', emit: 'removeChildren' },
+        { label: 'Edit', emit: 'editChildren' },
+      ]"
       :disabled-action="() => {}"
       :add-new-data="addChildren"
       :save-state="() => {}"
@@ -292,6 +295,7 @@
       :initial-sort-by="[]"
       @RowClick="() => {}"
       @removeChildren="removeChildren"
+      @editChildren="editChildren"
     />
     <br />
     <EButton
@@ -402,6 +406,12 @@
         </ECol>
       </ECol>
     </EDialog>
+    <EConfirmation
+      id="confirmation"
+      ref="confirmation"
+      positive="Yes"
+      negative="No"
+    />
   </ECard>
 </template>
 <script>
@@ -416,6 +426,7 @@ const uiprops = {
   job: { required: true, disabled: false, show: true },
 }
 const emptyDialogModel = {
+  id: null,
   name: null,
   nik: null,
   sex: null,
@@ -438,28 +449,150 @@ export default {
       child: this.$object.clone(emptyDialogModel),
       biodata: {
         father: {
-          name: null,
-          nik: null,
+          name: 'Elvino',
+          nik: 1212,
           sex: 'M',
-          birthPlace: null,
-          birthDate: null,
-          religion: null,
-          education: null,
-          job: null,
+          birthPlace: 'Jakarta',
+          birthDate: new Date(),
+          religion: 'KATOLIK',
+          education: 'SD',
+          job: 1,
         },
         mother: {
-          name: null,
-          nik: null,
-          sex: 'F',
-          birthPlace: null,
-          birthDate: null,
-          religion: null,
-          education: null,
-          job: null,
+          name: 'Carinnia',
+          nik: 234234,
+          sex: 'M',
+          birthPlace: 'Jakarta',
+          birthDate: new Date(),
+          religion: 'KATOLIK',
+          education: 'SMP',
+          job: 1,
         },
         children: [
           {
+            id: 1,
             name: 'CONSTANTINE',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 2,
+            name: 'AAA',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 3,
+            name: 'BBB',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 4,
+            name: 'CCCC',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 5,
+            name: 'DDD',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 6,
+            name: 'EEE',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 7,
+            name: 'FFF',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 8,
+            name: 'GGG',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 9,
+            name: 'HHH',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 10,
+            name: 'III',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 11,
+            name: 'JJJ',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+          {
+            id: 12,
+            name: 'KKK',
             nik: 1123323,
             sex: 'M',
             birthPlace: 'JAKARTA',
@@ -478,10 +611,10 @@ export default {
   },
   methods: {
     saveBiodata() {
-      console.log('clicked')
       const { valid, errors } = this.$wrapper.validate(this.$refs.customerEntry)
       if (valid) {
         alert('Valid')
+        this.$wrapper.disabled([this.ui.father, this.ui.mother], true)
       } else {
         console.log('errors ', errors)
       }
@@ -490,17 +623,25 @@ export default {
       this.child = this.$object.clone(emptyDialogModel)
       this.$refs.childrenDlg.open()
     },
+    editChildren(props) {
+      this.child = this.$object.clone(props.row)
+      this.$refs.childrenDlg.open()
+    },
     saveChild() {
       const { valid, errors } = this.$wrapper.validate(this.$refs.childrenDlg)
       if (valid) {
-        this.biodata.children.push(this.child)
-        this.child = this.$object.clone(emptyDialogModel)
+        this.$refs.children.addOrReplace(this.child)
         this.$refs.childrenDlg.close()
       } else {
         console.log('errors ', errors)
       }
     },
-    removeChildren() {},
+    async removeChildren(props) {
+      const { Yes } = await this.$refs.confirmation.confirm(
+        `Are you sure want to remove ${props.row.name} ?`
+      )
+      if (Yes) this.$refs.children.remove()
+    },
   },
 }
 </script>

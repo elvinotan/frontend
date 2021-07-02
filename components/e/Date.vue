@@ -61,7 +61,7 @@ export default {
     disabled: { type: Boolean, required: false, default: false },
     show: { type: Boolean, required: false, default: true },
     vruntime: { type: Function, required: false, default: null },
-    value: { type: Date, required: false, default: null },
+    value: { type: [Date, String], required: false, default: null },
     minimum: { type: Date, required: false, default: null },
     maximum: { type: Date, required: false, default: null },
   },
@@ -71,7 +71,7 @@ export default {
       maxlength: 10,
       state: 0,
       errors: [],
-      lvalue: this._format(this.value, 'YYYY-MM-DD'), // Masukan dari component adalah YYYY-MM-DD, meski dari component menampilkan DD/MM/YYYY
+      lvalue: this._format(this._parseInput(this.value), 'YYYY-MM-DD'), // Masukan dari component adalah YYYY-MM-DD, meski dari component menampilkan DD/MM/YYYY
     }
   },
   computed: {
@@ -117,6 +117,15 @@ export default {
     },
   },
   methods: {
+    _parseInput(value) {
+      if (value instanceof Date) {
+        return value
+      } else {
+        const dateValue = new Date(value)
+        this.$emit('input', dateValue)
+        return dateValue
+      }
+    },
     _clearInput() {
       this.lvalue = null
       this.$emit('input', this.lvalue)

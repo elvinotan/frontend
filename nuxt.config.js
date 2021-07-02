@@ -27,6 +27,7 @@ export default {
     '~/plugins/string',
     '~/plugins/number',
     '~/plugins/object',
+    '~/plugins/array',
     '~/plugins/enum',
     '~/plugins/rest',
   ],
