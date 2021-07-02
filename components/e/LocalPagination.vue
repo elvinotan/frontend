@@ -221,14 +221,21 @@ export default {
 
       return props.formattedRow[props.column.field]
     },
-    _loadLookupGroups() {
+    async _loadLookupGroups() {
+      const promise = []
       for (const column of this.columns) {
         if (column.type === 'lookup') {
-          this.$rest.get(`api/general/lookup/${column.reference}`, {
-            vuex: this.$enum.VUEX.LOOKUP_PREFIX + column.reference,
-          })
+          promise.push(
+            this.$rest.get(`api/general/lookup/${column.reference}`, {
+              vuex: this.$enum.VUEX.LOOKUP_PREFIX + column.reference,
+            })
+          )
         }
       }
+
+      await Promise.all(promise)
+
+      this.$forceUpdate()
     },
     _constractColumns() {
       if (this.saveState) {

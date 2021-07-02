@@ -457,7 +457,18 @@ export default {
           education: null,
           job: null,
         },
-        children: [],
+        children: [
+          {
+            name: 'CONSTANTINE',
+            nik: 1123323,
+            sex: 'M',
+            birthPlace: 'JAKARTA',
+            birthDate: new Date(),
+            religion: 'KATOLIK',
+            education: 'SMP',
+            job: '3',
+          },
+        ],
       },
     }
   },
