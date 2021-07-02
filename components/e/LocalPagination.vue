@@ -223,14 +223,14 @@ export default {
     },
     async _loadLookupGroups() {
       const promise = []
-      for (const column of this.columns) {
-        if (column.type === 'lookup') {
-          promise.push(
-            this.$rest.get(`api/general/lookup/${column.reference}`, {
-              vuex: this.$enum.VUEX.LOOKUP_PREFIX + column.reference,
-            })
-          )
-        }
+      for (const column of this.columns.filter(
+        (column) => column.type === 'lookup'
+      )) {
+        promise.push(
+          this.$rest.get(`api/general/lookup/${column.reference}`, {
+            vuex: this.$enum.VUEX.LOOKUP_PREFIX + column.reference,
+          })
+        )
       }
 
       await Promise.all(promise)
