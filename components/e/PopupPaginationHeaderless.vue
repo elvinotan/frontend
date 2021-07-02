@@ -67,7 +67,7 @@
             </ECol>
           </div>
           <template slot="table-row" slot-scope="props">
-            <span v-if="props.column.ltype === 'boolean'">
+            <span v-if="props.column.type === 'boolean'">
               <input
                 v-if="props.row[props.column.field]"
                 type="checkbox"
@@ -147,8 +147,7 @@ export default {
     _constractColumns() {
       // Gunakan tempoarary colum, krn formatted data kita gax mau gunakan default
       for (const column of this.columns) {
-        let lcolumn = { ...column, ltype: column.type }
-        if (!lcolumn.type) lcolumn.type = 'text'
+        let lcolumn = { type: 'text', ...column }
 
         if (lcolumn.type === 'text') {
           lcolumn = {
@@ -157,7 +156,6 @@ export default {
             tdClass: 'vgt-left-align text-sm',
             ...lcolumn,
           }
-          delete lcolumn.type
         }
         if (lcolumn.type === 'date') {
           lcolumn = {
@@ -166,14 +164,12 @@ export default {
             tdClass: 'vgt-center-align text-sm',
             ...lcolumn,
           }
-          delete lcolumn.type
         }
         if (lcolumn.type === 'number') {
           lcolumn = {
             formatFn: this._formatNumber,
             thClass: 'vgt-right-align text-sm',
             tdClass: 'vgt-right-align text-sm',
-            type: 'number',
             ...lcolumn,
           }
         }
@@ -182,7 +178,6 @@ export default {
             formatFn: this._formatDecimal,
             thClass: 'vgt-right-align text-sm',
             tdClass: 'vgt-right-align text-sm',
-            type: 'number',
             ...lcolumn,
           }
         }
@@ -191,7 +186,6 @@ export default {
             formatFn: this._formatPercentage,
             thClass: 'vgt-right-align text-sm',
             tdClass: 'vgt-right-align text-sm',
-            type: 'number',
             ...lcolumn,
           }
         }
@@ -202,7 +196,6 @@ export default {
             tdClass: 'vgt-center-align text-sm',
             ...lcolumn,
           }
-          delete lcolumn.type
         }
 
         this.lcolumns.push(lcolumn)

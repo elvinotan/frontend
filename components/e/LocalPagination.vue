@@ -201,22 +201,25 @@ export default {
         const vuex = this.$rest.getVuex(
           this.$enum.VUEX.LOOKUP_PREFIX + props.column.reference
         )
-        if (props.column.format) {
-          return props.column.format(props, vuex)
+        if (vuex && props.column.format) {
+          props.formattedRow[props.column.field] = props.column.format(
+            props,
+            vuex
+          )
         } else if (vuex) {
-          const value = props.formattedRow[props.column.field]
+          const value = props.row[props.column.field]
           const selected = vuex.find(
             (lookup) => lookup.value + '' === value + ''
           )
-          return selected ? selected.description : value
-        } else {
-          return props.formattedRow[props.column.field]
+          props.formattedRow[props.column.field] = selected
+            ? selected.description
+            : value
         }
       } else if (props.column.format) {
-        return props.column.format(props)
-      } else {
-        return props.formattedRow[props.column.field]
+        props.formattedRow[props.column.field] = props.column.format(props)
       }
+
+      return props.formattedRow[props.column.field]
     },
     _loadLookupGroups() {
       for (const column of this.columns) {
@@ -291,7 +294,6 @@ export default {
             ...lcolumn,
           }
         }
-
         if (lcolumn.type === 'lookup') {
           lcolumn = {
             formatFn: this._formatText,
