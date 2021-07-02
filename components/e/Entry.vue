@@ -224,7 +224,8 @@
           sortable: true,
           width: '100px',
           tooltip: 'Jenis Kelamin',
-          type: 'SEX',
+          type: 'lookup',
+          reference: 'SEX',
         },
         {
           label: 'Tempat Lahir',
@@ -256,7 +257,8 @@
           sortable: true,
           width: '100px',
           tooltip: 'Agama',
-          type: 'RELIGION',
+          type: 'lookup',
+          reference: 'RELIGION',
         },
         {
           label: 'Pendidikan',
@@ -264,7 +266,8 @@
           sortable: true,
           width: '100px',
           tooltip: 'Pendidikan',
-          type: 'EDUCATION',
+          type: 'lookup',
+          reference: 'EDUCATION',
         },
         {
           label: 'Pekerjaan',
@@ -272,7 +275,8 @@
           sortable: true,
           width: '100px',
           tooltip: 'Pekerjaan',
-          type: 'JOB',
+          type: 'lookup',
+          reference: 'JOB',
         },
         {
           field: 'action',

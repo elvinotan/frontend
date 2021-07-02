@@ -73,7 +73,7 @@
             <span v-else-if="saveState && props.column.field === 'saved'">
               {{ saveState(props) ? 'Saved' : 'Not Saved' }}
             </span>
-            <span v-else-if="props.column.ltype === 'boolean'">
+            <span v-else-if="props.column.type === 'boolean'">
               <input
                 v-if="props.row[props.column.field]"
                 type="checkbox"
@@ -196,20 +196,10 @@ export default {
         show: true,
       }
     },
-    _isColumLookup(column) {
-      return ![
-        'text',
-        'date',
-        'number',
-        'decimal',
-        'percentage',
-        'boolean',
-      ].includes(column.type)
-    },
     _renderCell(props) {
-      if (this._isColumLookup(props.column)) {
+      if (props.column.type === 'lookup') {
         const vuex = this.$rest.getVuex(
-          this.$enum.VUEX.LOOKUP_PREFIX + props.column.type
+          this.$enum.VUEX.LOOKUP_PREFIX + props.column.reference
         )
         if (props.column.format) {
           return props.column.format(props, vuex)
@@ -229,17 +219,12 @@ export default {
       }
     },
     _loadLookupGroups() {
-      const lookupGroups = []
       for (const column of this.columns) {
-        if (this._isColumLookup(column)) {
-          lookupGroups.push(column.type)
+        if (column.type === 'lookup') {
+          this.$rest.get(`api/general/lookup/${column.reference}`, {
+            vuex: this.$enum.VUEX.LOOKUP_PREFIX + column.reference,
+          })
         }
-      }
-
-      for (const lookupGroup of lookupGroups) {
-        this.$rest.get(`api/general/lookup/${lookupGroup}`, {
-          vuex: this.$enum.VUEX.LOOKUP_PREFIX + lookupGroup,
-        })
       }
     },
     _constractColumns() {
@@ -256,8 +241,7 @@ export default {
 
       // Gunakan tempoarary colum, krn formatted data kita gax mau gunakan default
       for (const column of this.columns) {
-        let lcolumn = { ...column, ltype: column.type }
-        if (!lcolumn.type) lcolumn.type = 'text'
+        let lcolumn = { type: 'text', ...column }
 
         if (lcolumn.type === 'text') {
           lcolumn = {
@@ -266,7 +250,6 @@ export default {
             tdClass: 'vgt-left-align text-sm',
             ...lcolumn,
           }
-          delete lcolumn.type
         }
         if (lcolumn.type === 'date') {
           lcolumn = {
@@ -275,14 +258,12 @@ export default {
             tdClass: 'vgt-center-align text-sm',
             ...lcolumn,
           }
-          delete lcolumn.type
         }
         if (lcolumn.type === 'number') {
           lcolumn = {
             formatFn: this._formatNumber,
             thClass: 'vgt-right-align text-sm',
             tdClass: 'vgt-right-align text-sm',
-            type: 'number',
             ...lcolumn,
           }
         }
@@ -291,7 +272,6 @@ export default {
             formatFn: this._formatDecimal,
             thClass: 'vgt-right-align text-sm',
             tdClass: 'vgt-right-align text-sm',
-            type: 'number',
             ...lcolumn,
           }
         }
@@ -300,7 +280,6 @@ export default {
             formatFn: this._formatPercentage,
             thClass: 'vgt-right-align text-sm',
             tdClass: 'vgt-right-align text-sm',
-            type: 'number',
             ...lcolumn,
           }
         }
@@ -311,7 +290,15 @@ export default {
             tdClass: 'vgt-center-align text-sm',
             ...lcolumn,
           }
-          delete lcolumn.type
+        }
+
+        if (lcolumn.type === 'lookup') {
+          lcolumn = {
+            formatFn: this._formatText,
+            thClass: 'vgt-left-align text-sm',
+            tdClass: 'vgt-left-align text-sm',
+            ...lcolumn,
+          }
         }
 
         if (lcolumn.field !== 'action') this.lcolumns.push(lcolumn)
