@@ -615,6 +615,7 @@ export default {
       if (valid) {
         alert('Valid')
         this.$wrapper.disabled([this.ui.father, this.ui.mother], true)
+        this.ui.childrens.disabled = true
       } else {
         console.log('errors ', errors)
       }
