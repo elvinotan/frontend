@@ -2,19 +2,8 @@
   <div>
     <div v-if="show">
       <label class="inline-flex items-center mt-3">
-        <input
-          :id="id"
-          v-model="lvalue"
-          type="checkbox"
-          :disabled="disabled"
-          class="h-4 w-4 field relative"
-          :class="[_cssInputBg]"
-          @input="_input"
-          @blur="_blur"
-        />
-        <span :for="id" class="text-sm px-1" :class="[_cssInputText]">{{
-          label
-        }}</span>
+        <input :id="id" v-model="lvalue" type="checkbox" :disabled="disabled" class="h-4 w-4 field relative" :class="[_cssInputBg]" @input="_input" @blur="_blur" />
+        <span :for="id" class="text-sm px-1" :class="[_cssInputText]">{{ label }}</span>
       </label>
     </div>
   </div>

@@ -1,45 +1,13 @@
 <template>
   <div>
     <div v-if="show">
-      <span
-        class="flex text-xs rounded border-0 outline-none ring-2"
-        :class="[_cssBorder]"
-      >
-        <span
-          v-if="label"
-          class="font-bold rounded-l text-sm text-gray-800 w-auto p-1"
-          :class="[_cssLabelBg]"
-        >
+      <span class="flex text-xs rounded border-0 outline-none ring-2" :class="[_cssBorder]">
+        <span v-if="label" class="font-bold rounded-l text-sm text-gray-800 w-auto p-1" :class="[_cssLabelBg]">
           {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
         </span>
-        <span
-          v-if="label && required"
-          class="font-bold text-center text-sm text-red-800 w-auto p-1"
-          :class="[_cssLabelBg]"
-        >
-          *
-        </span>
-        <input
-          :id="id"
-          v-model="lvalue"
-          autocomplete="off"
-          type="time"
-          :maxlength="maxlength"
-          :disabled="disabled"
-          :required="required"
-          class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
-          :class="[_cssRounded, _cssInputBg, _cssInputText]"
-          @input="_input"
-          @blur="_blur"
-        />
-        <span
-          v-if="!disabled"
-          class="font-bold rounded-r text-sm text-center text-gray-800 w-7 p-1 cursor-pointer"
-          :class="[_cssLabelBg]"
-          @click="_clearInput"
-        >
-          X
-        </span>
+        <span v-if="label && required" class="font-bold text-center text-sm text-red-800 w-auto p-1" :class="[_cssLabelBg]"> * </span>
+        <input :id="id" v-model="lvalue" autocomplete="off" type="time" :maxlength="maxlength" :disabled="disabled" :required="required" class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative" :class="[_cssRounded, _cssInputBg, _cssInputText]" @input="_input" @blur="_blur" />
+        <span v-if="!disabled" class="font-bold rounded-r text-sm text-center text-gray-800 w-7 p-1 cursor-pointer" :class="[_cssLabelBg]" @click="_clearInput"> X </span>
       </span>
       <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
         {{ errors[0] }}
@@ -102,9 +70,7 @@ export default {
       const maximum = this.maximum ? `Max:${this.maximum}` : ''
       const minmax = minimum || maximum ? `(${minimum}  ${maximum})     ` : ''
 
-      const charInfo = `${this.lvalue ? this.lvalue.length : 0} / ${
-        this.maxlength
-      } Char`
+      const charInfo = `${this.lvalue ? this.lvalue.length : 0} / ${this.maxlength} Char`
       return minmax + charInfo
     },
   },

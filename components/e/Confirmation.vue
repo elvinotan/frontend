@@ -3,19 +3,9 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container" style="width: 500px">
-          <div
-            class="text-xs rounded border-0 outline-none ring-2"
-            :class="[_cssBorder, _cssInputBg]"
-          >
-            <div
-              class="font-bold rounded-t text-sm bg-gray-300 text-gray-800 w-auto p-1"
-            >
-              Confirmation
-            </div>
-            <div
-              class="modal-body p-3 w-full flex justify-start"
-              :class="[_cssInputBg]"
-            >
+          <div class="text-xs rounded border-0 outline-none ring-2" :class="[_cssBorder, _cssInputBg]">
+            <div class="font-bold rounded-t text-sm bg-gray-300 text-gray-800 w-auto p-1">Confirmation</div>
+            <div class="modal-body p-3 w-full flex justify-start" :class="[_cssInputBg]">
               <div>
                 <img src="~/assets/images/confirm.png" />
               </div>
@@ -24,28 +14,10 @@
                 {{ label }}
               </div>
             </div>
-            <span
-              class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5"
-            >
-              <EButton
-                :id="'ConfirmationClose' + id"
-                class="w-full justify-start"
-                label="Close"
-                color="gray"
-                @click="_button('Close')"
-              />
-              <EButton
-                :id="'ConfirmationYes' + id"
-                :label="positive"
-                color="green"
-                @click="_button(positive)"
-              />
-              <EButton
-                :id="'ConfirmationNo' + id"
-                :label="negative"
-                color="red"
-                @click="_button(negative)"
-              />
+            <span class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5">
+              <EButton :id="'ConfirmationClose' + id" class="w-full justify-start" label="Close" color="gray" @click="_button('Close')" />
+              <EButton :id="'ConfirmationYes' + id" :label="positive" color="green" @click="_button(positive)" />
+              <EButton :id="'ConfirmationNo' + id" :label="negative" color="red" @click="_button(negative)" />
             </span>
           </div>
         </div>

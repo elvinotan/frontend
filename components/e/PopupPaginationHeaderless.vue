@@ -1,9 +1,7 @@
 <template>
   <div>
     <div v-if="show">
-      <div
-        class="text-xs rounded border-0 outline-none ring-2 ring-gray-500 bg-white"
-      >
+      <div class="text-xs rounded border-0 outline-none ring-2 ring-gray-500 bg-white">
         <vue-good-table
           :id="id"
           mode="remote"
@@ -38,42 +36,18 @@
           </div>
           <div slot="table-actions" class="py-0.5 px-2">
             <ECol :col="2">
-              <span
-                class="flex w-full text-xs rounded border-0 outline-none ring-2"
-                :class="[_cssBorder]"
-              >
-                <input
-                  :id="id + 'SearchTerm'"
-                  v-model="search"
-                  autocomplete="off"
-                  type="text"
-                  :maxlength="4"
-                  class="field w-full text-sm rounded p-1 px-1 w-auto outline-none uppercase placeholder-blueGray-300 relative"
-                  @keyup.enter="_onSearch"
-                />
+              <span class="flex w-full text-xs rounded border-0 outline-none ring-2" :class="[_cssBorder]">
+                <input :id="id + 'SearchTerm'" v-model="search" autocomplete="off" type="text" :maxlength="4" class="field w-full text-sm rounded p-1 px-1 w-auto outline-none uppercase placeholder-blueGray-300 relative" @keyup.enter="_onSearch" />
               </span>
               <ECol :col="2">
-                <EButton
-                  :id="'PopupPaginationHeaderless' + id + 'Search'"
-                  label="Search"
-                  @click="_onSearch"
-                />
-                <EButton
-                  :id="'PopupPaginationHeaderless' + id + 'Close'"
-                  label="Close"
-                  @click="_onClose"
-                />
+                <EButton :id="'PopupPaginationHeaderless' + id + 'Search'" label="Search" @click="_onSearch" />
+                <EButton :id="'PopupPaginationHeaderless' + id + 'Close'" label="Close" @click="_onClose" />
               </ECol>
             </ECol>
           </div>
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.type === 'boolean'">
-              <input
-                v-if="props.row[props.column.field]"
-                type="checkbox"
-                disabled
-                checked
-              />
+              <input v-if="props.row[props.column.field]" type="checkbox" disabled checked />
               <input v-else type="checkbox" disabled />
             </span>
             <span v-else>
@@ -128,9 +102,7 @@ export default {
       return css
     },
     _dataEmptyDescription() {
-      return this.error
-        ? 'Fail to fetch data, please try again'
-        : 'No data available'
+      return this.error ? 'Fail to fetch data, please try again' : 'No data available'
     },
   },
   created() {
@@ -206,10 +178,7 @@ export default {
       this.isLoading = true
       this.serverParams.filter = this._cleanFilter()
 
-      const { result, error } = await this.$rest.post(
-        '/api/general/pagination/page',
-        this.serverParams
-      )
+      const { result, error } = await this.$rest.post('/api/general/pagination/page', this.serverParams)
 
       this.isLoading = false
       this.error = error
@@ -276,9 +245,7 @@ export default {
       await this.fetchData()
     },
     async _onSearch() {
-      this.serverParams.search = this.search
-        ? this.search.toUpperCase().trim()
-        : this.search
+      this.serverParams.search = this.search ? this.search.toUpperCase().trim() : this.search
       await this.fetchData()
     },
     _onClose() {

@@ -3,33 +3,10 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container" style="width: 300px">
-          <div
-            class="text-xs rounded border-0 outline-none ring-2"
-            :class="[_cssBorder, _cssInputBg]"
-          >
-            <div
-              class="font-bold rounded-t text-sm text-gray-800 w-auto p-1"
-              :class="[_cssLabelBg]"
-            >
-              Loading...
-            </div>
-            <div
-              class="modal-body rounded p-3 w-full flex justify-start"
-              :class="[_cssInputBg]"
-            >
-              <svg
-                id="loader-1"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                width="40px"
-                height="40px"
-                viewBox="0 0 40 40"
-                enable-background="new 0 0 40 40"
-                xml:space="preserve"
-              >
+          <div class="text-xs rounded border-0 outline-none ring-2" :class="[_cssBorder, _cssInputBg]">
+            <div class="font-bold rounded-t text-sm text-gray-800 w-auto p-1" :class="[_cssLabelBg]">Loading...</div>
+            <div class="modal-body rounded p-3 w-full flex justify-start" :class="[_cssInputBg]">
+              <svg id="loader-1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
                 <path
                   opacity="0.2"
                   fill="#000"
@@ -42,15 +19,7 @@
                   d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
     C22.32,8.481,24.301,9.057,26.013,10.047z"
                 >
-                  <animateTransform
-                    attributeType="xml"
-                    attributeName="transform"
-                    type="rotate"
-                    from="0 20 20"
-                    to="360 20 20"
-                    dur="0.5s"
-                    repeatCount="indefinite"
-                  />
+                  <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.5s" repeatCount="indefinite" />
                 </path>
               </svg>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -80,11 +49,7 @@ export default {
       return 'ring-gray-500'
     },
     _cssLabelBg() {
-      return this.state === 1
-        ? 'bg-green-300'
-        : this.state === -1
-        ? 'bg-red-300'
-        : 'bg-gray-300'
+      return this.state === 1 ? 'bg-green-300' : this.state === -1 ? 'bg-red-300' : 'bg-gray-300'
     },
     _cssInputBg() {
       return 'bg-white'

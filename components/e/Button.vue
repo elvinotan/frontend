@@ -1,14 +1,7 @@
 <template>
   <div>
     <div v-if="show">
-      <button
-        :id="id"
-        type="button"
-        :disabled="disabled"
-        class="text-sm font-bold py-1 px-2 rounded border-0 ring-2 ring-gray-500 focus:outline-none"
-        :class="[_cssBorder, _cssLabelBg, _cssInputText]"
-        @click="_event"
-      >
+      <button :id="id" type="button" :disabled="disabled" class="text-sm font-bold py-1 px-2 rounded border-0 ring-2 ring-gray-500 focus:outline-none" :class="[_cssBorder, _cssLabelBg, _cssInputText]" @click="_event">
         {{ label }}
       </button>
       <div style="height: 1px; width: 1px">
@@ -34,9 +27,7 @@ export default {
     },
     _cssLabelBg() {
       const color = this.color ? this.color : 'gray'
-      const disabledClass = this.disabled
-        ? ' opacity-50 cursor-not-allowed '
-        : ''
+      const disabledClass = this.disabled ? ' opacity-50 cursor-not-allowed ' : ''
       return `bg-${color}-500 ${disabledClass}`
     },
     _cssInputText() {

@@ -1,49 +1,14 @@
 <template>
   <div>
     <div v-if="show">
-      <div
-        class="text-xs rounded border-0 outline-none ring-2"
-        :class="[_cssBorder, _cssInputBg]"
-      >
-        <div
-          v-if="label"
-          class="font-bold rounded-t text-sm text-gray-800 w-auto p-1 flex justify-start"
-          :class="[_cssLabelBg]"
-        >
+      <div class="text-xs rounded border-0 outline-none ring-2" :class="[_cssBorder, _cssInputBg]">
+        <div v-if="label" class="font-bold rounded-t text-sm text-gray-800 w-auto p-1 flex justify-start" :class="[_cssLabelBg]">
           {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
-          <span
-            v-if="label && required"
-            class="font-bold text-center text-sm text-red-800 w-full flex justify-start"
-            :class="[_cssLabelBg]"
-          >
-            *
-          </span>
-          <span
-            v-if="!disabled"
-            class="font-bold text-right text-sm text-center text-gray-800 w-7 px-1 cursor-pointer flex justify-end"
-            :class="[_cssLabelBg]"
-            @click="_clearInput"
-          >
-            X
-          </span>
+          <span v-if="label && required" class="font-bold text-center text-sm text-red-800 w-full flex justify-start" :class="[_cssLabelBg]"> * </span>
+          <span v-if="!disabled" class="font-bold text-right text-sm text-center text-gray-800 w-7 px-1 cursor-pointer flex justify-end" :class="[_cssLabelBg]" @click="_clearInput"> X </span>
         </div>
 
-        <textarea
-          :id="id"
-          autocomplete="off"
-          type="text"
-          :placeholder="placeholder"
-          :value="value"
-          :maxlength="maxlength"
-          :disabled="disabled"
-          :required="required"
-          :cols="cols"
-          :rows="rows"
-          class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative"
-          :class="[_cssRounded, _cssInputBg, _cssInputText]"
-          @input="_input"
-          @blur="_blur"
-        />
+        <textarea :id="id" autocomplete="off" type="text" :placeholder="placeholder" :value="value" :maxlength="maxlength" :disabled="disabled" :required="required" :cols="cols" :rows="rows" class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative" :class="[_cssRounded, _cssInputBg, _cssInputText]" @input="_input" @blur="_blur" />
       </div>
       <p v-if="hasError()" class="text-red-500 text-right text-xs italic">
         {{ errors[0] }}

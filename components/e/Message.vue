@@ -3,25 +3,11 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container" style="width: 500px">
-          <div
-            class="text-xs rounded border-0 outline-none ring-2"
-            :class="[_cssBorder, _cssInputBg]"
-          >
-            <div
-              class="font-bold rounded-t text-sm bg-gray-300 text-gray-800 w-auto p-1"
-              :class="[_cssLabelBg]"
-            >
-              Information
-            </div>
-            <div
-              class="modal-body p-3 w-full flex justify-start"
-              :class="[_cssInputBg]"
-            >
+          <div class="text-xs rounded border-0 outline-none ring-2" :class="[_cssBorder, _cssInputBg]">
+            <div class="font-bold rounded-t text-sm bg-gray-300 text-gray-800 w-auto p-1" :class="[_cssLabelBg]">Information</div>
+            <div class="modal-body p-3 w-full flex justify-start" :class="[_cssInputBg]">
               <div>
-                <img
-                  v-if="type === 'success'"
-                  src="~/assets/images/success.jpg"
-                />
+                <img v-if="type === 'success'" src="~/assets/images/success.jpg" />
                 <img v-if="type === 'error'" src="~/assets/images/error.png" />
               </div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -30,12 +16,7 @@
               </div>
             </div>
             <div class="rounded-b bg-gray-100 w-auto p-2 flex justify-end">
-              <EButton
-                :id="'Message' + id"
-                label="Close"
-                :color="type === 'success' ? 'green' : 'red'"
-                @click="_button('Close')"
-              />
+              <EButton :id="'Message' + id" label="Close" :color="type === 'success' ? 'green' : 'red'" @click="_button('Close')" />
             </div>
           </div>
         </div>

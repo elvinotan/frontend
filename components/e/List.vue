@@ -1,53 +1,12 @@
 <template>
   <EForm id="customerForm" ref="customerForm">
     <ECol :col="1" :gap-y="5">
-      <EFilter
-        id="customerFilter"
-        ref="customerFilter"
-        title="Search Customer"
-        :disabled="ui.filter.disabled"
-        @Clear="clear"
-        @Search="search"
-      >
+      <EFilter id="customerFilter" ref="customerFilter" title="Search Customer" :disabled="ui.filter.disabled" @Clear="clear" @Search="search">
         <ECol :col="4">
-          <EText
-            id="customerFilterName"
-            ref="customerFilterName"
-            v-model="filter.name"
-            label="Full Name"
-            placeholder="Input Full Name"
-            type="long"
-            :disabled="ui.name.disabled"
-            :required="true"
-          />
-          <EDate
-            id="customerFilterBirthDate"
-            ref="customerFilterBirthDate"
-            v-model="filter.birthDate"
-            label="Birth Date"
-            :disabled="ui.birthDate.disabled"
-            :required="true"
-          />
-          <ENumber
-            id="customerFilterBirthAge"
-            ref="customerFilterBirthAge"
-            v-model="filter.age"
-            label="Age"
-            placeholder="Input Age"
-            :maxlength="3"
-            :disabled="ui.age.disabled"
-            :required="true"
-          />
-          <EBoolean
-            id="customerFilterBirthMerried"
-            ref="customerFilterBirthMerried"
-            v-model="filter.merried"
-            label="Merried"
-            placeholder=""
-            type="YesNo"
-            :disabled="ui.merried.disabled"
-            :required="true"
-          />
+          <EText id="customerFilterName" ref="customerFilterName" v-model="filter.name" label="Full Name" placeholder="Input Full Name" type="long" :disabled="ui.name.disabled" :required="true" />
+          <EDate id="customerFilterBirthDate" ref="customerFilterBirthDate" v-model="filter.birthDate" label="Birth Date" :disabled="ui.birthDate.disabled" :required="true" />
+          <ENumber id="customerFilterBirthAge" ref="customerFilterBirthAge" v-model="filter.age" label="Age" placeholder="Input Age" :maxlength="3" :disabled="ui.age.disabled" :required="true" />
+          <EBoolean id="customerFilterBirthMerried" ref="customerFilterBirthMerried" v-model="filter.merried" label="Merried" placeholder="" type="YesNo" :disabled="ui.merried.disabled" :required="true" />
         </ECol>
       </EFilter>
       <EServerPagination
@@ -148,9 +107,7 @@ export default {
   },
   methods: {
     addNewData() {
-      this.$refs.customerMessage.success(
-        'Add New Data Clicked, Redirect to Entry Page'
-      )
+      this.$refs.customerMessage.success('Add New Data Clicked, Redirect to Entry Page')
     },
     disabledAction(label, data) {
       if (label.emit === 'hapus') {
@@ -165,24 +122,16 @@ export default {
       return false
     },
     rowClick(data) {
-      this.$refs.customerMessage.success(
-        `Delete data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`
-      )
+      this.$refs.customerMessage.success(`Delete data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`)
     },
     hapus(data) {
-      this.$refs.customerMessage.success(
-        `Delete data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`
-      )
+      this.$refs.customerMessage.success(`Delete data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`)
     },
     lihat(data) {
-      this.$refs.customerMessage.success(
-        `View data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`
-      )
+      this.$refs.customerMessage.success(`View data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`)
     },
     ubah(data) {
-      this.$refs.customerMessage.success(
-        `Update data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`
-      )
+      this.$refs.customerMessage.success(`Update data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`)
     },
     clear() {
       this.filter = { ...emptyFilter }

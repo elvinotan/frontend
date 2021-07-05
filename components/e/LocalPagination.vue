@@ -1,12 +1,8 @@
 <template>
   <div>
     <div v-if="show">
-      <div
-        class="text-xs rounded border-0 outline-none ring-2 ring-gray-500 bg-white"
-      >
-        <div
-          class="font-bold rounded-t text-sm text-gray-800 w-auto p-1 bg-gray-300"
-        >
+      <div class="text-xs rounded border-0 outline-none ring-2 ring-gray-500 bg-white">
+        <div class="font-bold rounded-t text-sm text-gray-800 w-auto p-1 bg-gray-300">
           {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
         </div>
         <vue-good-table
@@ -51,18 +47,10 @@
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field === 'action'">
               <span v-for="(action, index) of actions" :key="action.field">
-                <button
-                  v-if="disabled || disabledAction(action, props)"
-                  class="font-bold opacity-50 cursor-not-allowed"
-                  disabled
-                >
+                <button v-if="disabled || disabledAction(action, props)" class="font-bold opacity-50 cursor-not-allowed" disabled>
                   {{ action.label }}
                 </button>
-                <button
-                  v-else
-                  class="font-bold"
-                  @click="_action(action, props)"
-                >
+                <button v-else class="font-bold" @click="_action(action, props)">
                   {{ action.label }}
                 </button>
                 {{ index === actions.length - 1 ? '' : '&nbsp;|' }}
@@ -72,12 +60,7 @@
               {{ saveState(props) ? 'Saved' : 'Not Saved' }}
             </span>
             <span v-else-if="props.column.type === 'boolean'">
-              <input
-                v-if="props.row[props.column.field]"
-                type="checkbox"
-                disabled
-                checked
-              />
+              <input v-if="props.row[props.column.field]" type="checkbox" disabled checked />
               <input v-else type="checkbox" disabled />
             </span>
             <span v-else>
@@ -85,29 +68,11 @@
             </span>
           </template>
           <div slot="table-actions" class="py-0.5 px-2">
-            <EButton
-              v-if="addNewData"
-              :id="'LocalPagination' + id + 'AddNewData'"
-              label="Add New Data"
-              :disabled="disabled"
-              @click="_addNewData"
-            />
+            <EButton v-if="addNewData" :id="'LocalPagination' + id + 'AddNewData'" label="Add New Data" :disabled="disabled" @click="_addNewData" />
           </div>
-          <div
-            v-if="buttons && buttons.length > 0"
-            slot="table-actions-bottom"
-            class="py-1.5 px-2 flex justify-start space-x-5"
-          >
+          <div v-if="buttons && buttons.length > 0" slot="table-actions-bottom" class="py-1.5 px-2 flex justify-start space-x-5">
             <span v-for="button of buttons" :key="button.label">
-              <EButton
-                :id="'LocalPagination' + id + button.label"
-                :label="button.label"
-                :disabled="disabled || disabledButton"
-                :color="button.color"
-                @click="
-                  $emit(button.emit ? button.emit : button.label, selectedRows)
-                "
-              />
+              <EButton :id="'LocalPagination' + id + button.label" :label="button.label" :disabled="disabled || disabledButton" :color="button.color" @click="$emit(button.emit ? button.emit : button.label, selectedRows)" />
             </span>
           </div>
         </vue-good-table>
@@ -219,22 +184,13 @@ export default {
     },
     _renderCell(props) {
       if (props.column.type === 'lookup') {
-        const vuex = this.$rest.getVuex(
-          this.$enum.VUEX.LOOKUP_PREFIX + props.column.reference
-        )
+        const vuex = this.$rest.getVuex(this.$enum.VUEX.LOOKUP_PREFIX + props.column.reference)
         if (vuex && props.column.format) {
-          props.formattedRow[props.column.field] = props.column.format(
-            props,
-            vuex
-          )
+          props.formattedRow[props.column.field] = props.column.format(props, vuex)
         } else if (vuex) {
           const value = props.row[props.column.field]
-          const selected = vuex.find(
-            (lookup) => lookup.value + '' === value + ''
-          )
-          props.formattedRow[props.column.field] = selected
-            ? selected.description
-            : value
+          const selected = vuex.find((lookup) => lookup.value + '' === value + '')
+          props.formattedRow[props.column.field] = selected ? selected.description : value
         }
       } else if (props.column.format) {
         props.formattedRow[props.column.field] = props.column.format(props)
@@ -244,9 +200,7 @@ export default {
     },
     async _loadLookupGroups() {
       const promise = []
-      for (const column of this.columns.filter(
-        (column) => column.type === 'lookup'
-      )) {
+      for (const column of this.columns.filter((column) => column.type === 'lookup')) {
         promise.push(
           this.$rest.get(`api/general/lookup/${column.reference}`, {
             vuex: this.$enum.VUEX.LOOKUP_PREFIX + column.reference,
@@ -335,8 +289,7 @@ export default {
       }
 
       if (this.actions && this.actions.length > 0) {
-        const actionColumn =
-          this.columns.find((column) => column.field === 'action') || {}
+        const actionColumn = this.columns.find((column) => column.field === 'action') || {}
 
         this.lcolumns.push({
           label: 'Action',

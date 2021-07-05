@@ -1,83 +1,25 @@
 <template>
   <div>
     <div v-if="show">
-      <span
-        class="flex text-xs rounded border-0 outline-none ring-2"
-        :class="[_cssBorder, _cssLabelBg]"
-      >
-        <span
-          v-if="label"
-          class="font-bold rounded-l text-sm text-gray-800 w-auto p-1"
-          :class="[_cssLabelBg]"
-        >
+      <span class="flex text-xs rounded border-0 outline-none ring-2" :class="[_cssBorder, _cssLabelBg]">
+        <span v-if="label" class="font-bold rounded-l text-sm text-gray-800 w-auto p-1" :class="[_cssLabelBg]">
           {{ label ? label.replace(/\s/g, '&nbsp;') : '' }}
         </span>
-        <span
-          v-if="label && required"
-          class="font-bold text-center text-sm text-red-800 w-auto p-1"
-          :class="[_cssLabelBg]"
-        >
-          *
-        </span>
-        <input
-          :id="id"
-          v-model="lvalue"
-          autocomplete="off"
-          type="text"
-          :placeholder="placeholder"
-          :maxlength="maxlength"
-          :disabled="disabled"
-          :required="required"
-          class="field text-sm p-1 px-1 outline-none w-16 uppercase placeholder-blueGray-300 relative"
-          :class="[_cssRounded, _cssInputBg, _cssInputText]"
-          @keyup.enter="_blur"
-          @blur="_blur"
-        />
-        <span
-          class="font-bold text-center text-sm w-10 p-1 border-l-2 border-r-2"
-          :class="[_cssBorderBox, _cssLabelBg, _cssCursor, _cssInputText]"
-          @click="_showPopup"
-        >
-          ?
-        </span>
-        <span
-          class="text-left w-full text-sm w-auto p-1 rounded-r"
-          :class="[_cssLabelBg, _cssInputText]"
-        >
+        <span v-if="label && required" class="font-bold text-center text-sm text-red-800 w-auto p-1" :class="[_cssLabelBg]"> * </span>
+        <input :id="id" v-model="lvalue" autocomplete="off" type="text" :placeholder="placeholder" :maxlength="maxlength" :disabled="disabled" :required="required" class="field text-sm p-1 px-1 outline-none w-16 uppercase placeholder-blueGray-300 relative" :class="[_cssRounded, _cssInputBg, _cssInputText]" @keyup.enter="_blur" @blur="_blur" />
+        <span class="font-bold text-center text-sm w-10 p-1 border-l-2 border-r-2" :class="[_cssBorderBox, _cssLabelBg, _cssCursor, _cssInputText]" @click="_showPopup"> ? </span>
+        <span class="text-left w-full text-sm w-auto p-1 rounded-r" :class="[_cssLabelBg, _cssInputText]">
           {{ description }}
         </span>
-        <span
-          v-if="!disabled"
-          class="font-bold rounded-r text-sm text-center text-gray-800 w-7 p-1 cursor-pointer"
-          :class="[_cssLabelBg]"
-          @click="_clearInput"
-        >
-          X
-        </span>
+        <span v-if="!disabled" class="font-bold rounded-r text-sm text-center text-gray-800 w-7 p-1 cursor-pointer" :class="[_cssLabelBg]" @click="_clearInput"> X </span>
       </span>
-      <p
-        v-if="!pagination.show && hasError()"
-        class="text-red-500 text-right text-xs italic"
-      >
+      <p v-if="!pagination.show && hasError()" class="text-red-500 text-right text-xs italic">
         {{ errors[0] }}
       </p>
       <p v-else-if="!pagination.show" class="text-right text-xs italic">
         {{ _info }}
       </p>
-      <EPopupPaginationHeaderless
-        :id="id + `PopupPaginationHeaderless`"
-        :ref="id + `PopupPaginationHeaderless`"
-        class="absolute overflow-hidden w-auto p-px z-10"
-        :label="label"
-        :columns="pagination.columns"
-        :show="pagination.show"
-        :disabled="false"
-        :auto-load="false"
-        :picker="pagination.picker"
-        :filter="pagination.filter"
-        @RowClick="_rowClick"
-        @Close="_hidePopup"
-      />
+      <EPopupPaginationHeaderless :id="id + `PopupPaginationHeaderless`" :ref="id + `PopupPaginationHeaderless`" class="absolute overflow-hidden w-auto p-px z-10" :label="label" :columns="pagination.columns" :show="pagination.show" :disabled="false" :auto-load="false" :picker="pagination.picker" :filter="pagination.filter" @RowClick="_rowClick" @Close="_hidePopup" />
     </div>
   </div>
 </template>
@@ -197,9 +139,7 @@ export default {
         this.$emit('input', this.lvalue)
         this.$nextTick(this._validate)
       } else {
-        console.log(
-          'WARNING !!!!, Pastikan hasil query mengembalikan popupCode dan popupDescription'
-        )
+        console.log('WARNING !!!!, Pastikan hasil query mengembalikan popupCode dan popupDescription')
       }
     },
     _showPopup() {
@@ -231,8 +171,7 @@ export default {
           picker: this.picker,
         },
         {
-          vuex:
-            this.$enum.VUEX.POPUPPAGINATION_PREFIX + this.picker + '_' + lvalue,
+          vuex: this.$enum.VUEX.POPUPPAGINATION_PREFIX + this.picker + '_' + lvalue,
           saveFn: (result) => {
             return result.length === 1
           },
@@ -289,11 +228,7 @@ export default {
             picker: this.picker,
           },
           {
-            vuex:
-              this.$enum.VUEX.POPUPPAGINATION_PREFIX +
-              this.picker +
-              '_' +
-              this.value,
+            vuex: this.$enum.VUEX.POPUPPAGINATION_PREFIX + this.picker + '_' + this.value,
             saveFn: (result) => {
               return result.length === 1
             },

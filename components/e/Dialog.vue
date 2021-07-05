@@ -3,38 +3,17 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container" :style="_width">
-          <div
-            class="text-xs rounded border-0 outline-none ring-2"
-            :class="[_cssBorder, _cssInputBg]"
-          >
-            <div
-              class="font-bold rounded-t text-sm bg-gray-300 text-gray-800 w-auto p-1"
-            >
+          <div class="text-xs rounded border-0 outline-none ring-2" :class="[_cssBorder, _cssInputBg]">
+            <div class="font-bold rounded-t text-sm bg-gray-300 text-gray-800 w-auto p-1">
               {{ title }}
             </div>
             <div class="p-3 w-full" :class="[_cssInputBg]" :style="_height">
               <slot />
             </div>
-            <span
-              class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5 content-start"
-            >
-              <EButton
-                :id="'DialogClose' + id"
-                class="w-full flex justify-start"
-                label="Close"
-                color="gray"
-                @click="close"
-              />
+            <span class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5 content-start">
+              <EButton :id="'DialogClose' + id" class="w-full flex justify-start" label="Close" color="gray" @click="close" />
 
-              <EButton
-                v-for="button of buttons"
-                :id="'Dialog' + button.label + id"
-                :key="button.label"
-                class="flex justify-end"
-                :label="button.label"
-                :color="button.color"
-                @click="$emit(button.emit ? button.emit : button.label)"
-              />
+              <EButton v-for="button of buttons" :id="'Dialog' + button.label + id" :key="button.label" class="flex justify-end" :label="button.label" :color="button.color" @click="$emit(button.emit ? button.emit : button.label)" />
             </span>
           </div>
         </div>
