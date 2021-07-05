@@ -21,6 +21,11 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
     removeVuex(key) {
       store.commit('removeItem', key)
     },
+    delay(delay = 0) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(), delay)
+      })
+    },
 
     // Rest Call base on type
     async get(pUrl = '', pHeaders = {}) {

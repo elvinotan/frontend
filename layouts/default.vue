@@ -1,15 +1,38 @@
 <template>
   <div>
-    <Header />
-    <Nuxt />
-    <Footer />
+    <EPageLoader id="layoutPageLoader" ref="layoutPageLoader" label="Please Wait, prepare all data....." :fetcher="layoutPageLoader">
+      <Header />
+      <Nuxt />
+      <Footer />
+    </EPageLoader>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    async layoutPageLoader() {
+      try {
+        const { result, error } = await this.$rest.get(`api/general/lookups`)
 
+        if (result) {
+          for (const [key, value] of Object.entries(result)) {
+            this.$rest.setVuex(this.$enum.VUEX.LOOKUP_PREFIX + key, value)
+          }
+          await this.$rest.delay(2500)
+          return true
+        }
+
+        if (error) return false
+      } catch (error) {
+        return false
+      }
+    },
+  },
+}
+</script>
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

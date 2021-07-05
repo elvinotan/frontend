@@ -179,7 +179,40 @@ app.post('/general/pagination/page', function (req, res) {
     })
   }
 })
-
+app.get('/general/lookups', function (req, res) {
+  res.json({
+    SEX: [
+      { value: 'M', description: 'Male' },
+      { value: 'F', description: 'Female' },
+      { value: 'X', description: 'Unknown' },
+    ],
+    EDUCATION: [
+      { value: 'SD', description: 'SD' },
+      { value: 'SMP', description: 'SMP' },
+      { value: 'SMA', description: 'SMA' },
+      { value: 'S1', description: 'S1' },
+      { value: 'S2', description: 'S2' },
+    ],
+    RELIGION: [
+      { value: 'ISLAM', description: 'ISLAM' },
+      { value: 'KATOLIK', description: 'KATOLIK' },
+      { value: 'KRISTEN', description: 'KRISTEN' },
+      { value: 'BUDHA', description: 'BUDHA' },
+      { value: 'HINDU', description: 'HINDU' },
+      { value: 'KONGHUCU', description: 'KONGHUCU' },
+    ],
+    EXP: [
+      { value: 1, description: '1 Th' },
+      { value: 2, description: '2 Th' },
+      { value: 3, description: '3 Th' },
+    ],
+    JOB: [
+      { value: 1, description: 'Karyawan' },
+      { value: 2, description: 'Ibu Rumah Tangga' },
+      { value: 3, description: 'Penganguran' },
+    ],
+  })
+})
 app.get('/general/lookup/:group', function (req, res) {
   const group = req.params.group
   if (group === 'SEX') {
