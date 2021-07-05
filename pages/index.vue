@@ -1,30 +1,10 @@
 <template>
   <div>
-    <ETabs
-      id="Showroom"
-      :labels="[
-        { label: 'Component' },
-        { label: 'Plugin' },
-        { label: 'Demo List' },
-        { label: 'Demo Entry' },
-      ]"
-      selected-tab="Component"
-    >
+    <ETabs id="Showroom" :labels="[{ label: 'Component' }, { label: 'Plugin' }, { label: 'Demo List' }, { label: 'Demo Entry' }]" selected-tab="Component">
       <EForm id="Component">
         <ETabs id="Component" :labels="tabs" selected-tab="Text">
           <EForm id="Text">
-            <EText
-              id="TextComponent"
-              ref="TextComponent"
-              v-model="text.value"
-              :label="text.label"
-              :placeholder="text.placeholder"
-              :type="text.type"
-              :required="text.required"
-              :disabled="text.disabled"
-              :show="text.show"
-              :vruntime="text.vruntime"
-            />
+            <EText id="TextComponent" ref="TextComponent" v-model="text.value" :label="text.label" :placeholder="text.placeholder" :type="text.type" :required="text.required" :disabled="text.disabled" :show="text.show" :vruntime="text.vruntime" />
             <div class="text-xs">Template : {{ htmlText }}</div>
             <br />
             <div class="text-xs">Data Object : {{ text }}</div>
@@ -55,10 +35,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Label untuk component, bila tidak di bind maka sign * tidak
-                    di tampilkan
-                  </td>
+                  <td>Label untuk component, bila tidak di bind maka sign * tidak di tampilkan</td>
                 </tr>
                 <tr>
                   <td>placeholder</td>
@@ -81,12 +58,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>short</td>
-                  <td>
-                    Type dari Text Input untuk menentukan panjang character yg
-                    bisa di terima. Terdapat berberapa tipe ( short=16,
-                    medium=32, long=64, extralong=128 ), silakan customize
-                    sesuai kebutuhan
-                  </td>
+                  <td>Type dari Text Input untuk menentukan panjang character yg bisa di terima. Terdapat berberapa tipe ( short=16, medium=32, long=64, extralong=128 ), silakan customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>required</td>
@@ -94,10 +66,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -105,9 +74,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -115,10 +82,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -126,10 +90,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -137,9 +98,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik GAGAL untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik GAGAL untuk mencoba</td>
                 </tr>
               </tbody>
             </table>
@@ -176,10 +135,7 @@
                     <button @click="hasError('TextComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -193,18 +149,7 @@
             </table>
           </EForm>
           <EForm id="Password">
-            <EPassword
-              id="PasswordComponent"
-              ref="PasswordComponent"
-              v-model="password.value"
-              :label="password.label"
-              :placeholder="password.placeholder"
-              :maxlength="password.maxlength"
-              :required="password.required"
-              :disabled="password.disabled"
-              :show="password.show"
-              :vruntime="password.vruntime"
-            />
+            <EPassword id="PasswordComponent" ref="PasswordComponent" v-model="password.value" :label="password.label" :placeholder="password.placeholder" :maxlength="password.maxlength" :required="password.required" :disabled="password.disabled" :show="password.show" :vruntime="password.vruntime" />
             <div class="text-xs">Template : {{ htmlPassword }}</div>
             <br />
             <div class="text-xs">Data Object : {{ password }}</div>
@@ -235,10 +180,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Label untuk component, bila tidak di bind maka sign * tidak
-                    di tampilkan
-                  </td>
+                  <td>Label untuk component, bila tidak di bind maka sign * tidak di tampilkan</td>
                 </tr>
                 <tr>
                   <td>placeholder</td>
@@ -264,10 +206,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -275,9 +214,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -285,10 +222,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -296,10 +230,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -307,9 +238,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik GAGAL untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik GAGAL untuk mencoba</td>
                 </tr>
               </tbody>
             </table>
@@ -327,9 +256,7 @@
                 <tr>
                   <td>metaData</td>
                   <td>
-                    <button @click="metaData('PasswordComponent')">
-                      Click
-                    </button>
+                    <button @click="metaData('PasswordComponent')">Click</button>
                   </td>
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
@@ -337,9 +264,7 @@
                 <tr>
                   <td>clearError</td>
                   <td>
-                    <button @click="clearError('PasswordComponent')">
-                      Click
-                    </button>
+                    <button @click="clearError('PasswordComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Hapus error, kembalikan ke state component semula</td>
@@ -347,22 +272,15 @@
                 <tr>
                   <td>hasError</td>
                   <td>
-                    <button @click="hasError('PasswordComponent')">
-                      Click
-                    </button>
+                    <button @click="hasError('PasswordComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
                   <td>
-                    <button @click="validate('PasswordComponent')">
-                      Click
-                    </button>
+                    <button @click="validate('PasswordComponent')">Click</button>
                   </td>
                   <td>{{ valid }}</td>
                   <td>Lakukan validasi berdasarkan required dan vruntime</td>
@@ -371,20 +289,7 @@
             </table>
           </EForm>
           <EForm id="TextArea">
-            <ETextArea
-              id="TextAreaComponent"
-              ref="TextAreaComponent"
-              v-model="textarea.value"
-              :label="textarea.label"
-              :placeholder="textarea.placeholder"
-              :maxlength="textarea.maxlength"
-              :required="textarea.required"
-              :disabled="textarea.disabled"
-              :show="textarea.show"
-              :cols="textarea.cols"
-              :rows="textarea.rows"
-              :vruntime="textarea.vruntime"
-            />
+            <ETextArea id="TextAreaComponent" ref="TextAreaComponent" v-model="textarea.value" :label="textarea.label" :placeholder="textarea.placeholder" :maxlength="textarea.maxlength" :required="textarea.required" :disabled="textarea.disabled" :show="textarea.show" :cols="textarea.cols" :rows="textarea.rows" :vruntime="textarea.vruntime" />
             <div class="text-xs">Template : {{ htmlTextarea }}</div>
             <br />
             <div class="text-xs">Data Object : {{ textarea }}</div>
@@ -415,10 +320,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Label untuk component, bila tidak di bind maka sign * tidak
-                    di tampilkan
-                  </td>
+                  <td>Label untuk component, bila tidak di bind maka sign * tidak di tampilkan</td>
                 </tr>
                 <tr>
                   <td>placeholder</td>
@@ -464,10 +366,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -475,9 +374,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -485,10 +382,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -496,10 +390,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -507,9 +398,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik GAGAL untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik GAGAL untuk mencoba</td>
                 </tr>
               </tbody>
             </table>
@@ -527,9 +416,7 @@
                 <tr>
                   <td>metaData</td>
                   <td>
-                    <button @click="metaData('TextAreaComponent')">
-                      Click
-                    </button>
+                    <button @click="metaData('TextAreaComponent')">Click</button>
                   </td>
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
@@ -537,9 +424,7 @@
                 <tr>
                   <td>clearError</td>
                   <td>
-                    <button @click="clearError('TextAreaComponent')">
-                      Click
-                    </button>
+                    <button @click="clearError('TextAreaComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Hapus error, kembalikan ke state component semula</td>
@@ -547,22 +432,15 @@
                 <tr>
                   <td>hasError</td>
                   <td>
-                    <button @click="hasError('TextAreaComponent')">
-                      Click
-                    </button>
+                    <button @click="hasError('TextAreaComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
                   <td>
-                    <button @click="validate('TextAreaComponent')">
-                      Click
-                    </button>
+                    <button @click="validate('TextAreaComponent')">Click</button>
                   </td>
                   <td>{{ valid }}</td>
                   <td>Lakukan validasi berdasarkan required dan vruntime</td>
@@ -572,14 +450,7 @@
           </EForm>
 
           <EForm id="Button">
-            <EButton
-              id="ButtonComponent"
-              ref="ButtonComponent"
-              :label="button.label"
-              :disabled="button.disabled"
-              :show="button.show"
-              :color="button.color"
-            />
+            <EButton id="ButtonComponent" ref="ButtonComponent" :label="button.label" :disabled="button.disabled" :show="button.show" :color="button.color" />
             <div class="text-xs">Template : {{ htmlButton }}</div>
             <br />
             <div class="text-xs">Data Object : {{ button }}</div>
@@ -633,9 +504,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -643,10 +512,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
               </tbody>
             </table>
@@ -673,22 +539,7 @@
             </table>
           </EForm>
           <EForm id="Number">
-            <ENumber
-              id="NumberComponent"
-              ref="NumberComponent"
-              v-model.number="number.value"
-              :label="number.label"
-              :placeholder="number.placeholder"
-              :maxlength="number.maxlength"
-              :required="number.required"
-              :disabled="number.disabled"
-              :show="number.show"
-              :vruntime="number.vruntime"
-              :allow-minus="number.allowMinus"
-              :separator="number.separator"
-              :minimum="number.minimum"
-              :maximum="number.maximum"
-            />
+            <ENumber id="NumberComponent" ref="NumberComponent" v-model.number="number.value" :label="number.label" :placeholder="number.placeholder" :maxlength="number.maxlength" :required="number.required" :disabled="number.disabled" :show="number.show" :vruntime="number.vruntime" :allow-minus="number.allowMinus" :separator="number.separator" :minimum="number.minimum" :maximum="number.maximum" />
             <div class="text-xs">Template : {{ htmlNumber }}</div>
             <br />
             <div class="text-xs">Data Object : {{ number }}</div>
@@ -737,10 +588,7 @@
                   <td>Number</td>
                   <td>false</td>
                   <td>15</td>
-                  <td>
-                    Maxiumum charater yang bisa di terima oleh component,
-                    termasuk separarator and sign
-                  </td>
+                  <td>Maxiumum charater yang bisa di terima oleh component, termasuk separarator and sign</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -748,9 +596,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>required</td>
@@ -758,10 +604,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -769,10 +612,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -780,9 +620,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik 666 untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -790,10 +628,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>allowMinus</td>
@@ -809,10 +644,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Number formated dengan separator default menggunakan config
-                    US, koma untuk ribuan dan . untuk fraksi
-                  </td>
+                  <td>Number formated dengan separator default menggunakan config US, koma untuk ribuan dan . untuk fraksi</td>
                 </tr>
                 <tr>
                   <td>minimum</td>
@@ -858,9 +690,7 @@
                 <tr>
                   <td>clearError</td>
                   <td>
-                    <button @click="clearError('NumberComponent')">
-                      Click
-                    </button>
+                    <button @click="clearError('NumberComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Hapus error, kembalikan ke state component semula</td>
@@ -871,10 +701,7 @@
                     <button @click="hasError('NumberComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -954,10 +781,7 @@
                   <td>Number</td>
                   <td>false</td>
                   <td>18</td>
-                  <td>
-                    Maxiumum charater yang bisa di terima oleh component,
-                    termasuk separarator and sign
-                  </td>
+                  <td>Maxiumum charater yang bisa di terima oleh component, termasuk separarator and sign</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -965,9 +789,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>required</td>
@@ -975,10 +797,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -986,10 +805,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -997,9 +813,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik 666 untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -1007,10 +821,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>allowMinus</td>
@@ -1028,10 +839,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Number formated dengan separator default menggunakan config
-                    US, koma untuk ribuan dan . untuk fraksi
-                  </td>
+                  <td>Number formated dengan separator default menggunakan config US, koma untuk ribuan dan . untuk fraksi</td>
                 </tr>
                 <tr>
                   <td>minimum</td>
@@ -1056,10 +864,7 @@
                 <tr>
                   <td>minimumFractionDigits</td>
                   <td>
-                    <input
-                      v-model.number="decimal.minimumFractionDigits"
-                      type="number"
-                    />
+                    <input v-model.number="decimal.minimumFractionDigits" type="number" />
                   </td>
                   <td>Number</td>
                   <td>false</td>
@@ -1070,10 +875,7 @@
                 <tr>
                   <td>maximumFractionDigits</td>
                   <td>
-                    <input
-                      v-model.number="decimal.maximumFractionDigits"
-                      type="number"
-                    />
+                    <input v-model.number="decimal.maximumFractionDigits" type="number" />
                   </td>
                   <td>Number</td>
                   <td>false</td>
@@ -1104,9 +906,7 @@
                 <tr>
                   <td>clearError</td>
                   <td>
-                    <button @click="clearError('DecimalComponent')">
-                      Click
-                    </button>
+                    <button @click="clearError('DecimalComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Hapus error, kembalikan ke state component semula</td>
@@ -1117,10 +917,7 @@
                     <button @click="hasError('DecimalComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -1134,18 +931,7 @@
             </table>
           </EForm>
           <EForm id="Date">
-            <EDate
-              id="DateComponent"
-              ref="DateComponent"
-              v-model="date.value"
-              :label="date.label"
-              :required="date.required"
-              :disabled="date.disabled"
-              :show="date.show"
-              :vruntime="date.vruntime"
-              :minimum="date.minimum"
-              :maximum="date.maximum"
-            />
+            <EDate id="DateComponent" ref="DateComponent" v-model="date.value" :label="date.label" :required="date.required" :disabled="date.disabled" :show="date.show" :vruntime="date.vruntime" :minimum="date.minimum" :maximum="date.maximum" />
             <div class="text-xs">Template : {{ htmlDate }}</div>
             <br />
             <div class="text-xs">Data Object : {{ date }}</div>
@@ -1184,9 +970,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>required</td>
@@ -1194,10 +978,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -1205,10 +986,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -1216,9 +994,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik 666 untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -1226,10 +1002,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>minimum</td>
@@ -1282,10 +1055,7 @@
                     <button @click="hasError('DateComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -1299,18 +1069,7 @@
             </table>
           </EForm>
           <EForm id="Time">
-            <ETime
-              id="TimeComponent"
-              ref="TimeComponent"
-              v-model="time.value"
-              :label="time.label"
-              :required="time.required"
-              :disabled="time.disabled"
-              :show="time.show"
-              :vruntime="time.vruntime"
-              :minimum="time.minimum"
-              :maximum="time.maximum"
-            />
+            <ETime id="TimeComponent" ref="TimeComponent" v-model="time.value" :label="time.label" :required="time.required" :disabled="time.disabled" :show="time.show" :vruntime="time.vruntime" :minimum="time.minimum" :maximum="time.maximum" />
             <div class="text-xs">Template : {{ htmlTime }}</div>
             <br />
             <div class="text-xs">Data Object : {{ time }}</div>
@@ -1349,9 +1108,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>required</td>
@@ -1359,10 +1116,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -1370,10 +1124,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -1381,9 +1132,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik 666 untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -1391,10 +1140,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>minimum</td>
@@ -1402,9 +1148,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    Validasi minumum jam/menit yang bisa di input, format HH:mm
-                  </td>
+                  <td>Validasi minumum jam/menit yang bisa di input, format HH:mm</td>
                 </tr>
                 <tr>
                   <td>maximum</td>
@@ -1412,9 +1156,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    Validasi maximum jam/menit yang bisa di input, format HH:mm
-                  </td>
+                  <td>Validasi maximum jam/menit yang bisa di input, format HH:mm</td>
                 </tr>
               </tbody>
             </table>
@@ -1451,10 +1193,7 @@
                     <button @click="hasError('TimeComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -1468,17 +1207,7 @@
             </table>
           </EForm>
           <EForm id="Checkbox">
-            <ECheckBox
-              id="CheckboxComponent"
-              ref="CheckboxComponent"
-              v-model.number="checkbox.value"
-              :label="checkbox.label"
-              :disabled="checkbox.disabled"
-              :show="checkbox.show"
-              :vruntime="checkbox.vruntime"
-              :selected="checkbox.selected"
-              :unselected="checkbox.unselected"
-            />
+            <ECheckBox id="CheckboxComponent" ref="CheckboxComponent" v-model.number="checkbox.value" :label="checkbox.label" :disabled="checkbox.disabled" :show="checkbox.show" :vruntime="checkbox.vruntime" :selected="checkbox.selected" :unselected="checkbox.unselected" />
             <div class="text-xs">Template : {{ htmlCheckbox }}</div>
             <br />
             <div class="text-xs">Data Object : {{ checkbox }}</div>
@@ -1517,9 +1246,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -1527,10 +1254,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -1538,9 +1262,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik 666 untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -1548,10 +1270,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>selected</td>
@@ -1559,9 +1278,7 @@
                   <td>[String, Number, Boolean]</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Value yang ke set pada model, apabila checkbok terpilih
-                  </td>
+                  <td>Value yang ke set pada model, apabila checkbok terpilih</td>
                 </tr>
                 <tr>
                   <td>unselected</td>
@@ -1569,10 +1286,7 @@
                   <td>[String, Number, Boolean]</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Value yang ke set pada model, apabila checkbok tidak
-                    terpilih
-                  </td>
+                  <td>Value yang ke set pada model, apabila checkbok tidak terpilih</td>
                 </tr>
               </tbody>
             </table>
@@ -1590,9 +1304,7 @@
                 <tr>
                   <td>metaData</td>
                   <td>
-                    <button @click="metaData('CheckboxComponent')">
-                      Click
-                    </button>
+                    <button @click="metaData('CheckboxComponent')">Click</button>
                   </td>
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
@@ -1601,18 +1313,7 @@
             </table>
           </EForm>
           <EForm id="Boolean">
-            <EBoolean
-              id="BooleanComponent"
-              ref="BooleanComponent"
-              v-model="boolean.value"
-              :label="boolean.label"
-              :placeholder="boolean.placeholder"
-              :required="boolean.required"
-              :disabled="boolean.disabled"
-              :show="boolean.show"
-              :vruntime="boolean.vruntime"
-              :type="boolean.type"
-            />
+            <EBoolean id="BooleanComponent" ref="BooleanComponent" v-model="boolean.value" :label="boolean.label" :placeholder="boolean.placeholder" :required="boolean.required" :disabled="boolean.disabled" :show="boolean.show" :vruntime="boolean.vruntime" :type="boolean.type" />
             <div class="text-xs">Template : {{ htmlBoolean }}</div>
             <br />
             <div class="text-xs">Data Object : {{ boolean }}</div>
@@ -1659,10 +1360,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -1670,9 +1368,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -1680,10 +1376,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -1691,9 +1384,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik 666 untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -1701,10 +1392,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>type</td>
@@ -1744,9 +1432,7 @@
                 <tr>
                   <td>clearError</td>
                   <td>
-                    <button @click="clearError('BooleanComponent')">
-                      Click
-                    </button>
+                    <button @click="clearError('BooleanComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Hapus error, kembalikan ke state component semula</td>
@@ -1757,10 +1443,7 @@
                     <button @click="hasError('BooleanComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -1774,19 +1457,7 @@
             </table>
           </EForm>
           <EForm id="Select">
-            <ESelect
-              id="SelectComponent"
-              ref="SelectComponent"
-              v-model="select.value"
-              :label="select.label"
-              :placeholder="select.placeholder"
-              :required="select.required"
-              :disabled="select.disabled"
-              :show="select.show"
-              :as="select.as"
-              :vruntime="select.vruntime"
-              :options="select.options"
-            />
+            <ESelect id="SelectComponent" ref="SelectComponent" v-model="select.value" :label="select.label" :placeholder="select.placeholder" :required="select.required" :disabled="select.disabled" :show="select.show" :as="select.as" :vruntime="select.vruntime" :options="select.options" />
             <div class="text-xs">Template : {{ htmlSelect }}</div>
             <br />
             <div class="text-xs">Data Object : {{ select }}</div>
@@ -1833,10 +1504,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -1844,9 +1512,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -1854,10 +1520,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>as</td>
@@ -1870,11 +1533,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>string</td>
-                  <td>
-                    Tipe data converter, bila tidak di provide maka tipe data
-                    sesuai option, bila di sediakan makan nilai value akan di
-                    convert
-                  </td>
+                  <td>Tipe data converter, bila tidak di provide maka tipe data sesuai option, bila di sediakan makan nilai value akan di convert</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -1882,9 +1541,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik 666 untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -1892,10 +1549,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>options</td>
@@ -1903,10 +1557,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Data Option pilihan dengan format { value: null,
-                    description: null }
-                  </td>
+                  <td>Data Option pilihan dengan format { value: null, description: null }</td>
                 </tr>
               </tbody>
             </table>
@@ -1932,9 +1583,7 @@
                 <tr>
                   <td>clearError</td>
                   <td>
-                    <button @click="clearError('SelectComponent')">
-                      Click
-                    </button>
+                    <button @click="clearError('SelectComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Hapus error, kembalikan ke state component semula</td>
@@ -1945,10 +1594,7 @@
                     <button @click="hasError('SelectComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -1962,21 +1608,7 @@
             </table>
           </EForm>
           <EForm id="Lookup">
-            <ELookup
-              id="LookupComponent"
-              ref="LookupComponent"
-              v-model="lookup.value"
-              :label="lookup.label"
-              :group="lookup.group"
-              :placeholder="lookup.placeholder"
-              :required="lookup.required"
-              :disabled="lookup.disabled"
-              :show="lookup.show"
-              :as="lookup.as"
-              :vruntime="lookup.vruntime"
-              :filter="lookup.filter"
-              :lookup-group="lookup.lookupGroup"
-            />
+            <ELookup id="LookupComponent" ref="LookupComponent" v-model="lookup.value" :label="lookup.label" :group="lookup.group" :placeholder="lookup.placeholder" :required="lookup.required" :disabled="lookup.disabled" :show="lookup.show" :as="lookup.as" :vruntime="lookup.vruntime" :filter="lookup.filter" :lookup-group="lookup.lookupGroup" />
             <div class="text-xs">Template : {{ htmlLookup }}</div>
             <br />
             <div class="text-xs">Data Object : {{ lookup }}</div>
@@ -2023,10 +1655,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -2034,9 +1663,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -2044,10 +1671,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>as</td>
@@ -2060,11 +1684,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>string</td>
-                  <td>
-                    Tipe data converter, bila tidak di provide maka tipe data
-                    sesuai option, bila di sediakan makan nilai value akan di
-                    convert
-                  </td>
+                  <td>Tipe data converter, bila tidak di provide maka tipe data sesuai option, bila di sediakan makan nilai value akan di convert</td>
                 </tr>
                 <tr>
                   <td>lookupGrup</td>
@@ -2078,10 +1698,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Tipe Lookup Group yang akan di fetching dari server,
-                    kemudaian di cache di sisi vuex
-                  </td>
+                  <td>Tipe Lookup Group yang akan di fetching dari server, kemudaian di cache di sisi vuex</td>
                 </tr>
                 <tr>
                   <td>vruntime</td>
@@ -2089,9 +1706,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    OnType runtime validation, test ketik 666 untuk mencoba
-                  </td>
+                  <td>OnType runtime validation, test ketik 666 untuk mencoba</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -2099,10 +1714,7 @@
                   <td>String</td>
                   <td>false</td>
                   <td>''</td>
-                  <td>
-                    Two way data binding, saat ini data yang di input dalam
-                    bentuk upprcase, customize sesuai kebutuhan
-                  </td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
                 <tr>
                   <td>filter</td>
@@ -2110,11 +1722,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>(lookupGroup, options) => { return options }</td>
-                  <td>
-                    Kadang kita tidak ingin menampilkan seluruh data lookup, krn
-                    logic businsess, pd function ini kita dapat melakukan
-                    filtering tambahan
-                  </td>
+                  <td>Kadang kita tidak ingin menampilkan seluruh data lookup, krn logic businsess, pd function ini kita dapat melakukan filtering tambahan</td>
                 </tr>
               </tbody>
             </table>
@@ -2140,9 +1748,7 @@
                 <tr>
                   <td>clearError</td>
                   <td>
-                    <button @click="clearError('LookupComponent')">
-                      Click
-                    </button>
+                    <button @click="clearError('LookupComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Hapus error, kembalikan ke state component semula</td>
@@ -2153,10 +1759,7 @@
                     <button @click="hasError('LookupComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -2170,16 +1773,7 @@
             </table>
           </EForm>
           <EForm id="Dialog">
-            <EDialog
-              id="DialogComponent"
-              ref="DialogComponent"
-              :title="dialog.title"
-              :width="dialog.width"
-              :height="dialog.height"
-              :buttons="dialog.buttons"
-              @EmitSimpan="SimpanClicked"
-              @Submit="SubmitClicked"
-            />
+            <EDialog id="DialogComponent" ref="DialogComponent" :title="dialog.title" :width="dialog.width" :height="dialog.height" :buttons="dialog.buttons" @EmitSimpan="SimpanClicked" @Submit="SubmitClicked" />
             <div class="text-xs">Template : {{ htmlDialog }}</div>
             <br />
             <div class="text-xs">Data Object : {{ dialog }}</div>
@@ -2234,11 +1828,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[{ label: null, color: null, emit: optional }]</td>
-                  <td>
-                    List of button yang akan muncul pada dialog, untuk close
-                    sudah ada default button, untuk masing-masing button akan
-                    trigger emit berdadarkan label buttons.
-                  </td>
+                  <td>List of button yang akan muncul pada dialog, untuk close sudah ada default button, untuk masing-masing button akan trigger emit berdadarkan label buttons.</td>
                 </tr>
               </tbody>
             </table>
@@ -2264,9 +1854,7 @@
                 <tr>
                   <td>open</td>
                   <td>
-                    <button @click="openDialog('DialogComponent')">
-                      Click
-                    </button>
+                    <button @click="openDialog('DialogComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Show popup dialog container</td>
@@ -2274,9 +1862,7 @@
                 <tr>
                   <td>close</td>
                   <td>
-                    <button @click="closeDialog('DialogComponent')">
-                      Click
-                    </button>
+                    <button @click="closeDialog('DialogComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Hide popup dialog container</td>
@@ -2311,9 +1897,7 @@
                 <tr>
                   <td>show</td>
                   <td>
-                    <button @click="showLoading('LoadingComponent')">
-                      Click
-                    </button>
+                    <button @click="showLoading('LoadingComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Show popup loading</td>
@@ -2321,9 +1905,7 @@
                 <tr>
                   <td>success</td>
                   <td>
-                    <button @click="successLoading('LoadingComponent')">
-                      Click
-                    </button>
+                    <button @click="successLoading('LoadingComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Close Loading dan info operation success label</td>
@@ -2331,9 +1913,7 @@
                 <tr>
                   <td>fail</td>
                   <td>
-                    <button @click="failLoading('LoadingComponent')">
-                      Click
-                    </button>
+                    <button @click="failLoading('LoadingComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Close Loading dan info operation fail label</td>
@@ -2390,9 +1970,7 @@
                 <tr>
                   <td>success</td>
                   <td>
-                    <button @click="successMessage('MessageComponent')">
-                      Click
-                    </button>
+                    <button @click="successMessage('MessageComponent')">Click</button>
                   </td>
                   <td>Promise</td>
                   <td>Tampilkan success message</td>
@@ -2400,9 +1978,7 @@
                 <tr>
                   <td>error</td>
                   <td>
-                    <button @click="errorMessage('MessageComponent')">
-                      Click
-                    </button>
+                    <button @click="errorMessage('MessageComponent')">Click</button>
                   </td>
                   <td>Promise</td>
                   <td>Tampilkan error message</td>
@@ -2410,9 +1986,7 @@
                 <tr>
                   <td>close</td>
                   <td>
-                    <button @click="closeMessage('MessageComponent')">
-                      Click
-                    </button>
+                    <button @click="closeMessage('MessageComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Tutup popup message</td>
@@ -2421,12 +1995,7 @@
             </table>
           </EForm>
           <EForm id="Confirmation">
-            <EConfirmation
-              id="ConfirmationComponent"
-              ref="ConfirmationComponent"
-              :positive="confirmation.positive"
-              :negative="confirmation.negative"
-            />
+            <EConfirmation id="ConfirmationComponent" ref="ConfirmationComponent" :positive="confirmation.positive" :negative="confirmation.negative" />
             <div class="text-xs">Template : {{ htmlConfirmation }}</div>
             <br />
             <div class="text-xs">Data Object : {{ confirmation }}</div>
@@ -2482,9 +2051,7 @@
                 <tr>
                   <td>metaData</td>
                   <td>
-                    <button @click="metaData('ConfirmationComponent')">
-                      Click
-                    </button>
+                    <button @click="metaData('ConfirmationComponent')">Click</button>
                   </td>
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
@@ -2492,11 +2059,7 @@
                 <tr>
                   <td>confirm</td>
                   <td>
-                    <button
-                      @click="confirmConfirmation('ConfirmationComponent')"
-                    >
-                      Click
-                    </button>
+                    <button @click="confirmConfirmation('ConfirmationComponent')">Click</button>
                   </td>
                   <td>Promise</td>
                   <td>Tampilkan success message</td>
@@ -2504,9 +2067,7 @@
                 <tr>
                   <td>close</td>
                   <td>
-                    <button @click="closeConfirmation('ConfirmationComponent')">
-                      Click
-                    </button>
+                    <button @click="closeConfirmation('ConfirmationComponent')">Click</button>
                   </td>
                   <td>Promise</td>
                   <td>Tutup confimration dialog</td>
@@ -2515,25 +2076,8 @@
             </table>
           </EForm>
           <EForm id="Card">
-            <ECard
-              id="CardComponent"
-              ref="CardComponent"
-              :label="card.label"
-              :disabled="card.disabled"
-              :show="card.show"
-            >
-              <EText
-                id="TextComponent"
-                ref="TextComponent"
-                v-model="text.value"
-                :label="text.label"
-                :placeholder="text.placeholder"
-                :type="text.type"
-                :required="text.required"
-                :disabled="text.disabled"
-                :show="text.show"
-                :vruntime="text.vruntime"
-              />
+            <ECard id="CardComponent" ref="CardComponent" :label="card.label" :disabled="card.disabled" :show="card.show">
+              <EText id="TextComponent" ref="TextComponent" v-model="text.value" :label="text.label" :placeholder="text.placeholder" :type="text.type" :required="text.required" :disabled="text.disabled" :show="text.show" :vruntime="text.vruntime" />
             </ECard>
             <div class="text-xs">Template : {{ htmlCard }}</div>
             <br />
@@ -2564,9 +2108,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -2574,10 +2116,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
               </tbody>
             </table>
@@ -2595,9 +2134,7 @@
                 <tr>
                   <td>metaData</td>
                   <td>
-                    <button @click="metaData('ConfirmationComponent')">
-                      Click
-                    </button>
+                    <button @click="metaData('ConfirmationComponent')">Click</button>
                   </td>
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
@@ -2606,14 +2143,7 @@
             </table>
           </EForm>
           <EForm id="Tabs">
-            <ETabs
-              id="TabsComponent"
-              ref="TabsComponent"
-              :labels="tabss.labels"
-              :selected-tab="tabss.selectedTab"
-              :show="tabss.show"
-              :disabled="tabss.disabled"
-            >
+            <ETabs id="TabsComponent" ref="TabsComponent" :labels="tabss.labels" :selected-tab="tabss.selectedTab" :show="tabss.show" :disabled="tabss.disabled">
               <EForm id="Customer">
                 <div>Customer</div>
               </EForm>
@@ -2631,11 +2161,7 @@
             <br />
             <div class="text-xs">Data Object : {{ tabss }}</div>
             <br />
-            <div class="text-xs">
-              Important !! Untuk masing-masing content pada Tab, gunakan EForm
-              dgn id sesuai dengan label tabs, menggunakan EForm agar behaviour
-              ui bisa di buat central
-            </div>
+            <div class="text-xs">Important !! Untuk masing-masing content pada Tab, gunakan EForm dgn id sesuai dengan label tabs, menggunakan EForm agar behaviour ui bisa di buat central</div>
             <br />
             <table>
               <thead>
@@ -2671,9 +2197,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -2681,10 +2205,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>selectedTab</td>
@@ -2724,9 +2245,7 @@
                 <tr>
                   <td>setSelectedTab</td>
                   <td>
-                    <button @click="setSelectedTab('TabsComponent')">
-                      Click
-                    </button>
+                    <button @click="setSelectedTab('TabsComponent')">Click</button>
                   </td>
                   <td>Transaction Tab selected</td>
                   <td>Set selected tab progamatically</td>
@@ -2736,23 +2255,14 @@
                   <td>
                     <button @click="addNewTab()">Click</button>
                   </td>
-                  <td>
-                    Tambah new Tab, Customer Tab Enabled, Order Tab Disabled
-                  </td>
+                  <td>Tambah new Tab, Customer Tab Enabled, Order Tab Disabled</td>
                   <td>Ini bukan component ini hanya untuk test saja</td>
                 </tr>
               </tbody>
             </table>
           </EForm>
           <EForm id="Filter">
-            <EFilter
-              id="FilterComponent"
-              :title="filter.title"
-              :disabled="filter.disabled"
-              :show="filter.show"
-              @Clear="filterClear"
-              @Search="filterSearch"
-            >
+            <EFilter id="FilterComponent" :title="filter.title" :disabled="filter.disabled" :show="filter.show" @Clear="filterClear" @Search="filterSearch">
               <ECol :col="3">
                 <div style="background: yellow">Filter Component 1</div>
                 <div style="background: yellow">Filter Component 2</div>
@@ -2800,9 +2310,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component</td>
                 </tr>
                 <tr>
                   <td>show</td>
@@ -2810,10 +2318,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
               </tbody>
             </table>
@@ -2840,16 +2345,8 @@
             </table>
           </EForm>
           <EForm id="PageLoader">
-            <EPageLoader
-              id="PageLoaderComponent"
-              ref="PageLoaderComponent"
-              :label="pageLoader.label"
-              :fetcher="pageLoaderfetcher"
-            >
-              <div>
-                Content ini akan di tampil, Bila EPageLoader success melakukan
-                rest call
-              </div>
+            <EPageLoader id="PageLoaderComponent" ref="PageLoaderComponent" :label="pageLoader.label" :fetcher="pageLoaderfetcher">
+              <div>Content ini akan di tampil, Bila EPageLoader success melakukan rest call</div>
             </EPageLoader>
             <br />
             <div class="text-xs">Template : {{ htmlPageLoader }}</div>
@@ -2889,10 +2386,7 @@
                   <td>Function</td>
                   <td>true</td>
                   <td>Empty Function</td>
-                  <td>
-                    Server Call yang returnnya harus berupa boolean, true bila
-                    success, dan false bila gagal
-                  </td>
+                  <td>Server Call yang returnnya harus berupa boolean, true bila success, dan false bila gagal</td>
                 </tr>
               </tbody>
             </table>
@@ -2910,9 +2404,7 @@
                 <tr>
                   <td>metaData</td>
                   <td>
-                    <button @click="metaData('PageLoaderComponent')">
-                      Click
-                    </button>
+                    <button @click="metaData('PageLoaderComponent')">Click</button>
                   </td>
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
@@ -2920,9 +2412,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Upload">
-            https://medium.com/js-dojo/how-to-upload-base64-images-in-vue-nodejs-4e89635daebc
-          </EForm>
+          <EForm id="Upload"> https://medium.com/js-dojo/how-to-upload-base64-images-in-vue-nodejs-4e89635daebc </EForm>
           <EForm id="LocalPagination">
             <ELocalPagination
               id="LocalPaginationComponent"
@@ -2950,17 +2440,11 @@
             <br />
             <div class="text-xs">Column : {{ htmlLocalPaginationColumn }}</div>
             <br />
-            <div class="text-xs">
-              Actions : {{ htmlLocalPaginationActions }}
-            </div>
+            <div class="text-xs">Actions : {{ htmlLocalPaginationActions }}</div>
             <br />
-            <div class="text-xs">
-              initialSortBy : {{ htmlLocalPaginationinitialSortBy }}
-            </div>
+            <div class="text-xs">initialSortBy : {{ htmlLocalPaginationinitialSortBy }}</div>
             <br />
-            <div class="text-xs">
-              Buttons : {{ htmlLocalPaginationButtons }}
-            </div>
+            <div class="text-xs">Buttons : {{ htmlLocalPaginationButtons }}</div>
             <br />
             <div class="text-xs">Data Object : {{ localPagination }}</div>
             <table>
@@ -2999,10 +2483,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -3012,9 +2493,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>columns</td>
@@ -3022,12 +2501,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Colum configuration berupa array dgn format { label: null,
-                    field: null, sortable: null, width: null, tooltip: null,
-                    type: null} untuk type meng-support text, date, number,
-                    decimal, percentage, boolean
-                  </td>
+                  <td>Colum configuration berupa array dgn format { label: null, field: null, sortable: null, width: null, tooltip: null, type: null} untuk type meng-support text, date, number, decimal, percentage, boolean</td>
                 </tr>
                 <tr>
                   <td>row</td>
@@ -3035,10 +2509,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Data rows yang akan di tampilkan base on columns
-                    configuration
-                  </td>
+                  <td>Data rows yang akan di tampilkan base on columns configuration</td>
                 </tr>
                 <tr>
                   <td>actions</td>
@@ -3046,10 +2517,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Action/ Tindakan yang bisa di perlakukan terhadap data,
-                    dimana akan tigger emit berdasarkan label button
-                  </td>
+                  <td>Action/ Tindakan yang bisa di perlakukan terhadap data, dimana akan tigger emit berdasarkan label button</td>
                 </tr>
                 <tr>
                   <td>disabledAction</td>
@@ -3057,11 +2525,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>() => return false</td>
-                  <td>
-                    Function callback untuk menentukan apakah button action
-                    enabled atau disabled Ex : disabledAction(action: { label},
-                    prop: { column, row })
-                  </td>
+                  <td>Function callback untuk menentukan apakah button action enabled atau disabled Ex : disabledAction(action: { label}, prop: { column, row })</td>
                 </tr>
                 <tr>
                   <td>buttons</td>
@@ -3069,12 +2533,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Button pada footer, yang bertujuan untuk execute process
-                    secara bulk, bukan per-row, dimana akan tigger emit
-                    berdasarkan label button, dan akan mengirim selectedData,
-                    checkbox hanya akan muncul bila buttons di provide
-                  </td>
+                  <td>Button pada footer, yang bertujuan untuk execute process secara bulk, bukan per-row, dimana akan tigger emit berdasarkan label button, dan akan mengirim selectedData, checkbox hanya akan muncul bila buttons di provide</td>
                 </tr>
                 <tr>
                   <td>initialSortBy</td>
@@ -3082,10 +2541,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Configurasi, untuk sort data pada saat pertama kali di
-                    tampilkan
-                  </td>
+                  <td>Configurasi, untuk sort data pada saat pertama kali di tampilkan</td>
                 </tr>
                 <tr>
                   <td>addNewData</td>
@@ -3093,10 +2549,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    Akan menambahkan button pada header table, yang bertujuan
-                    untuk action Tambah data
-                  </td>
+                  <td>Akan menambahkan button pada header table, yang bertujuan untuk action Tambah data</td>
                 </tr>
                 <tr>
                   <td>saveState</td>
@@ -3104,11 +2557,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    Penambahan colum pada sisi kiri, untuk menandakan apakah
-                    data sudah terpersist ke db atau belum, agar user tau yang
-                    mana yang sudah ke save dan blm
-                  </td>
+                  <td>Penambahan colum pada sisi kiri, untuk menandakan apakah data sudah terpersist ke db atau belum, agar user tau yang mana yang sudah ke save dan blm</td>
                 </tr>
               </tbody>
             </table>
@@ -3126,9 +2575,7 @@
                 <tr>
                   <td>metaData</td>
                   <td>
-                    <button @click="metaData('LocalPaginationComponent')">
-                      Click
-                    </button>
+                    <button @click="metaData('LocalPaginationComponent')">Click</button>
                   </td>
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
@@ -3164,17 +2611,11 @@
             <br />
             <div class="text-xs">Colums : {{ htmlServerPaginationColumn }}</div>
             <br />
-            <div class="text-xs">
-              Actions : {{ htmlServerPaginationActions }}
-            </div>
+            <div class="text-xs">Actions : {{ htmlServerPaginationActions }}</div>
             <br />
-            <div class="text-xs">
-              initialSortBy : {{ htmlServerPaginationinitialSortBy }}
-            </div>
+            <div class="text-xs">initialSortBy : {{ htmlServerPaginationinitialSortBy }}</div>
             <br />
-            <div class="text-xs">
-              Buttons : {{ htmlServerPaginationButtons }}
-            </div>
+            <div class="text-xs">Buttons : {{ htmlServerPaginationButtons }}</div>
             <br />
             <div class="text-xs">Data Object : {{ serverPagination }}</div>
             <table>
@@ -3215,25 +2656,17 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
                   <td>
-                    <input
-                      v-model="serverPagination.disabled"
-                      type="checkbox"
-                    />
+                    <input v-model="serverPagination.disabled" type="checkbox" />
                   </td>
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>autoLoad</td>
@@ -3241,10 +2674,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan apakah data langsung di fetch pada
-                    inital atau lewat progamatically
-                  </td>
+                  <td>Boolean untuk menentukan apakah data langsung di fetch pada inital atau lewat progamatically</td>
                 </tr>
                 <tr>
                   <td>picker</td>
@@ -3260,11 +2690,7 @@
                   <td>Object</td>
                   <td>false</td>
                   <td>{}</td>
-                  <td>
-                    Ini adalah object filter, bukan berupa array tapi berupa
-                    object dimana nama props akan menjadi key mapping dengan
-                    server configuration
-                  </td>
+                  <td>Ini adalah object filter, bukan berupa array tapi berupa object dimana nama props akan menjadi key mapping dengan server configuration</td>
                 </tr>
                 <tr>
                   <td>columns</td>
@@ -3272,12 +2698,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Colum configuration berupa array dgn format { label: null,
-                    field: null, sortable: null, width: null, tooltip: null,
-                    type: null} untuk type meng-support text, date, number,
-                    decimal, percentage, boolean
-                  </td>
+                  <td>Colum configuration berupa array dgn format { label: null, field: null, sortable: null, width: null, tooltip: null, type: null} untuk type meng-support text, date, number, decimal, percentage, boolean</td>
                 </tr>
                 <tr>
                   <td>actions</td>
@@ -3285,10 +2706,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Action/ Tindakan yang bisa di perlakukan terhadap data,
-                    dimana akan tigger emit berdasarkan label button
-                  </td>
+                  <td>Action/ Tindakan yang bisa di perlakukan terhadap data, dimana akan tigger emit berdasarkan label button</td>
                 </tr>
                 <tr>
                   <td>disabledAction</td>
@@ -3296,11 +2714,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>() => return false</td>
-                  <td>
-                    Function callback untuk menentukan apakah button action
-                    enabled atau disabled Ex : disabledAction(action: { label},
-                    prop: { column, row })
-                  </td>
+                  <td>Function callback untuk menentukan apakah button action enabled atau disabled Ex : disabledAction(action: { label}, prop: { column, row })</td>
                 </tr>
                 <tr>
                   <td>buttons</td>
@@ -3308,12 +2722,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Button pada footer, yang bertujuan untuk execute process
-                    secara bulk, bukan per-row, dimana akan tigger emit
-                    berdasarkan label button, dan akan mengirim selectedData,
-                    checkbox hanya akan muncul bila buttons di provide
-                  </td>
+                  <td>Button pada footer, yang bertujuan untuk execute process secara bulk, bukan per-row, dimana akan tigger emit berdasarkan label button, dan akan mengirim selectedData, checkbox hanya akan muncul bila buttons di provide</td>
                 </tr>
                 <tr>
                   <td>initialSortBy</td>
@@ -3321,10 +2730,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Configurasi, untuk sort data pada saat pertama kali di
-                    tampilkan
-                  </td>
+                  <td>Configurasi, untuk sort data pada saat pertama kali di tampilkan</td>
                 </tr>
                 <tr>
                   <td>addNewData</td>
@@ -3332,10 +2738,7 @@
                   <td>Function</td>
                   <td>false</td>
                   <td>null</td>
-                  <td>
-                    Akan menambahkan button pada header table, yang bertujuan
-                    untuk action Tambah data
-                  </td>
+                  <td>Akan menambahkan button pada header table, yang bertujuan untuk action Tambah data</td>
                 </tr>
               </tbody>
             </table>
@@ -3353,9 +2756,7 @@
                 <tr>
                   <td>metaData</td>
                   <td>
-                    <button @click="metaData('ServerPaginationComponent')">
-                      Click
-                    </button>
+                    <button @click="metaData('ServerPaginationComponent')">Click</button>
                   </td>
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
@@ -3364,9 +2765,7 @@
             </table>
           </EForm>
           <EForm id="Form">
-            <EForm id="FormComponent" ref="FormComponent">
-              Content Of Form
-            </EForm>
+            <EForm id="FormComponent" ref="FormComponent"> Content Of Form </EForm>
             <br />
             <div class="text-xs">Template : {{ htmlForm }}</div>
             <table>
@@ -3422,21 +2821,7 @@
             </table>
           </EForm>
           <EForm id="PopupPagination">
-            <EPopupPagination
-              id="PopupPaginationComponent"
-              ref="PopupPaginationComponent"
-              v-model="popupPagination.value"
-              :label="popupPagination.label"
-              :placeholder="popupPagination.placeholder"
-              :required="popupPagination.required"
-              :disabled="popupPagination.disabled"
-              :maxlength="popupPagination.maxlength"
-              :show="popupPagination.show"
-              :vruntime="popupPagination.vruntime"
-              :picker="popupPagination.picker"
-              :filter="popupPagination.filter"
-              :columns="popupPagination.columns"
-            />
+            <EPopupPagination id="PopupPaginationComponent" ref="PopupPaginationComponent" v-model="popupPagination.value" :label="popupPagination.label" :placeholder="popupPagination.placeholder" :required="popupPagination.required" :disabled="popupPagination.disabled" :maxlength="popupPagination.maxlength" :show="popupPagination.show" :vruntime="popupPagination.vruntime" :picker="popupPagination.picker" :filter="popupPagination.filter" :columns="popupPagination.columns" />
             <br />
             <div class="text-xs">Template : {{ htmlPopupPagination }}</div>
             <br />
@@ -3492,10 +2877,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>true</td>
-                  <td>
-                    Boolean untuk menentukan component tampil atau tidak. tag
-                    ini menggunakan v-if
-                  </td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
                 <tr>
                   <td>required</td>
@@ -3505,10 +2887,7 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan required atau tidak text, error
-                    message akan otomatis terisi bila kosong
-                  </td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -3518,17 +2897,12 @@
                   <td>Boolean</td>
                   <td>false</td>
                   <td>false</td>
-                  <td>
-                    Boolean untuk menentukan disabled atau tidaknya component,
-                  </td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
                 </tr>
                 <tr>
                   <td>maxlength</td>
                   <td>
-                    <input
-                      v-model.number="popupPagination.maxlength"
-                      type="number"
-                    />
+                    <input v-model.number="popupPagination.maxlength" type="number" />
                   </td>
                   <td>Number</td>
                   <td>false</td>
@@ -3549,11 +2923,7 @@
                   <td>Object</td>
                   <td>false</td>
                   <td>{}</td>
-                  <td>
-                    Ini adalah object filter, bukan berupa array tapi berupa
-                    object dimana nama props akan menjadi key mapping dengan
-                    server configuration
-                  </td>
+                  <td>Ini adalah object filter, bukan berupa array tapi berupa object dimana nama props akan menjadi key mapping dengan server configuration</td>
                 </tr>
                 <tr>
                   <td>columns</td>
@@ -3561,12 +2931,7 @@
                   <td>Array</td>
                   <td>false</td>
                   <td>[]</td>
-                  <td>
-                    Colum configuration berupa array dgn format { label: null,
-                    field: null, sortable: null, width: null, tooltip: null,
-                    type: null} untuk type meng-support text, date, number,
-                    decimal, percentage, boolean
-                  </td>
+                  <td>Colum configuration berupa array dgn format { label: null, field: null, sortable: null, width: null, tooltip: null, type: null} untuk type meng-support text, date, number, decimal, percentage, boolean</td>
                 </tr>
               </tbody>
             </table>
@@ -3584,9 +2949,7 @@
                 <tr>
                   <td>metaData</td>
                   <td>
-                    <button @click="metaData('PopupPaginationComponent')">
-                      Click
-                    </button>
+                    <button @click="metaData('PopupPaginationComponent')">Click</button>
                   </td>
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
@@ -3594,9 +2957,7 @@
                 <tr>
                   <td>clearError</td>
                   <td>
-                    <button @click="clearError('PopupPaginationComponent')">
-                      Click
-                    </button>
+                    <button @click="clearError('PopupPaginationComponent')">Click</button>
                   </td>
                   <td>Void</td>
                   <td>Hapus error, kembalikan ke state component semula</td>
@@ -3604,22 +2965,15 @@
                 <tr>
                   <td>hasError</td>
                   <td>
-                    <button @click="hasError('PopupPaginationComponent')">
-                      Click
-                    </button>
+                    <button @click="hasError('PopupPaginationComponent')">Click</button>
                   </td>
                   <td>{{ haserror }}</td>
-                  <td>
-                    Flag untuk menandakan apakah component pass validasi atau
-                    tidak
-                  </td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
                   <td>validate</td>
                   <td>
-                    <button @click="validate('PopupPaginationComponent')">
-                      Click
-                    </button>
+                    <button @click="validate('PopupPaginationComponent')">Click</button>
                   </td>
                   <td>{{ valid }}</td>
                   <td>Lakukan validasi berdasarkan required dan vruntime</td>
@@ -3628,13 +2982,7 @@
             </table>
           </EForm>
           <EForm id="Col">
-            <ECol
-              id="ColComponent"
-              ref="ColComponent"
-              :col="col.col"
-              :gap-x="col.gapX"
-              :gap-y="col.gapY"
-            >
+            <ECol id="ColComponent" ref="ColComponent" :col="col.col" :gap-x="col.gapX" :gap-y="col.gapY">
               <div style="background: yellow">GROUP 1</div>
               <div style="background: yellow">GROUP 2</div>
               <div style="background: yellow">GROUP 3</div>
@@ -3717,31 +3065,12 @@
         <EEntry />
       </EForm>
       <EForm id="Plugin">
-        <ETabs
-          id="Plugin"
-          :labels="[
-            { label: 'fmt' },
-            { label: 'enum' },
-            { label: 'string' },
-            { label: 'number' },
-            { label: 'array' },
-            { label: 'wrapper' },
-            { label: 'rest' },
-          ]"
-          selected-tab="fmt"
-        >
+        <ETabs id="Plugin" :labels="[{ label: 'fmt' }, { label: 'enum' }, { label: 'string' }, { label: 'number' }, { label: 'array' }, { label: 'wrapper' }, { label: 'rest' }]" selected-tab="fmt">
           <EForm id="enum">
-            <div>
-              Plugin ini hanya berupa constant placeholder, dimana data data
-              constant di simpanan plugin dapat di access lewat this.$enum. Saat
-              ini sudah terdapat 2 constant utama yaitu VUEX dan LOCAL_STORAGE
-            </div>
+            <div>Plugin ini hanya berupa constant placeholder, dimana data data constant di simpanan plugin dapat di access lewat this.$enum. Saat ini sudah terdapat 2 constant utama yaitu VUEX dan LOCAL_STORAGE</div>
           </EForm>
           <EForm id="fmt">
-            <div>
-              Plugin ini bertujuan untuk memformat data sebagai presentasi ke
-              ui, plugin ini dapat di access melalui this.$fmt
-            </div>
+            <div>Plugin ini bertujuan untuk memformat data sebagai presentasi ke ui, plugin ini dapat di access melalui this.$fmt</div>
             <table>
               <thead>
                 <tr>
@@ -3771,17 +3100,13 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    decimal: (value = null, minimumFractionDigits = 0,
-                    maximumFractionDigits = 2) => {}
-                  </td>
+                  <td>decimal: (value = null, minimumFractionDigits = 0, maximumFractionDigits = 2) => {}</td>
                   <td>String</td>
                   <td>
                     value: Number <br />
                     minimumFractionDigits: Number <br />
                     maximumFractionDigits: Number <br />
-                    Akan memformat angka menjadi comma delimeter degan fraction
-                    yang tlh di tentukan <br />
+                    Akan memformat angka menjadi comma delimeter degan fraction yang tlh di tentukan <br />
                     Ex: 123456.2545 => 123,456.25
                   </td>
                 </tr>
@@ -3789,10 +3114,7 @@
             </table>
           </EForm>
           <EForm id="string">
-            <div>
-              Plugin ini bertujuan untuk melakukan menipulasi untuk tipe data
-              string , plugin ini dapat di access melalui this.$string
-            </div>
+            <div>Plugin ini bertujuan untuk melakukan menipulasi untuk tipe data string , plugin ini dapat di access melalui this.$string</div>
             <table>
               <thead>
                 <tr>
@@ -3805,22 +3127,13 @@
                 <tr>
                   <td>replaceByProperty: (string, object) => {}</td>
                   <td>String</td>
-                  <td>
-                    Akan mereplace operan data string dgn property yang ada di
-                    object, dengan menggunakan parameter []. Ex:
-                    http://[base_url]/user/profile, akan di repalce dgn {
-                    base_url: 'localhost' }
-                  </td>
+                  <td>Akan mereplace operan data string dgn property yang ada di object, dengan menggunakan parameter []. Ex: http://[base_url]/user/profile, akan di repalce dgn { base_url: 'localhost' }</td>
                 </tr>
               </tbody>
             </table>
           </EForm>
           <EForm id="number">
-            <div>
-              Plugin ini bertujuan untuk melakukan menipulasi untuk tipe data
-              number dan aritmatic oprational , plugin ini dapat di access
-              melalui this.$number
-            </div>
+            <div>Plugin ini bertujuan untuk melakukan menipulasi untuk tipe data number dan aritmatic oprational , plugin ini dapat di access melalui this.$number</div>
             <table>
               <thead>
                 <tr>
@@ -3833,10 +3146,7 @@
             </table>
           </EForm>
           <EForm id="array">
-            <div>
-              Plugin ini bertujuan untuk melakukan menipulasi untuk tipe data
-              array , plugin ini dapat di access melalui this.$array
-            </div>
+            <div>Plugin ini bertujuan untuk melakukan menipulasi untuk tipe data array , plugin ini dapat di access melalui this.$array</div>
             <table>
               <thead>
                 <tr>
@@ -3849,10 +3159,7 @@
             </table>
           </EForm>
           <EForm id="wrapper">
-            <div>
-              Plugin ini bertujuan untuk melakukan behaviour yang seragam
-              terhadap ui, plugin ini dapat di access melakui this.$wrapper
-            </div>
+            <div>Plugin ini bertujuan untuk melakukan behaviour yang seragam terhadap ui, plugin ini dapat di access melakui this.$wrapper</div>
             <table>
               <thead>
                 <tr>
@@ -3868,8 +3175,7 @@
                   <td>
                     data: Object with property disabled <br />
                     condition: Boolean <br />
-                    Akan meng-set component menjadi disabled atau enabeld, dgn
-                    melaukan manipulasi property disabled
+                    Akan meng-set component menjadi disabled atau enabeld, dgn melaukan manipulasi property disabled
                   </td>
                 </tr>
                 <tr>
@@ -3878,8 +3184,7 @@
                   <td>
                     data: Object with property show <br />
                     condition: Boolean <br />
-                    Akan meng-set component menjadi visible atau invisible, dgn
-                    melaukan manipulasi property show
+                    Akan meng-set component menjadi visible atau invisible, dgn melaukan manipulasi property show
                   </td>
                 </tr>
                 <tr>
@@ -3887,10 +3192,7 @@
                   <td>Array</td>
                   <td>
                     pref: Pointer <br />
-                    Akan mengambil semua children pointer, apabila terdapat
-                    container, maka akan masuk lagi untuk mengambil children
-                    pointer lagi (recursive) Ex :
-                    this.$wrapper.refs(this.$refs.entryEForm)
+                    Akan mengambil semua children pointer, apabila terdapat container, maka akan masuk lagi untuk mengambil children pointer lagi (recursive) Ex : this.$wrapper.refs(this.$refs.entryEForm)
                   </td>
                 </tr>
                 <tr>
@@ -3898,11 +3200,7 @@
                   <td>Void</td>
                   <td>
                     pref: Pointer <br />
-                    Akan mengambil semua children pointer, dan akan memanggil
-                    method clearError one by one Tujuan dari method ini adalah
-                    untuk menghapus semua error message dan mengambalikan ke
-                    state original
-                    this.$wrapper.clearError(this.$refs.entryEForm)
+                    Akan mengambil semua children pointer, dan akan memanggil method clearError one by one Tujuan dari method ini adalah untuk menghapus semua error message dan mengambalikan ke state original this.$wrapper.clearError(this.$refs.entryEForm)
                   </td>
                 </tr>
                 <tr>
@@ -3910,33 +3208,19 @@
                   <td>{ valid: boolean, errors: Array }</td>
                   <td>
                     pref: Pointer <br />
-                    Akan mengambil semua children pointer, dan akan memanggil
-                    method validate one by one Tujuan dari method ini adalah
-                    untuk melakukan validasi pada masing masing komponent sesuai
-                    dengan rule yang di terapkan
-                    this.$wrapper.validate(this.$refs.entryEForm)
+                    Akan mengambil semua children pointer, dan akan memanggil method validate one by one Tujuan dari method ini adalah untuk melakukan validasi pada masing masing komponent sesuai dengan rule yang di terapkan this.$wrapper.validate(this.$refs.entryEForm)
                   </td>
                 </tr>
                 <tr>
                   <td>jquery(selector)</td>
                   <td>instance</td>
-                  <td>
-                    Akan mengambalikan jquery instance, sebisa mungkin fungsi
-                    ini jgn pernah di pake. Hanya gunakan fungsi ini untuk
-                    manipulasi ui saja bukan data atau business dapat di access
-                    dari this.$wrapper.jquery()
-                  </td>
+                  <td>Akan mengambalikan jquery instance, sebisa mungkin fungsi ini jgn pernah di pake. Hanya gunakan fungsi ini untuk manipulasi ui saja bukan data atau business dapat di access dari this.$wrapper.jquery()</td>
                 </tr>
               </tbody>
             </table>
           </EForm>
           <EForm id="rest">
-            <div>
-              Plugin ini bertujuan untuk melakukan oprational komunikasi dgn
-              server , plugin ini dapat di access melalui this.$rest. Url dan
-              header props dapat menggunakan enviroment variable dgn menggunakan
-              tag [] contoh : https://[base_url]/users
-            </div>
+            <div>Plugin ini bertujuan untuk melakukan oprational komunikasi dgn server , plugin ini dapat di access melalui this.$rest. Url dan header props dapat menggunakan enviroment variable dgn menggunakan tag [] contoh : https://[base_url]/users</div>
             <table>
               <thead>
                 <tr>
@@ -3949,50 +3233,27 @@
                 <tr>
                   <td>localStorage</td>
                   <td>String</td>
-                  <td>
-                    Hasil restcall akan di simpan ke localstorage menggunakan id
-                    = localStorage, option ini dapat di gunakan dgn cara
-                    menyertakan props localStorage pada headers, bila
-                    operational yang sama dilakukan, tidak akan melakukan
-                    restcall kembali apabila data di localStorage sudah ada
-                  </td>
+                  <td>Hasil restcall akan di simpan ke localstorage menggunakan id = localStorage, option ini dapat di gunakan dgn cara menyertakan props localStorage pada headers, bila operational yang sama dilakukan, tidak akan melakukan restcall kembali apabila data di localStorage sudah ada</td>
                 </tr>
                 <tr>
                   <td>vuex</td>
                   <td>String</td>
-                  <td>
-                    Hasil restcall akan di simpan ke vuex menggunakan id = vuex,
-                    option ini dapat di gunakan dgn cara menyertakan props vuex
-                    pada headers, bila operational yang sama dilakukan, tidak
-                    akan melakukan restcall kembali apabila data di vuex sudah
-                    ada
-                  </td>
+                  <td>Hasil restcall akan di simpan ke vuex menggunakan id = vuex, option ini dapat di gunakan dgn cara menyertakan props vuex pada headers, bila operational yang sama dilakukan, tidak akan melakukan restcall kembali apabila data di vuex sudah ada</td>
                 </tr>
                 <tr>
                   <td>saveFn</td>
                   <td>Function</td>
-                  <td>
-                    Logic untuk menentukan apakah suatu data layak untuk di
-                    simpan atau tidak, function ini menerima oparan parameter
-                    result dan wajib mengembalikan boolean
-                  </td>
+                  <td>Logic untuk menentukan apakah suatu data layak untuk di simpan atau tidak, function ini menerima oparan parameter result dan wajib mengembalikan boolean</td>
                 </tr>
                 <tr>
                   <td>forceUpdate</td>
                   <td>String</td>
-                  <td>
-                    forceUpdate akan memaksa untuk melakukan restCall meskipun
-                    data di localStorage/vuex tersedia, dan akan di replace oleh
-                    next restCall
-                  </td>
+                  <td>forceUpdate akan memaksa untuk melakukan restCall meskipun data di localStorage/vuex tersedia, dan akan di replace oleh next restCall</td>
                 </tr>
                 <tr>
                   <td>expired</td>
                   <td>number</td>
-                  <td>
-                    Number in milisecond, timout of expired object in vuex or
-                    storage
-                  </td>
+                  <td>Number in milisecond, timout of expired object in vuex or storage</td>
                 </tr>
               </tbody>
             </table>
@@ -4013,11 +3274,7 @@
                     <button @click="restSetLocalStorage">Click</button>
                   </td>
                   <td>Void</td>
-                  <td>
-                    Akan menyimpan object { id: 1, name: 'nuxt', description:
-                    'vue next framework' } dengan id USER_FRAMEWORK, silakan
-                    lihat pada browser localStorage
-                  </td>
+                  <td>Akan menyimpan object { id: 1, name: 'nuxt', description: 'vue next framework' } dengan id USER_FRAMEWORK, silakan lihat pada browser localStorage</td>
                 </tr>
                 <tr>
                   <td>getLocalStorage</td>
@@ -4025,11 +3282,7 @@
                     <button @click="restGetLocalStorage">Click</button>
                   </td>
                   <td>Object</td>
-                  <td>
-                    Akan mengambil object { id: 1, name: 'nuxt', description:
-                    'vue next framework' } dengan id USER_FRAMEWORK, silakan
-                    lihat console
-                  </td>
+                  <td>Akan mengambil object { id: 1, name: 'nuxt', description: 'vue next framework' } dengan id USER_FRAMEWORK, silakan lihat console</td>
                 </tr>
                 <tr>
                   <td>removeLocalStorage</td>
@@ -4045,11 +3298,7 @@
                     <button @click="restSetVuex">Click</button>
                   </td>
                   <td>Void</td>
-                  <td>
-                    Akan menyimpan object { id: 1, name: 'nuxt', description:
-                    'vue next framework' } dengan id USER_FRAMEWORK, silakan
-                    lihat pada browser Vuex debugger
-                  </td>
+                  <td>Akan menyimpan object { id: 1, name: 'nuxt', description: 'vue next framework' } dengan id USER_FRAMEWORK, silakan lihat pada browser Vuex debugger</td>
                 </tr>
                 <tr>
                   <td>getVuex</td>
@@ -4057,11 +3306,7 @@
                     <button @click="restGetVuex">Click</button>
                   </td>
                   <td>Object</td>
-                  <td>
-                    Akan mengambil object { id: 1, name: 'nuxt', description:
-                    'vue next framework' } dengan id USER_FRAMEWORK, silakan
-                    lihat console
-                  </td>
+                  <td>Akan mengambil object { id: 1, name: 'nuxt', description: 'vue next framework' } dengan id USER_FRAMEWORK, silakan lihat console</td>
                 </tr>
                 <tr>
                   <td>removeVuex</td>
@@ -4077,11 +3322,7 @@
                     <button @click="restGetExample">Click</button>
                   </td>
                   <td>Object</td>
-                  <td>
-                    Oprational rest call get, yang meng-support property
-                    localStorage, vuex dan forceUpdate, lihat console. Hasil
-                    oprational ini akan menghasilkan object { result, error }
-                  </td>
+                  <td>Oprational rest call get, yang meng-support property localStorage, vuex dan forceUpdate, lihat console. Hasil oprational ini akan menghasilkan object { result, error }</td>
                 </tr>
                 <tr>
                   <td>post</td>
@@ -4089,11 +3330,7 @@
                     <button @click="restPostExample">Click</button>
                   </td>
                   <td>Object</td>
-                  <td>
-                    Oprational rest call post, yang meng-support property
-                    localStorage, vuex dan forceUpdate, lihat console. Hasil
-                    oprational ini akan menghasilkan object { result, error }
-                  </td>
+                  <td>Oprational rest call post, yang meng-support property localStorage, vuex dan forceUpdate, lihat console. Hasil oprational ini akan menghasilkan object { result, error }</td>
                 </tr>
               </tbody>
             </table>
@@ -4108,64 +3345,38 @@
 export default {
   data() {
     return {
-      htmlText:
-        '<EText id="" ref="" v-model="" :label="" :placeholder="" :type="" :required="" :disabled="" :show="" />',
-      htmlPassword:
-        '<EPassword id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" />',
-      htmlTextarea:
-        '<ETextArea id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :cols="" :rows="" :show="" />',
-      htmlButton:
-        '<EButton id="" ref="" :label="" :disabled="" :color="" :show="" />',
-      htmlNumber:
-        '<ENumber id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum=""/>',
-      htmlDecimal:
-        '<EDecimal id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum="" :minimumFractionDigits="" :maximumFractionDigits=""/>',
-      htmlDate:
-        '<EDate id="" ref="" v-model="" :label="" :required="" :disabled="" :show="" :minimum="" :maximum=""/>',
-      htmlTime:
-        '<ETime id="" ref="" v-model="" :label="" :required="" :disabled="" :show="" :minimum="" :maximum=""/>',
-      htmlCheckbox:
-        '<ECheckBox id="" ref="" v-model="" :label="" :disabled="" :show="" :selected="" :unselected=""/>',
-      htmlBoolean:
-        '<EBoolean id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :type="" />',
-      htmlSelect:
-        '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options="[{ value: null, description: null }]" />',
-      htmlLookup:
-        '<ELookup id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :lookupGroup="" />',
-      htmlDialog:
-        '<EDialog id="" ref="" :title="" :width="" :height="" :buttons="[{ label:"", emit:"", color: null }]"> Contents </EDialog>',
-      htmlConfirmation:
-        '<EConfirmation id="" ref="" :positive="" :negative="" />',
+      htmlText: '<EText id="" ref="" v-model="" :label="" :placeholder="" :type="" :required="" :disabled="" :show="" />',
+      htmlPassword: '<EPassword id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" />',
+      htmlTextarea: '<ETextArea id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :cols="" :rows="" :show="" />',
+      htmlButton: '<EButton id="" ref="" :label="" :disabled="" :color="" :show="" />',
+      htmlNumber: '<ENumber id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum=""/>',
+      htmlDecimal: '<EDecimal id="" ref="" v-model="" :label="" :placeholder="" :maxlength="" :required="" :disabled="" :show="" :allowMinus="" :separator="" :minimum="" :maximum="" :minimumFractionDigits="" :maximumFractionDigits=""/>',
+      htmlDate: '<EDate id="" ref="" v-model="" :label="" :required="" :disabled="" :show="" :minimum="" :maximum=""/>',
+      htmlTime: '<ETime id="" ref="" v-model="" :label="" :required="" :disabled="" :show="" :minimum="" :maximum=""/>',
+      htmlCheckbox: '<ECheckBox id="" ref="" v-model="" :label="" :disabled="" :show="" :selected="" :unselected=""/>',
+      htmlBoolean: '<EBoolean id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :type="" />',
+      htmlSelect: '<ESelect id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :options="[{ value: null, description: null }]" />',
+      htmlLookup: '<ELookup id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :lookupGroup="" />',
+      htmlDialog: '<EDialog id="" ref="" :title="" :width="" :height="" :buttons="[{ label:"", emit:"", color: null }]"> Contents </EDialog>',
+      htmlConfirmation: '<EConfirmation id="" ref="" :positive="" :negative="" />',
       htmlLoading: '<ELoading ref="loader" />',
       htmlMessage: '<EMessage id="" ref="" />',
-      htmlCard:
-        '<ECard ref="" :label="" :disabled="" :show="" >Contents </ECard>',
-      htmlTabs:
-        '<ETabs id="" ref="" :labels="[{ label:null , disabled: false }]" :disabled="" :show="" >Contents </ETabs>',
-      htmlFilter:
-        '<EFilter id="" ref="" :title="" :disabled="" :show="" @Clear="" @Search="">Contents </EFilter>',
-      htmlPageLoader:
-        '<EPageLoader id="" ref="" :labels="" :fetcher="()=>{}" >Contents</EPageLoader>',
-      htmlLocalPagination:
-        '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction="()=>{}" :addNewData="()=>" :saveState="()=>" :columns="[]" :rows="[]" :actions="[]" :buttons="[]" :initialSortBy="[]" @RowClick="()=>{}" />',
-      htmlLocalPaginationColumn:
-        '{ label:"", field:"", sortable: true, width:"100px", tooltip:"", type:"", :format="()=>{}" } // type = text, number, decimal, percentage, boolean',
-      htmlLocalPaginationinitialSortBy:
-        "{ field: '', type:'' } // type = asc/desc",
+      htmlCard: '<ECard ref="" :label="" :disabled="" :show="" >Contents </ECard>',
+      htmlTabs: '<ETabs id="" ref="" :labels="[{ label:null , disabled: false }]" :disabled="" :show="" >Contents </ETabs>',
+      htmlFilter: '<EFilter id="" ref="" :title="" :disabled="" :show="" @Clear="" @Search="">Contents </EFilter>',
+      htmlPageLoader: '<EPageLoader id="" ref="" :labels="" :fetcher="()=>{}" >Contents</EPageLoader>',
+      htmlLocalPagination: '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction="()=>{}" :addNewData="()=>" :saveState="()=>" :columns="[]" :rows="[]" :actions="[]" :buttons="[]" :initialSortBy="[]" @RowClick="()=>{}" />',
+      htmlLocalPaginationColumn: '{ label:"", field:"", sortable: true, width:"100px", tooltip:"", type:"", :format="()=>{}" } // type = text, number, decimal, percentage, boolean',
+      htmlLocalPaginationinitialSortBy: "{ field: '', type:'' } // type = asc/desc",
       htmlLocalPaginationActions: "{ label:'', emit:'' }",
       htmlLocalPaginationButtons: '{ label:"", color:"", emit:"" }',
-      htmlServerPagination:
-        '<EServerPagination id="" ref="" :label="" :show="" :disabled="" :columns="[]" :autoLoad="" :picker="" :filter="" ::addNewData="()=>{}" :disabledAction="()=>{}" :actions="[]" :buttons="[]" :initialSortBy="[]" @RowClick="()=>{}" />',
-      htmlServerPaginationColumn:
-        '{ label:"", field:"", sortable: true, width:"100px", tooltip:"", type:"", :format="()=>{}" } // type = text, number, decimal, percentage, boolean',
+      htmlServerPagination: '<EServerPagination id="" ref="" :label="" :show="" :disabled="" :columns="[]" :autoLoad="" :picker="" :filter="" ::addNewData="()=>{}" :disabledAction="()=>{}" :actions="[]" :buttons="[]" :initialSortBy="[]" @RowClick="()=>{}" />',
+      htmlServerPaginationColumn: '{ label:"", field:"", sortable: true, width:"100px", tooltip:"", type:"", :format="()=>{}" } // type = text, number, decimal, percentage, boolean',
       htmlServerPaginationActions: "{ label:'', emit:'' }",
       htmlServerPaginationButtons: '{ label:"", color:"", emit:"" }',
-      htmlServerPaginationinitialSortBy:
-        "{ field: '', type:'' } // type = asc/desc",
-      htmlPopupPagination:
-        '<EPopupPagination id="" ref="" v-model="" :label="" :placeholder="" :show="" :required="" :disabled="" :show="" :maxlength="" :picker="" :filter="" :columns="[]"  />',
-      htmlPopupPaginationColumn:
-        "{ label:'', field:'', sortable: true, width:'100px', tooltip:'', type:'' } // type = text, number, decimal, percentage, boolean",
+      htmlServerPaginationinitialSortBy: "{ field: '', type:'' } // type = asc/desc",
+      htmlPopupPagination: '<EPopupPagination id="" ref="" v-model="" :label="" :placeholder="" :show="" :required="" :disabled="" :show="" :maxlength="" :picker="" :filter="" :columns="[]"  />',
+      htmlPopupPaginationColumn: "{ label:'', field:'', sortable: true, width:'100px', tooltip:'', type:'' } // type = text, number, decimal, percentage, boolean",
       htmlForm: '<EForm id="" ref="" />',
       htmlCol: '<ECol :col="" :gapX="" :gapY="" />',
       haserror: null,
@@ -4736,9 +3947,7 @@ export default {
       this.$refs[ref].close()
     },
     async confirmConfirmation(ref) {
-      const result = await this.$refs[ref].confirm(
-        'Anda yakin akan memprocess data ini ?'
-      )
+      const result = await this.$refs[ref].confirm('Anda yakin akan memprocess data ini ?')
       alert('Return object ' + JSON.stringify(result))
     },
     closeConfirmation(ref) {
@@ -4830,10 +4039,7 @@ export default {
         btpnApiKey: '[test_api_key]',
         localStorage: localStorageId,
       })
-      console.log(
-        'Fetch melalui getLocalStorage',
-        this.$rest.getLocalStorage(localStorageId)
-      )
+      console.log('Fetch melalui getLocalStorage', this.$rest.getLocalStorage(localStorageId))
     },
     async restPostExample() {
       const vuexId = this.$enum.VUEX.EXAMPLE
