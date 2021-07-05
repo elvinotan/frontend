@@ -323,6 +323,8 @@ export default {
       this.columnClick = params.column
     },
     _onRowClick(params) {
+      if (this.disabled) return
+
       if (this.columnClick) {
         if (this.columnClick.field === 'action') {
           // Do nothing, krn ini column action, bisa ke trigger 2 kali, bila action ke click
