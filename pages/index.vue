@@ -142,7 +142,7 @@
                   <td>
                     <button @click="addError('TextComponent')">Click</button>
                   </td>
-                  <td>{{ haserror }}</td>
+                  <td>-</td>
                   <td>Penambahan error secara manual, programtically</td>
                 </tr>
                 <tr>
@@ -284,6 +284,14 @@
                   </td>
                   <td>{{ haserror }}</td>
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
+                </tr>
+                <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('PasswordComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
                 </tr>
                 <tr>
                   <td>validate</td>
