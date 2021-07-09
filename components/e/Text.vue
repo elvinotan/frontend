@@ -112,6 +112,11 @@ export default {
     hasError() {
       return this.errors.length > 0
     },
+    addError(errors = []) {
+      const errs = this.$object.isString(errors) ? [errors] : errors
+      this.state = -1
+      this.errors = this.errors.concat(errs)
+    },
     validate() {
       this.clearError()
 

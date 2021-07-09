@@ -138,6 +138,14 @@
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('TextComponent')">Click</button>
+                  </td>
+                  <td>{{ haserror }}</td>
+                  <td>Penambahan error secara manual, programtically</td>
+                </tr>
+                <tr>
                   <td>validate</td>
                   <td>
                     <button @click="validate('TextComponent')">Click</button>
@@ -3909,6 +3917,9 @@ export default {
     },
     hasError(ref) {
       this.haserror = this.$refs[ref].hasError()
+    },
+    addError(ref) {
+      this.$refs[ref].addError('Add Error, programacally')
     },
     openDialog(ref) {
       this.$refs[ref].open()
