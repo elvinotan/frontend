@@ -196,6 +196,13 @@ export default {
     hasError() {
       return this.errors.length > 0
     },
+    addError(errors = []) {
+      this.clearError()
+      const errs = this.$object.isString(errors) ? [errors] : errors
+
+      this.state = -1
+      this.errors = this.errors.concat(errs)
+    },
     async validate() {
       this.$emit('input', this.lvalue)
       await this.$nextTick()

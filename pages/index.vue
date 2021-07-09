@@ -454,6 +454,14 @@
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('TextAreaComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
+                </tr>
+                <tr>
                   <td>validate</td>
                   <td>
                     <button @click="validate('TextAreaComponent')">Click</button>
@@ -719,6 +727,14 @@
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('NumberComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
+                </tr>
+                <tr>
                   <td>validate</td>
                   <td>
                     <button @click="validate('NumberComponent')">Click</button>
@@ -935,6 +951,14 @@
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('DecimalComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
+                </tr>
+                <tr>
                   <td>validate</td>
                   <td>
                     <button @click="validate('DecimalComponent')">Click</button>
@@ -1073,6 +1097,14 @@
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('DateComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
+                </tr>
+                <tr>
                   <td>validate</td>
                   <td>
                     <button @click="validate('DateComponent')">Click</button>
@@ -1209,6 +1241,14 @@
                   </td>
                   <td>{{ haserror }}</td>
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
+                </tr>
+                <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('TimeComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -1461,6 +1501,14 @@
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
                 </tr>
                 <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('BooleanComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
+                </tr>
+                <tr>
                   <td>validate</td>
                   <td>
                     <button @click="validate('BooleanComponent')">Click</button>
@@ -1610,6 +1658,14 @@
                   </td>
                   <td>{{ haserror }}</td>
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
+                </tr>
+                <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('SelectComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -1775,6 +1831,14 @@
                   </td>
                   <td>{{ haserror }}</td>
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
+                </tr>
+                <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('LookupComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
                 </tr>
                 <tr>
                   <td>validate</td>
@@ -2984,6 +3048,14 @@
                   </td>
                   <td>{{ haserror }}</td>
                   <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
+                </tr>
+                <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('PopupPaginationComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
                 </tr>
                 <tr>
                   <td>validate</td>

@@ -57,7 +57,9 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
       try {
         const url = $string.replaceByProperty(pUrl, $config)
-        const { result, error } = await $axios.$get(url, { headers })
+        const bundle = await $axios.$get(url, { headers })
+        console.log('bundle ', bundle)
+        const { result, error } = bundle
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (!result && !error) throw new Error('Fail to execute GET operation')
@@ -75,6 +77,7 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
         return { result, error }
       } catch (ex) {
+        console.log('Rest.Get.Error ', ex)
         const error = [{ type: 'GLOBAL', field: undefined, code: ex.code || 'EXCEPTION', message: ex.message || undefined }]
         return { error }
       }
@@ -128,6 +131,7 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
         return { result, error }
       } catch (ex) {
+        console.log('Rest.Post.Error ', ex)
         const error = [{ type: 'GLOBAL', field: undefined, code: ex.code || 'EXCEPTION', message: ex.message || undefined }]
         return { error }
       }
