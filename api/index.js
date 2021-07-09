@@ -139,7 +139,7 @@ const datas = [
 
 app.get('/example/biodata/:id', function (req, res) {
   console.log('Get ', req.params.id)
-  res.json({ id: 1, name: 'yanto', as: 'developer' })
+  res.json({ result: { id: 1, name: 'yanto', as: 'developer' }, error: null })
 })
 
 app.post('/example/biodata', function (req, res) {
@@ -154,7 +154,7 @@ app.post('/general/pagination/popup', function (req, res) {
   const filtered = datas.filter((e) => {
     return e.popupCode === code
   })
-  res.json(filtered)
+  res.json({ result: filtered, error: null })
 })
 
 app.post('/general/pagination/page', function (req, res) {
@@ -181,79 +181,97 @@ app.post('/general/pagination/page', function (req, res) {
 })
 app.get('/general/lookups', function (req, res) {
   res.json({
-    SEX: [
-      { value: 'M', description: 'Male' },
-      { value: 'F', description: 'Female' },
-      { value: 'X', description: 'Unknown' },
-    ],
-    EDUCATION: [
-      { value: 'SD', description: 'SD' },
-      { value: 'SMP', description: 'SMP' },
-      { value: 'SMA', description: 'SMA' },
-      { value: 'S1', description: 'S1' },
-      { value: 'S2', description: 'S2' },
-    ],
-    RELIGION: [
-      { value: 'ISLAM', description: 'ISLAM' },
-      { value: 'KATOLIK', description: 'KATOLIK' },
-      { value: 'KRISTEN', description: 'KRISTEN' },
-      { value: 'BUDHA', description: 'BUDHA' },
-      { value: 'HINDU', description: 'HINDU' },
-      { value: 'KONGHUCU', description: 'KONGHUCU' },
-    ],
-    EXP: [
-      { value: 1, description: '1 Th' },
-      { value: 2, description: '2 Th' },
-      { value: 3, description: '3 Th' },
-    ],
-    JOB: [
-      { value: 1, description: 'Karyawan' },
-      { value: 2, description: 'Ibu Rumah Tangga' },
-      { value: 3, description: 'Penganguran' },
-    ],
+    result: {
+      SEX: [
+        { value: 'M', description: 'Male' },
+        { value: 'F', description: 'Female' },
+        { value: 'X', description: 'Unknown' },
+      ],
+      EDUCATION: [
+        { value: 'SD', description: 'SD' },
+        { value: 'SMP', description: 'SMP' },
+        { value: 'SMA', description: 'SMA' },
+        { value: 'S1', description: 'S1' },
+        { value: 'S2', description: 'S2' },
+      ],
+      RELIGION: [
+        { value: 'ISLAM', description: 'ISLAM' },
+        { value: 'KATOLIK', description: 'KATOLIK' },
+        { value: 'KRISTEN', description: 'KRISTEN' },
+        { value: 'BUDHA', description: 'BUDHA' },
+        { value: 'HINDU', description: 'HINDU' },
+        { value: 'KONGHUCU', description: 'KONGHUCU' },
+      ],
+      EXP: [
+        { value: 1, description: '1 Th' },
+        { value: 2, description: '2 Th' },
+        { value: 3, description: '3 Th' },
+      ],
+      JOB: [
+        { value: 1, description: 'Karyawan' },
+        { value: 2, description: 'Ibu Rumah Tangga' },
+        { value: 3, description: 'Penganguran' },
+      ],
+    },
+    error: null,
   })
 })
 app.get('/general/lookup/:group', function (req, res) {
   const group = req.params.group
   if (group === 'SEX') {
-    res.json([
-      { value: 'M', description: 'Male' },
-      { value: 'F', description: 'Female' },
-      { value: 'X', description: 'Unknown' },
-    ])
+    res.json({
+      result: [
+        { value: 'M', description: 'Male' },
+        { value: 'F', description: 'Female' },
+        { value: 'X', description: 'Unknown' },
+      ],
+      error: null,
+    })
   }
   if (group === 'EDUCATION') {
-    res.json([
-      { value: 'SD', description: 'SD' },
-      { value: 'SMP', description: 'SMP' },
-      { value: 'SMA', description: 'SMA' },
-      { value: 'S1', description: 'S1' },
-      { value: 'S2', description: 'S2' },
-    ])
+    res.json({
+      result: [
+        { value: 'SD', description: 'SD' },
+        { value: 'SMP', description: 'SMP' },
+        { value: 'SMA', description: 'SMA' },
+        { value: 'S1', description: 'S1' },
+        { value: 'S2', description: 'S2' },
+      ],
+      error: null,
+    })
   }
   if (group === 'RELIGION') {
-    res.json([
-      { value: 'ISLAM', description: 'ISLAM' },
-      { value: 'KATOLIK', description: 'KATOLIK' },
-      { value: 'KRISTEN', description: 'KRISTEN' },
-      { value: 'BUDHA', description: 'BUDHA' },
-      { value: 'HINDU', description: 'HINDU' },
-      { value: 'KONGHUCU', description: 'KONGHUCU' },
-    ])
+    res.json({
+      result: [
+        { value: 'ISLAM', description: 'ISLAM' },
+        { value: 'KATOLIK', description: 'KATOLIK' },
+        { value: 'KRISTEN', description: 'KRISTEN' },
+        { value: 'BUDHA', description: 'BUDHA' },
+        { value: 'HINDU', description: 'HINDU' },
+        { value: 'KONGHUCU', description: 'KONGHUCU' },
+      ],
+      error: null,
+    })
   }
   if (group === 'EXP') {
-    res.json([
-      { value: 1, description: '1 Th' },
-      { value: 2, description: '2 Th' },
-      { value: 3, description: '3 Th' },
-    ])
+    res.json({
+      result: [
+        { value: 1, description: '1 Th' },
+        { value: 2, description: '2 Th' },
+        { value: 3, description: '3 Th' },
+      ],
+      error: null,
+    })
   }
   if (group === 'JOB') {
-    res.json([
-      { value: 1, description: 'Karyawan' },
-      { value: 2, description: 'Ibu Rumah Tangga' },
-      { value: 3, description: 'Penganguran' },
-    ])
+    res.json({
+      result: [
+        { value: 1, description: 'Karyawan' },
+        { value: 2, description: 'Ibu Rumah Tangga' },
+        { value: 3, description: 'Penganguran' },
+      ],
+      error: null,
+    })
   }
 })
 

@@ -57,7 +57,7 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
       try {
         const url = $string.replaceByProperty(pUrl, $config)
-        const result = await $axios.$get(url, { headers })
+        const { result, error } = await $axios.$get(url, { headers })
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
@@ -71,7 +71,7 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
           }
         }
 
-        return { result }
+        return { result, error }
       } catch (error) {
         return { error }
       }
@@ -106,7 +106,7 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
       try {
         const url = $string.replaceByProperty(pUrl, $config)
-        const result = await $axios.$post(url, payload, { headers })
+        const { result, error } = await $axios.$post(url, payload, { headers })
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (result) {
@@ -121,7 +121,7 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
           }
         }
 
-        return { result }
+        return { result, error }
       } catch (error) {
         return { error }
       }
