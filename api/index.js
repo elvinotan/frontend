@@ -167,15 +167,21 @@ app.post('/general/pagination/page', function (req, res) {
       return e.popupCode.includes(search)
     })
     res.json({
-      totalRows: filtered.length,
-      rows: filtered,
+      result: {
+        totalRows: filtered.length,
+        rows: filtered,
+      },
+      error: null,
     })
   } else {
     const begin = (page - 1) * perPage
     const end = begin + perPage
     res.json({
-      totalRows: 12,
-      rows: datas.slice(begin, end),
+      result: {
+        totalRows: 12,
+        rows: datas.slice(begin, end),
+      },
+      error: null,
     })
   }
 })

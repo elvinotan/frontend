@@ -57,9 +57,7 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
       try {
         const url = $string.replaceByProperty(pUrl, $config)
-        const bundle = await $axios.$get(url, { headers })
-        console.log('bundle ', bundle)
-        const { result, error } = bundle
+        const { result, error } = await $axios.$get(url, { headers })
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (!result && !error) throw new Error('Fail to execute GET operation')
