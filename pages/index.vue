@@ -3,7 +3,7 @@
     <ETabs id="Showroom" :labels="[{ label: 'Component' }, { label: 'Plugin' }, { label: 'Demo List' }, { label: 'Demo Entry' }]" selected-tab="Component">
       <EForm id="Component">
         <ETabs id="Component" :labels="tabs" selected-tab="Text">
-          <EForm id="Text">
+          <EForm id="TextC">
             <EText id="TextComponent" ref="TextComponent" v-model="text.value" :label="text.label" :placeholder="text.placeholder" :type="text.type" :required="text.required" :disabled="text.disabled" :show="text.show" :vruntime="text.vruntime" />
             <div class="text-xs">Template : {{ htmlText }}</div>
             <br />
@@ -2077,7 +2077,7 @@
           </EForm>
           <EForm id="Card">
             <ECard id="CardComponent" ref="CardComponent" :label="card.label" :disabled="card.disabled" :show="card.show">
-              <EText id="TextComponent" ref="TextComponent" v-model="text.value" :label="text.label" :placeholder="text.placeholder" :type="text.type" :required="text.required" :disabled="text.disabled" :show="text.show" :vruntime="text.vruntime" />
+              <EText id="TextComponent2" ref="TextComponent2" v-model="text.value" :label="text.label" :placeholder="text.placeholder" :type="text.type" :required="text.required" :disabled="text.disabled" :show="text.show" :vruntime="text.vruntime" />
             </ECard>
             <div class="text-xs">Template : {{ htmlCard }}</div>
             <br />
@@ -2261,7 +2261,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Filter">
+          <EForm id="FilterC">
             <EFilter id="FilterComponent" :title="filter.title" :disabled="filter.disabled" :show="filter.show" @Clear="filterClear" @Search="filterSearch">
               <ECol :col="3">
                 <div style="background: yellow">Filter Component 1</div>
@@ -3384,7 +3384,7 @@ export default {
       valid: null,
       fetchedData: false,
       tabs: [
-        { label: 'Text' },
+        { label: 'TextC' },
         { label: 'Password' },
         { label: 'TextArea' },
         { label: 'Button' },
@@ -3402,7 +3402,7 @@ export default {
         { label: 'Confirmation' },
         { label: 'Card' },
         { label: 'Tabs' },
-        { label: 'Filter' },
+        { label: 'FilterC' },
         { label: 'PageLoader' },
         { label: 'Upload' },
         { label: 'LocalPagination' },

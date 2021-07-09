@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-  name: 'Filter',
+  name: 'Filterr',
   props: {
     id: { type: String, required: true, default: null },
     title: { type: String, required: false, default: 'Please Provide title..' },
