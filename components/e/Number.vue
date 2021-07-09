@@ -24,7 +24,7 @@
   dan angka pertama tidak boleh 0 krn nanti akan di convert menjadi real number
  */
 export default {
-  name: 'Number',
+  name: 'ENumber',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },

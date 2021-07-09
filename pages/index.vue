@@ -2,8 +2,8 @@
   <div>
     <ETabs id="Showroom" :labels="[{ label: 'Component' }, { label: 'Plugin' }, { label: 'Demo List' }, { label: 'Demo Entry' }]" selected-tab="Component">
       <EForm id="Component">
-        <ETabs id="Component" :labels="tabs" selected-tab="TextC">
-          <EForm id="TextC">
+        <ETabs id="Component" :labels="tabs" selected-tab="EText">
+          <EForm id="EText">
             <EText id="TextComponent" ref="TextComponent" v-model="text.value" :label="text.label" :placeholder="text.placeholder" :type="text.type" :required="text.required" :disabled="text.disabled" :show="text.show" :vruntime="text.vruntime" />
             <div class="text-xs">Template : {{ htmlText }}</div>
             <br />
@@ -156,7 +156,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Password">
+          <EForm id="EPassword">
             <EPassword id="PasswordComponent" ref="PasswordComponent" v-model="password.value" :label="password.label" :placeholder="password.placeholder" :maxlength="password.maxlength" :required="password.required" :disabled="password.disabled" :show="password.show" :vruntime="password.vruntime" />
             <div class="text-xs">Template : {{ htmlPassword }}</div>
             <br />
@@ -304,7 +304,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="TextArea">
+          <EForm id="ETextArea">
             <ETextArea id="TextAreaComponent" ref="TextAreaComponent" v-model="textarea.value" :label="textarea.label" :placeholder="textarea.placeholder" :maxlength="textarea.maxlength" :required="textarea.required" :disabled="textarea.disabled" :show="textarea.show" :cols="textarea.cols" :rows="textarea.rows" :vruntime="textarea.vruntime" />
             <div class="text-xs">Template : {{ htmlTextarea }}</div>
             <br />
@@ -464,8 +464,7 @@
               </tbody>
             </table>
           </EForm>
-
-          <EForm id="Button">
+          <EForm id="EButton">
             <EButton id="ButtonComponent" ref="ButtonComponent" :label="button.label" :disabled="button.disabled" :show="button.show" :color="button.color" />
             <div class="text-xs">Template : {{ htmlButton }}</div>
             <br />
@@ -554,7 +553,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Number">
+          <EForm id="ENumber">
             <ENumber id="NumberComponent" ref="NumberComponent" v-model.number="number.value" :label="number.label" :placeholder="number.placeholder" :maxlength="number.maxlength" :required="number.required" :disabled="number.disabled" :show="number.show" :vruntime="number.vruntime" :allow-minus="number.allowMinus" :separator="number.separator" :minimum="number.minimum" :maximum="number.maximum" />
             <div class="text-xs">Template : {{ htmlNumber }}</div>
             <br />
@@ -730,7 +729,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Decimal">
+          <EForm id="EDecimal">
             <EDecimal
               id="DecimalComponent"
               ref="DecimalComponent"
@@ -946,7 +945,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Date">
+          <EForm id="EDate">
             <EDate id="DateComponent" ref="DateComponent" v-model="date.value" :label="date.label" :required="date.required" :disabled="date.disabled" :show="date.show" :vruntime="date.vruntime" :minimum="date.minimum" :maximum="date.maximum" />
             <div class="text-xs">Template : {{ htmlDate }}</div>
             <br />
@@ -1084,7 +1083,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Time">
+          <EForm id="ETime">
             <ETime id="TimeComponent" ref="TimeComponent" v-model="time.value" :label="time.label" :required="time.required" :disabled="time.disabled" :show="time.show" :vruntime="time.vruntime" :minimum="time.minimum" :maximum="time.maximum" />
             <div class="text-xs">Template : {{ htmlTime }}</div>
             <br />
@@ -1222,7 +1221,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Checkbox">
+          <EForm id="ECheckbox">
             <ECheckBox id="CheckboxComponent" ref="CheckboxComponent" v-model.number="checkbox.value" :label="checkbox.label" :disabled="checkbox.disabled" :show="checkbox.show" :vruntime="checkbox.vruntime" :selected="checkbox.selected" :unselected="checkbox.unselected" />
             <div class="text-xs">Template : {{ htmlCheckbox }}</div>
             <br />
@@ -1328,7 +1327,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Boolean">
+          <EForm id="EBoolean">
             <EBoolean id="BooleanComponent" ref="BooleanComponent" v-model="boolean.value" :label="boolean.label" :placeholder="boolean.placeholder" :required="boolean.required" :disabled="boolean.disabled" :show="boolean.show" :vruntime="boolean.vruntime" :type="boolean.type" />
             <div class="text-xs">Template : {{ htmlBoolean }}</div>
             <br />
@@ -1472,7 +1471,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Select">
+          <EForm id="ESelect">
             <ESelect id="SelectComponent" ref="SelectComponent" v-model="select.value" :label="select.label" :placeholder="select.placeholder" :required="select.required" :disabled="select.disabled" :show="select.show" :as="select.as" :vruntime="select.vruntime" :options="select.options" />
             <div class="text-xs">Template : {{ htmlSelect }}</div>
             <br />
@@ -1623,7 +1622,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Lookup">
+          <EForm id="ELookup">
             <ELookup id="LookupComponent" ref="LookupComponent" v-model="lookup.value" :label="lookup.label" :group="lookup.group" :placeholder="lookup.placeholder" :required="lookup.required" :disabled="lookup.disabled" :show="lookup.show" :as="lookup.as" :vruntime="lookup.vruntime" :filter="lookup.filter" :lookup-group="lookup.lookupGroup" />
             <div class="text-xs">Template : {{ htmlLookup }}</div>
             <br />
@@ -1788,7 +1787,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Dialog">
+          <EForm id="EDialog">
             <EDialog id="DialogComponent" ref="DialogComponent" :title="dialog.title" :width="dialog.width" :height="dialog.height" :buttons="dialog.buttons" @EmitSimpan="SimpanClicked" @Submit="SubmitClicked" />
             <div class="text-xs">Template : {{ htmlDialog }}</div>
             <br />
@@ -1886,7 +1885,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Loading">
+          <EForm id="ELoading">
             <ELoading ref="LoadingComponent" />
             <div class="text-xs">Template : {{ htmlLoading }}</div>
             <br />
@@ -1937,7 +1936,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Message">
+          <EForm id="EMessage">
             <EMessage id="MessageComponent" ref="MessageComponent" />
             <div class="text-xs">Template : {{ htmlMessage }}</div>
             <br />
@@ -2010,7 +2009,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Confirmation">
+          <EForm id="EConfirmation">
             <EConfirmation id="ConfirmationComponent" ref="ConfirmationComponent" :positive="confirmation.positive" :negative="confirmation.negative" />
             <div class="text-xs">Template : {{ htmlConfirmation }}</div>
             <br />
@@ -2091,7 +2090,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Card">
+          <EForm id="ECard">
             <ECard id="CardComponent" ref="CardComponent" :label="card.label" :disabled="card.disabled" :show="card.show">
               <EText id="TextComponent2" ref="TextComponent2" v-model="text.value" :label="text.label" :placeholder="text.placeholder" :type="text.type" :required="text.required" :disabled="text.disabled" :show="text.show" :vruntime="text.vruntime" />
             </ECard>
@@ -2158,7 +2157,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Tabs">
+          <EForm id="ETabs">
             <ETabs id="TabsComponent" ref="TabsComponent" :labels="tabss.labels" :selected-tab="tabss.selectedTab" :show="tabss.show" :disabled="tabss.disabled">
               <EForm id="Customer">
                 <div>Customer</div>
@@ -2277,7 +2276,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="FilterC">
+          <EForm id="EFilter">
             <EFilter id="FilterComponent" :title="filter.title" :disabled="filter.disabled" :show="filter.show" @Clear="filterClear" @Search="filterSearch">
               <ECol :col="3">
                 <div style="background: yellow">Filter Component 1</div>
@@ -2360,7 +2359,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="PageLoader">
+          <EForm id="EPageLoader">
             <EPageLoader id="PageLoaderComponent" ref="PageLoaderComponent" :label="pageLoader.label" :fetcher="pageLoaderfetcher">
               <div>Content ini akan di tampil, Bila EPageLoader success melakukan rest call</div>
             </EPageLoader>
@@ -2428,8 +2427,8 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Upload"> https://medium.com/js-dojo/how-to-upload-base64-images-in-vue-nodejs-4e89635daebc </EForm>
-          <EForm id="LocalPagination">
+          <EForm id="EUpload"> https://medium.com/js-dojo/how-to-upload-base64-images-in-vue-nodejs-4e89635daebc </EForm>
+          <EForm id="ELocalPagination">
             <ELocalPagination
               id="LocalPaginationComponent"
               ref="LocalPaginationComponent"
@@ -2599,7 +2598,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="ServerPagination">
+          <EForm id="EServerPagination">
             <EServerPagination
               id="ServerPaginationComponent"
               ref="ServerPaginationComponent"
@@ -2780,7 +2779,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Form">
+          <EForm id="EForm">
             <EForm id="FormComponent" ref="FormComponent"> Content Of Form </EForm>
             <br />
             <div class="text-xs">Template : {{ htmlForm }}</div>
@@ -2836,7 +2835,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="PopupPagination">
+          <EForm id="EPopupPagination">
             <EPopupPagination id="PopupPaginationComponent" ref="PopupPaginationComponent" v-model="popupPagination.value" :label="popupPagination.label" :placeholder="popupPagination.placeholder" :required="popupPagination.required" :disabled="popupPagination.disabled" :maxlength="popupPagination.maxlength" :show="popupPagination.show" :vruntime="popupPagination.vruntime" :picker="popupPagination.picker" :filter="popupPagination.filter" :columns="popupPagination.columns" />
             <br />
             <div class="text-xs">Template : {{ htmlPopupPagination }}</div>
@@ -2997,7 +2996,7 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="Col">
+          <EForm id="ECol">
             <ECol id="ColComponent" ref="ColComponent" :col="col.col" :gap-x="col.gapX" :gap-y="col.gapY">
               <div style="background: yellow">GROUP 1</div>
               <div style="background: yellow">GROUP 2</div>
@@ -3400,32 +3399,32 @@ export default {
       valid: null,
       fetchedData: false,
       tabs: [
-        { label: 'TextC' },
-        { label: 'Password' },
-        { label: 'TextArea' },
-        { label: 'Button' },
-        { label: 'Number' },
-        { label: 'Decimal' },
-        { label: 'Date' },
-        { label: 'Time' },
-        { label: 'Checkbox' },
-        { label: 'Boolean' },
-        { label: 'Select' },
-        { label: 'Lookup' },
-        { label: 'Dialog' },
-        { label: 'Loading' },
-        { label: 'Message' },
-        { label: 'Confirmation' },
-        { label: 'Card' },
-        { label: 'Tabs' },
-        { label: 'FilterC' },
-        { label: 'PageLoader' },
-        { label: 'Upload' },
-        { label: 'LocalPagination' },
-        { label: 'ServerPagination' },
-        { label: 'PopupPagination' },
-        { label: 'Form' },
-        { label: 'Col' },
+        { label: 'EText' },
+        { label: 'EPassword' },
+        { label: 'ETextArea' },
+        { label: 'EButton' },
+        { label: 'ENumber' },
+        { label: 'EDecimal' },
+        { label: 'EDate' },
+        { label: 'ETime' },
+        { label: 'ECheckbox' },
+        { label: 'EBoolean' },
+        { label: 'ESelect' },
+        { label: 'ELookup' },
+        { label: 'EDialog' },
+        { label: 'ELoading' },
+        { label: 'EMessage' },
+        { label: 'EConfirmation' },
+        { label: 'ECard' },
+        { label: 'ETabs' },
+        { label: 'EFilter' },
+        { label: 'EPageLoader' },
+        { label: 'EUpload' },
+        { label: 'ELocalPagination' },
+        { label: 'EServerPagination' },
+        { label: 'EPopupPagination' },
+        { label: 'EForm' },
+        { label: 'ECol' },
       ],
       text: {
         label: 'Full Name',

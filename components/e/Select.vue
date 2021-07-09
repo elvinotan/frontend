@@ -22,7 +22,7 @@
 </template>
 <script>
 export default {
-  name: 'Select',
+  name: 'ESelect',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },

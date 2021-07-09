@@ -26,7 +26,7 @@
 </template>
 <script>
 export default {
-  name: 'Message',
+  name: 'EMessage',
   props: {
     id: { type: String, required: true },
   },

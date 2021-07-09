@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'Time',
+  name: 'ETime',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },

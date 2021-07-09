@@ -20,7 +20,7 @@
 </template>
 <script>
 export default {
-  name: 'Decimal',
+  name: 'EDecimal',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },

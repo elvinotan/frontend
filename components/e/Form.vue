@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'Form',
+  name: 'EForm',
   props: {
     id: { type: String, required: true, default: null },
   },

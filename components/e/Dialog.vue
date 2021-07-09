@@ -23,7 +23,7 @@
 </template>
 <script>
 export default {
-  name: 'Dialog',
+  name: 'EDialog',
   props: {
     id: { type: String, required: true, default: null },
     title: { type: String, required: false, default: 'Please Provide title..' },

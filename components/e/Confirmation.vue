@@ -27,7 +27,7 @@
 </template>
 <script>
 export default {
-  name: 'Confirmation',
+  name: 'EConfirmation',
   props: {
     id: { type: String, required: true },
     positive: { type: String, required: false, default: 'Yes' },

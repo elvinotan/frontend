@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'Col',
+  name: 'ECol',
   props: {
     col: { type: Number, required: false, default: 1 },
     gapX: { type: Number, required: false, default: 3 },

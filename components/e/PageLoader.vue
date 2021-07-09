@@ -32,7 +32,7 @@
 </template>
 <script>
 export default {
-  name: 'PageLoader',
+  name: 'EPageLoader',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },

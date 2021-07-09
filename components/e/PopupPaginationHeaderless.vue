@@ -62,7 +62,7 @@
 
 <script>
 export default {
-  name: 'PopupPaginationHeaderless',
+  name: 'EPopupPaginationHeaderless',
   props: {
     id: { type: String, required: true, default: null },
     show: { type: Boolean, required: false, default: true },

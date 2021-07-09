@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-  name: 'Card',
+  name: 'ECard',
   props: {
     label: { type: String, required: false, default: '' },
     disabled: { type: Boolean, required: false, default: false },

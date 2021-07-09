@@ -43,10 +43,7 @@ export default function (plugin, inject) {
           }
         } else {
           const externals = ['<VueGoodTable>']
-          if (!externals.includes(ref._name))
-            throw new Error(
-              "Warning!!! some component dosen't have metaData !!!" + ref._name
-            )
+          if (!externals.includes(ref._name)) throw new Error("Warning!!! some component dosen't have metaData !!!" + ref._name)
         }
       }
       return refs

@@ -43,7 +43,7 @@ const initColumns = [
   },
 ]
 export default {
-  name: 'PopupPagination',
+  name: 'EPopupPagination',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },

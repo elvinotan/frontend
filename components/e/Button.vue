@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-  name: 'Button',
+  name: 'EButton',
   props: {
     id: { type: String, required: true },
     label: { type: String, required: false, default: '' },

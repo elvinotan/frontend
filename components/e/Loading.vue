@@ -36,7 +36,7 @@
 </template>
 <script>
 export default {
-  name: 'Loading',
+  name: 'ELoading',
   data() {
     return {
       visible: false,

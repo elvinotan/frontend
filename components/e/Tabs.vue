@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-  name: 'Tabs',
+  name: 'ETabs',
   props: {
     id: { type: String, required: true },
     labels: { type: Array, required: false, default: () => [] },

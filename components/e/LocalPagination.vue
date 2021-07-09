@@ -103,7 +103,7 @@
 // - field = nama field di object
 // - type = asc dan desc
 export default {
-  name: 'LocalPagination',
+  name: 'ELocalPagination',
   props: {
     id: { type: String, required: true, default: null },
     show: { type: Boolean, required: false, default: true },

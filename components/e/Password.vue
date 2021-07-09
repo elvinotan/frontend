@@ -20,7 +20,7 @@
 </template>
 <script>
 export default {
-  name: 'Password',
+  name: 'EPassword',
   props: {
     id: { type: String, required: true, default: null },
     label: { type: String, required: false, default: '' },
