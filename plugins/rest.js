@@ -60,6 +60,8 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         const { result, error } = await $axios.$get(url, { headers })
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
+        if (!result && !error) throw new Error('Fail to execute GET operation')
+
         if (result) {
           const isSave = saveFn(result)
 
@@ -72,7 +74,8 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         }
 
         return { result, error }
-      } catch (error) {
+      } catch (ex) {
+        const error = [{ type: 'GLOBAL', field: undefined, code: ex.code || 'EXCEPTION', message: ex.message || undefined }]
         return { error }
       }
     },
@@ -109,6 +112,8 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         const { result, error } = await $axios.$post(url, payload, { headers })
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
+        if (!result && !error) throw new Error('Fail to execute GET operation')
+
         if (result) {
           const isSave = saveFn(result)
 
@@ -122,7 +127,8 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         }
 
         return { result, error }
-      } catch (error) {
+      } catch (ex) {
+        const error = [{ type: 'GLOBAL', field: undefined, code: ex.code || 'EXCEPTION', message: ex.message || undefined }]
         return { error }
       }
     },
