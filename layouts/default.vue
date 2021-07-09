@@ -12,7 +12,7 @@ export default {
   methods: {
     async layoutPageLoader() {
       try {
-        const { result, error } = await this.$rest.get(`api/general/lookups/test`)
+        const { result, error } = await this.$rest.get(`api/general/lookups`)
 
         if (result) {
           for (const [key, value] of Object.entries(result)) {
