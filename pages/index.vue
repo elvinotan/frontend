@@ -2,7 +2,7 @@
   <div>
     <ETabs id="Showroom" :labels="[{ label: 'Component' }, { label: 'Plugin' }, { label: 'Demo List' }, { label: 'Demo Entry' }]" selected-tab="Component">
       <EForm id="Component">
-        <ETabs id="Component" :labels="tabs" selected-tab="Text">
+        <ETabs id="Component" :labels="tabs" selected-tab="TextC">
           <EForm id="TextC">
             <EText id="TextComponent" ref="TextComponent" v-model="text.value" :label="text.label" :placeholder="text.placeholder" :type="text.type" :required="text.required" :disabled="text.disabled" :show="text.show" :vruntime="text.vruntime" />
             <div class="text-xs">Template : {{ htmlText }}</div>
