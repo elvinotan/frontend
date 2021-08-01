@@ -353,6 +353,8 @@ export default {
     }
   },
   mounted() {
+    this.biodata.father.sex = 'M'
+    this.biodata.mother.sex = 'F'
     this.ui.father.sex.disabled = true
     this.ui.mother.sex.disabled = true
   },
