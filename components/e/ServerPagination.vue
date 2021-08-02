@@ -302,6 +302,10 @@ export default {
       this.isLoading = true
       this.alreadyFetchData = true
       this.serverParams.filter = this._cleanFilter()
+
+      const searchValue = this.$wrapper.jquery(`#${this.id} input[placeholder='Search Table']`).val()
+      this.serverParams.search = searchValue
+
       const { result, error } = await this.$rest.post('/api/general/pagination/page', this.serverParams)
       if (result) {
         this.totalRows = result.totalRows
