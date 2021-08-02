@@ -297,7 +297,6 @@ export default {
       }
     },
     async fetchData() {
-      // TODO Ambil search yang ada Seach component di atas, agar saat click search on filter, search text ke bawa
       this.error = null
       this.isLoading = true
       this.alreadyFetchData = true
