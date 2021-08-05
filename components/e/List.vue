@@ -13,7 +13,7 @@
         id="customerServerPagination"
         ref="customerServerPagination"
         label="List Of Customer"
-        picker="pagingCustomer"
+        picker="pagingDummyCustomer"
         :auto-load="true"
         :filter="filter"
         :add-new-data="addNewData"

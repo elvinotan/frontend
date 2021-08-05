@@ -21,7 +21,7 @@ export default {
             }
           }
 
-          await this.$rest.delay(2500)
+          await this.$rest.delay(1500)
           return true
         }
 

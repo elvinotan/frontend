@@ -3876,7 +3876,7 @@ export default {
         show: true,
         disabled: false,
         autoLoad: true,
-        picker: 'pagingCustomer',
+        picker: 'pagingDummyCustomer',
         buttons: [
           { label: 'Process', color: 'red' },
           { label: 'Migrate', color: 'green' },
@@ -3886,17 +3886,13 @@ export default {
           { field: 'age', type: 'asc' },
           { field: 'name', type: 'asc' },
         ],
-        filter: {
-          age: 12,
-          birthDate: undefined,
-          name: 'elvino',
-        },
+        filter: {},
         columns: [
           {
             label: 'Name',
             field: 'name',
             sortable: true,
-            width: '750px',
+            width: '400px',
             tooltip: 'Column Name',
             type: 'text',
           },
@@ -3904,7 +3900,7 @@ export default {
             label: 'Bith Date',
             field: 'birthDate',
             sortable: false,
-            width: '200px',
+            width: '150px',
             tooltip: 'Tanggal Lahir Customer',
             type: 'date',
           },
@@ -3939,6 +3935,10 @@ export default {
             width: '100px',
             tooltip: 'Sudah menikah atau belum',
             type: 'boolean',
+          },
+          {
+            field: 'action',
+            width: '200px',
           },
         ],
       },

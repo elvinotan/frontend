@@ -14,7 +14,7 @@
           return props.row.id
         }
       "
-      picker="pagingCustomer"
+      picker="pagingDummyCustomer"
       @Edit="editRow"
       @Delete="deleteRow"
       @Process="process"

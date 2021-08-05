@@ -305,7 +305,7 @@ export default {
       const searchValue = this.$wrapper.jquery(`#${this.id} input[placeholder='Search Table']`).val()
       this.serverParams.search = searchValue
 
-      const { result, error } = await this.$rest.post('/api/general/pagination/page', this.serverParams)
+      const { result, error } = await this.$rest.post('/paging/fetch', this.serverParams)
       if (result) {
         this.totalRows = result.totalRows
         this.rows = result.rows
