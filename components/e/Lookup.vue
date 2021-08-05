@@ -99,7 +99,7 @@ export default {
     },
     async _fetchData() {
       if (this.lookupGroup) {
-        const { result } = await this.$rest.get(`api/general/lookup/${this.lookupGroup}`, {
+        const { result } = await this.$rest.get(`/cache/lookup/${this.lookupGroup}`, {
           vuex: this.$enum.VUEX.LOOKUP_PREFIX + this.lookupGroup,
         })
 
