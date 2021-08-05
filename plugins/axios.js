@@ -1,8 +1,11 @@
 // https://axios.nuxtjs.org/helpers
 
-export default function ({ $axios, redirect }) {
+export default function ({ $axios, redirect, app, ...other }) {
   $axios.onRequest((config) => {
-    $axios.setToken('123456789', 'Bearer')
+    const token = app.$rest.getLocalStorage(app.$enum.LOCAL_STORAGE.APP_TOKEN)
+    if (token) {
+      $axios.setToken(token, 'Bearer')
+    }
   })
   // $axios.onResponse((response) => {})
   // $axios.onError((error) => {})

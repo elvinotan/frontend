@@ -2,7 +2,7 @@ export default function (plugin, inject) {
   const enumm = {
     LOCAL_STORAGE: {
       EXAMPLE: 'EXAMPLE',
-      USER_LOGIN: '',
+      APP_TOKEN: 'app_token',
     },
     VUEX: {
       EXAMPLE: 'EXAMPLE',

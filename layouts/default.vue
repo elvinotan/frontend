@@ -12,12 +12,15 @@ export default {
   methods: {
     async layoutPageLoader() {
       try {
-        const { result, error } = await this.$rest.get(`api/general/lookups`)
+        const { result, error } = await this.$rest.get(`/cache/fetch`)
 
         if (result) {
-          for (const [key, value] of Object.entries(result)) {
-            this.$rest.setVuex(this.$enum.VUEX.LOOKUP_PREFIX + key, value)
+          if (result.LOOKUPGROUP) {
+            for (const [key, value] of Object.entries(result.LOOKUPGROUP)) {
+              this.$rest.setVuex(this.$enum.VUEX.LOOKUP_PREFIX + key, value)
+            }
           }
+
           await this.$rest.delay(2500)
           return true
         }

@@ -33,17 +33,16 @@ export default {
       const { valid, errors } = this.$wrapper.validate(this.$refs.login)
       if (valid) {
         this.$wrapper.disabled([this.ui], true)
-        const { result, error } = await this.$rest.post('/auth/login', { username: 'ethan', password: '12345' })
+        const { result, error } = await this.$rest.post('/auth/login', this.model)
         this.$wrapper.disabled([this.ui], false)
 
-        console.log('result.ui ', result)
-        console.log('error.ui ', error)
-
         if (result) {
-          console.log('Result ', result)
+          this.$rest.setLocalStorage(this.$enum.LOCAL_STORAGE.APP_TOKEN, result)
+          this.$router.push({ path: '/home' })
         }
 
         if (error) {
+          this.$rest.removeLocalStorage(this.$enum.LOCAL_STORAGE.APP_TOKEN)
           this.$refs.message.error('Fail to login ', error)
         }
       }
