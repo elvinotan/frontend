@@ -28,9 +28,13 @@ export default {
       },
     }
   },
+  mounted() {
+    // setiap tampilan login muncul, lakukan remove localstorage semuanya
+    this.$rest.removeLocalStorage(this.$enum.LOCAL_STORAGE.APP_TOKEN)
+  },
   methods: {
     async signIn() {
-      const { valid, errors } = this.$wrapper.validate(this.$refs.login)
+      const { valid } = this.$wrapper.validate(this.$refs.login)
       if (valid) {
         this.$wrapper.disabled([this.ui], true)
         const { result, error } = await this.$rest.post('/auth/login', this.model)
@@ -42,12 +46,8 @@ export default {
         }
 
         if (error) {
-          this.$rest.removeLocalStorage(this.$enum.LOCAL_STORAGE.APP_TOKEN)
           this.$refs.message.error('Fail to login ', error)
         }
-      }
-      if (errors) {
-        // do nothing krn error sudah show di component
       }
     },
   },
