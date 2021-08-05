@@ -6,11 +6,7 @@ export default {
     htmlAttrs: {
       lang: 'en',
     },
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-    ],
+    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: '' }],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [],
   },
@@ -19,18 +15,7 @@ export default {
   css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~/plugins/component',
-    '~/plugins/axios',
-    '~/plugins/wrapper',
-    '~/plugins/fmt',
-    '~/plugins/string',
-    '~/plugins/number',
-    '~/plugins/object',
-    '~/plugins/array',
-    '~/plugins/enum',
-    '~/plugins/rest',
-  ],
+  plugins: ['~/plugins/component', '~/plugins/axios', '~/plugins/wrapper', '~/plugins/fmt', '~/plugins/string', '~/plugins/number', '~/plugins/object', '~/plugins/array', '~/plugins/enum', '~/plugins/rest'],
 
   serverMiddleware: {
     '/api': '~/api',
@@ -66,8 +51,8 @@ export default {
   // BILA tidak ada dan tidak tersedia, maka akan ambil dari configurasi diatas yaitu axios {}
   publicRuntimeConfig: {
     API_HOST: process.env.API_HOST || 'localhost',
-    API_PORT: process.env.API_PORT || '3000',
-    API_PREFIX: process.env.API_PREFIX || '/',
+    API_PORT: process.env.API_PORT || '8082',
+    API_PREFIX: process.env.API_PREFIX || '/backend',
     test_api_key: process.env.test_api_key || 'abxkd-dfkhe-fdmkwh-djdf',
   },
 

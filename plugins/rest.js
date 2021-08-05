@@ -57,7 +57,8 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
       try {
         const url = $string.replaceByProperty(pUrl, $config)
-        const { result, error } = await $axios.$get(url, { headers })
+        const host = `http://${$config.API_HOST}:${$config.API_PORT}${$config.API_PREFIX}`
+        const { result, error } = await $axios.$get(host + url, { headers })
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (!result && !error) throw new Error('Fail to execute GET operation')
@@ -110,10 +111,11 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
 
       try {
         const url = $string.replaceByProperty(pUrl, $config)
-        const { result, error } = await $axios.$post(url, payload, { headers })
+        const host = `http://${$config.API_HOST}:${$config.API_PORT}${$config.API_PREFIX}`
+        const { result, error } = await $axios.$post(host + url, payload, { headers })
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
-        if (!result && !error) throw new Error('Fail to execute GET operation')
+        if (!result && !error) throw new Error('Fail to execute POST operation')
 
         if (result) {
           const isSave = saveFn(result)
