@@ -178,7 +178,7 @@ export default {
       this.isLoading = true
       this.serverParams.filter = this._cleanFilter()
 
-      const { result, error } = await this.$rest.post('/api/general/pagination/page', this.serverParams)
+      const { result, error } = await this.$rest.post('/paging/fetch', this.serverParams)
 
       this.isLoading = false
       this.error = error

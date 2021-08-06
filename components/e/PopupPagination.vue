@@ -165,7 +165,7 @@ export default {
 
       const lvalue = this.value.toUpperCase().trim()
       const { result } = await this.$rest.post(
-        `api/general/pagination/popup`,
+        `/paging/one`,
         {
           code: lvalue,
           picker: this.picker,
@@ -229,7 +229,7 @@ export default {
       if (this.errors.length === 0 && this.value) {
         // lakukan validasi untuk code
         const { result, error } = await this.$rest.post(
-          `api/general/pagination/popup`,
+          `/paging/one`,
           {
             code: this.value,
             picker: this.picker,

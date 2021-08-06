@@ -41,7 +41,6 @@ export default {
       maxlength: 0,
     }
   },
-
   computed: {
     _cssRounded() {
       return this.label ? '' : 'rounded'
@@ -73,6 +72,9 @@ export default {
   watch: {
     type(newVal, oldVal) {
       this._maxlength()
+    },
+    value(newVal, oldVal) {
+      this.lvalue = newVal
     },
   },
   created() {

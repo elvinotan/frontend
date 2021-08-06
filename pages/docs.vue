@@ -3958,8 +3958,8 @@ export default {
         vruntime: (data) => {
           console.log('vruntime ', data)
         },
-        picker: 'popupCustomer',
-        filter: { age: 17 },
+        picker: 'popupDummyCustomer',
+        filter: {},
         columns: [
           {
             label: 'Age',
