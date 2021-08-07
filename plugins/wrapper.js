@@ -63,7 +63,7 @@ export default function (plugin, inject) {
           if (errors) allErrors.push(...errors)
         }
       }
-      return { valid: allValid, errors: allErrors }
+      return { valid: allValid, error: allErrors }
     },
   }
   // Math Operational

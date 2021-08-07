@@ -84,6 +84,8 @@ export default {
   },
   methods: {
     _parseInput(value) {
+      if (!value) return value
+
       if (value instanceof Date) {
         return value
       } else {
