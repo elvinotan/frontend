@@ -158,7 +158,7 @@ export default {
         const error = this.vruntime(this.value)
         if (error) this.errors.push(error)
       }
-      const validation = { valid: !this.hasError(), errors: this.errors }
+      const validation = { valid: !this.hasError(), error: this.errors }
       this.state = validation.valid ? 1 : -1
       return validation
     },

@@ -3292,7 +3292,7 @@
                 </tr>
                 <tr>
                   <td>validate: (pref) => {}</td>
-                  <td>{ valid: boolean, errors: Array }</td>
+                  <td>{ valid: boolean, error: Array }</td>
                   <td>
                     pref: Pointer <br />
                     Akan mengambil semua children pointer, dan akan memanggil method validate one by one Tujuan dari method ini adalah untuk melakukan validasi pada masing masing komponent sesuai dengan rule yang di terapkan this.$wrapper.validate(this.$refs.entryEForm)

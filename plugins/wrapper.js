@@ -58,9 +58,9 @@ export default function (plugin, inject) {
       const allErrors = []
       for (const ref of plugin.$wrapper.refs(pref)) {
         if (ref.validate) {
-          const { valid, errors } = ref.validate()
+          const { valid, error } = ref.validate()
           allValid = allValid && valid
-          if (errors) allErrors.push(...errors)
+          if (error) allErrors.push(...error)
         }
       }
       return { valid: allValid, error: allErrors }
