@@ -3267,6 +3267,68 @@
               </tbody>
             </table>
           </EForm>
+          <EForm id="ECenter">
+            <ECenter id="CenterComponent" ref="CenterComponent" :gap-x="center.gapX" :gap-y="center.gapY">
+              <div style="background: yellow">GROUP 1</div>
+              <div style="background: yellow">GROUP 2</div>
+              <div style="background: yellow">GROUP 3</div>
+            </ECenter>
+            <br />
+            <div class="text-xs">Template : {{ htmlCenter }}</div>
+            <br />
+            <div class="text-xs">Data Object : {{ center }}</div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Props</td>
+                  <td>Try</td>
+                  <td>Type</td>
+                  <td>Required</td>
+                  <td>Default</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>gapX</td>
+                  <td><input v-model.number="center.gapX" type="number" /></td>
+                  <td>Number</td>
+                  <td>false</td>
+                  <td>3</td>
+                  <td>Gap antar component secara horizontal</td>
+                </tr>
+                <tr>
+                  <td>gapY</td>
+                  <td><input v-model.number="center.gapY" type="number" /></td>
+                  <td>Number</td>
+                  <td>false</td>
+                  <td>2</td>
+                  <td>Gap antar component secara vertical</td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Try</td>
+                  <td>Result</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>metaData</td>
+                  <td>
+                    <button @click="metaData('CenterComponent')">Click</button>
+                  </td>
+                  <td>{{ metadata }}</td>
+                  <td>Component Information</td>
+                </tr>
+              </tbody>
+            </table>
+          </EForm>
         </ETabs>
       </EForm>
       <EForm id="Demo List">
@@ -3592,6 +3654,7 @@ export default {
       htmlCol: '<ECol :col="" :gapX="" :gapY="" />',
       htmlLeft: '<ELeft :gapX="" :gapY="" />',
       htmlRight: '<ERight :gapX="" :gapY="" />',
+      htmlCenter: '<ECenter :gapX="" :gapY="" />',
       haserror: null,
       metadata: null,
       valid: null,
@@ -3625,6 +3688,7 @@ export default {
         { label: 'ECol' },
         { label: 'ELeft' },
         { label: 'ERight' },
+        { label: 'ECenter' },
       ],
       text: {
         label: 'Full Name',
@@ -4080,6 +4144,10 @@ export default {
         gapY: 2,
       },
       right: {
+        gapX: 3,
+        gapY: 2,
+      },
+      center: {
         gapX: 3,
         gapY: 2,
       },
