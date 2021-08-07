@@ -12,7 +12,6 @@
             </div>
             <span class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5 content-start">
               <EButton :id="'DialogClose' + id" class="w-full flex justify-start" label="Close" color="gray" @click="close" />
-
               <EButton v-for="button of buttons" :id="'Dialog' + button.label + id" :key="button.label" class="flex justify-end" :label="button.label" :color="button.color" @click="$emit(button.emit ? button.emit : button.label)" />
             </span>
           </div>

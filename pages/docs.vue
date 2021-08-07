@@ -3143,6 +3143,130 @@
               </tbody>
             </table>
           </EForm>
+          <EForm id="ELeft">
+            <ELeft id="LeftComponent" ref="LeftComponent" :gap-x="left.gapX" :gap-y="left.gapY">
+              <div style="background: yellow">GROUP 1</div>
+              <div style="background: yellow">GROUP 2</div>
+              <div style="background: yellow">GROUP 3</div>
+            </ELeft>
+            <br />
+            <div class="text-xs">Template : {{ htmlLeft }}</div>
+            <br />
+            <div class="text-xs">Data Object : {{ left }}</div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Props</td>
+                  <td>Try</td>
+                  <td>Type</td>
+                  <td>Required</td>
+                  <td>Default</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>gapX</td>
+                  <td><input v-model.number="left.gapX" type="number" /></td>
+                  <td>Number</td>
+                  <td>false</td>
+                  <td>3</td>
+                  <td>Gap antar component secara horizontal</td>
+                </tr>
+                <tr>
+                  <td>gapY</td>
+                  <td><input v-model.number="left.gapY" type="number" /></td>
+                  <td>Number</td>
+                  <td>false</td>
+                  <td>2</td>
+                  <td>Gap antar component secara vertical</td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Try</td>
+                  <td>Result</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>metaData</td>
+                  <td>
+                    <button @click="metaData('LeftComponent')">Click</button>
+                  </td>
+                  <td>{{ metadata }}</td>
+                  <td>Component Information</td>
+                </tr>
+              </tbody>
+            </table>
+          </EForm>
+          <EForm id="ERight">
+            <ERight id="RightComponent" ref="RightComponent" :gap-x="right.gapX" :gap-y="right.gapY">
+              <div style="background: yellow">GROUP 1</div>
+              <div style="background: yellow">GROUP 2</div>
+              <div style="background: yellow">GROUP 3</div>
+            </ERight>
+            <br />
+            <div class="text-xs">Template : {{ htmlRight }}</div>
+            <br />
+            <div class="text-xs">Data Object : {{ right }}</div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Props</td>
+                  <td>Try</td>
+                  <td>Type</td>
+                  <td>Required</td>
+                  <td>Default</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>gapX</td>
+                  <td><input v-model.number="right.gapX" type="number" /></td>
+                  <td>Number</td>
+                  <td>false</td>
+                  <td>3</td>
+                  <td>Gap antar component secara horizontal</td>
+                </tr>
+                <tr>
+                  <td>gapY</td>
+                  <td><input v-model.number="right.gapY" type="number" /></td>
+                  <td>Number</td>
+                  <td>false</td>
+                  <td>2</td>
+                  <td>Gap antar component secara vertical</td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Try</td>
+                  <td>Result</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>metaData</td>
+                  <td>
+                    <button @click="metaData('RightComponent')">Click</button>
+                  </td>
+                  <td>{{ metadata }}</td>
+                  <td>Component Information</td>
+                </tr>
+              </tbody>
+            </table>
+          </EForm>
         </ETabs>
       </EForm>
       <EForm id="Demo List">
@@ -3466,6 +3590,8 @@ export default {
       htmlPopupPaginationColumn: "{ label:'', field:'', sortable: true, width:'100px', tooltip:'', type:'' } // type = text, number, decimal, percentage, boolean",
       htmlForm: '<EForm id="" ref="" />',
       htmlCol: '<ECol :col="" :gapX="" :gapY="" />',
+      htmlLeft: '<ELeft :gapX="" :gapY="" />',
+      htmlRight: '<ERight :gapX="" :gapY="" />',
       haserror: null,
       metadata: null,
       valid: null,
@@ -3497,6 +3623,8 @@ export default {
         { label: 'EPopupPagination' },
         { label: 'EForm' },
         { label: 'ECol' },
+        { label: 'ELeft' },
+        { label: 'ERight' },
       ],
       text: {
         label: 'Full Name',
@@ -3944,6 +4072,14 @@ export default {
       },
       col: {
         col: 1,
+        gapX: 3,
+        gapY: 2,
+      },
+      left: {
+        gapX: 3,
+        gapY: 2,
+      },
+      right: {
         gapX: 3,
         gapY: 2,
       },

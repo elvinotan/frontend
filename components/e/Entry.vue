@@ -1,8 +1,10 @@
 <template>
   <ECard ref="customerEntry" label="Bio Data Keluarga">
-    <ECard ref="oprational" label="Oprational">
-      <EButton id="newFamilyHelper" ref="newFamilyHelper" label="Helper Data Family Baru" color="green" @click="helperNewFamilyData" />
-      <EButton id="newFamilyData" ref="newFamilyData" label="Data Family Baru" color="green" @click="newFamilyData" />
+    <ECard ref="simulation" label="Simulation">
+      <ELeft>
+        <EButton id="newFamilyHelper" ref="newFamilyHelper" label="Helper Data Family Baru" color="green" @click="helperNewFamilyData" />
+        <EButton id="newFamilyData" ref="newFamilyData" label="Data Family Baru" color="green" @click="newFamilyData" />
+      </ELeft>
     </ECard>
     <br />
     <ECol :col="2">
@@ -14,8 +16,8 @@
           </ECol>
           <ECol :col="3">
             <ELookup id="fatherSex" ref="fatherSex" v-model="model.father.sex" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.father.sex.required" :disabled="ui.father.sex.disabled" :show="ui.father.sex.show" lookup-group="SEX" />
-            <EText id="fatherBirthPlace" ref="fatherBirthPlace" v-model="model.father.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.father.placeOfBirth.required" :disabled="ui.father.placeOfBirth.disabled" :show="ui.father.placeOfBirth.show" />
-            <EDate id="fatherBirthDate" ref="fatherBirthDate" v-model="model.father.dateOfBirth" label="Tgl Lahir" :required="ui.father.dateOfBirth.required" :disabled="ui.father.dateOfBirth.disabled" :show="ui.father.dateOfBirth.show" />
+            <EText id="fatherBirthPlace" ref="fatherBirthOfPlace" v-model="model.father.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.father.placeOfBirth.required" :disabled="ui.father.placeOfBirth.disabled" :show="ui.father.placeOfBirth.show" />
+            <EDate id="fatherBirthDate" ref="fatherBirthOfDate" v-model="model.father.dateOfBirth" label="Tgl Lahir" :required="ui.father.dateOfBirth.required" :disabled="ui.father.dateOfBirth.disabled" :show="ui.father.dateOfBirth.show" />
           </ECol>
           <ECol :col="3">
             <ELookup id="fatherReligion" ref="fatherReligion" v-model="model.father.religion" label="Agama" placeholder="Input Agama" :required="ui.father.religion.required" :disabled="ui.father.religion.disabled" :show="ui.father.religion.show" lookup-group="RELIGION" />
@@ -32,8 +34,8 @@
           </ECol>
           <ECol :col="3">
             <ELookup id="motherSex" ref="motherSex" v-model="model.mother.sex" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.mother.sex.required" :disabled="ui.mother.sex.disabled" :show="ui.mother.sex.show" lookup-group="SEX" />
-            <EText id="motherBirthPlace" ref="motherBirthPlace" v-model="model.mother.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.mother.placeOfBirth.required" :disabled="ui.mother.placeOfBirth.disabled" :show="ui.mother.placeOfBirth.show" />
-            <EDate id="motherBirthDate" ref="motherBirthDate" v-model="model.mother.dateOfBirth" label="Tgl Lahir" :required="ui.mother.dateOfBirth.required" :disabled="ui.mother.dateOfBirth.disabled" :show="ui.mother.dateOfBirth.show" />
+            <EText id="motherBirthPlace" ref="motherBirthOfPlace" v-model="model.mother.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.mother.placeOfBirth.required" :disabled="ui.mother.placeOfBirth.disabled" :show="ui.mother.placeOfBirth.show" />
+            <EDate id="motherBirthDate" ref="motherBirthOfDate" v-model="model.mother.dateOfBirth" label="Tgl Lahir" :required="ui.mother.dateOfBirth.required" :disabled="ui.mother.dateOfBirth.disabled" :show="ui.mother.dateOfBirth.show" />
           </ECol>
           <ECol :col="3">
             <ELookup id="motherReligion" ref="motherReligion" v-model="model.mother.religion" label="Agama" placeholder="Input Agama" :required="ui.mother.religion.required" :disabled="ui.mother.religion.disabled" :show="ui.mother.religion.show" lookup-group="RELIGION" />
