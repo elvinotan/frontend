@@ -10,6 +10,7 @@
       <ECard ref="simulation" label="Simulation">
         <ELeft>
           <EButton id="fillFamilyHelper" ref="fillFamilyHelper" label="Fill Data Family Baru" color="green" @click="fillNewFamilyData" />
+          <EButton id="resetFamilyHelper" ref="resetFamilyHelper" label="Reset Data Family Baru" color="green" @click="resetNewFamilyData" />
           <EButton id="newFamilyData" ref="newFamilyData" label="Data Family Baru" color="green" @click="newFamilyData" />
         </ELeft>
       </ECard>
@@ -149,35 +150,13 @@ export default {
       },
       child: this.$object.clone(empty),
       model: {
-        father: {
-          id: undefined,
-          name: undefined,
-          nik: undefined,
-          sex: undefined,
-          placeOfBirth: undefined,
-          dateOfBirth: undefined,
-          religion: undefined,
-          education: undefined,
-          job: undefined,
-        },
-        mother: {
-          id: undefined,
-          name: undefined,
-          nik: undefined,
-          sex: undefined,
-          placeOfBirth: undefined,
-          dateOfBirth: undefined,
-          religion: undefined,
-          education: undefined,
-          job: undefined,
-        },
+        father: { typeid: undefined, name: undefined, nik: undefined, sex: undefined, placeOfBirth: undefined, dateOfBirth: undefined, religion: undefined, education: undefined, job: undefined },
+        mother: { id: undefined, name: undefined, nik: undefined, sex: undefined, placeOfBirth: undefined, dateOfBirth: undefined, religion: undefined, education: undefined, job: undefined },
         children: [],
       },
     }
   },
   mounted() {
-    this.model.father.sex = 'SEX_M'
-    this.model.mother.sex = 'SEX_F'
     this.ui.father.sex.disabled = true
     this.ui.mother.sex.disabled = true
   },
@@ -214,6 +193,17 @@ export default {
         religion: 'RELIGION_KA',
         education: 'EDUCATION_SMP',
         job: 'JOB_P',
+      })
+    },
+    resetNewFamilyData() {
+      this.model = {
+        father: { typeid: undefined, name: undefined, nik: undefined, sex: 'SEX_M', placeOfBirth: undefined, dateOfBirth: undefined, religion: undefined, education: undefined, job: undefined },
+        mother: { id: undefined, name: undefined, nik: undefined, sex: 'SEX_F', placeOfBirth: undefined, dateOfBirth: undefined, religion: undefined, education: undefined, job: undefined },
+        children: [],
+      }
+      // await this.$rest.delay(100)
+      this.$nextTick(() => {
+        this.$wrapper.clearError(this.$refs.customerEntry)
       })
     },
     newFamilyData() {

@@ -80,7 +80,7 @@ export default {
   watch: {
     value(newVal, oldVal) {
       this.lvalue = this._format(this._parseInput(newVal), 'YYYY-MM-DD')
-      this.$nextTick(this.validate)
+      this.validate()
     },
   },
   methods: {
