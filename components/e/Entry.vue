@@ -1,5 +1,6 @@
 <template>
   <ECard ref="customerEntry" label="Bio Data Keluarga">
+    <!-- Card simulation -->
     <ECard ref="simulation" label="Simulation">
       <ELeft>
         <EButton id="newFamilyHelper" ref="newFamilyHelper" label="Helper Data Family Baru" color="green" @click="helperNewFamilyData" />
@@ -7,6 +8,8 @@
       </ELeft>
     </ECard>
     <br />
+
+    <!-- Model Parent -->
     <ECol :col="2">
       <ECard ref="father" label="Ayah">
         <ECol>
@@ -46,6 +49,8 @@
       </ECard>
     </ECol>
     <br />
+
+    <!-- Model Children -->
     <ELocalPagination
       id="children"
       ref="children"
@@ -53,7 +58,7 @@
       :show="ui.children.table.show"
       :disabled="ui.children.table.disabled"
       :columns="[
-        { label: 'Name', field: 'name', sortable: true, width: '100px', tooltip: 'Nama', type: 'string' },
+        { label: 'Name', field: 'name', sortable: true, width: '200px', tooltip: 'Nama', type: 'string' },
         { label: 'Nik', field: 'nik', sortable: true, width: '100px', tooltip: 'NIK', type: 'number' },
         { label: 'Jenis Kelamin', field: 'sex', sortable: true, width: '100px', tooltip: 'Jenis Kelamin', type: 'lookup', reference: 'SEX' },
         { label: 'Tempat Lahir', field: 'placeOfBirth', sortable: true, width: '100px', tooltip: 'Tempat Lahir', type: 'string' },
@@ -78,8 +83,13 @@
       @editChildren="editChildren"
     />
     <br />
-    <EButton id="save" ref="save" label="Simpan" color="green" @click="saveFamily" />
 
+    <!-- Actions -->
+    <ERight>
+      <EButton id="save" ref="save" label="Simpan" color="green" @click="saveFamily" />
+    </ERight>
+
+    <!-- Entry Dialog -->
     <EDialog id="childrenDlg" ref="childrenDlg" title="Tambah Anak" :width="800" :height="250" :buttons="[{ label: 'Simpan', emit: 'saveChild', color: 'green' }]" @saveChild="saveChild">
       <ECol>
         <ECol :col="2">
@@ -94,6 +104,8 @@
         </ECol>
       </ECol>
     </EDialog>
+
+    <!-- Confirmation and message -->
     <EConfirmation id="confirmation" ref="confirmation" positive="Yes" negative="No" />
     <EMessage id="message" ref="message" />
   </ECard>
@@ -167,17 +179,38 @@ export default {
   },
   methods: {
     helperNewFamilyData() {
+      this.model.father.id = undefined
       this.model.father.name = 'Elvino'
       this.model.father.nik = 123456
-      this.model.father.six = 'SEX_M'
+      this.model.father.sex = 'SEX_M'
       this.model.father.placeOfBirth = 'Bogor'
       this.model.father.dateOfBirth = '1978-09-19'
+      this.model.father.religion = 'RELIGION_KH'
+      this.model.father.education = 'EDUCATION_S1'
+      this.model.father.job = 'JOB_K'
 
+      this.model.mother.id = undefined
       this.model.mother.name = 'Carinnia'
       this.model.mother.nik = 654321
-      this.model.mother.six = 'SEX_F'
+      this.model.mother.sex = 'SEX_F'
       this.model.mother.placeOfBirth = 'Jakarta'
       this.model.mother.dateOfBirth = '1978-09-26'
+      this.model.mother.religion = 'RELIGION_KA'
+      this.model.mother.education = 'EDUCATION_S2'
+      this.model.mother.job = 'JOB_I'
+
+      this.model.children = []
+      this.model.children.push({
+        id: undefined,
+        name: 'Constantine Davin Ethan',
+        nik: 162534,
+        sex: 'SEX_M',
+        placeOfBirth: 'Jakarta',
+        dateOfBirth: '2007-03-26',
+        religion: 'RELIGION_KA',
+        education: 'EDUCATION_SMP',
+        job: 'JOB_P',
+      })
     },
     newFamilyData() {
       this.model = {

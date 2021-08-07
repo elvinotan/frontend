@@ -5,7 +5,7 @@ export default function (plugin, inject) {
         // Must return YYYY-MM-DD, krn format ini yang di terima oleh input tag dgn tipe date
         const year = value.getFullYear()
         const month = (value.getMonth() + 1).toString().length === 1 ? `0${value.getMonth() + 1}` : value.getMonth() + 1
-        const date = (value.getDate() + 1).toString().length === 1 ? `0${value.getDate() + 1}` : value.getDate() + 1
+        const date = value.getDate().toString().length === 1 ? `0${value.getDate()}` : value.getDate()
 
         return pattern.replace(/YYYY/g, year).replace(/MM/g, month).replace(/DD/g, date)
       } else {

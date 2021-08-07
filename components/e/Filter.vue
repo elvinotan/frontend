@@ -2,10 +2,10 @@
   <ECard :label="title" :disabled="disabled" :show="show">
     <slot />
 
-    <span class="w-full p-1 flex justify-end space-x-5 content-start">
+    <ERight>
       <EButton :id="id + 'Clear'" label="Clear" :disabled="disabled" color="gray" :show="true" @click="_clear" />
       <EButton :id="id + 'Search'" label="Search" :disabled="disabled" color="green" :show="true" @click="_search" />
-    </span>
+    </ERight>
   </ECard>
 </template>
 <script>

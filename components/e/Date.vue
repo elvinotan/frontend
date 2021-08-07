@@ -90,7 +90,6 @@ export default {
         return value
       } else {
         const dateValue = new Date(value)
-        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA >>', dateValue)
         this.$emit('input', dateValue)
         return dateValue
       }
