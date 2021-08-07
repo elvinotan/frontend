@@ -3,6 +3,9 @@
     <ELoading ref="loader" />
 
     <ECol :gap-y="3">
+      <!-- Validator Message -->
+      <EInformation ref="information" />
+
       <!-- Card simulation -->
       <ECard ref="simulation" label="Simulation">
         <ELeft>
@@ -113,7 +116,7 @@
 </template>
 <script>
 const uiProps = {
-  name: { required: false, disabled: false, show: true },
+  name: { required: true, disabled: false, show: true },
   nik: { required: true, disabled: false, show: true },
   sex: { required: true, disabled: false, show: true },
   placeOfBirth: { required: true, disabled: false, show: true },
@@ -239,11 +242,14 @@ export default {
 
         if (error) {
           this.$refs.loader.fail()
+
           for (const err of error) {
             if (err.type === 'FIELD' && this.$refs[err.field]) {
               this.$refs[err.field].addError([err.message])
             }
           }
+
+          this.$refs.information.addRestError(error)
         }
       }
     },

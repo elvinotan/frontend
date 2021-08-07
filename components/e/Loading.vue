@@ -79,7 +79,7 @@ export default {
         self.visible = false
         self.label = ''
         this.state = 0
-      }, 1000)
+      }, 500)
     },
     fail() {
       this.state = -1
@@ -89,7 +89,7 @@ export default {
         self.visible = false
         self.label = ''
         this.state = 0
-      }, 1000)
+      }, 500)
     },
   },
 }
