@@ -2154,6 +2154,87 @@
               </tbody>
             </table>
           </EForm>
+          <EForm id="EInformation">
+            <EInformation ref="informationRef" :label="information.label" />
+            <div class="text-xs">Template : {{ htmlInformation }}</div>
+            <br />
+            <div class="text-xs">Data Object : {{ information }}</div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Props</td>
+                  <td>Try</td>
+                  <td>Type</td>
+                  <td>Required</td>
+                  <td>Default</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>label</td>
+                  <td><input v-model="information.label" type="text" /></td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>Validation</td>
+                  <td>Label untuk component</td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Try</td>
+                  <td>Result</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>metaData</td>
+                  <td>
+                    <button @click="metaData('InformationComponent')">Click</button>
+                  </td>
+                  <td>{{ metadata }}</td>
+                  <td>Component Information</td>
+                </tr>
+                <tr>
+                  <td>addRestError</td>
+                  <td>
+                    <button @click="addRestErrorInformation()">Click</button>
+                  </td>
+                  <td>Void</td>
+                  <td>Menampilkan pesan dgn tipe Error, dimana object error yang di oper berasal dari server</td>
+                </tr>
+                <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addErrorInformation()">Click</button>
+                  </td>
+                  <td>Void</td>
+                  <td>Menampilkan pesan dgn tipe Error, dimana object error yang di oper dari ui logic</td>
+                </tr>
+                <tr>
+                  <td>addWarning</td>
+                  <td>
+                    <button @click="addWarningInformation()">Click</button>
+                  </td>
+                  <td>Void</td>
+                  <td>Menampilkan pesan dgn tipe Warning, dimana object warning yang di oper dari ui logic</td>
+                </tr>
+                <tr>
+                  <td>addInformation</td>
+                  <td>
+                    <button @click="addInformationInformation()">Click</button>
+                  </td>
+                  <td>Void</td>
+                  <td>Menampilkan pesan dgn tipe information, dimana object information yang di oper dari ui logic</td>
+                </tr>
+              </tbody>
+            </table>
+          </EForm>
           <EForm id="ECard">
             <ECard id="CardComponent" ref="CardComponent" :label="card.label" :disabled="card.disabled" :show="card.show">
               <EText id="TextComponent2" ref="TextComponent2" v-model="text.value" :label="text.label" :placeholder="text.placeholder" :type="text.type" :required="text.required" :disabled="text.disabled" :show="text.show" :vruntime="text.vruntime" />
@@ -3632,6 +3713,7 @@ export default {
       htmlLookup: '<ELookup id="" ref="" v-model="" :label="" :placeholder="" :required="" :disabled="" :show="" :as="" :lookupGroup="" />',
       htmlDialog: '<EDialog id="" ref="" :title="" :width="" :height="" :buttons="[{ label:"", emit:"", color: null }]"> Contents </EDialog>',
       htmlConfirmation: '<EConfirmation id="" ref="" :positive="" :negative="" />',
+      htmlInformation: '<EInformation />',
       htmlLoading: '<ELoading ref="loader" />',
       htmlMessage: '<EMessage id="" ref="" />',
       htmlCard: '<ECard ref="" :label="" :disabled="" :show="" >Contents </ECard>',
@@ -3676,6 +3758,7 @@ export default {
         { label: 'ELoading' },
         { label: 'EMessage' },
         { label: 'EConfirmation' },
+        { label: 'EInformation' },
         { label: 'ECard' },
         { label: 'ETabs' },
         { label: 'EFilter' },
@@ -3864,6 +3947,9 @@ export default {
       confirmation: {
         positive: 'Tentu',
         negative: 'Gax',
+      },
+      information: {
+        label: 'Validation',
       },
       card: {
         label: 'Card Label',
@@ -4378,6 +4464,21 @@ export default {
     restRemoveVuex() {
       this.$rest.removeVuex('USER_FRAMEWORK')
       console.log('Object USER_FRAMEWORK removed')
+    },
+    addRestErrorInformation() {
+      this.$refs.informationRef.addRestError([
+        { type: 'GLOBAL', code: 'UI001', field: null, message: 'Error through addRestError 1' },
+        { type: 'GLOBAL', code: 'UI001', field: null, message: 'Error through addRestError 2' },
+      ])
+    },
+    addErrorInformation() {
+      this.$refs.informationRef.addError(['Error through addError 1', 'Error through addError 2'])
+    },
+    addWarningInformation() {
+      this.$refs.informationRef.addWarning(['Warning through addWarning 1', 'Warning through addWarning 2'])
+    },
+    addInformationInformation() {
+      this.$refs.informationRef.addInformation(['Information through addInformation 1', 'Information through addInformation 2'])
     },
   },
 }

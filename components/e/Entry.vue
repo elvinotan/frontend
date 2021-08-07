@@ -4,7 +4,7 @@
 
     <ECol :gap-y="3">
       <!-- Validator Message -->
-      <EInformation ref="information" />
+      <EInformation ref="information" label="Error Entry" />
 
       <!-- Card simulation -->
       <ECard ref="simulation" label="Simulation">

@@ -1,6 +1,6 @@
 <template>
   <div v-if="show">
-    <ECard label="Validation">
+    <ECard :label="label">
       <div v-for="msg of messages" :key="msg.message">
         <div class="font-bold text-sm w-auto p-1" :class="[_errColor(msg)]">- {{ msg.msg }}</div>
       </div>
@@ -11,6 +11,9 @@
 // TYPE : ERROR, WARNING, INFO
 export default {
   name: 'EInformation',
+  props: {
+    label: { type: String, required: true, default: 'Validation' },
+  },
   data() {
     return {
       show: false,
