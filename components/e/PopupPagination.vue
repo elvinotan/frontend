@@ -139,7 +139,7 @@ export default {
         this.$emit('input', this.lvalue)
         this.$nextTick(this._validate)
       } else {
-        console.log('WARNING !!!!, Pastikan hasil query mengembalikan popupCode dan popupDescription')
+        alert('DEVELOPER WARNING !!!!, Pastikan hasil query mengembalikan popupCode dan popupDescription')
       }
     },
     _showPopup() {
