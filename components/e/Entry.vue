@@ -1,5 +1,7 @@
 <template>
   <ECard ref="customerEntry" label="Bio Data Keluarga">
+    <ELoading ref="loader" />
+
     <ECol :gap-y="3">
       <!-- Card simulation -->
       <ECard ref="simulation" label="Simulation">
@@ -111,7 +113,7 @@
 </template>
 <script>
 const uiProps = {
-  name: { required: true, disabled: false, show: true },
+  name: { required: false, disabled: false, show: true },
   nik: { required: true, disabled: false, show: true },
   sex: { required: true, disabled: false, show: true },
   placeOfBirth: { required: true, disabled: false, show: true },
@@ -193,7 +195,7 @@ export default {
       this.model.mother.nik = 654321
       this.model.mother.sex = 'SEX_F'
       this.model.mother.placeOfBirth = 'Jakarta'
-      this.model.mother.dateOfBirth = '1978-09-26'
+      this.model.mother.dateOfBirth = '1979-09-26'
       this.model.mother.religion = 'RELIGION_KA'
       this.model.mother.education = 'EDUCATION_S2'
       this.model.mother.job = 'JOB_I'
@@ -225,22 +227,34 @@ export default {
       const { valid } = this.$wrapper.validate(this.$refs.customerEntry)
       if (valid) {
         // Do validate server
+        this.$refs.loader.show('Validation')
         this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], true)
-        const { result, error } = await this.$refs.post('/family/validate', this.constractFamily())
+        const { result, error } = await this.$rest.post('/family/validate', this.constractFamily())
         this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], false)
 
         if (result) {
-          console.log('Result')
+          this.$refs.loader.success()
+          // TODO saving
         }
 
         if (error) {
-          console.log('Error')
+          this.$refs.loader.fail()
+          for (const err of error) {
+            if (err.type === 'FIELD' && this.$refs[err.field]) {
+              this.$refs[err.field].addError([err.message])
+            }
+          }
         }
       }
     },
     constractFamily() {
       return {
-        parent: [{ ...this.model.father }, { ...this.model.mother }],
+        id: null,
+        name: 'Unknown Family',
+        parent: [
+          { ...this.model.father, type: 'F' },
+          { ...this.model.mother, type: 'M' },
+        ],
         children: [...this.model.children],
       }
     },

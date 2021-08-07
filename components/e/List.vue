@@ -1,6 +1,6 @@
 <template>
   <EForm id="customerForm" ref="customerForm">
-    <ECol gap-y="3">
+    <ECol :gap-y="3">
       <EFilter id="customerFilter" ref="customerFilter" title="Search Customer" :disabled="ui.filter.disabled" @Clear="clear" @Search="search">
         <ECol :col="4">
           <EText id="customerFilterName" ref="customerFilterName" v-model="filter.name" label="Full Name" placeholder="Input Full Name" type="long" :disabled="ui.name.disabled" :required="false" />
