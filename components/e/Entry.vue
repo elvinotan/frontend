@@ -1,6 +1,7 @@
 <template>
   <ECard ref="customerEntry" label="Bio Data Keluarga">
     <ECard ref="oprational" label="Oprational">
+      <EButton id="newFamilyHelper" ref="newFamilyHelper" label="Helper Data Family Baru" color="green" @click="helperNewFamilyData" />
       <EButton id="newFamilyData" ref="newFamilyData" label="Data Family Baru" color="green" @click="newFamilyData" />
     </ECard>
     <br />
@@ -53,9 +54,8 @@
         { label: 'Name', field: 'name', sortable: true, width: '100px', tooltip: 'Nama', type: 'string' },
         { label: 'Nik', field: 'nik', sortable: true, width: '100px', tooltip: 'NIK', type: 'number' },
         { label: 'Jenis Kelamin', field: 'sex', sortable: true, width: '100px', tooltip: 'Jenis Kelamin', type: 'lookup', reference: 'SEX' },
-        { label: 'Tempat Lahir', field: 'birthPlace', sortable: true, width: '100px', tooltip: 'Tempat Lahir', type: 'string' },
-        { label: 'Tgl Lahir', field: 'birthDate', sortable: true, width: '100px', tooltip: 'Tgl Lahir', type: 'date' },
-        { label: 'Tgl Lahir', field: 'birthDate', sortable: true, width: '100px', tooltip: 'Tgl Lahir', type: 'date' },
+        { label: 'Tempat Lahir', field: 'placeOfBirth', sortable: true, width: '100px', tooltip: 'Tempat Lahir', type: 'string' },
+        { label: 'Tgl Lahir', field: 'dateOfBirth', sortable: true, width: '100px', tooltip: 'Tgl Lahir', type: 'date' },
         { label: 'Agama', field: 'religion', sortable: true, width: '100px', tooltip: 'Agama', type: 'lookup', reference: 'RELIGION' },
         { label: 'Pendidikan', field: 'education', sortable: true, width: '100px', tooltip: 'Pendidikan', type: 'lookup', reference: 'EDUCATION' },
         { label: 'Pekerjaan', field: 'job', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'JOB' },
@@ -164,6 +164,19 @@ export default {
     this.ui.mother.sex.disabled = true
   },
   methods: {
+    helperNewFamilyData() {
+      this.model.father.name = 'Elvino'
+      this.model.father.nik = 123456
+      this.model.father.six = 'SEX_M'
+      this.model.father.placeOfBirth = 'Bogor'
+      this.model.father.dateOfBirth = '1978-09-19'
+
+      this.model.mother.name = 'Carinnia'
+      this.model.mother.nik = 654321
+      this.model.mother.six = 'SEX_F'
+      this.model.mother.placeOfBirth = 'Jakarta'
+      this.model.mother.dateOfBirth = '1978-09-26'
+    },
     newFamilyData() {
       this.model = {
         father: { ...empty },
@@ -175,7 +188,7 @@ export default {
       this.$wrapper.validate(this.$refs.customerEntry)
     },
     async saveFamily() {
-      const { valid, error } = this.$wrapper.validate(this.$refs.customerEntry)
+      const { valid } = this.$wrapper.validate(this.$refs.customerEntry)
       if (valid) {
         // Do validate server
         this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], true)
@@ -189,10 +202,6 @@ export default {
         if (error) {
           console.log('Error')
         }
-      }
-
-      if (error) {
-        this.$refs.message.error('Gagal Menyimpan data Family')
       }
     },
     constractFamily() {

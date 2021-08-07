@@ -79,7 +79,7 @@ export default {
   },
   watch: {
     value(newVal, oldVal) {
-      this.lvalue = this._format(newVal, 'YYYY-MM-DD')
+      this.lvalue = this._format(this._parseInput(newVal), 'YYYY-MM-DD')
     },
   },
   methods: {
@@ -90,6 +90,7 @@ export default {
         return value
       } else {
         const dateValue = new Date(value)
+        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA >>', dateValue)
         this.$emit('input', dateValue)
         return dateValue
       }
@@ -100,6 +101,7 @@ export default {
       this.$nextTick(this.validate)
     },
     _format(value, pattern) {
+      if (!value) return value
       if (value && pattern) {
         return this.$fmt.date(value, pattern)
       } else {

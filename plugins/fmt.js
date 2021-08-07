@@ -4,19 +4,10 @@ export default function (plugin, inject) {
       if (value && pattern) {
         // Must return YYYY-MM-DD, krn format ini yang di terima oleh input tag dgn tipe date
         const year = value.getFullYear()
-        const month =
-          (value.getMonth() + 1).toString().length === 1
-            ? `0${value.getMonth() + 1}`
-            : value.getMonth() + 1
-        const date =
-          (value.getDate() + 1).toString().length === 1
-            ? `0${value.getDate() + 1}`
-            : value.getDate() + 1
+        const month = (value.getMonth() + 1).toString().length === 1 ? `0${value.getMonth() + 1}` : value.getMonth() + 1
+        const date = (value.getDate() + 1).toString().length === 1 ? `0${value.getDate() + 1}` : value.getDate() + 1
 
-        return pattern
-          .replace(/YYYY/g, year)
-          .replace(/MM/g, month)
-          .replace(/DD/g, date)
+        return pattern.replace(/YYYY/g, year).replace(/MM/g, month).replace(/DD/g, date)
       } else {
         return value
       }
@@ -31,11 +22,7 @@ export default function (plugin, inject) {
         return value
       }
     },
-    decimal: (
-      value = null,
-      minimumFractionDigits = 0,
-      maximumFractionDigits = 2
-    ) => {
+    decimal: (value = null, minimumFractionDigits = 0, maximumFractionDigits = 2) => {
       if (value) {
         return new Intl.NumberFormat('en-US', {
           minimumFractionDigits,
