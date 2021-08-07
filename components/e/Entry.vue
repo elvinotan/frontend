@@ -9,7 +9,7 @@
       <!-- Card simulation -->
       <ECard ref="simulation" label="Simulation">
         <ELeft>
-          <EButton id="newFamilyHelper" ref="newFamilyHelper" label="Helper Data Family Baru" color="green" @click="helperNewFamilyData" />
+          <EButton id="fillFamilyHelper" ref="fillFamilyHelper" label="Fill Data Family Baru" color="green" @click="fillNewFamilyData" />
           <EButton id="newFamilyData" ref="newFamilyData" label="Data Family Baru" color="green" @click="newFamilyData" />
         </ELeft>
       </ECard>
@@ -182,7 +182,7 @@ export default {
     this.ui.mother.sex.disabled = true
   },
   methods: {
-    helperNewFamilyData() {
+    fillNewFamilyData() {
       this.model.father.id = undefined
       this.model.father.name = 'Elvino'
       this.model.father.nik = 123456

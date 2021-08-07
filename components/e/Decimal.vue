@@ -82,6 +82,7 @@ export default {
   watch: {
     value(newVal, oldVal) {
       this.lvalue = this._format(newVal)
+      this.$nextTick(this.validate)
     },
     separator(newVal, oldVal) {
       this.lvalue = this._format(this.value)

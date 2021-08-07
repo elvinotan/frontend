@@ -67,6 +67,12 @@ export default {
       return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
     },
   },
+  watch: {
+    value(newVal, oldVal) {
+      this.lvalue = newVal
+      this.$nextTick(this.validate)
+    },
+  },
   methods: {
     _clearInput() {
       this.lvalue = null

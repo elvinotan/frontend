@@ -71,13 +71,7 @@ export default {
   },
   methods: {
     _clearInput() {
-      this.lvalue = null
-      this.$emit('input', this.lvalue)
-      this.$nextTick(this.validate)
-    },
-    clearInput() {
-      this.lvalue = null
-      this.$emit('input', this.lvalue)
+      this.$emit('input', null)
       this.$nextTick(this.validate)
     },
     _input(event) {

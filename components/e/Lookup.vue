@@ -82,6 +82,7 @@ export default {
   watch: {
     value(newVal, oldVal) {
       this.lvalue = newVal
+      this.$nextTick(this.validate)
     },
     lookupGroup(newVal, oldVal) {
       this.options = []

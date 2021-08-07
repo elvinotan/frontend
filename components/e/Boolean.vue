@@ -97,6 +97,7 @@ export default {
   watch: {
     value(newVal, oldVal) {
       this.lvalue = newVal === null ? '0' : newVal === true ? '1' : '-1'
+      this.$nextTick(this.validate)
     },
   },
   methods: {

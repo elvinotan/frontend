@@ -77,6 +77,7 @@ export default {
   watch: {
     value(newVal, oldVal) {
       this.lvalue = newVal
+      this.$nextTick(this.validate)
     },
   },
   methods: {
