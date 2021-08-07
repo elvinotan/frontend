@@ -1,6 +1,6 @@
 <template>
   <EForm id="customerForm" ref="customerForm">
-    <ECol :col="1" :gap-y="5">
+    <ECol gap-y="3">
       <EFilter id="customerFilter" ref="customerFilter" title="Search Customer" :disabled="ui.filter.disabled" @Clear="clear" @Search="search">
         <ECol :col="4">
           <EText id="customerFilterName" ref="customerFilterName" v-model="filter.name" label="Full Name" placeholder="Input Full Name" type="long" :disabled="ui.name.disabled" :required="false" />
@@ -25,62 +25,20 @@
         ]"
         :initial-sort-by="[{ field: 'name', type: 'asc' }]"
         :columns="[
-          {
-            label: 'Full Name',
-            field: 'name',
-            sortable: true,
-            width: '600px',
-            tooltip: 'Customer Name',
-            type: 'text',
-          },
-          {
-            label: 'Birth Date',
-            field: 'birthDate',
-            sortable: true,
-            width: '100px',
-            tooltip: 'Customer Birth Date',
-            type: 'date',
-          },
-          {
-            label: 'Age',
-            field: 'age',
-            sortable: true,
-            width: '100px',
-            tooltip: 'Customer Age',
-            type: 'number',
-          },
-          {
-            label: 'Saving',
-            field: 'saving',
-            sortable: true,
-            width: '100px',
-            tooltip: 'Customer Bank Saving',
-            type: 'decimal',
-          },
-          {
-            label: 'Allow Loan Pct',
-            field: 'loanPct',
-            sortable: true,
-            width: '100px',
-            tooltip: 'Loan Percentage Allowed',
-            type: 'percentage',
-          },
-          {
-            label: 'Merried',
-            field: 'merried',
-            sortable: true,
-            width: '100px',
-            tooltip: 'Is Customer Merried',
-            type: 'boolean',
-          },
+          { label: 'Full Name', field: 'name', sortable: true, width: '600px', tooltip: 'Customer Name', type: 'text' },
+          { label: 'Birth Date', field: 'birthDate', sortable: true, width: '100px', tooltip: 'Customer Birth Date', type: 'date' },
+          { label: 'Age', field: 'age', sortable: true, width: '100px', tooltip: 'Customer Age', type: 'number' },
+          { label: 'Saving', field: 'saving', sortable: true, width: '100px', tooltip: 'Customer Bank Saving', type: 'decimal' },
+          { label: 'Allow Loan Pct', field: 'loanPct', sortable: true, width: '100px', tooltip: 'Loan Percentage Allowed', type: 'percentage' },
+          { label: 'Merried', field: 'merried', sortable: true, width: '100px', tooltip: 'Is Customer Merried', type: 'boolean' },
         ]"
         @RowClick="rowClick"
         @hapus="hapus"
         @lihat="lihat"
         @ubah="ubah"
       />
-      <EMessage id="customerMessage" ref="customerMessage" />
     </ECol>
+    <EMessage id="customerMessage" ref="customerMessage" />
   </EForm>
 </template>
 <script>

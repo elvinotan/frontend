@@ -1,93 +1,92 @@
 <template>
   <ECard ref="customerEntry" label="Bio Data Keluarga">
-    <!-- Card simulation -->
-    <ECard ref="simulation" label="Simulation">
-      <ELeft>
-        <EButton id="newFamilyHelper" ref="newFamilyHelper" label="Helper Data Family Baru" color="green" @click="helperNewFamilyData" />
-        <EButton id="newFamilyData" ref="newFamilyData" label="Data Family Baru" color="green" @click="newFamilyData" />
-      </ELeft>
-    </ECard>
-    <br />
+    <ECol :gap-y="3">
+      <!-- Card simulation -->
+      <ECard ref="simulation" label="Simulation">
+        <ELeft>
+          <EButton id="newFamilyHelper" ref="newFamilyHelper" label="Helper Data Family Baru" color="green" @click="helperNewFamilyData" />
+          <EButton id="newFamilyData" ref="newFamilyData" label="Data Family Baru" color="green" @click="newFamilyData" />
+        </ELeft>
+      </ECard>
 
-    <!-- Model Parent -->
-    <ECol :col="2">
-      <ECard ref="father" label="Ayah">
-        <ECol>
-          <ECol :col="2">
-            <EText id="fatherName" ref="fatherName" v-model="model.father.name" label="Nama Ayah" placeholder="Input Nama Ayah" type="short" :required="ui.father.name.required" :disabled="ui.father.name.disabled" :show="ui.father.name.show" />
-            <ENumber id="fatherNik" ref="fatherNik" v-model="model.father.nik" label="NIK" placeholder="Input NIK" type="short" :required="ui.father.nik.required" :disabled="ui.father.nik.disabled" :show="ui.father.nik.show" />
+      <!-- Model Parent -->
+      <ECol :col="2">
+        <ECard ref="father" label="Ayah">
+          <ECol>
+            <ECol :col="2">
+              <EText id="fatherName" ref="fatherName" v-model="model.father.name" label="Nama Ayah" placeholder="Input Nama Ayah" type="short" :required="ui.father.name.required" :disabled="ui.father.name.disabled" :show="ui.father.name.show" />
+              <ENumber id="fatherNik" ref="fatherNik" v-model="model.father.nik" label="NIK" placeholder="Input NIK" type="short" :required="ui.father.nik.required" :disabled="ui.father.nik.disabled" :show="ui.father.nik.show" />
+            </ECol>
+            <ECol :col="3">
+              <ELookup id="fatherSex" ref="fatherSex" v-model="model.father.sex" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.father.sex.required" :disabled="ui.father.sex.disabled" :show="ui.father.sex.show" lookup-group="SEX" />
+              <EText id="fatherBirthPlace" ref="fatherBirthOfPlace" v-model="model.father.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.father.placeOfBirth.required" :disabled="ui.father.placeOfBirth.disabled" :show="ui.father.placeOfBirth.show" />
+              <EDate id="fatherBirthDate" ref="fatherBirthOfDate" v-model="model.father.dateOfBirth" label="Tgl Lahir" :required="ui.father.dateOfBirth.required" :disabled="ui.father.dateOfBirth.disabled" :show="ui.father.dateOfBirth.show" />
+            </ECol>
+            <ECol :col="3">
+              <ELookup id="fatherReligion" ref="fatherReligion" v-model="model.father.religion" label="Agama" placeholder="Input Agama" :required="ui.father.religion.required" :disabled="ui.father.religion.disabled" :show="ui.father.religion.show" lookup-group="RELIGION" />
+              <ELookup id="fatherEducation" ref="fatherEducation" v-model="model.father.education" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.father.education.required" :disabled="ui.father.education.disabled" :show="ui.father.education.show" lookup-group="EDUCATION" />
+              <ELookup id="fatherJob" ref="fatherJob" v-model="model.father.job" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.father.job.required" :disabled="ui.father.job.disabled" :show="ui.father.job.show" lookup-group="JOB" />
+            </ECol>
           </ECol>
-          <ECol :col="3">
-            <ELookup id="fatherSex" ref="fatherSex" v-model="model.father.sex" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.father.sex.required" :disabled="ui.father.sex.disabled" :show="ui.father.sex.show" lookup-group="SEX" />
-            <EText id="fatherBirthPlace" ref="fatherBirthOfPlace" v-model="model.father.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.father.placeOfBirth.required" :disabled="ui.father.placeOfBirth.disabled" :show="ui.father.placeOfBirth.show" />
-            <EDate id="fatherBirthDate" ref="fatherBirthOfDate" v-model="model.father.dateOfBirth" label="Tgl Lahir" :required="ui.father.dateOfBirth.required" :disabled="ui.father.dateOfBirth.disabled" :show="ui.father.dateOfBirth.show" />
+        </ECard>
+        <ECard ref="mother" label="Ibu">
+          <ECol>
+            <ECol :col="2">
+              <EText id="motherName" ref="motherName" v-model="model.mother.name" label="Nama Ibu" placeholder="Input Nama Ibu" type="short" :required="ui.mother.name.required" :disabled="ui.mother.name.disabled" :show="ui.mother.name.show" />
+              <ENumber id="motherNik" ref="motherNik" v-model="model.mother.nik" label="NIK" placeholder="Input NIK" type="short" :required="ui.mother.nik.required" :disabled="ui.mother.nik.disabled" :show="ui.mother.nik.show" />
+            </ECol>
+            <ECol :col="3">
+              <ELookup id="motherSex" ref="motherSex" v-model="model.mother.sex" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.mother.sex.required" :disabled="ui.mother.sex.disabled" :show="ui.mother.sex.show" lookup-group="SEX" />
+              <EText id="motherBirthPlace" ref="motherBirthOfPlace" v-model="model.mother.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.mother.placeOfBirth.required" :disabled="ui.mother.placeOfBirth.disabled" :show="ui.mother.placeOfBirth.show" />
+              <EDate id="motherBirthDate" ref="motherBirthOfDate" v-model="model.mother.dateOfBirth" label="Tgl Lahir" :required="ui.mother.dateOfBirth.required" :disabled="ui.mother.dateOfBirth.disabled" :show="ui.mother.dateOfBirth.show" />
+            </ECol>
+            <ECol :col="3">
+              <ELookup id="motherReligion" ref="motherReligion" v-model="model.mother.religion" label="Agama" placeholder="Input Agama" :required="ui.mother.religion.required" :disabled="ui.mother.religion.disabled" :show="ui.mother.religion.show" lookup-group="RELIGION" />
+              <ELookup id="motherEducation" ref="motherEducation" v-model="model.mother.education" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.mother.education.required" :disabled="ui.mother.education.disabled" :show="ui.mother.education.show" lookup-group="EDUCATION" />
+              <ELookup id="motherJob" ref="motherJob" v-model="model.mother.job" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.mother.job.required" :disabled="ui.mother.job.disabled" :show="ui.mother.job.show" lookup-group="JOB" />
+            </ECol>
           </ECol>
-          <ECol :col="3">
-            <ELookup id="fatherReligion" ref="fatherReligion" v-model="model.father.religion" label="Agama" placeholder="Input Agama" :required="ui.father.religion.required" :disabled="ui.father.religion.disabled" :show="ui.father.religion.show" lookup-group="RELIGION" />
-            <ELookup id="fatherEducation" ref="fatherEducation" v-model="model.father.education" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.father.education.required" :disabled="ui.father.education.disabled" :show="ui.father.education.show" lookup-group="EDUCATION" />
-            <ELookup id="fatherJob" ref="fatherJob" v-model="model.father.job" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.father.job.required" :disabled="ui.father.job.disabled" :show="ui.father.job.show" lookup-group="JOB" />
-          </ECol>
-        </ECol>
-      </ECard>
-      <ECard ref="mother" label="Ibu">
-        <ECol>
-          <ECol :col="2">
-            <EText id="motherName" ref="motherName" v-model="model.mother.name" label="Nama Ibu" placeholder="Input Nama Ibu" type="short" :required="ui.mother.name.required" :disabled="ui.mother.name.disabled" :show="ui.mother.name.show" />
-            <ENumber id="motherNik" ref="motherNik" v-model="model.mother.nik" label="NIK" placeholder="Input NIK" type="short" :required="ui.mother.nik.required" :disabled="ui.mother.nik.disabled" :show="ui.mother.nik.show" />
-          </ECol>
-          <ECol :col="3">
-            <ELookup id="motherSex" ref="motherSex" v-model="model.mother.sex" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.mother.sex.required" :disabled="ui.mother.sex.disabled" :show="ui.mother.sex.show" lookup-group="SEX" />
-            <EText id="motherBirthPlace" ref="motherBirthOfPlace" v-model="model.mother.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.mother.placeOfBirth.required" :disabled="ui.mother.placeOfBirth.disabled" :show="ui.mother.placeOfBirth.show" />
-            <EDate id="motherBirthDate" ref="motherBirthOfDate" v-model="model.mother.dateOfBirth" label="Tgl Lahir" :required="ui.mother.dateOfBirth.required" :disabled="ui.mother.dateOfBirth.disabled" :show="ui.mother.dateOfBirth.show" />
-          </ECol>
-          <ECol :col="3">
-            <ELookup id="motherReligion" ref="motherReligion" v-model="model.mother.religion" label="Agama" placeholder="Input Agama" :required="ui.mother.religion.required" :disabled="ui.mother.religion.disabled" :show="ui.mother.religion.show" lookup-group="RELIGION" />
-            <ELookup id="motherEducation" ref="motherEducation" v-model="model.mother.education" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.mother.education.required" :disabled="ui.mother.education.disabled" :show="ui.mother.education.show" lookup-group="EDUCATION" />
-            <ELookup id="motherJob" ref="motherJob" v-model="model.mother.job" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.mother.job.required" :disabled="ui.mother.job.disabled" :show="ui.mother.job.show" lookup-group="JOB" />
-          </ECol>
-        </ECol>
-      </ECard>
+        </ECard>
+      </ECol>
+
+      <!-- Model Children -->
+      <ELocalPagination
+        id="children"
+        ref="children"
+        label="Anak-anak"
+        :show="ui.children.table.show"
+        :disabled="ui.children.table.disabled"
+        :columns="[
+          { label: 'Name', field: 'name', sortable: true, width: '200px', tooltip: 'Nama', type: 'string' },
+          { label: 'Nik', field: 'nik', sortable: true, width: '100px', tooltip: 'NIK', type: 'number' },
+          { label: 'Jenis Kelamin', field: 'sex', sortable: true, width: '100px', tooltip: 'Jenis Kelamin', type: 'lookup', reference: 'SEX' },
+          { label: 'Tempat Lahir', field: 'placeOfBirth', sortable: true, width: '100px', tooltip: 'Tempat Lahir', type: 'string' },
+          { label: 'Tgl Lahir', field: 'dateOfBirth', sortable: true, width: '100px', tooltip: 'Tgl Lahir', type: 'date' },
+          { label: 'Agama', field: 'religion', sortable: true, width: '100px', tooltip: 'Agama', type: 'lookup', reference: 'RELIGION' },
+          { label: 'Pendidikan', field: 'education', sortable: true, width: '100px', tooltip: 'Pendidikan', type: 'lookup', reference: 'EDUCATION' },
+          { label: 'Pekerjaan', field: 'job', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'JOB' },
+          { field: 'action', width: '200px' },
+        ]"
+        :actions="[
+          { label: 'Delete', emit: 'removeChildren' },
+          { label: 'Edit', emit: 'editChildren' },
+        ]"
+        :disabled-action="() => {}"
+        :add-new-data="addChildren"
+        :save-state="() => {}"
+        :rows="model.children"
+        :buttons="[]"
+        :initial-sort-by="[]"
+        @RowClick="() => {}"
+        @removeChildren="removeChildren"
+        @editChildren="editChildren"
+      />
+
+      <!-- Actions -->
+      <ERight>
+        <EButton id="save" ref="save" label="Simpan" color="green" @click="saveFamily" />
+      </ERight>
     </ECol>
-    <br />
-
-    <!-- Model Children -->
-    <ELocalPagination
-      id="children"
-      ref="children"
-      label="Anak-anak"
-      :show="ui.children.table.show"
-      :disabled="ui.children.table.disabled"
-      :columns="[
-        { label: 'Name', field: 'name', sortable: true, width: '200px', tooltip: 'Nama', type: 'string' },
-        { label: 'Nik', field: 'nik', sortable: true, width: '100px', tooltip: 'NIK', type: 'number' },
-        { label: 'Jenis Kelamin', field: 'sex', sortable: true, width: '100px', tooltip: 'Jenis Kelamin', type: 'lookup', reference: 'SEX' },
-        { label: 'Tempat Lahir', field: 'placeOfBirth', sortable: true, width: '100px', tooltip: 'Tempat Lahir', type: 'string' },
-        { label: 'Tgl Lahir', field: 'dateOfBirth', sortable: true, width: '100px', tooltip: 'Tgl Lahir', type: 'date' },
-        { label: 'Agama', field: 'religion', sortable: true, width: '100px', tooltip: 'Agama', type: 'lookup', reference: 'RELIGION' },
-        { label: 'Pendidikan', field: 'education', sortable: true, width: '100px', tooltip: 'Pendidikan', type: 'lookup', reference: 'EDUCATION' },
-        { label: 'Pekerjaan', field: 'job', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'JOB' },
-        { field: 'action', width: '200px' },
-      ]"
-      :actions="[
-        { label: 'Delete', emit: 'removeChildren' },
-        { label: 'Edit', emit: 'editChildren' },
-      ]"
-      :disabled-action="() => {}"
-      :add-new-data="addChildren"
-      :save-state="() => {}"
-      :rows="model.children"
-      :buttons="[]"
-      :initial-sort-by="[]"
-      @RowClick="() => {}"
-      @removeChildren="removeChildren"
-      @editChildren="editChildren"
-    />
-    <br />
-
-    <!-- Actions -->
-    <ERight>
-      <EButton id="save" ref="save" label="Simpan" color="green" @click="saveFamily" />
-    </ERight>
 
     <!-- Entry Dialog -->
     <EDialog id="childrenDlg" ref="childrenDlg" title="Tambah Anak" :width="800" :height="250" :buttons="[{ label: 'Simpan', emit: 'saveChild', color: 'green' }]" @saveChild="saveChild">
