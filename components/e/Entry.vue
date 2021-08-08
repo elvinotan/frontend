@@ -1,7 +1,6 @@
 <template>
   <ECard ref="customerEntry" label="Bio Data Keluarga">
     <ELoading ref="loader" />
-
     <ECol :gap-y="3">
       <!-- Validator Message -->
       <EInformation ref="information" label="Error Entry" />
@@ -127,15 +126,15 @@ const uiProps = {
   job: { required: true, disabled: false, show: true },
 }
 const empty = {
-  id: undefined,
-  name: undefined,
-  nik: undefined,
-  sex: undefined,
-  placeOfBirth: undefined,
-  dateOfBirth: undefined,
-  religion: undefined,
-  education: undefined,
-  job: undefined,
+  id: null,
+  name: null,
+  nik: null,
+  sex: null,
+  placeOfBirth: null,
+  dateOfBirth: null,
+  religion: null,
+  education: null,
+  job: null,
 }
 
 export default {
@@ -152,8 +151,11 @@ export default {
       },
       child: this.$object.clone(empty),
       model: {
-        father: { typeid: undefined, name: undefined, nik: undefined, sex: undefined, placeOfBirth: undefined, dateOfBirth: undefined, religion: undefined, education: undefined, job: undefined },
-        mother: { id: undefined, name: undefined, nik: undefined, sex: undefined, placeOfBirth: undefined, dateOfBirth: undefined, religion: undefined, education: undefined, job: undefined },
+        id: null,
+        name: null,
+        enabled: null,
+        father: { typeid: null, name: null, nik: null, sex: null, placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
+        mother: { id: null, name: null, nik: null, sex: null, placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
         children: [],
       },
     }
@@ -164,7 +166,11 @@ export default {
   },
   methods: {
     fillNewFamilyData() {
-      this.model.father.id = undefined
+      this.model.id = null
+      this.model.name = 'Unknown Family'
+      this.model.enabled = false
+
+      this.model.father.id = null
       this.model.father.name = 'Elvino'
       this.model.father.nik = 123456
       this.model.father.sex = 'SEX_M'
@@ -174,7 +180,7 @@ export default {
       this.model.father.education = 'EDUCATION_S1'
       this.model.father.job = 'JOB_K'
 
-      this.model.mother.id = undefined
+      this.model.mother.id = null
       this.model.mother.name = 'Carinnia'
       this.model.mother.nik = 654321
       this.model.mother.sex = 'SEX_F'
@@ -186,7 +192,7 @@ export default {
 
       this.model.children = []
       this.model.children.push({
-        id: undefined,
+        id: null,
         name: 'Constantine Davin Ethan',
         nik: 162534,
         sex: 'SEX_M',
@@ -199,8 +205,11 @@ export default {
     },
     resetNewFamilyData() {
       this.model = {
-        father: { typeid: undefined, name: undefined, nik: undefined, sex: 'SEX_M', placeOfBirth: undefined, dateOfBirth: undefined, religion: undefined, education: undefined, job: undefined },
-        mother: { id: undefined, name: undefined, nik: undefined, sex: 'SEX_F', placeOfBirth: undefined, dateOfBirth: undefined, religion: undefined, education: undefined, job: undefined },
+        id: null,
+        name: null,
+        enabled: null,
+        father: { typeid: null, name: null, nik: null, sex: 'SEX_M', placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
+        mother: { id: null, name: null, nik: null, sex: 'SEX_F', placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
         children: [],
       }
       // await this.$rest.delay(100)
@@ -266,9 +275,9 @@ export default {
     },
     constractFamily() {
       return {
-        id: null,
-        name: 'Unknown Family',
-        enabled: false,
+        id: this.model.id,
+        name: this.model.name,
+        enabled: this.model.enabled,
         parent: [
           { ...this.model.father, type: 'F' },
           { ...this.model.mother, type: 'M' },
@@ -279,7 +288,7 @@ export default {
     deconstructFamily(result) {
       const father = result.parent.find((p) => p.type === 'F')
       const mother = result.parent.find((p) => p.type === 'M')
-      return { father, mother, children: result.children }
+      return { id: result.id, name: result.name, enabled: result.enabled, father, mother, children: result.children }
     },
 
     addChildren() {
@@ -287,8 +296,8 @@ export default {
       this.$refs.childrenDlg.open()
     },
     editChildren(props) {
-      this.child = this.$object.clone(props.row)
       this.$refs.childrenDlg.open()
+      this.child = this.$object.clone(props.row)
     },
     saveChild() {
       const { valid, errors } = this.$wrapper.validate(this.$refs.childrenDlg)

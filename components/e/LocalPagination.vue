@@ -162,7 +162,7 @@ export default {
     },
     addOrReplace(object) {
       if (this.reference) {
-        Object.assign(this.reference.row, object)
+        Object.assign(this.reference, object)
       } else {
         // eslint-disable-next-line vue/no-mutating-props
         this.rows.push(object)
@@ -179,7 +179,7 @@ export default {
       this.addNewData()
     },
     _action(action, props) {
-      this.reference = props
+      this.reference = this.rows[props.row.vgt_id]
       this.$emit(action.emit ? action.emit : action.label, props)
     },
     _renderCell(props) {

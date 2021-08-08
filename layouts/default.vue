@@ -1,6 +1,6 @@
 <template>
   <div>
-    <EPageLoader id="layoutPageLoader" ref="layoutPageLoader" label="Please Wait, prepare all data....." :fetcher="layoutPageLoader">
+    <EPageLoader id="layoutPageLoader" ref="layoutPageLoader" label="Main Page" :fetcher="layoutPageLoader">
       <Header />
       <Nuxt />
       <Footer />
@@ -11,22 +11,21 @@
 export default {
   methods: {
     async layoutPageLoader() {
-      try {
-        const { result, error } = await this.$rest.get(`/cache/fetch`)
+      const { result, error } = await this.$rest.get(`/cache/fetch`)
 
-        if (result) {
-          if (result.LOOKUPGROUP) {
-            for (const [key, value] of Object.entries(result.LOOKUPGROUP)) {
-              this.$rest.setVuex(this.$enum.VUEX.LOOKUP_PREFIX + key, value)
-            }
+      if (result) {
+        if (result.LOOKUPGROUP) {
+          for (const [key, value] of Object.entries(result.LOOKUPGROUP)) {
+            this.$rest.setVuex(this.$enum.VUEX.LOOKUP_PREFIX + key, value)
           }
-
-          await this.$rest.delay(1500)
-          return true
         }
 
-        if (error) return false
-      } catch (error) {
+        await this.$rest.delay(1500)
+        return true
+      }
+
+      if (error) {
+        this.$refs.layoutPageLoader.setInfo(error)
         return false
       }
     },

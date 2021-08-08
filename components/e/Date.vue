@@ -79,8 +79,22 @@ export default {
   },
   watch: {
     value(newVal, oldVal) {
-      this.lvalue = this._format(this._parseInput(newVal), 'YYYY-MM-DD')
-      this.validate()
+      // newVal dan oldVal kadang bisa berupa beda tipe antara data dan string, jadi harus ada pengecekan perbedaan tambahan
+
+      let newValstr = newVal
+      if (newValstr instanceof Date) {
+        newValstr = this._format(newValstr, 'YYYY-MM-DD')
+      }
+
+      let oldValstr = oldVal
+      if (oldValstr instanceof Date) {
+        oldValstr = this._format(oldValstr, 'YYYY-MM-DD')
+      }
+
+      if (newValstr !== oldValstr) {
+        this.lvalue = this._format(this._parseInput(newVal), 'YYYY-MM-DD')
+        this.validate()
+      }
     },
   },
   methods: {

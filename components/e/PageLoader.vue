@@ -26,6 +26,7 @@
     </div>
     <div v-else :id="id" class="text-center grid grid-cols-1 flex justify-center">
       <div class="font-bold text-sm p-2">Fail To Load {{ label }}</div>
+      <div class="text-sm p-2">{{ info }}</div>
       <EButton :id="'PageLoader' + id" label="Retry" color="green" @click="_fetcher" />
     </div>
   </div>
@@ -48,6 +49,7 @@ export default {
     return {
       loaded: false,
       fetched: true,
+      info: undefined,
     }
   },
   async mounted() {
@@ -62,9 +64,13 @@ export default {
       }
     },
     async _fetcher() {
+      this.info = undefined
       this.fetched = true
       this.fetched = await this.fetcher()
       if (this.fetched) this.loaded = true
+    },
+    setInfo(info) {
+      this.info = info
     },
   },
 }
