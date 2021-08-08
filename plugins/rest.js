@@ -61,7 +61,7 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         const { result, error } = await $axios.$get(host + url, { headers })
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
-        if (!result && !error) throw new Error('Fail to execute GET operation, result and error must not both null')
+        if (!result && !error) throw new Error('DEVELOPER WARNING !!!!, Fail to execute GET operation, result and error must not both null')
 
         if (result) {
           const isSave = saveFn(result)
@@ -115,7 +115,7 @@ export default function ({ $axios, $config, $string, $number, store }, inject) {
         const { result, error } = await $axios.$post(host + url, payload, { headers })
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
-        if (!result && !error) throw new Error('Fail to execute POST operation, result and error must not both null')
+        if (!result && !error) throw new Error('DEVELOPER WARNING !!!!, Fail to execute POST operation, result and error must not both null')
 
         if (result) {
           const isSave = saveFn(result)

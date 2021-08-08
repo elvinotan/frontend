@@ -238,20 +238,48 @@ export default {
         }
       }
     },
-    confirmFamily() {
-      this.showSave = true
-      this.showConfirm = false
+    async confirmFamily() {
+      this.$refs.loader.show('Saving Data Family')
+      this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], true)
+      const { result, error } = await this.$rest.post('/family/save', this.constractFamily())
+      this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], false)
+      this.ui.father.sex.disabled = true
+      this.ui.mother.sex.disabled = true
+
+      if (result) {
+        this.model = this.deconstructFamily(result)
+        this.$refs.loader.success()
+        this.showSave = true
+        this.showConfirm = false
+      }
+      if (error) {
+        this.$refs.loader.fail()
+
+        for (const err of error) {
+          if (err.type === 'FIELD' && this.$refs[err.field]) {
+            this.$refs[err.field].addError([err.message])
+          }
+        }
+
+        this.$refs.information.addRestError(error)
+      }
     },
     constractFamily() {
       return {
         id: null,
         name: 'Unknown Family',
+        enabled: false,
         parent: [
           { ...this.model.father, type: 'F' },
           { ...this.model.mother, type: 'M' },
         ],
         children: [...this.model.children],
       }
+    },
+    deconstructFamily(result) {
+      const father = result.parent.find((p) => p.type === 'F')
+      const mother = result.parent.find((p) => p.type === 'M')
+      return { father, mother, children: result.children }
     },
 
     addChildren() {
