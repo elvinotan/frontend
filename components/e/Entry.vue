@@ -9,9 +9,8 @@
       <!-- Card simulation -->
       <ECard ref="simulation" label="Simulation">
         <ELeft>
-          <EButton id="fillFamilyHelper" ref="fillFamilyHelper" label="Fill Data Family Baru" color="green" @click="fillNewFamilyData" />
-          <EButton id="resetFamilyHelper" ref="resetFamilyHelper" label="Reset Data Family Baru" color="green" @click="resetNewFamilyData" />
-          <EButton id="newFamilyData" ref="newFamilyData" label="Data Family Baru" color="green" @click="newFamilyData" />
+          <EButton id="fillFamilyHelper" ref="fillFamilyHelper" label="Fill Data Family" color="green" @click="fillNewFamilyData" />
+          <EButton id="resetFamilyHelper" ref="resetFamilyHelper" label="Reset Data Family" color="green" @click="resetNewFamilyData" />
         </ELeft>
       </ECard>
 
@@ -205,16 +204,6 @@ export default {
       this.$nextTick(() => {
         this.$wrapper.clearError(this.$refs.customerEntry)
       })
-    },
-    newFamilyData() {
-      this.model = {
-        father: { ...empty },
-        mother: { ...empty },
-        children: [],
-      }
-      this.model.father.sex = 'SEX_M'
-      this.model.mother.sex = 'SEX_F'
-      this.$wrapper.validate(this.$refs.customerEntry)
     },
     async saveFamily() {
       const { valid } = this.$wrapper.validate(this.$refs.customerEntry)

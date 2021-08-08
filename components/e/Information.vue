@@ -32,7 +32,7 @@ export default {
       const self = this
       setTimeout(() => {
         self.show = false
-      }, 5000)
+      }, 10000)
     },
     metaData() {
       return {
