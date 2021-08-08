@@ -213,6 +213,8 @@ export default {
         this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], true)
         const { result, error } = await this.$rest.post('/family/validate', this.constractFamily())
         this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], false)
+        this.ui.father.sex.disabled = true
+        this.ui.mother.sex.disabled = true
 
         if (result) {
           this.$refs.loader.success()
