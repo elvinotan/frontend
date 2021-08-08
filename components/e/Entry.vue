@@ -89,7 +89,8 @@
 
       <!-- Actions -->
       <ERight>
-        <EButton id="save" ref="save" label="Simpan" color="green" @click="saveFamily" />
+        <EButton id="save" ref="save" label="Save" color="green" :show="showSave" @click="saveFamily" />
+        <EButton id="confim" ref="confim" label="Confirm" color="green" :show="showConfirm" @click="confirmFamily" />
       </ERight>
     </ECol>
 
@@ -141,6 +142,8 @@ export default {
   name: 'Entry',
   data() {
     return {
+      showSave: true,
+      showConfirm: false,
       ui: {
         father: this.$object.clone(uiProps),
         mother: this.$object.clone(uiProps),
@@ -218,7 +221,8 @@ export default {
 
         if (result) {
           this.$refs.loader.success()
-          // TODO saving
+          this.showSave = false
+          this.showConfirm = true
         }
 
         if (error) {
@@ -233,6 +237,10 @@ export default {
           this.$refs.information.addRestError(error)
         }
       }
+    },
+    confirmFamily() {
+      this.showSave = true
+      this.showConfirm = false
     },
     constractFamily() {
       return {
