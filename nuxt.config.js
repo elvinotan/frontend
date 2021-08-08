@@ -51,7 +51,7 @@ export default {
   // BILA tidak ada dan tidak tersedia, maka akan ambil dari configurasi diatas yaitu axios {}
   publicRuntimeConfig: {
     API_HOST: process.env.API_HOST || 'localhost',
-    API_PORT: process.env.API_PORT || '8082',
+    API_PORT: process.env.API_PORT || '8443',
     API_PREFIX: process.env.API_PREFIX || '/backend',
     test_api_key: process.env.test_api_key || 'abxkd-dfkhe-fdmkwh-djdf',
   },
