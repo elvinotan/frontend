@@ -171,7 +171,7 @@ export default {
     remove() {
       if (this.reference) {
         // eslint-disable-next-line vue/no-mutating-props
-        this.rows.splice(this.reference.row.originalIndex, 1)
+        this.rows.splice(this.reference.vgt_id, 1)
       }
     },
     _addNewData() {
