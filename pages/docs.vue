@@ -1761,9 +1761,9 @@
                   <td>lookupGrup</td>
                   <td>
                     <select v-model="lookup.lookupGroup">
-                      <option value="SEX">SEX</option>
-                      <option value="EDUCATION">EDUCATION</option>
-                      <option value="EXP">EXP</option>
+                      <option value="DEMO_SEX">SEX</option>
+                      <option value="DEMO_EDUCATION">EDUCATION</option>
+                      <option value="DEMO_EXP">EXP</option>
                     </select>
                   </td>
                   <td>String</td>
@@ -3919,7 +3919,7 @@ export default {
       },
       lookup: {
         label: 'Jenis Kelamin',
-        lookupGroup: 'SEX',
+        lookupGroup: 'DEMO_SEX',
         placeholder: 'Please Select...',
         required: false,
         disabled: false,
