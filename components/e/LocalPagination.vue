@@ -12,7 +12,7 @@
           :fixed-header="false"
           :line-numbers="true"
           :row-style-class="_rowStyleClassFn"
-          :search-options="{ enabled: true, trigger: 'enter' }"
+          :search-options="{ enabled: _enableSearching, trigger: 'enter' }"
           :select-options="{
             enabled: buttons && buttons.length > 0,
             selectOnCheckboxOnly: true,
@@ -23,7 +23,7 @@
             initialSortBy: initialSortBy,
           }"
           :pagination-options="{
-            enabled: true,
+            enabled: _enablePagination,
             mode: 'pages',
             perPage: 10,
             position: 'bottom',
@@ -143,7 +143,18 @@ export default {
   computed: {
     _addNewDataLabel() {
       if (this.mode === 'multiupload') return 'Browse'
+      if (this.mode === 'upload') return 'Browse'
       return 'Add New Data'
+    },
+    _enablePagination() {
+      if (this.mode === 'multiupload') return true
+      if (this.mode === 'upload') return false
+      return true
+    },
+    _enableSearching() {
+      if (this.mode === 'multiupload') return true
+      if (this.mode === 'upload') return false
+      return true
     },
     disabledButton() {
       return this.selectedRows.length === 0
