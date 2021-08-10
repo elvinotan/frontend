@@ -68,7 +68,7 @@
             </span>
           </template>
           <div slot="table-actions" class="py-0.5 px-2">
-            <EButton v-if="addNewData" :id="'LocalPagination' + id + 'AddNewData'" label="Add New Data" :disabled="disabled" @click="_addNewData" />
+            <EButton v-if="addNewData" :id="'LocalPagination' + id + 'AddNewData'" :label="config.addNewDataLabel" :disabled="disabled" @click="_addNewData" />
           </div>
           <div v-if="buttons && buttons.length > 0" slot="table-actions-bottom" class="py-1.5 px-2 flex justify-start space-x-5">
             <span v-for="button of buttons" :key="button.label">
@@ -107,11 +107,7 @@ export default {
   props: {
     id: { type: String, required: true, default: null },
     show: { type: Boolean, required: false, default: true },
-    label: {
-      type: String,
-      required: true,
-      default: 'Please Provide Table title...',
-    },
+    label: { type: String, required: true, default: 'Please Provide Table title...' },
     disabled: { type: Boolean, required: false, default: false },
     columns: { type: Array, required: false, default: () => [] },
     rows: { type: Array, required: false, default: () => [] },
@@ -141,6 +137,9 @@ export default {
       reference: undefined,
       lcolumns: [],
       selectedRows: [],
+      config: {
+        addNewDataLabel: 'Add New Data',
+      },
     }
   },
   computed: {
@@ -173,6 +172,9 @@ export default {
         // eslint-disable-next-line vue/no-mutating-props
         this.rows.splice(this.reference.vgt_id, 1)
       }
+    },
+    renameAddNewData(addNewDataLabel) {
+      this.config.addNewDataLabel = addNewDataLabel
     },
     _addNewData() {
       this.reference = undefined
