@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ rows }}
     <input :ref="id + 'File'" type="file" style="display: none" @change="_change" />
     <ELocalPagination
       :id="id"
