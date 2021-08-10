@@ -16,7 +16,7 @@
       ]"
       :disabled-action="_disabledAction"
       :add-new-data="_browse"
-      mode="upload"
+      mode="multiupload"
       @delete="_delete"
       @download="_download"
       @preview="_preview"
@@ -39,11 +39,11 @@
 const fileType = 'image/jpeg image/jpg image/jpg application/pdf text/plain video/mp4'
 
 export default {
-  name: 'EUpload',
+  name: 'EMultiUpload',
   props: {
     id: { type: String, required: true, default: null },
     show: { type: Boolean, required: false, default: true },
-    label: { type: String, required: true, default: 'Please Provide Table title...' },
+    label: { type: String, required: false, default: 'Please Provide Table title...' },
     disabled: { type: Boolean, required: false, default: false },
     required: { type: Boolean, required: false, default: false },
     accept: { type: String, required: false, default: fileType }, // secara default accept all, kalo ada yang kurang tambahakan
@@ -161,6 +161,7 @@ export default {
       }
     },
     _change(event) {
+      this.clearError()
       const selectedFile = event.target.files[0]
       if (!selectedFile) return
 
@@ -218,6 +219,13 @@ export default {
         })
       }
       reader.readAsDataURL(fileObject)
+    },
+    metaData() {
+      return {
+        name: this._name,
+        type: 'input',
+        show: this.show,
+      }
     },
     clearError() {
       this.state = 0

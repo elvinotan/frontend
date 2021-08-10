@@ -142,7 +142,7 @@ export default {
   },
   computed: {
     _addNewDataLabel() {
-      if (this.mode === 'upload') return 'Browse'
+      if (this.mode === 'multiupload') return 'Browse'
       return 'Add New Data'
     },
     disabledButton() {
