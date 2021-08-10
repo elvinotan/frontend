@@ -216,6 +216,7 @@ export default {
           if (error) {
             fileRaw.state = 'UPLOADFAILED'
           }
+          this.$refs[this.id + 'File'].value = ''
         })
       }
       reader.readAsDataURL(fileObject)
