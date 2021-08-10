@@ -1,6 +1,6 @@
 <template>
   <div v-if="show">
-    <div class="text-xs rounded border-0 pl-1 outline-none bg-white flex justify-start">
+    <div class="text-xs rounded border-0 pl-1 outline-none bg-white flex justify-start flex-wrap gap-y-0">
       <div v-for="tab of labels" :key="tab.label" class="font-bold rounded-t-lg text-sm w-auto px-3 mr-0.5 ring-2 ring-gray-500" :class="[_cssSelectedTab(tab), _cssCursor(tab)]" @click="tab.disabled ? null : setSelectedTab(tab.label)">
         {{ tab.label }}
       </div>

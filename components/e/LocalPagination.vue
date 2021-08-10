@@ -131,7 +131,7 @@ export default {
       required: false,
       default: null,
     },
-    mode: { type: String, required: true, default: 'default' }, // ini hanya di pakai untuk component developer tidak boleah pake ini
+    mode: { type: String, required: false, default: 'default' }, // ini hanya di pakai untuk component developer tidak boleah pake ini
   },
   data() {
     return {
