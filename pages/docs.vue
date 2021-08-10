@@ -2573,6 +2573,7 @@
             </table>
           </EForm>
           <EForm id="EUpload"> https://medium.com/js-dojo/how-to-upload-base64-images-in-vue-nodejs-4e89635daebc </EForm>
+          <EForm id="EMultiUpload">Multipe Upload Component</EForm>
           <EForm id="ELocalPagination">
             <ELocalPagination
               id="LocalPaginationComponent"
@@ -3764,6 +3765,7 @@ export default {
         { label: 'EFilter' },
         { label: 'EPageLoader' },
         { label: 'EUpload' },
+        { label: 'EMultiUpload' },
         { label: 'ELocalPagination' },
         { label: 'EServerPagination' },
         { label: 'EPopupPagination' },
