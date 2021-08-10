@@ -68,7 +68,7 @@
             </span>
           </template>
           <div slot="table-actions" class="py-0.5 px-2">
-            <EButton v-if="addNewData" :id="'LocalPagination' + id + 'AddNewData'" :label="config.addNewDataLabel" :disabled="disabled" @click="_addNewData" />
+            <EButton v-if="addNewData" :id="'LocalPagination' + id + 'AddNewData'" :label="_addNewDataLabel" :disabled="disabled" @click="_addNewData" />
           </div>
           <div v-if="buttons && buttons.length > 0" slot="table-actions-bottom" class="py-1.5 px-2 flex justify-start space-x-5">
             <span v-for="button of buttons" :key="button.label">
@@ -131,18 +131,20 @@ export default {
       required: false,
       default: null,
     },
+    mode: { type: String, required: true, default: 'default' }, // ini hanya di pakai untuk component developer tidak boleah pake ini
   },
   data() {
     return {
       reference: undefined,
       lcolumns: [],
       selectedRows: [],
-      config: {
-        addNewDataLabel: 'Add New Data',
-      },
     }
   },
   computed: {
+    _addNewDataLabel() {
+      if (this.mode === 'upload') return 'Browse'
+      return 'Add New Data'
+    },
     disabledButton() {
       return this.selectedRows.length === 0
     },
@@ -161,7 +163,8 @@ export default {
     },
     addOrReplace(object) {
       if (this.reference) {
-        Object.assign(this.reference, object)
+        const { bean } = this.reference
+        Object.assign(bean, object)
       } else {
         // eslint-disable-next-line vue/no-mutating-props
         this.rows.push(object)
@@ -169,19 +172,20 @@ export default {
     },
     remove() {
       if (this.reference) {
+        const { row } = this.reference
         // eslint-disable-next-line vue/no-mutating-props
-        this.rows.splice(this.reference.vgt_id, 1)
+        this.rows.splice(row.originalIndex, 1)
       }
     },
-    renameAddNewData(addNewDataLabel) {
-      this.config.addNewDataLabel = addNewDataLabel
+    getReference() {
+      return this.reference
     },
     _addNewData() {
       this.reference = undefined
       this.addNewData()
     },
     _action(action, props) {
-      this.reference = this.rows[props.row.vgt_id]
+      this.reference = { bean: this.rows[props.row.originalIndex], row: props.row }
       this.$emit(action.emit ? action.emit : action.label, props)
     },
     _renderCell(props) {
