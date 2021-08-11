@@ -31,11 +31,6 @@
   </div>
 </template>
 <script>
-// CONVERT = Process convert from binary to base64
-// ONUPLOAD = Process upload file dari ui ke server
-// UPLOADED = Process upload telah selesai dan kembali ke client
-// UPLOADFAILED = Process upload file, gagal krn terjadi error
-
 const fileType = 'image/jpeg image/jpg image/jpg application/pdf text/plain video/mp4'
 
 export default {
@@ -101,7 +96,7 @@ export default {
         const { result } = await this.$rest.get(`/file/fetch/${fileId}`)
         if (result) {
           result.file = file
-          result.state = 'UPLOADED'
+          result.state = this.$enum.UPLOAD.UPLOADED
           this.rows.push(result)
         }
       }
@@ -110,18 +105,18 @@ export default {
   methods: {
     _disabledAction(label, data) {
       if (label.emit === 'delete') {
-        return !['UPLOADED', 'UPLOADFAILED'].includes(data.row.state)
+        return ![this.$enum.UPLOAD.UPLOADED, this.$enum.UPLOAD.UPLOADFAILED].includes(data.row.state)
       }
       if (label.emit === 'download') {
-        return !['UPLOADED'].includes(data.row.state)
+        return ![this.$enum.UPLOAD.UPLOADED].includes(data.row.state)
       }
       if (label.emit === 'preview') {
-        return !['UPLOADED'].includes(data.row.state) || !'image/jpeg image/jpg image/jpg'.includes(data.row.type.toLowerCase())
+        return ![this.$enum.UPLOAD.UPLOADED].includes(data.row.state) || !'image/jpeg image/jpg image/jpg'.includes(data.row.type.toLowerCase())
       }
       return false
     },
     _sizeInMB(size) {
-      return size / 1048576
+      return size / this.$enum.SIZE.MB
     },
     async _delete(bean) {
       const { Yes } = await this.$refs[this.id + 'Confirmation'].confirm(`Are you sure want to delete file ${bean.row.name} ?`)
@@ -193,7 +188,7 @@ export default {
         type: fileObject.type,
         lastModifiedDate: fileObject.lastModifiedDate,
         persist: 'DETACH',
-        state: 'CONVERT',
+        state: this.$enum.UPLOAD.CONVERT,
       }
       this.$refs[this.id].addOrReplace(fileRaw)
 
@@ -204,17 +199,17 @@ export default {
           ...fileRaw,
         }
 
-        fileRaw.state = 'ONUPLOAD'
+        fileRaw.state = this.$enum.UPLOAD.ONUPLOAD
         this.$rest.post('/file/save', file).then(({ result, error }) => {
           if (result) {
             fileRaw.id = result.id
-            fileRaw.state = 'UPLOADED'
+            fileRaw.state = this.$enum.UPLOAD.UPLOADED
             fileRaw.file = this.onAdd(fileRaw)
             // eslint-disable-next-line vue/no-mutating-props
             this.files.push(fileRaw.file)
           }
           if (error) {
-            fileRaw.state = 'UPLOADFAILED'
+            fileRaw.state = this.$enum.UPLOAD.UPLOADFAILED
           }
           this.$refs[this.id + 'File'].value = ''
         })
