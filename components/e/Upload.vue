@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-const fileType = 'image/jpeg image/jpg image/jpg application/pdf text/plain video/mp4'
+const fileType = 'image/jpeg image/jpg application/pdf text/plain video/mp4'
 
 export default {
   name: 'EUpload',

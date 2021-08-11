@@ -1,5 +1,6 @@
 <template>
   <ECard ref="customerEntry" label="Bio Data Keluarga">
+    {{ $data.model }}
     <ELoading ref="loader" />
     <ECol :gap-y="3">
       <!-- Validator Message -->
@@ -85,6 +86,33 @@
         @removeChildren="removeChildren"
         @editChildren="editChildren"
       />
+      <EMultiUpload
+        id="document"
+        ref="document"
+        label="Dokumen"
+        :required="ui.document.table.required"
+        :disabled="ui.document.table.disabled"
+        :show="ui.document.table.show"
+        :max-file="5"
+        :max-size="5"
+        :files="model.document"
+        :on-load="
+          (document) => {
+            return document.id.file.id
+          }
+        "
+        :on-add="
+          (gnFile) => {
+            return {
+              id: {
+                family: { id: model.id },
+                file: { id: gnFile.id },
+              },
+            }
+          }
+        "
+        accept="image/jpeg image/jpg application/pdf"
+      />
 
       <!-- Actions -->
       <ERight>
@@ -147,6 +175,7 @@ export default {
         father: this.$object.clone(uiProps),
         mother: this.$object.clone(uiProps),
         children: { table: { required: true, disabled: false, show: true } },
+        document: { table: { required: true, disabled: false, show: true } },
         dialog: this.$object.clone(uiProps),
       },
       child: this.$object.clone(empty),
@@ -157,6 +186,7 @@ export default {
         father: { typeid: null, name: null, nik: null, sex: null, placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
         mother: { id: null, name: null, nik: null, sex: null, placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
         children: [],
+        document: [],
       },
     }
   },
@@ -283,6 +313,7 @@ export default {
           { ...this.model.mother, type: 'M' },
         ],
         children: [...this.model.children],
+        document: [...this.model.document],
       }
     },
     deconstructFamily(result) {
