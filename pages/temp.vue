@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ files }}
     <EMultiUpload id="upload" ref="uploadAA" label="File Appraisal" :required="true" :disabled="false" :show="true" :max-file="5" :files="files" :on-load="onLoad" :on-add="onAdd" />
     <EButton id="save" ref="save" label="Save" @click="save" />
     <EButton id="replace" ref="replace" label="Replace" @click="replace" />
