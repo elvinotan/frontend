@@ -1,6 +1,11 @@
 <template>
   <div>
     <EMultiUpload id="upload" ref="uploadAA" label="File Appraisal" :required="true" :disabled="false" :show="true" :max-file="5" :files="files" :on-load="onLoad" :on-add="onAdd" />
+
+    <!--
+    {{ file }}
+    <EUpload id="upload" ref="uploadAA" v-model="file.gnFileId" label="File Appraisal" :required="true" :disabled="false" :show="true" :max-file="5" />
+-->
     <EButton id="save" ref="save" label="Save" @click="save" />
     <EButton id="replace" ref="replace" label="Replace" @click="replace" />
   </div>
@@ -10,6 +15,7 @@ export default {
   data() {
     return {
       ui: {},
+      file: { gnFileId: 134, desc: 'KTP', parentId: 12 },
       files: [
         { gnFileId: 134, desc: 'KTP', parentId: 12 },
         { gnFileId: 135, desc: 'KK', parentId: 12 },

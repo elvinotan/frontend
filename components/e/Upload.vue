@@ -1,5 +1,7 @@
 <template>
   <div>
+    {{ value }}
+    {{ rows }}
     <input :ref="id + 'File'" type="file" style="display: none" @change="_change" />
     <ELocalPagination
       :id="id"
@@ -44,15 +46,7 @@ export default {
     accept: { type: String, required: false, default: fileType }, // secara default accept all, kalo ada yang kurang tambahakan
     maxSize: { type: Number, required: false, default: 5 },
     vruntime: { type: Function, required: false, default: null },
-    files: {
-      type: Array,
-      required: false,
-      default: () => {
-        return []
-      },
-    },
-    onLoad: { type: Function, required: false, default: null },
-    onAdd: { type: Function, required: false, default: null },
+    value: { type: Number, required: false, default: null },
   },
   data() {
     return {
@@ -90,19 +84,18 @@ export default {
     },
   },
   async mounted() {
-    if (this.onLoad) {
-      for (const file of this.files) {
-        const fileId = this.onLoad(file)
-        const { result } = await this.$rest.get(`/file/fetch/${fileId}`)
+    await this._load()
+  },
+  methods: {
+    async _load() {
+      if (this.value) {
+        const { result } = await this.$rest.get(`/file/fetch/${this.value}`)
         if (result) {
-          result.file = file
           result.state = this.$enum.UPLOAD.UPLOADED
           this.rows.push(result)
         }
       }
-    }
-  },
-  methods: {
+    },
     _disabledAction(label, data) {
       if (label.emit === 'delete') {
         return ![this.$enum.UPLOAD.UPLOADED, this.$enum.UPLOAD.UPLOADFAILED].includes(data.row.state)
@@ -121,23 +114,7 @@ export default {
     async _delete(bean) {
       const { Yes } = await this.$refs[this.id + 'Confirmation'].confirm(`Are you sure want to delete file ${bean.row.name} ?`)
       if (Yes) {
-        // Agax jadul cara untuk dapaet index, tp emang sengaja aku sgt hati hati sekali dlm delete data
-        let selectedIndex = null
-        const selectedJson = JSON.stringify(bean.row.file)
-        for (let i = 0; i < this.files.length; i++) {
-          const fileJson = JSON.stringify(this.files[i])
-          if (selectedJson === fileJson) {
-            // eslint-disable-next-line no-unused-vars
-            selectedIndex = i
-            break
-          }
-        }
-
-        if (selectedIndex !== null) {
-          // eslint-disable-next-line vue/no-mutating-props
-          this.files.splice(selectedIndex, 1)
-        }
-
+        this.files.splice(0, 1)
         this.$refs[this.id].remove()
         this.validate()
       }
@@ -204,9 +181,8 @@ export default {
           if (result) {
             fileRaw.id = result.id
             fileRaw.state = this.$enum.UPLOAD.UPLOADED
-            fileRaw.file = this.onAdd(fileRaw)
             // eslint-disable-next-line vue/no-mutating-props
-            this.files.push(fileRaw.file)
+            this.value = result.id
           }
           if (error) {
             fileRaw.state = this.$enum.UPLOAD.UPLOADFAILED
@@ -240,12 +216,8 @@ export default {
     validate() {
       this.clearError()
       // General validation base on props
-      if (this.required && this.rows.length <= 0) {
+      if (this.required && !this.value) {
         this.errors.push(`${this.label} is required`)
-      }
-
-      if (this.rows && this.rows.length > this.maxFile) {
-        this.errors.push(`${this.label}, exceeded maximum file upload`)
       }
 
       // add business runtime validation

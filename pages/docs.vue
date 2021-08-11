@@ -4160,8 +4160,12 @@ export default {
         maxFile: 5,
         accept: 'image/jpeg',
         files: [],
-        onLoad: () => {},
-        onAdd: () => {},
+        onLoad: (bean) => {
+          return bean.fileId
+        },
+        onAdd: (bean) => {
+          return { fileId: bean.id, parentId: 10 }
+        },
       },
       localPagination: {
         label: 'List of Customer',

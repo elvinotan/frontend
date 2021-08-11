@@ -77,6 +77,7 @@ export default {
       rows: [],
       state: 0,
       errors: [],
+      reload: true, // flag untuk menandakan reload ke server atau tidak, utuk menghindari flicker, saat add new File
     }
   },
   computed: {
@@ -91,7 +92,6 @@ export default {
   },
   watch: {
     async files(newVal, oldVal) {
-      this.rows = []
       await this._load()
     },
   },
@@ -100,7 +100,8 @@ export default {
   },
   methods: {
     async _load() {
-      if (this.onLoad) {
+      if (this.onLoad && this.files && this.reload) {
+        this.rows = []
         for (const file of this.files) {
           const fileId = this.onLoad(file)
           const { result } = await this.$rest.get(`/file/fetch/${fileId}`)
@@ -111,6 +112,7 @@ export default {
           }
         }
       }
+      this.reload = true // reset langi jadi true
     },
     _disabledAction(label, data) {
       if (label.emit === 'delete') {
@@ -214,6 +216,7 @@ export default {
             fileRaw.id = result.id
             fileRaw.state = this.$enum.UPLOAD.UPLOADED
             fileRaw.file = this.onAdd(fileRaw)
+            this.reload = false
             // eslint-disable-next-line vue/no-mutating-props
             this.files.push(fileRaw.file)
           }
