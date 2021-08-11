@@ -1,5 +1,10 @@
 <template>
   <div>
+    Rows : {{ rows }}
+    <br />
+    <br />
+    <br />
+    Files : {{ files }}
     <input :ref="id + 'File'" type="file" style="display: none" @change="_change" />
     <ELocalPagination
       :id="id"
@@ -89,20 +94,29 @@ export default {
       return `${this.rows.length} / ${this.maxFile} Files`
     },
   },
+  watch: {
+    async files(newVal, oldVal) {
+      this.rows = []
+      await this._load()
+    },
+  },
   async mounted() {
-    if (this.onLoad) {
-      for (const file of this.files) {
-        const fileId = this.onLoad(file)
-        const { result } = await this.$rest.get(`/file/fetch/${fileId}`)
-        if (result) {
-          result.file = file
-          result.state = this.$enum.UPLOAD.UPLOADED
-          this.rows.push(result)
-        }
-      }
-    }
+    await this._load()
   },
   methods: {
+    async _load() {
+      if (this.onLoad) {
+        for (const file of this.files) {
+          const fileId = this.onLoad(file)
+          const { result } = await this.$rest.get(`/file/fetch/${fileId}`)
+          if (result) {
+            result.file = file
+            result.state = this.$enum.UPLOAD.UPLOADED
+            this.rows.push(result)
+          }
+        }
+      }
+    },
     _disabledAction(label, data) {
       if (label.emit === 'delete') {
         return ![this.$enum.UPLOAD.UPLOADED, this.$enum.UPLOAD.UPLOADFAILED].includes(data.row.state)
