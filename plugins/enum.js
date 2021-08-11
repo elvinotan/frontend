@@ -4,7 +4,6 @@ export default function (plugin, inject) {
       MB: 1048576, // 1 MB TO BYTE
     },
     UPLOAD: {
-      SUPPORT_DATATYPE: 'image/jpeg image/jpg image/jpg application/pdf text/plain video/mp4',
       CONVERT: 'CONVERT', // Process convert from binary to base64
       ONUPLOAD: 'ONUPLOAD', // Process upload file dari ui ke server
       UPLOADED: 'UPLOADED', // Process upload telah selesai dan kembali ke client

@@ -83,6 +83,11 @@ export default {
       return `${this.rows.length} / ${this.maxFile} Files`
     },
   },
+  watch: {
+    async value(newVal, oldVal) {
+      await this._load()
+    },
+  },
   async mounted() {
     await this._load()
   },
@@ -92,7 +97,7 @@ export default {
         const { result } = await this.$rest.get(`/file/fetch/${this.value}`)
         if (result) {
           result.state = this.$enum.UPLOAD.UPLOADED
-          this.rows.push(result)
+          this.rows = [result]
         }
       }
     },
@@ -114,7 +119,7 @@ export default {
     async _delete(bean) {
       const { Yes } = await this.$refs[this.id + 'Confirmation'].confirm(`Are you sure want to delete file ${bean.row.name} ?`)
       if (Yes) {
-        this.files.splice(0, 1)
+        this.$emit('input', null)
         this.$refs[this.id].remove()
         this.validate()
       }
@@ -181,8 +186,7 @@ export default {
           if (result) {
             fileRaw.id = result.id
             fileRaw.state = this.$enum.UPLOAD.UPLOADED
-            // eslint-disable-next-line vue/no-mutating-props
-            this.value = result.id
+            this.$emit('input', result.id)
           }
           if (error) {
             fileRaw.state = this.$enum.UPLOAD.UPLOADFAILED
