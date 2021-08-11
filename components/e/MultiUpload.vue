@@ -82,7 +82,7 @@ export default {
   },
   computed: {
     _label() {
-      const supportedFile = fileType === this.accept ? 'Ext: All File Supported' : 'Ext' + this.accept
+      const supportedFile = fileType === this.accept ? 'Ext: All File Supported' : 'Ext: ' + this.accept
       const maxSizeFile = 'Maximum Size ' + this.maxSize + ' MB'
       return this.label + (this.required ? ' * ' : ' ') + '(' + supportedFile + ', ' + maxSizeFile + ')'
     },

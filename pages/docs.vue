@@ -2572,9 +2572,148 @@
               </tbody>
             </table>
           </EForm>
-          <EForm id="EUpload"> https://medium.com/js-dojo/how-to-upload-base64-images-in-vue-nodejs-4e89635daebc </EForm>
+          <EForm id="EUpload">
+            <EUpload id="UploadComponent" ref="UploadComponent" v-model="upload.value.fileId" :label="upload.label" :required="upload.required" :disabled="upload.disabled" :show="upload.show" :max-size="upload.maxSize" :accept="upload.accept" />
+            <br />
+            <div class="text-xs">Template : {{ htmlUpload }}</div>
+            <br />
+            <div class="text-xs">Data Object : {{ upload }}</div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Props</td>
+                  <td>Try</td>
+                  <td>Type</td>
+                  <td>Required</td>
+                  <td>Default</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>id</td>
+                  <td>-</td>
+                  <td>String</td>
+                  <td>true</td>
+                  <td>null</td>
+                  <td>id dari component, gax perlu di binding</td>
+                </tr>
+                <tr>
+                  <td>label</td>
+                  <td><input v-model="upload.label" type="text" /></td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>Please Provide Table title...</td>
+                  <td>Label untuk component</td>
+                </tr>
+                <tr>
+                  <td>show</td>
+                  <td>
+                    <input v-model="upload.show" type="checkbox" />
+                  </td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>true</td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
+                </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td>
+                    <input v-model="upload.disabled" type="checkbox" />
+                  </td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>false</td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
+                </tr>
+                <tr>
+                  <td>required</td>
+                  <td>
+                    <input v-model="upload.required" type="checkbox" />
+                  </td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>false</td>
+                  <td>Boolean untuk menentukan required atau tidak text, error message akan otomatis terisi bila kosong</td>
+                </tr>
+                <tr>
+                  <td>maxSize</td>
+                  <td>
+                    <input v-model.number="upload.maxSize" type="number" />
+                  </td>
+                  <td>Number</td>
+                  <td>false</td>
+                  <td>5 BM</td>
+                  <td>Maxium ukurang file yang bisa di upload</td>
+                </tr>
+                <tr>
+                  <td>accept</td>
+                  <td>
+                    <input v-model="upload.accept" type="text" />
+                  </td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>image/jpeg image/jpg image/jpg application/pdf text/plain video/mp4</td>
+                  <td>Tipe file apa saja yang di perboleahkan di upload</td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Try</td>
+                  <td>Result</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>metaData</td>
+                  <td>
+                    <button @click="metaData('UploadComponent')">Click</button>
+                  </td>
+                  <td>{{ metadata }}</td>
+                  <td>Component Information</td>
+                </tr>
+                <tr>
+                  <td>clearError</td>
+                  <td>
+                    <button @click="clearError('UploadComponent')">Click</button>
+                  </td>
+                  <td>Void</td>
+                  <td>Hapus error, kembalikan ke state component semula</td>
+                </tr>
+                <tr>
+                  <td>hasError</td>
+                  <td>
+                    <button @click="hasError('UploadComponent')">Click</button>
+                  </td>
+                  <td>{{ haserror }}</td>
+                  <td>Flag untuk menandakan apakah component pass validasi atau tidak</td>
+                </tr>
+                <tr>
+                  <td>addError</td>
+                  <td>
+                    <button @click="addError('UploadComponent')">Click</button>
+                  </td>
+                  <td>-</td>
+                  <td>Penambahan error secara manual, programtically</td>
+                </tr>
+                <tr>
+                  <td>validate</td>
+                  <td>
+                    <button @click="validate('UploadComponent')">Click</button>
+                  </td>
+                  <td>{{ valid }}</td>
+                  <td>Lakukan validasi berdasarkan required dan vruntime</td>
+                </tr>
+              </tbody>
+            </table>
+          </EForm>
           <EForm id="EMultiUpload">
-            <EMultiUpload id="MultiUploadComponent" ref="MultiUploadComponent" :label="multiUpload.label" :required="multiUpload.required" :disabled="multiUpload.disabled" :show="multiUpload.show" :max-file="multiUpload.maxFile" :files="multiUpload.files" :on-load="multiUpload.onLoad" :on-add="multiUpload.onAdd" />
+            <EMultiUpload id="MultiUploadComponent" ref="MultiUploadComponent" :label="multiUpload.label" :required="multiUpload.required" :disabled="multiUpload.disabled" :show="multiUpload.show" :accept="multiUpload.accept" :max-size="multiUpload.maxSize" :max-file="multiUpload.maxFile" :files="multiUpload.files" :on-load="multiUpload.onLoad" :on-add="multiUpload.onAdd" />
             <br />
             <div class="text-xs">Template : {{ htmlMultiUpload }}</div>
             <br />
@@ -2650,7 +2789,7 @@
                 <tr>
                   <td>maxSize</td>
                   <td>
-                    <input v-model="multiUpload.maxSize" type="number" />
+                    <input v-model.number="multiUpload.maxSize" type="number" />
                   </td>
                   <td>Number</td>
                   <td>false</td>
@@ -3896,6 +4035,7 @@ export default {
       htmlTabs: '<ETabs id="" ref="" :labels="[{ label:null , disabled: false }]" :disabled="" :show="" >Contents </ETabs>',
       htmlFilter: '<EFilter id="" ref="" :title="" :disabled="" :show="" @Clear="" @Search="">Contents </EFilter>',
       htmlPageLoader: '<EPageLoader id="" ref="" :labels="" :fetcher="()=>{}" >Contents</EPageLoader>',
+      htmlUpload: '<EUpload id="" ref="" :label="" :required="" :disabled="" :show="" :max-size="" :accept="" />',
       htmlMultiUpload: '<EMultiUpload id="" ref="" :label="" :required="" :disabled="" :show="" :max-file="" :max-size="" :files="" :on-load="()=>{}" :on-add="()=>{}" :accept="" />',
       htmlLocalPagination: '<ELocalPagination id="" ref="" :label="" :show="" :disabled="" :disabledAction="()=>{}" :addNewData="()=>" :saveState="()=>" :columns="[]" :rows="[]" :actions="[]" :buttons="[]" :initialSortBy="[]" @RowClick="()=>{}" />',
       htmlLocalPaginationColumn: '{ label:"", field:"", sortable: true, width:"100px", tooltip:"", type:"", :format="()=>{}" } // type = text, number, decimal, percentage, boolean',
@@ -4152,12 +4292,22 @@ export default {
       pageLoader: {
         label: 'Tab PageLoder',
       },
+      upload: {
+        label: 'Apprisal File',
+        required: true,
+        disabled: false,
+        show: true,
+        maxSize: 8,
+        accept: 'image/jpeg application/pdf',
+        value: { fileId: null },
+      },
       multiUpload: {
         label: 'Apprisal File',
         required: true,
         disabled: false,
         show: true,
         maxFile: 5,
+        maxSize: 5,
         accept: 'image/jpeg',
         files: [],
         onLoad: (bean) => {
