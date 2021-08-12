@@ -1,6 +1,5 @@
 <template>
   <ECard ref="customerEntry" label="Bio Data Keluarga">
-    {{ $data.model }}
     <ELoading ref="loader" />
     <ECol :gap-y="3">
       <!-- Validator Message -->
@@ -122,7 +121,6 @@
 
     <!-- Entry Dialog -->
     <EDialog id="childrenDlg" ref="childrenDlg" title="Tambah Anak" :width="800" :height="400" :buttons="[{ label: 'Simpan', emit: 'saveChild', color: 'green' }]" @saveChild="saveChild">
-      {{ child }}
       <ECol>
         <ECol :col="2">
           <EText id="childName" ref="childName" v-model="child.name" label="Nama Anak" placeholder="Input Nama Anak" type="short" :required="ui.dialog.name.required" :disabled="ui.dialog.name.disabled" :show="ui.dialog.name.show" />
