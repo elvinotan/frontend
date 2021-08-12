@@ -78,7 +78,7 @@
         ]"
         :disabled-action="() => {}"
         :add-new-data="addChildren"
-        :save-state="() => {}"
+        :save-state="saveState"
         :rows="model.children"
         :buttons="[]"
         :initial-sort-by="[]"
@@ -342,6 +342,9 @@ export default {
     async removeChildren(props) {
       const { Yes } = await this.$refs.confirmation.confirm(`Are you sure want to remove ${props.row.name} ?`)
       if (Yes) this.$refs.children.remove()
+    },
+    saveState(prop) {
+      return !!prop.row.id
     },
   },
 }
