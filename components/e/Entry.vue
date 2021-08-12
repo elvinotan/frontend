@@ -98,16 +98,14 @@
         :files="model.document"
         :on-load="
           (document) => {
-            return document.id.file.id
+            return document.fileId
           }
         "
         :on-add="
           (gnFile) => {
             return {
-              id: {
-                family: { id: model.id },
-                file: { id: gnFile.id },
-              },
+              familyId: model.id,
+              fileId: gnFile.id,
             }
           }
         "
@@ -319,7 +317,7 @@ export default {
     deconstructFamily(result) {
       const father = result.parent.find((p) => p.type === 'F')
       const mother = result.parent.find((p) => p.type === 'M')
-      return { id: result.id, name: result.name, enabled: result.enabled, father, mother, children: result.children }
+      return { id: result.id, name: result.name, enabled: result.enabled, father, mother, children: result.children, document: result.document }
     },
 
     addChildren() {
