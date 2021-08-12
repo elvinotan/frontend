@@ -71,6 +71,9 @@
               <input v-if="props.row[props.column.field]" type="checkbox" disabled checked />
               <input v-else type="checkbox" disabled />
             </span>
+            <span v-else-if="props.column.type === 'file'">
+              <button v-if="props.row[props.column.field]" class="font-bold" @click="_viewFile(props)">View</button>
+            </span>
             <span v-else>
               {{ _renderCell(props) }}
             </span>
@@ -86,6 +89,9 @@
         </vue-good-table>
       </div>
     </div>
+    <EDialog :id="'ServerPagination' + id + 'Dialog'" :ref="'ServerPagination' + id + 'Dialog'" title="View File" :width="800" :height="220">
+      <EUpload :id="'ServerPagination' + id + 'Upload'" v-model="fileColumn.value" :label="fileColumn.label" :required="false" :disabled="true" :accept="fileColumn.accept" :max-size="fileColumn.maxSize" />
+    </EDialog>
   </div>
 </template>
 
@@ -164,6 +170,7 @@ export default {
       },
       columnClick: null,
       error: null,
+      fileColumn: {},
     }
   },
   computed: {
@@ -278,6 +285,14 @@ export default {
             ...lcolumn,
           }
         }
+        if (lcolumn.type === 'file') {
+          lcolumn = {
+            formatFn: this._formatText,
+            thClass: 'vgt-center-align text-sm',
+            tdClass: 'vgt-center-align text-sm',
+            ...lcolumn,
+          }
+        }
 
         if (lcolumn.field !== 'action') this.lcolumns.push(lcolumn)
       }
@@ -380,6 +395,11 @@ export default {
     async _onSearch(params) {
       this.serverParams.search = params.searchTerm
       await this.fetchData()
+    },
+    _viewFile(props) {
+      const column = this.columns.find((e) => e.field === props.column.field)
+      this.fileColumn = { ...column, value: props.row[column.field] }
+      this.$refs['ServerPagination' + this.id + 'Dialog'].open()
     },
   },
 }

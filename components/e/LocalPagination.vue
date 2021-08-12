@@ -63,6 +63,9 @@
               <input v-if="props.row[props.column.field]" type="checkbox" disabled checked />
               <input v-else type="checkbox" disabled />
             </span>
+            <span v-else-if="props.column.type === 'file'">
+              <button v-if="props.row[props.column.field]" class="font-bold" @click="_viewFile(props)">View</button>
+            </span>
             <span v-else>
               {{ _renderCell(props) }}
             </span>
@@ -78,6 +81,9 @@
         </vue-good-table>
       </div>
     </div>
+    <EDialog :id="'LocalPagination' + id + 'Dialog'" :ref="'LocalPagination' + id + 'Dialog'" title="View File" :width="800" :height="220">
+      <EUpload :id="'LocalPagination' + id + 'Upload'" v-model="fileColumn.value" :label="fileColumn.label" :required="false" :disabled="true" :accept="fileColumn.accept" :max-size="fileColumn.maxSize" />
+    </EDialog>
   </div>
 </template>
 
@@ -138,6 +144,7 @@ export default {
       reference: undefined,
       lcolumns: [],
       selectedRows: [],
+      fileColumn: {},
     }
   },
   computed: {
@@ -301,6 +308,14 @@ export default {
             ...lcolumn,
           }
         }
+        if (lcolumn.type === 'file') {
+          lcolumn = {
+            formatFn: this._formatText,
+            thClass: 'vgt-center-align text-sm',
+            tdClass: 'vgt-center-align text-sm',
+            ...lcolumn,
+          }
+        }
 
         if (lcolumn.field !== 'action') this.lcolumns.push(lcolumn)
       }
@@ -361,6 +376,11 @@ export default {
     _rowStyleClassFn(row) {
       // specific class berdasarkan data row
       return ''
+    },
+    _viewFile(props) {
+      const column = this.columns.find((e) => e.field === props.column.field)
+      this.fileColumn = { ...column, value: props.row[column.field] }
+      this.$refs['LocalPagination' + this.id + 'Dialog'].open()
     },
   },
 }

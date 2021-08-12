@@ -70,6 +70,7 @@
           { label: 'Agama', field: 'religion', sortable: true, width: '100px', tooltip: 'Agama', type: 'lookup', reference: 'DEMO_RELIGION' },
           { label: 'Pendidikan', field: 'education', sortable: true, width: '100px', tooltip: 'Pendidikan', type: 'lookup', reference: 'DEMO_EDUCATION' },
           { label: 'Pekerjaan', field: 'job', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'DEMO_JOB' },
+          { label: 'KTP', field: 'doc', sortable: false, width: '100px', tooltip: 'KTP', type: 'file', maxSize: 2, accept: 'image/jpeg' },
           { field: 'action', width: '200px' },
         ]"
         :actions="[
@@ -120,7 +121,8 @@
     </ECol>
 
     <!-- Entry Dialog -->
-    <EDialog id="childrenDlg" ref="childrenDlg" title="Tambah Anak" :width="800" :height="250" :buttons="[{ label: 'Simpan', emit: 'saveChild', color: 'green' }]" @saveChild="saveChild">
+    <EDialog id="childrenDlg" ref="childrenDlg" title="Tambah Anak" :width="800" :height="400" :buttons="[{ label: 'Simpan', emit: 'saveChild', color: 'green' }]" @saveChild="saveChild">
+      {{ child }}
       <ECol>
         <ECol :col="2">
           <EText id="childName" ref="childName" v-model="child.name" label="Nama Anak" placeholder="Input Nama Anak" type="short" :required="ui.dialog.name.required" :disabled="ui.dialog.name.disabled" :show="ui.dialog.name.show" />
@@ -132,6 +134,7 @@
           <ELookup id="childEducation" ref="childEducation" v-model="child.education" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.dialog.education.required" :disabled="ui.dialog.education.disabled" :show="ui.dialog.education.show" lookup-group="DEMO_EDUCATION" />
           <ELookup id="childJob" ref="childJob" v-model="child.job" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.dialog.job.required" :disabled="ui.dialog.job.disabled" :show="ui.dialog.job.show" lookup-group="DEMO_JOB" />
         </ECol>
+        <EUpload id="childDoc" ref="childDoc" v-model="child.doc" label="KTP" :required="ui.dialog.doc.required" :disabled="ui.dialog.doc.disabled" :show="ui.dialog.doc.show" :max-size="2" accept="image/jpeg" />
       </ECol>
     </EDialog>
 
@@ -174,7 +177,7 @@ export default {
         mother: this.$object.clone(uiProps),
         children: { table: { required: true, disabled: false, show: true } },
         document: { table: { required: true, disabled: false, show: true } },
-        dialog: this.$object.clone(uiProps),
+        dialog: { ...this.$object.clone(uiProps), doc: { required: true, disabled: false, show: true } },
       },
       child: this.$object.clone(empty),
       model: {
@@ -229,6 +232,7 @@ export default {
         religion: 'RELIGION_KA',
         education: 'EDUCATION_SMP',
         job: 'JOB_P',
+        doc: null,
       })
     },
     resetNewFamilyData() {
@@ -321,7 +325,7 @@ export default {
     },
 
     addChildren() {
-      this.child = this.$object.clone(empty)
+      this.child = { ...this.$object.clone(empty), doc: null }
       this.$refs.childrenDlg.open()
     },
     editChildren(props) {
