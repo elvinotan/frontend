@@ -104,7 +104,7 @@
         :on-add="
           (gnFile) => {
             return {
-              familyId: model.id,
+              familyId: null,
               fileId: gnFile.id,
             }
           }
