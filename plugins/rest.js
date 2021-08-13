@@ -1,4 +1,4 @@
-export default function ({ $axios, $config, $string, $number, store }, inject) {
+export default function ({ $axios, $config, $string, store }, inject) {
   const rest = {
     // Local Storage
     setLocalStorage(key, object) {

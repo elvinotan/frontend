@@ -15,7 +15,7 @@ export default {
   css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/component', '~/plugins/axios', '~/plugins/wrapper', '~/plugins/fmt', '~/plugins/string', '~/plugins/number', '~/plugins/object', '~/plugins/array', '~/plugins/enum', '~/plugins/rest'],
+  plugins: ['~/plugins/component', '~/plugins/axios', '~/plugins/wrapper', '~/plugins/fmt', '~/plugins/string', '~/plugins/number', '~/plugins/object', '~/plugins/array', '~/plugins/enum', '~/plugins/rest', '~/plugins/nav', '~/plugins/bus'],
 
   serverMiddleware: {
     '/api': '~/api',

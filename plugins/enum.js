@@ -11,12 +11,16 @@ export default function (plugin, inject) {
     },
     LOCAL_STORAGE: {
       EXAMPLE: 'EXAMPLE',
-      APP_TOKEN: 'app_token',
+      APP_TOKEN: 'APP_TOKEN', // store jwt token
+      LAST_PATH: 'LAST_PATH', // store last menu access by user
     },
     VUEX: {
       EXAMPLE: 'EXAMPLE',
       LOOKUP_PREFIX: 'LOOKUP_', // Ini adalah prefix untuk component Lookup
       POPUPPAGINATION_PREFIX: 'POPUPPAGINATION_', // Ini adalah prefix untuk componentn popupPagination
+    },
+    EVENT_BUS: {
+      BREADCRUMBS: 'eventbus-breadcrumbs',
     },
   }
 
