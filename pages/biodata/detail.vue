@@ -356,7 +356,7 @@ export default {
       if (onConfirm) {
         this.disabled(false)
       } else {
-        this.$nav.to({ path: '/home' })
+        this.$nav.to({ path: '/biodata/list' })
       }
     },
   },

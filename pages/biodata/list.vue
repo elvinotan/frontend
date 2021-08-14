@@ -3,34 +3,45 @@
     <ECol :gap-y="3">
       <EFilter id="customerFilter" ref="customerFilter" title="Search Customer" :disabled="ui.filter.disabled" @Clear="clear" @Search="search">
         <ECol :col="4">
-          <EText id="customerFilterName" ref="customerFilterName" v-model="filter.name" label="Full Name" placeholder="Input Full Name" type="long" :disabled="ui.name.disabled" :required="false" />
-          <EDate id="customerFilterBirthDate" ref="customerFilterBirthDate" v-model="filter.birthDate" label="Birth Date" :disabled="ui.birthDate.disabled" :required="false" />
-          <ENumber id="customerFilterBirthAge" ref="customerFilterBirthAge" v-model="filter.age" label="Age" placeholder="Input Age" :maxlength="3" :disabled="ui.age.disabled" :required="false" />
-          <EBoolean id="customerFilterBirthMerried" ref="customerFilterBirthMerried" v-model="filter.merried" label="Merried" placeholder="" type="YesNo" :disabled="ui.merried.disabled" :required="false" />
+          <EText id="filterFatherName" ref="filterFatherName" v-model="filter.fatherName" label="Nama Ayah" placeholder="Input Full Name" type="short" :disabled="ui.fatherName.disabled" :required="false" />
+          <ENumber id="filterFatherNik" ref="filterFatherNik" v-model="filter.fatherNik" label="NIK" placeholder="Input NIK" type="short" :required="ui.fatherNik.disabled" :disabled="false" />
+
+          <EText id="filterMotherName" ref="filterMotherName" v-model="filter.motherName" label="Nama Ibu" placeholder="Input Full Name" type="short" :disabled="ui.motherName.disabled" :required="false" />
+          <ENumber id="filterMotherNik" ref="filterMotherNik" v-model="filter.motherNik" label="NIK" placeholder="Input NIK" type="short" :required="ui.motherNik.disabled" :disabled="false" />
         </ECol>
       </EFilter>
       <EServerPagination
-        id="customerServerPagination"
-        ref="customerServerPagination"
-        label="List Of Customer"
-        picker="pagingDummyCustomer"
+        id="pagingFamily"
+        ref="pagingFamily"
+        label="List Of Family"
+        picker="pagingFamily"
         :auto-load="true"
-        :filter="filter"
         :add-new-data="addNewData"
         :disabled-action="disabledAction"
+        :filter="filter"
+        :initial-sort-by="[{ field: 'fatherName', type: 'asc' }]"
         :actions="[
           { label: 'Delete', emit: 'hapus' },
           { label: 'Edit', emit: 'ubah' },
           { label: 'View', emit: 'lihat' },
         ]"
-        :initial-sort-by="[{ field: 'name', type: 'asc' }]"
         :columns="[
-          { label: 'Full Name', field: 'name', sortable: true, width: '600px', tooltip: 'Customer Name', type: 'text' },
-          { label: 'Birth Date', field: 'birthDate', sortable: true, width: '100px', tooltip: 'Customer Birth Date', type: 'date' },
-          { label: 'Age', field: 'age', sortable: true, width: '100px', tooltip: 'Customer Age', type: 'number' },
-          { label: 'Saving', field: 'saving', sortable: true, width: '100px', tooltip: 'Customer Bank Saving', type: 'decimal' },
-          { label: 'Allow Loan Pct', field: 'loanPct', sortable: true, width: '100px', tooltip: 'Loan Percentage Allowed', type: 'percentage' },
-          { label: 'Merried', field: 'merried', sortable: true, width: '100px', tooltip: 'Is Customer Merried', type: 'boolean' },
+          { label: 'Nama Ayah', field: 'fatherName', sortable: true, width: '100px', tooltip: 'Father Name', type: 'text' },
+          { label: 'NIK', field: 'fatherNik', sortable: true, width: '100px', tooltip: 'NIK', type: 'text' },
+          { label: 'Kelamin', field: 'fatherSex', sortable: true, width: '100px', tooltip: 'Kelamin', type: 'lookup', reference: 'DEMO_SEX' },
+          { label: 'Tmpt Lahir', field: 'fatherPlaceOfBirth', sortable: true, width: '100px', tooltip: 'Tempat Lahir', type: 'text' },
+          { label: 'Tgl Lahir', field: 'fatherDateOfBirth', sortable: true, width: '100px', tooltip: 'Tanggal Lahir', type: 'date' },
+          { label: 'Agama', field: 'fatherReligion', sortable: true, width: '100px', tooltip: 'Agama', type: 'lookup', reference: 'DEMO_RELIGION' },
+          { label: 'Edukasi', field: 'fatherEducation', sortable: true, width: '100px', tooltip: 'Edukasi', type: 'lookup', reference: 'DEMO_EDUCATION' },
+          { label: 'Pekerjaan', field: 'fatherJob', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'DEMO_JOB' },
+          { label: 'Nama Ibu', field: 'motherName', sortable: true, width: '100px', tooltip: 'Father Name', type: 'text' },
+          { label: 'NIK', field: 'motherNik', sortable: true, width: '100px', tooltip: 'NIK', type: 'text' },
+          { label: 'Kelamin', field: 'motherSex', sortable: true, width: '100px', tooltip: 'Kelamin', type: 'lookup', reference: 'DEMO_SEX' },
+          { label: 'Tmpt Lahir', field: 'motherPlaceOfBirth', sortable: true, width: '100px', tooltip: 'Tempat Lahir', type: 'text' },
+          { label: 'Tgl Lahir', field: 'motherDateOfBirth', sortable: true, width: '100px', tooltip: 'Tanggal Lahir', type: 'date' },
+          { label: 'Agama', field: 'motherReligion', sortable: true, width: '100px', tooltip: 'Agama', type: 'lookup', reference: 'DEMO_RELIGION' },
+          { label: 'Edukasi', field: 'motherEducation', sortable: true, width: '100px', tooltip: 'Edukasi', type: 'lookup', reference: 'DEMO_EDUCATION' },
+          { label: 'Pekerjaan', field: 'motherJob', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'DEMO_JOB' },
         ]"
         @RowClick="rowClick"
         @hapus="hapus"
@@ -43,10 +54,10 @@
 </template>
 <script>
 const emptyFilter = {
-  name: null,
-  birthDate: null,
-  age: null,
-  merried: null,
+  fatherName: null,
+  fatherNik: null,
+  motherName: null,
+  motherNik: null,
 }
 
 export default {
@@ -55,11 +66,11 @@ export default {
     return {
       filter: { ...emptyFilter },
       ui: {
-        name: { disabled: false },
-        birthDate: { disabled: false },
-        age: { disabled: false },
-        merried: { disabled: false },
         filter: { disabled: false },
+        fatherName: { disabled: false },
+        fatherNik: { disabled: false },
+        motherName: { disabled: false },
+        motherNik: { disabled: false },
       },
     }
   },
@@ -102,7 +113,7 @@ export default {
       const { valid } = this.$wrapper.validate(this.$refs.customerFilter)
       if (valid) {
         this.$wrapper.disabled(this.ui, true)
-        await this.$refs.customerServerPagination.fetchData()
+        await this.$refs.pagingFamily.fetchData()
         this.$wrapper.disabled(this.ui, false)
       }
     },
