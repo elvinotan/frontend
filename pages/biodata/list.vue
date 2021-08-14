@@ -24,7 +24,6 @@
         :filter="filter"
         :initial-sort-by="[{ field: 'fatherName', type: 'asc' }]"
         :actions="[
-          { label: 'Delete', emit: 'hapus' },
           { label: 'Edit', emit: 'ubah' },
           { label: 'View', emit: 'lihat' },
         ]"
@@ -91,12 +90,8 @@ export default {
   methods: {
     addNewData() {
       this.$nav.to({ path: '/biodata/entry' })
-      // this.$refs.customerMessage.success('Add New Data Clicked, Redirect to Entry Page')
     },
     disabledAction(label, data) {
-      if (label.emit === 'hapus') {
-        return data.row.age > 50
-      }
       if (label.emit === 'ubah') {
         return data.row.merried
       }
@@ -107,9 +102,6 @@ export default {
     },
     rowClick(data) {
       this.$refs.customerMessage.success(`Detail data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`)
-    },
-    hapus(data) {
-      this.$refs.customerMessage.success(`Delete data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`)
     },
     lihat(data) {
       this.$refs.customerMessage.success(`View data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`)
