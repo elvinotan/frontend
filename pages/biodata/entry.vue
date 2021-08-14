@@ -8,9 +8,6 @@
 import detail from './detail.vue'
 export default {
   components: { detail },
-  data() {
-    return {}
-  },
   methods: {
     back(onConfirm) {
       this.$refs.detail.back(onConfirm)
