@@ -3,11 +3,14 @@
     <ECol :gap-y="3">
       <EFilter id="customerFilter" ref="customerFilter" title="Search Customer" :disabled="ui.filter.disabled" @Clear="clear" @Search="search">
         <ECol :col="4">
-          <EText id="filterFatherName" ref="filterFatherName" v-model="filter.fatherName" label="Nama Ayah" placeholder="Input Full Name" type="short" :disabled="ui.fatherName.disabled" :required="false" />
-          <ENumber id="filterFatherNik" ref="filterFatherNik" v-model="filter.fatherNik" label="NIK" placeholder="Input NIK" type="short" :required="ui.fatherNik.disabled" :disabled="false" />
-
-          <EText id="filterMotherName" ref="filterMotherName" v-model="filter.motherName" label="Nama Ibu" placeholder="Input Full Name" type="short" :disabled="ui.motherName.disabled" :required="false" />
-          <ENumber id="filterMotherNik" ref="filterMotherNik" v-model="filter.motherNik" label="NIK" placeholder="Input NIK" type="short" :required="ui.motherNik.disabled" :disabled="false" />
+          <EText id="filterFatherName" v-model="filter.fatherName" label="Nama Ayah" placeholder="Input Full Name" type="short" :disabled="ui.fatherName.disabled" />
+          <ENumber id="filterFatherNik" v-model="filter.fatherNik" label="NIK" placeholder="Input NIK" type="short" :disabled="ui.fatherNik.disabled" />
+          <EDate id="filterFatherDateOfBirth" v-model="filter.fatherDateOfBirth" label="Tgl Lahir" :disabled="ui.fatherDateOfBirth.disabled" />
+          <ELookup id="filterFatherReligion" v-model="filter.fatherReligion" label="Agama" :disabled="ui.fatherReligion.disabled" lookup-group="DEMO_RELIGION" />
+          <EText id="filterMotherName" v-model="filter.motherName" label="Nama Ibu" placeholder="Input Full Name" type="short" :disabled="ui.motherName.disabled" />
+          <ENumber id="filterMotherNik" v-model="filter.motherNik" label="NIK" placeholder="Input NIK" type="short" :disabled="ui.motherNik.disabled" />
+          <EDate id="filterFatherDateOfBirth" v-model="filter.motherDateOfBirth" label="Tgl Lahir" :disabled="ui.motherDateOfBirth.disabled" />
+          <ELookup id="filterMotherReligion" v-model="filter.motherReligion" label="Agama" :disabled="ui.motherReligion.disabled" lookup-group="DEMO_RELIGION" />
         </ECol>
       </EFilter>
       <EServerPagination
@@ -56,8 +59,12 @@
 const emptyFilter = {
   fatherName: null,
   fatherNik: null,
+  fatherDateOfBirth: null,
+  fatherReligion: null,
   motherName: null,
   motherNik: null,
+  motherDateOfBirth: null,
+  motherReligion: null,
 }
 
 export default {
@@ -69,8 +76,12 @@ export default {
         filter: { disabled: false },
         fatherName: { disabled: false },
         fatherNik: { disabled: false },
+        fatherDateOfBirth: { disabled: false },
+        fatherReligion: { disabled: false },
         motherName: { disabled: false },
         motherNik: { disabled: false },
+        motherDateOfBirth: { disabled: false },
+        motherReligion: { disabled: false },
       },
     }
   },
