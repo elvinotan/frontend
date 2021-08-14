@@ -300,6 +300,15 @@ export default {
         this.$refs.information.addRestError(error)
       }
     },
+    approve(reason) {
+      alert('Approve ' + reason)
+    },
+    reject(reason) {
+      alert('Reject ' + reason)
+    },
+    delete(reason) {
+      alert('Delete ' + reason)
+    },
     constractFamily() {
       return {
         id: this.model.id,
