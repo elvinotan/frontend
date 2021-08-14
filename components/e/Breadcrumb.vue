@@ -1,6 +1,5 @@
 <template>
   <div v-if="show">
-    {{ flat }}
     <div class="w-full flex flex-row justify-start rounded border-0 ring-2 ring-gray-500 focus:outline-none" :class="[_cssBorder, _cssInputBg, _cssInputText]">
       <div v-for="(b, i) of crumbs" :key="b.code" :class="_cssCursor" class="text-sm font-bold py-1 px-2" @click="_click(b)">{{ b.description }}&nbsp;&nbsp;&nbsp;{{ i === crumbs.length - 1 ? '' : '>' }}</div>
     </div>
@@ -15,19 +14,19 @@ const app = {
   sub: [
     {
       code: 'BN001',
-      path: '/temp',
-      description: 'Data Master',
+      path: '/home',
+      description: 'Home',
       leaf: false,
       sub: [
-        { code: 'BN005', path: '/temp', description: 'Lookup', leaf: true },
+        { code: 'BN005', path: '/biodata/list', description: 'BioData', leaf: true },
         {
-          code: 'BN005',
+          code: 'BN006',
           path: '/docs',
           description: 'Docs',
           leaf: false,
           sub: [
-            { code: 'BN006', path: '/temp', description: 'Temp', leaf: true },
-            { code: 'BN007', path: '/temp', description: 'Biodata', leaf: true },
+            { code: 'BN007', path: '/biodata/entry', description: 'Entry', leaf: true },
+            { code: 'BN008', path: '/temp', description: 'Biodata', leaf: true },
           ],
         },
       ],
@@ -63,20 +62,13 @@ export default {
       return css
     },
   },
-  mounted() {
+  created() {
+    // TODO menu harus di fetch pada saat login, dan harus di kirim ke breadcrum, wajib already exist sebelumm di pakai
     if (!this.flat) {
       this.flat = {}
       this._makeMenuFlat(app)
-      //   this.$rest.delay(2000)
-      //   this._reconstract('BN006')
     }
-    this.$nav.loadLastPath()
-    const currentPath = this.flat[this.$route.path.replace('/', '-')]
-    if (currentPath) {
-      this.$nav.to({ breadcrumb: currentPath.code })
-    }
-  },
-  created() {
+
     this.$bus.$on(this.$enum.EVENT_BUS.BREADCRUMBS, (code) => {
       this._reconstract(code)
     })
