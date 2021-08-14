@@ -81,7 +81,7 @@ export default {
           self.label = ''
           this.state = 0
           resolve()
-        }, 500)
+        }, 1000)
       })
     },
     fail() {
@@ -94,7 +94,7 @@ export default {
           self.label = ''
           this.state = 0
           resolve()
-        }, 500)
+        }, 1000)
       })
     },
   },

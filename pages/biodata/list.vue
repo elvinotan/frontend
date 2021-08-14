@@ -46,7 +46,6 @@
           { label: 'Pekerjaan', field: 'motherJob', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'DEMO_JOB' },
         ]"
         @RowClick="rowClick"
-        @hapus="hapus"
         @lihat="lihat"
         @ubah="ubah"
       />
@@ -89,7 +88,7 @@ export default {
   },
   methods: {
     addNewData() {
-      this.$nav.to({ path: '/biodata/entry' })
+      this.$nav.to({ path: '/biodata/entry', familyId: null, from: 'familyList' })
     },
     disabledAction(label, data) {
       if (label.emit === 'ubah') {
@@ -107,7 +106,7 @@ export default {
       this.$refs.customerMessage.success(`View data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`)
     },
     ubah(data) {
-      this.$refs.customerMessage.success(`Edit data customer, with data [Name: ${data.row.name}, Age: ${data.row.age}]`)
+      this.$nav.to({ path: '/biodata/entry', familyId: data.row.id, from: 'familyList', view: true })
     },
     clear() {
       this.filter = { ...emptyFilter }

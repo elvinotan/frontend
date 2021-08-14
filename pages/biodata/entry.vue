@@ -8,6 +8,13 @@
 import detail from './detail.vue'
 export default {
   components: { detail },
+  mounted() {
+    const param = this.$nav.getLastPath()
+    if (param.view) {
+      this.$refs.buttons.show('save', false)
+      this.$refs.detail.disabled(true)
+    }
+  },
   methods: {
     back(onConfirm) {
       this.$refs.detail.back(onConfirm)
