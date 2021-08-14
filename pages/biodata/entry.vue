@@ -1,8 +1,7 @@
 <template>
   <div>
-    <detail />
-    <nuxt-link to="/home">Home</nuxt-link>
-    This is entry.vue
+    <detail ref="detail" />
+    <EButtonEntry ref="buttons" @back="back" @save="save" @confirm="confirm" />
   </div>
 </template>
 <script>
@@ -11,6 +10,25 @@ export default {
   components: { detail },
   data() {
     return {}
+  },
+  methods: {
+    back(onConfirm) {
+      this.$refs.detail.back(onConfirm)
+      if (onConfirm) {
+        this.$refs.buttons.show('save', true)
+        this.$refs.buttons.show('confirm', false)
+      }
+    },
+    async save() {
+      const valid = await this.$refs.detail.save()
+      if (valid) {
+        this.$refs.buttons.show('save', false)
+        this.$refs.buttons.show('confirm', true)
+      }
+    },
+    confirm() {
+      this.$refs.detail.confirm()
+    },
   },
 }
 </script>

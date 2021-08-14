@@ -75,21 +75,27 @@ export default {
       this.state = 1
       this.label = (this.label + ' success').trim()
       const self = this
-      setTimeout(() => {
-        self.visible = false
-        self.label = ''
-        this.state = 0
-      }, 500)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          self.visible = false
+          self.label = ''
+          this.state = 0
+          resolve()
+        }, 500)
+      })
     },
     fail() {
       this.state = -1
       this.label = (this.label + ' fail').trim()
       const self = this
-      setTimeout(() => {
-        self.visible = false
-        self.label = ''
-        this.state = 0
-      }, 500)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          self.visible = false
+          self.label = ''
+          this.state = 0
+          resolve()
+        }, 500)
+      })
     },
   },
 }

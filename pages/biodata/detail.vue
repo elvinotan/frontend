@@ -111,12 +111,6 @@
         "
         accept="image/jpeg image/jpg application/pdf"
       />
-
-      <!-- Actions -->
-      <ERight>
-        <EButton id="save" ref="save" label="Save" color="green" :show="showSave" @click="saveFamily" />
-        <EButton id="confim" ref="confim" label="Confirm" color="green" :show="showConfirm" @click="confirmFamily" />
-      </ERight>
     </ECol>
 
     <!-- Entry Dialog -->
@@ -168,8 +162,6 @@ export default {
   name: 'Entry',
   data() {
     return {
-      showSave: true,
-      showConfirm: false,
       ui: {
         father: this.$object.clone(uiProps),
         mother: this.$object.clone(uiProps),
@@ -250,21 +242,24 @@ export default {
         this.$wrapper.clearError(this.$refs.customerEntry)
       })
     },
-    async saveFamily() {
+    disabled(condition) {
+      this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children, this.ui.document], condition)
+      if (!condition) {
+        this.ui.father.sex.disabled = true
+        this.ui.mother.sex.disabled = true
+      }
+    },
+    async save() {
       const { valid } = this.$wrapper.validate(this.$refs.customerEntry)
       if (valid) {
         // Do validate server
         this.$refs.loader.show('Validation')
-        this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], true)
         const { result, error } = await this.$rest.post('/family/validate', this.constractFamily())
-        this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], false)
-        this.ui.father.sex.disabled = true
-        this.ui.mother.sex.disabled = true
 
         if (result) {
           this.$refs.loader.success()
-          this.showSave = false
-          this.showConfirm = true
+          this.disabled(true)
+          return true
         }
 
         if (error) {
@@ -277,22 +272,21 @@ export default {
           }
 
           this.$refs.information.addRestError(error)
+          return false
         }
       }
     },
-    async confirmFamily() {
+
+    async confirm() {
       this.$refs.loader.show('Saving Data Family')
-      this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], true)
       const { result, error } = await this.$rest.post('/family/save', this.constractFamily())
-      this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children], false)
-      this.ui.father.sex.disabled = true
-      this.ui.mother.sex.disabled = true
 
       if (result) {
         this.model = this.deconstructFamily(result)
-        this.$refs.loader.success()
-        this.showSave = true
-        this.showConfirm = false
+        await this.$refs.loader.success()
+
+        await this.$refs.message.success('Success Save Data Family')
+        this.$nav.to({ path: '/biodata/list' })
       }
       if (error) {
         this.$refs.loader.fail()
@@ -348,6 +342,13 @@ export default {
     },
     saveState(prop) {
       return !!prop.row.id
+    },
+    back(onConfirm) {
+      if (onConfirm) {
+        this.disabled(false)
+      } else {
+        this.$nav.to({ path: '/home' })
+      }
     },
   },
 }

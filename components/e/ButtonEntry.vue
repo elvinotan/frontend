@@ -1,23 +1,35 @@
 <template>
-  <div></div>
+  <EForm id="buttonEntry">
+    <ERight>
+      <EButton v-if="showBack" id="buttonEntryBack" label="Back" color="gray" @click="_back" />
+      <EButton v-if="showSave" id="buttonEntrySave" label="Save" color="green" @click="_save" />
+      <EButton v-if="showConfirm" id="buttonEntryConfirm" label="Confirm" color="green" @click="_confirm" />
+    </ERight>
+  </EForm>
 </template>
 <script>
 export default {
   data() {
-    return {}
-  },
-  created() {
-    this.$nav.breadcrumb('BN001')
+    return {
+      showBack: true,
+      showSave: true,
+      showConfirm: false,
+    }
   },
   methods: {
-    list() {
-      this.$nav.to({ path: '/biodata/list' })
+    show(name, condition) {
+      if (name === 'back') this.showBack = condition
+      if (name === 'save') this.showSave = condition
+      if (name === 'confirm') this.showConfirm = condition
     },
-    entry() {
-      this.$nav.to({ path: '/biodata/entry' })
+    _back() {
+      this.$emit('back', this.showConfirm)
     },
-    approval() {
-      this.$nav.to({ path: '/biodata/approval' })
+    _save() {
+      this.$emit('save')
+    },
+    _confirm() {
+      this.$emit('confirm')
     },
   },
 }
