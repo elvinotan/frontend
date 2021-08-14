@@ -8,25 +8,25 @@
 <script>
 const app = {
   code: 'BN000',
-  path: '/temp',
+  name: 'temp',
   description: 'App Home',
   leaf: false,
   sub: [
     {
       code: 'BN001',
-      path: '/home',
+      name: 'home',
       description: 'Home',
       leaf: false,
       sub: [
-        { code: 'BN005', path: '/biodata/list', description: 'BioData', leaf: true },
+        { code: 'BN005', name: 'biodata-list', description: 'BioData', leaf: true },
         {
           code: 'BN006',
-          path: '/docs',
+          name: 'docs',
           description: 'Docs',
           leaf: false,
           sub: [
-            { code: 'BN007', path: '/biodata/entry', description: 'Entry', leaf: true },
-            { code: 'BN008', path: '/temp', description: 'Biodata', leaf: true },
+            { code: 'BN007', name: 'biodata-entry', description: 'Entry', leaf: true },
+            { code: 'BN008', name: 'temp', description: 'Biodata', leaf: true },
           ],
         },
       ],
@@ -77,7 +77,7 @@ export default {
     _makeMenuFlat(app, pCode) {
       const { sub, ...other } = app
       if (other.code) this.flat[other.code] = { ...other, pCode }
-      if (other.path) this.flat[other.path.replace('/', '-')] = { ...other, pCode }
+      if (other.name) this.flat[other.name] = { ...other, pCode }
 
       if (sub)
         for (const s of sub) {
@@ -87,7 +87,7 @@ export default {
     _click(menu) {
       if (this.disabled) return // do nothing
 
-      this.$nav.to({ breadcrumb: menu.code, path: menu.path, name: menu.description })
+      this.$nav.to({ name: menu.name })
     },
     _reconstract(code) {
       this.crumbs = []

@@ -67,7 +67,10 @@ export default {
       this.info = undefined
       this.fetched = true
       this.fetched = await this.fetcher()
-      if (this.fetched) this.loaded = true
+      if (this.fetched) {
+        this.loaded = true
+        this.$nextTick(() => this.$emit('rendered'))
+      }
     },
     setInfo(info) {
       this.info = info

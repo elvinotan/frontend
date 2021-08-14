@@ -44,7 +44,7 @@ export default {
 
         if (result) {
           this.$rest.setLocalStorage(this.$enum.LOCAL_STORAGE.APP_TOKEN, result)
-          this.$router.push({ path: '/home' })
+          this.$nav.to({ name: 'home' })
         }
 
         if (error) {

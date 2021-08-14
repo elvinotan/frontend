@@ -19,13 +19,13 @@ export default {
   },
   methods: {
     list() {
-      this.$nav.to({ path: '/biodata/list' })
+      this.$nav.to({ name: 'biodata-list' })
     },
     entry() {
-      this.$nav.to({ path: '/biodata/entry' })
+      this.$nav.to({ name: 'biodata-entry' })
     },
     approval() {
-      this.$nav.to({ path: '/biodata/approval' })
+      this.$nav.to({ name: 'biodata-approval' })
     },
   },
 }
