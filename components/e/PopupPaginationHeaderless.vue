@@ -40,8 +40,8 @@
                 <input :id="id + 'SearchTerm'" v-model="search" autocomplete="off" type="text" :maxlength="4" class="field w-full text-sm rounded p-1 px-1 w-auto outline-none uppercase placeholder-blueGray-300 relative" @keyup.enter="_onSearch" />
               </span>
               <ECol :col="2">
-                <EButton :id="'PopupPaginationHeaderless' + id + 'Search'" label="Search" @click="_onSearch" />
-                <EButton :id="'PopupPaginationHeaderless' + id + 'Close'" label="Close" @click="_onClose" />
+                <EButton :id="id + 'Search'" label="Search" @click="_onSearch" />
+                <EButton :id="id + 'Close'" label="Close" @click="_onClose" />
               </ECol>
             </ECol>
           </div>

@@ -5,7 +5,7 @@
         {{ label }}
       </button>
       <div style="height: 1px; width: 1px">
-        <button :id="'lostFocus' + id" />
+        <button :id="id + 'LostFocus'" />
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@ export default {
   methods: {
     _event(evt) {
       this.$emit(evt.type)
-      const element = document.getElementById('lostFocus' + this.id)
+      const element = document.getElementById(this.id + 'LostFocus')
       if (element) element.focus()
     },
     metaData() {

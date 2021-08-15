@@ -27,7 +27,7 @@
     <div v-else :id="id" class="text-center grid grid-cols-1 flex justify-center">
       <div class="font-bold text-sm p-2">Fail To Load {{ label }}</div>
       <div class="text-sm p-2">{{ info }}</div>
-      <EButton :id="'PageLoader' + id" label="Retry" color="green" @click="_fetcher" />
+      <EButton :id="id + 'Retry'" label="Retry" color="green" @click="_fetcher" />
     </div>
   </div>
 </template>

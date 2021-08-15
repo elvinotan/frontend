@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="rounded-b bg-gray-100 w-auto p-2 flex justify-end">
-              <EButton :id="'Message' + id" label="Close" :color="type === 'success' ? 'green' : 'red'" @click="_button('Close')" />
+              <EButton :id="id + 'Close'" label="Close" :color="type === 'success' ? 'green' : 'red'" @click="_button('Close')" />
             </div>
           </div>
         </div>

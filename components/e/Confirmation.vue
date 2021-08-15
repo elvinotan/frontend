@@ -15,9 +15,9 @@
               </div>
             </div>
             <span class="rounded-b bg-gray-100 w-auto p-2 flex justify-end space-x-5">
-              <EButton :id="'ConfirmationClose' + id" class="w-full justify-start" label="Close" color="gray" @click="_button('Close')" />
-              <EButton :id="'ConfirmationYes' + id" :label="positive" color="green" @click="_button(positive)" />
-              <EButton :id="'ConfirmationNo' + id" :label="negative" color="red" @click="_button(negative)" />
+              <EButton :id="id + 'Close'" class="w-full justify-start" label="Close" color="gray" @click="_button('Close')" />
+              <EButton :id="id + 'Positive'" :label="positive" color="green" @click="_button(positive)" />
+              <EButton :id="id + 'Negative'" :label="negative" color="red" @click="_button(negative)" />
             </span>
           </div>
         </div>

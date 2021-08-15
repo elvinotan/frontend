@@ -79,18 +79,18 @@
             </span>
           </template>
           <div slot="table-actions" class="py-0.5 px-2">
-            <EButton v-if="addNewData" :id="'ServerPagination' + id + 'AddNewData'" label="Add New Data" :disabled="disabled" @click="addNewData" />
+            <EButton v-if="addNewData" :id="id + 'AddNewData'" label="Add New Data" :disabled="disabled" @click="addNewData" />
           </div>
           <div v-if="buttons && buttons.length > 0" slot="table-actions-bottom" class="py-1.5 px-2 flex justify-start space-x-5">
             <span v-for="button of buttons" :key="button.label">
-              <EButton :id="'ServerPagination' + id + button.label" :label="button.label" :disabled="disabled || disabledButton" :color="button.color" @click="$emit(button.emit ? button.emit : button.label, selectedRows)" />
+              <EButton :id="id + button.label" :label="button.label" :disabled="disabled || disabledButton" :color="button.color" @click="$emit(button.emit ? button.emit : button.label, selectedRows)" />
             </span>
           </div>
         </vue-good-table>
       </div>
     </div>
-    <EDialog :id="'ServerPagination' + id + 'Dialog'" :ref="'ServerPagination' + id + 'Dialog'" title="View File" :width="800" :height="220">
-      <EUpload :id="'ServerPagination' + id + 'Upload'" v-model="fileColumn.value" :label="fileColumn.label" :required="false" :disabled="true" :accept="fileColumn.accept" :max-size="fileColumn.maxSize" />
+    <EDialog :id="id + 'Dialog'" :ref="id + 'Dialog'" title="View File" :width="800" :height="220">
+      <EUpload :id="id + 'Upload'" v-model="fileColumn.value" :label="fileColumn.label" :required="false" :disabled="true" :accept="fileColumn.accept" :max-size="fileColumn.maxSize" />
     </EDialog>
   </div>
 </template>
@@ -399,7 +399,7 @@ export default {
     _viewFile(props) {
       const column = this.columns.find((e) => e.field === props.column.field)
       this.fileColumn = { ...column, value: props.row[column.field] }
-      this.$refs['ServerPagination' + this.id + 'Dialog'].open()
+      this.$refs[this.id + 'Dialog'].open()
     },
   },
 }

@@ -5,7 +5,7 @@
         {{ tab.label }}
       </div>
     </div>
-    <EForm :id="'Tabs' + id + 'Content'" ref="contents" class="text-xs rounded border-0 outline-none p-2 mt-0.5 ring-2 ring-gray-500 bg-white" :class="[_cssInputBg]">
+    <EForm :id="id + 'Content'" :ref="id + 'Content'" class="text-xs rounded border-0 outline-none p-2 mt-0.5 ring-2 ring-gray-500 bg-white" :class="[_cssInputBg]">
       <slot />
     </EForm>
   </div>
@@ -48,7 +48,7 @@ export default {
     },
     setSelectedTab(lselectedTab) {
       this.lselectedTab = lselectedTab
-      for (const ref of this.$refs.contents.$children) {
+      for (const ref of this.$refs[this.id + 'Content'].$children) {
         const state = this.lselectedTab === ref.id
         ref.setShow(state)
         if (state) this.$emit('selected', ref.id)

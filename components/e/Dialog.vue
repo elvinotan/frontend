@@ -13,10 +13,10 @@
             <span class="rounded-b bg-gray-100 w-auto p-2 flex">
               <ECol :col="2">
                 <ELeft>
-                  <EButton :id="'DialogClose' + id" label="Close" color="gray" @click="close" />
+                  <EButton :id="id + 'DefaultClose'" label="Close" color="gray" @click="close" />
                 </ELeft>
                 <ERight>
-                  <EButton v-for="button of buttons" :id="'Dialog' + button.label + id" :key="button.label" :label="button.label" :color="button.color" @click="$emit(button.emit ? button.emit : button.label)" />
+                  <EButton v-for="button of buttons" :id="id + button.label" :key="button.label" :label="button.label" :color="button.color" @click="$emit(button.emit ? button.emit : button.label)" />
                 </ERight>
               </ECol>
             </span>
