@@ -7,7 +7,7 @@
         </span>
         <span v-if="label && required" class="font-bold text-center text-sm text-red-800 w-auto p-1" :class="[_cssLabelBg]"> * </span>
         <select :id="id" v-model="lvalue" :disabled="disabled" :required="required" class="field text-sm rounded-r p-1 px-1 w-full outline-none uppercase placeholder-blueGray-300 relative" :class="[_cssRounded, _cssInputBg, _cssInputText]" @input="_input" @blur="_blur">
-          <option v-for="option of _options" :key="option.value" class="text-sm text-gray-800 p-1 px-1" :value="option.value">
+          <option v-for="option of _options" :key="option.value" class="text-sm p-1 px-1" :class="[_cssOptionText(option)]" :value="option.value">
             {{ option.description }}
           </option>
         </select>
@@ -67,7 +67,7 @@ export default {
       return css
     },
     _cssInputText() {
-      const css = this.disabled ? 'text-gray-500' : 'text-gray-800'
+      const css = this.disabled ? 'text-gray-500' : this.lvalue ? 'text-gray-800' : 'text-gray-400'
       return css
     },
     _options() {
@@ -82,6 +82,9 @@ export default {
     },
   },
   methods: {
+    _cssOptionText(option) {
+      return option.value ? 'text-gray-800' : 'text-gray-400'
+    },
     _clearInput() {
       this.lvalue = null
       this.$emit('input', this.lvalue)
