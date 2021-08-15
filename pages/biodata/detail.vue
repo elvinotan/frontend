@@ -1,6 +1,10 @@
 <template>
   <ECard ref="customerEntry" label="Bio Data Keluarga">
+    <!-- Hidden Component -->
     <ELoading ref="loader" />
+    <EConfirmation id="confirmation" ref="confirmation" positive="Yes" negative="No" />
+    <EMessage id="message" ref="message" />
+
     <ECol :gap-y="3">
       <!-- Validator Message -->
       <EInformation ref="information" label="Error Entry" />
@@ -129,10 +133,6 @@
         <EUpload id="childDoc" ref="childDoc" v-model="child.doc" label="KTP" :required="ui.dialog.doc.required" :disabled="ui.dialog.doc.disabled" :show="ui.dialog.doc.show" :max-size="2" accept="image/jpeg" />
       </ECol>
     </EDialog>
-
-    <!-- Confirmation and message -->
-    <EConfirmation id="confirmation" ref="confirmation" positive="Yes" negative="No" />
-    <EMessage id="message" ref="message" />
   </ECard>
 </template>
 <script>
@@ -214,16 +214,7 @@ export default {
 
         if (error) {
           this.disabled(false)
-          this.$refs.loader.fail()
-
-          for (const err of error) {
-            if (err.type === 'FIELD' && this.$refs[err.field]) {
-              this.$refs[err.field].addError([err.message])
-            }
-          }
-
-          this.$refs.information.addRestError(error)
-          return false
+          this.handleRestError(error)
         }
       }
     },
@@ -240,15 +231,7 @@ export default {
       }
 
       if (error) {
-        this.$refs.loader.fail()
-
-        for (const err of error) {
-          if (err.type === 'FIELD' && this.$refs[err.field]) {
-            this.$refs[err.field].addError([err.message])
-          }
-        }
-
-        this.$refs.information.addRestError(error)
+        this.handleRestError(error)
       }
     },
     approve(workflowId, reason) {
@@ -271,6 +254,17 @@ export default {
         // TODO nanti back ke halaman approval
         this.$nav.to({ name: 'biodata-list' })
       }
+    },
+    handleRestError(error) {
+      this.$refs.loader.fail()
+
+      for (const err of error) {
+        if (err.type === 'FIELD' && this.$refs[err.field]) {
+          this.$refs[err.field].addError([err.message])
+        }
+      }
+
+      this.$refs.information.addRestError(error)
     },
     saveStateChildren(prop) {
       return !!prop.row.id
