@@ -8,26 +8,37 @@
 <script>
 const app = {
   code: 'BN000',
-  name: 'temp',
+  name: 'home',
   description: 'App Home',
   leaf: false,
   sub: [
     {
       code: 'BN001',
-      name: 'home',
-      description: 'Home',
+      name: 'docs',
+      description: 'Component',
       leaf: false,
+      pCode: 'BN000',
+    },
+    {
+      code: 'BN002',
+      name: 'biodata-list',
+      description: 'Biodata',
+      leaf: false,
+      pCode: 'BN000',
       sub: [
-        { code: 'BN005', name: 'biodata-list', description: 'BioData', leaf: true },
         {
-          code: 'BN006',
-          name: 'docs',
-          description: 'Docs',
+          code: 'BN003',
+          name: 'biodata-entry',
+          description: 'Entry',
           leaf: false,
-          sub: [
-            { code: 'BN007', name: 'biodata-entry', description: 'Entry', leaf: true },
-            { code: 'BN008', name: 'temp', description: 'Biodata', leaf: true },
-          ],
+          pCode: 'BN002',
+        },
+        {
+          code: 'BN004',
+          name: 'biodata-approval',
+          description: 'Approval',
+          leaf: false,
+          pCode: 'BN002',
         },
       ],
     },

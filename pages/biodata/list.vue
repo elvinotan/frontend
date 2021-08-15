@@ -82,7 +82,7 @@ export default {
     }
   },
   created() {
-    this.$nav.breadcrumb('BN005')
+    this.$nav.breadcrumb('BN002')
   },
   methods: {
     addNewData() {

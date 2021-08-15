@@ -4611,6 +4611,9 @@ export default {
       return this.$store.getters.getAllItem()
     },
   },
+  created() {
+    this.$nav.breadcrumb('BN001')
+  },
   methods: {
     SimpanClicked() {
       alert('Simpan Clicked')

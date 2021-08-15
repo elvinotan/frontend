@@ -30,6 +30,8 @@ export default {
 
     // Untuk workflow wajib memiliki param id dan workflow, id untuk tampilan data dan workflowId untuk action approval
     if (!param.id || !param.workflowId) throw new Error('Invalid Param, property is not exist')
+
+    this.$nav.breadcrumb('BN004')
   },
   methods: {
     async fetcher() {

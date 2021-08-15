@@ -182,7 +182,6 @@ export default {
     }
   },
   created() {
-    this.$nav.breadcrumb('BN007')
     this.model.father.sex = 'SEX_M'
     this.model.mother.sex = 'SEX_F'
     this.ui.father.sex.disabled = true

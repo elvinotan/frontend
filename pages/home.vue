@@ -1,12 +1,9 @@
 <template>
   <div>
-    <div>
-      <nuxt-link to="/docs">Document</nuxt-link>
-
-      <EButton id="list" ref="list" label="Biodata List" :disabled="false" @click="list" />
-      <EButton id="entry" ref="entry" label="Biodata Entry" :disabled="false" @click="entry" />
-      <EButton id="approval" ref="approval" label="Biodata Approval" :disabled="false" @click="approval" />
-    </div>
+    <ECenter :gap-x="10">
+      <EButton id="biodata" label="Biodata" :disabled="false" @click="biodata" />
+      <EButton id="component" label="Component" :disabled="false" @click="component" />
+    </ECenter>
   </div>
 </template>
 <script>
@@ -15,17 +12,14 @@ export default {
     return {}
   },
   created() {
-    this.$nav.breadcrumb('BN001')
+    this.$nav.breadcrumb('BN000')
   },
   methods: {
-    list() {
+    biodata() {
       this.$nav.to({ name: 'biodata-list' })
     },
-    entry() {
-      this.$nav.to({ name: 'biodata-entry' })
-    },
-    approval() {
-      this.$nav.to({ name: 'biodata-approval' })
+    component() {
+      this.$nav.to({ name: 'docs' })
     },
   },
 }

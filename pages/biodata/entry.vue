@@ -21,6 +21,8 @@ export default {
 
     // Mau access biodata-entry, tapi tidak berasal dari biodata-list atau nanti dari approval, return error
     if (!['biodata-list'].includes(param.from)) throw new Error('Invalid Source Page')
+
+    this.$nav.breadcrumb('BN003')
   },
   methods: {
     async fetcher() {
