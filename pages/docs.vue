@@ -2569,6 +2569,12 @@
                   <td>{{ metadata }}</td>
                   <td>Component Information</td>
                 </tr>
+                <tr>
+                  <td>setInfo</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>pass information to be desplay, umumnya adalah error dr server</td>
+                </tr>
               </tbody>
             </table>
           </EForm>
