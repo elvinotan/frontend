@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     addNewData() {
-      this.$nav.to({ name: 'biodata-entry', params: { from: 'familyList', id: null } })
+      this.$nav.to({ name: 'biodata-entry', params: { from: 'biodata-list', id: null } })
     },
     disabledAction(label, data) {
       if (label.emit === 'ubah') {
@@ -98,13 +98,13 @@ export default {
       return false
     },
     rowClick(data) {
-      this.$nav.to({ name: 'biodata-approval', params: { from: 'familyList', id: data.row.id, workflowId: 2 } })
+      this.$nav.to({ name: 'biodata-approval', params: { from: 'biodata-list', id: data.row.id, workflowId: 2 } })
     },
     lihat(data) {
-      this.$nav.to({ name: 'biodata-entry', params: { from: 'familyList', id: data.row.id, view: true } })
+      this.$nav.to({ name: 'biodata-entry', params: { from: 'biodata-list', id: data.row.id, view: true } })
     },
     ubah(data) {
-      this.$nav.to({ name: 'biodata-entry', params: { from: 'familyList', id: data.row.id } })
+      this.$nav.to({ name: 'biodata-entry', params: { from: 'biodata-list', id: data.row.id } })
     },
     clear() {
       this.filter = { ...empty }

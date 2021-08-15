@@ -11,18 +11,20 @@ import detail from './detail.vue'
 
 export default {
   components: { detail },
+  created() {
+    const param = this.$route.params
+
+    // User langsung access page lewat browser url, param will be empty, redirected to list page
+    if (!param.from) {
+      this.$nav.to({ name: 'biodata-list' })
+    }
+
+    // Mau access biodata-entry, tapi tidak berasal dari biodata-list atau nanti dari approval, return error
+    if (!['biodata-list'].includes(param.from)) throw new Error('Invalid Source Page')
+  },
   methods: {
     async fetcher() {
       const param = this.$route.params
-
-      // User langsung access page lewat browser url, param will be empty, redirected to list page
-      if (!param.from) {
-        this.$nav.to({ name: 'biodata-list' })
-        return false
-      }
-
-      // Mau access biodata-entry, tapi tidak berasal dari biodata-list atau nanti dari approval, return error
-      if (!['familyList'].includes(param.from)) return false
 
       // Access ke biodata-entry tapi tidak ada opran id, ini artinya newDataFamily, ini valid return true
       if (!param.id) return true
@@ -33,10 +35,13 @@ export default {
         this.result = result // simpan data
         return true
       }
-      if (error) return false
+      if (error) {
+        this.$refs.fetcher.setInfo(error)
+        return false
+      }
     },
     back(onConfirm) {
-      this.$refs.detail.back(onConfirm)
+      this.$refs.detail.back(onConfirm ? 'confirm' : 'save')
       if (onConfirm) {
         this.$refs.buttons.show('save', true)
         this.$refs.buttons.show('confirm', false)

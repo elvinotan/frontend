@@ -252,21 +252,24 @@ export default {
         this.$refs.information.addRestError(error)
       }
     },
-    approve(reason) {
-      alert('Approve ' + reason)
+    approve(workflowId, reason) {
+      alert('Approve ' + workflowId + ', with reason=' + reason)
     },
-    reject(reason) {
-      alert('Reject ' + reason)
+    reject(workflowId, reason) {
+      alert('Reject ' + workflowId + ', with reason=' + reason)
     },
-    delete(reason) {
-      alert('Delete ' + reason)
+    delete(workflowId, reason) {
+      alert('Delete ' + workflowId + ', with reason=' + reason)
     },
-    back(onConfirm) {
-      if (onConfirm) {
-        // Saat di main entry mode confirm, click back, balik ke save
+    back(from) {
+      if (from === 'save') {
+        this.$nav.to({ name: 'biodata-list' })
+      }
+      if (from === 'confirm') {
         this.disabled(false)
-      } else {
-        // Saat di main entry mode save, click back, balik ke list
+      }
+      if (from === 'approval') {
+        // TODO nanti back ke halaman approval
         this.$nav.to({ name: 'biodata-list' })
       }
     },
