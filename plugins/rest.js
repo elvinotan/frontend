@@ -1,4 +1,4 @@
-export default function ({ $axios, $config, $string, store }, inject) {
+export default function ({ $axios, $config, $string, $crypto, store }, inject) {
   const rest = {
     // Local Storage
     setLocalStorage(key, object) {
@@ -56,6 +56,7 @@ export default function ({ $axios, $config, $string, store }, inject) {
       }
 
       try {
+        console.log('Haloooo ', $crypto)
         const url = $string.replaceByProperty(pUrl, $config)
         const host = `https://${$config.API_HOST}:${$config.API_PORT}${$config.API_PREFIX}`
         const { result, error } = await $axios.$get(host + url, { headers })
@@ -112,7 +113,10 @@ export default function ({ $axios, $config, $string, store }, inject) {
       try {
         const url = $string.replaceByProperty(pUrl, $config)
         const host = `https://${$config.API_HOST}:${$config.API_PORT}${$config.API_PREFIX}`
-        const { result, error } = await $axios.$post(host + url, payload, { headers })
+        const jsonPayload = JSON.stringify(payload)
+        const jsonPaylodEncrypt = $crypto.encrypt(jsonPayload)
+        const { data } = await $axios.$post(host + url, { data: jsonPaylodEncrypt }, { headers })
+        const { result, error } = JSON.parse($crypto.decrypt(data))
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (!result && !error) throw new Error('DEVELOPER WARNING !!!!, Fail to execute POST operation, result and error must not both null')
