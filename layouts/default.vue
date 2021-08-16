@@ -2,9 +2,11 @@
   <div>
     <EPageLoader id="layoutPageLoader" ref="layoutPageLoader" label="Main Page" :fetcher="layoutPageLoader">
       <Header />
-      <EBreadcrumb />
-      <br />
-      <Nuxt />
+      <div class="m-5">
+        <EBreadcrumb />
+        <br />
+        <Nuxt />
+      </div>
       <Footer />
     </EPageLoader>
   </div>
