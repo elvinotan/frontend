@@ -92,7 +92,7 @@ export default {
   methods: {
     async _load() {
       if (this.value) {
-        const { result } = await this.$rest.get(`/file/fetch/${this.value}`)
+        const { result } = await this.$rest.get('/file/fetch', this.value)
         if (result) {
           result.state = this.$enum.UPLOAD.UPLOADED
           this.rows = [result]
@@ -180,7 +180,8 @@ export default {
         }
 
         fileRaw.state = this.$enum.UPLOAD.ONUPLOAD
-        this.$rest.post('/file/save', file).then(({ result, error }) => {
+        const { state, ...other } = file
+        this.$rest.post('/file/save', other).then(({ result, error }) => {
           if (result) {
             fileRaw.id = result.id
             fileRaw.state = this.$enum.UPLOAD.UPLOADED

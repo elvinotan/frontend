@@ -104,7 +104,7 @@ export default {
         this.rows = []
         for (const file of this.files) {
           const fileId = this.onLoad(file)
-          const { result } = await this.$rest.get(`/file/fetch/${fileId}`)
+          const { result } = await this.$rest.get('/file/fetch', fileId)
           if (result) {
             result.file = file
             result.state = this.$enum.UPLOAD.UPLOADED
@@ -211,7 +211,8 @@ export default {
         }
 
         fileRaw.state = this.$enum.UPLOAD.ONUPLOAD
-        this.$rest.post('/file/save', file).then(({ result, error }) => {
+        const { state, ...other } = file
+        this.$rest.post('/file/save', other).then(({ result, error }) => {
           if (result) {
             fileRaw.id = result.id
             fileRaw.state = this.$enum.UPLOAD.UPLOADED

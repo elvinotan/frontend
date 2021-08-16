@@ -32,7 +32,7 @@ export default {
       if (!param.id) return true
 
       // Fetch data biodata
-      const { result, error } = await this.$rest.get(`/family/fetch/${param.id}`)
+      const { result, error } = await this.$rest.get('/family/fetch', param.id)
       if (result) {
         this.result = result // simpan data
         return true

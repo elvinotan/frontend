@@ -28,7 +28,7 @@ export default function ({ $axios, $config, $string, $crypto, store }, inject) {
     },
 
     // Rest Call base on type
-    async get(pUrl = '', pHeaders = {}) {
+    async get(pUrl = '', param, pHeaders = {}) {
       const {
         forceUpdate = false,
         vuex,
@@ -56,10 +56,12 @@ export default function ({ $axios, $config, $string, $crypto, store }, inject) {
       }
 
       try {
-        console.log('Haloooo ', $crypto)
-        const url = $string.replaceByProperty(pUrl, $config)
+        // const paramEncrypt = param ? '/' + $crypto.encrypt(param) : ''
+        const paramEncrypt = param ? '/' + param : ''
+        const url = $string.replaceByProperty(pUrl + paramEncrypt, $config)
         const host = `https://${$config.API_HOST}:${$config.API_PORT}${$config.API_PREFIX}`
-        const { result, error } = await $axios.$get(host + url, { headers })
+        const { data } = await $axios.$get(host + url, { headers })
+        const { result, error } = JSON.parse($crypto.decrypt(data))
         // TODO PENTING harus handle code, bila code 400 dan 500, maka lempar ke error, harus ada standarisasi response
 
         if (!result && !error) throw new Error('DEVELOPER WARNING !!!!, Fail to execute GET operation, result and error must not both null')
@@ -77,7 +79,7 @@ export default function ({ $axios, $config, $string, $crypto, store }, inject) {
 
         return { result, error }
       } catch (ex) {
-        console.log('Rest.Get.Error ', ex)
+        console.error('Rest.Get.Error ', ex)
         const error = [{ type: 'GLOBAL', field: undefined, code: ex.code || 'EXCEPTION', message: ex.message || undefined }]
         return { error }
       }
@@ -135,7 +137,7 @@ export default function ({ $axios, $config, $string, $crypto, store }, inject) {
 
         return { result, error }
       } catch (ex) {
-        console.log('Rest.Post.Error ', ex)
+        console.error('Rest.Post.Error ', ex)
         const error = [{ type: 'GLOBAL', field: undefined, code: ex.code || 'EXCEPTION', message: ex.message || undefined }]
         return { error }
       }

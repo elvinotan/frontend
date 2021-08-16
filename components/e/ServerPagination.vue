@@ -214,7 +214,7 @@ export default {
       const promise = []
       for (const column of this.columns.filter((column) => column.type === 'lookup')) {
         promise.push(
-          this.$rest.get(`api/general/lookup/${column.reference}`, {
+          this.$rest.get('/cache/lookup', column.reference, {
             vuex: this.$enum.VUEX.LOOKUP_PREFIX + column.reference,
           })
         )

@@ -4767,7 +4767,7 @@ export default {
     async restGetExample() {
       const localStorageId = this.$enum.LOCAL_STORAGE.EXAMPLE
       console.log('Lakukan get dgn opsi localStorage: ', localStorageId)
-      await this.$rest.get(`/api/example/biodata/10`, {
+      await this.$rest.get('/api/example/biodata', 10, {
         btpnApiKey: '[test_api_key]',
         localStorage: localStorageId,
       })

@@ -15,7 +15,7 @@
 export default {
   methods: {
     async layoutPageLoader() {
-      const { result, error } = await this.$rest.get(`/cache/fetch`)
+      const { result, error } = await this.$rest.get('/cache/fetch')
 
       if (result) {
         if (result.LOOKUPGROUP) {
