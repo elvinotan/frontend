@@ -11,7 +11,7 @@
     </ECenter>
     <br />
     <ECenter>
-      <div><nuxt-link to="/">Home</nuxt-link></div>
+      <div><nuxt-link to="/home">Home</nuxt-link></div>
     </ECenter>
   </div>
 </template>

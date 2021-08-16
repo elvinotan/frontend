@@ -103,12 +103,15 @@ export default {
     },
     async _fetchData() {
       if (this.lookupGroup) {
-        const { result } = await this.$rest.get('/cache/lookup', this.lookupGroup, {
+        const { result, error } = await this.$rest.get('/cache/lookup', this.lookupGroup, {
           vuex: this.$enum.VUEX.LOOKUP_PREFIX + this.lookupGroup,
         })
 
         if (result) {
           this.options = this.filter(this.lookupGroup, result)
+        }
+        if (error) {
+          throw error
         }
       }
     },

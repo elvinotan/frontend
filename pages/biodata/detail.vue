@@ -182,6 +182,13 @@ export default {
     }
   },
   created() {
+    const param = this.$route.params
+    // User langsung access page lewat browser url, param will be empty, redirected to list page
+    if (!param.from) {
+      this.$nav.to({ name: 'biodata-list' })
+      return
+    }
+
     this.model.father.sex = 'SEX_M'
     this.model.mother.sex = 'SEX_F'
     this.ui.father.sex.disabled = true
