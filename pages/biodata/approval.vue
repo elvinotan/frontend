@@ -10,7 +10,7 @@
 <script>
 import detail from './detail.vue'
 export default {
-  components: { detail },
+  components: { detail }, // import component detail
   data() {
     return {
       workflowId: null,
@@ -18,6 +18,7 @@ export default {
     }
   },
   created() {
+    // Numpang lifecycle dari vue created, bagian ini di gunakan untuk melakukan validasi, asal request page
     const param = this.$route.params
 
     // User langsung access page lewat browser url, param will be empty, redirected to list page
@@ -32,6 +33,7 @@ export default {
     // Untuk workflow wajib memiliki param id dan workflow, id untuk tampilan data dan workflowId untuk action approval
     if (!param.id || !param.workflowId) throw new Error('Invalid Param, property is not exist')
 
+    // Update breadcrum url
     this.$nav.breadcrumb('BN004')
   },
   methods: {
@@ -39,16 +41,22 @@ export default {
       const param = this.$route.params
       this.workflowId = param.workflowId
 
-      // Fetch data biodata
+      // Fetch data family
       const { result, error } = await this.$rest.get('/family/fetch', param.id)
       if (result) {
-        this.result = result // simpan data
+        this.result = result // simpan data di tempoarary variable, nanti saat rendered akan di panggil
         return true
       }
       if (error) {
         this.$refs.fetcher.setInfo(error)
         return false
       }
+    },
+    rendered() {
+      this.$refs.detail.disabled(true)
+
+      // passing data hasil fetch ke server dari method fetcher
+      if (this.result) this.$refs.detail.init(this.result)
     },
     back() {
       this.$refs.detail.back('approval')
@@ -61,10 +69,6 @@ export default {
     },
     deletee() {
       this.$refs.detail.delete(this.workflowId, this.reason)
-    },
-    rendered() {
-      this.$refs.detail.disabled(true)
-      if (this.result) this.$refs.detail.init(this.result)
     },
   },
 }
