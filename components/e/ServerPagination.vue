@@ -324,8 +324,13 @@ export default {
       if (result) {
         this.totalRows = result.totalRows
         this.rows = result.rows
+        this.error = null
       }
-      this.error = error
+      if (error) {
+        this.rows = []
+        this.error = error
+      }
+
       this.isLoading = false
     },
     _cleanFilter() {

@@ -9,9 +9,7 @@ export default function ({ $axios, redirect, app, ...other }) {
   $axios.onRequest((config) => {
     config.httpsAgent = agent
     const token = app.$rest.getLocalStorage(app.$enum.LOCAL_STORAGE.APP_TOKEN)
-    if (token) {
-      $axios.setToken(token, 'Bearer')
-    }
+    $axios.setToken(token, 'Bearer')
   })
   // $axios.onResponse((response) => {})
   // $axios.onError((error) => {})

@@ -104,11 +104,14 @@ export default {
         this.rows = []
         for (const file of this.files) {
           const fileId = this.onLoad(file)
-          const { result } = await this.$rest.get('/file/fetch', fileId)
+          const { result, error } = await this.$rest.get('/file/fetch', fileId)
           if (result) {
             result.file = file
             result.state = this.$enum.UPLOAD.UPLOADED
             this.rows.push(result)
+          }
+          if (error) {
+            throw error
           }
         }
       }

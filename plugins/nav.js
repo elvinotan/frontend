@@ -1,8 +1,9 @@
 export default function ({ Context, $rest, $enum, app }, inject) {
   const nav = {
-    // { breadcrumb:'GN001', path:'/doc', name:'elvion', age:40 }
+    // { name:'biodata-list', params: { name:'elvion', age:40 } }
     to: (payload) => {
       // simpan last router payload, agar bila ctrl +F5 nanti bisa otomatis
+      // batal di implement krn bisa 2 tab, dan bisa beda last page, siapa punya siapa bingung
       // lihat comment di bawah
       // $rest.setLocalStorage($enum.LOCAL_STORAGE.LAST_PATH, payload)
 

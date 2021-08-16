@@ -92,10 +92,13 @@ export default {
   methods: {
     async _load() {
       if (this.value) {
-        const { result } = await this.$rest.get('/file/fetch', this.value)
+        const { result, error } = await this.$rest.get('/file/fetch', this.value)
         if (result) {
           result.state = this.$enum.UPLOAD.UPLOADED
           this.rows = [result]
+        }
+        if (error) {
+          throw error
         }
       }
     },

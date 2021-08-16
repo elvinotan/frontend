@@ -23,6 +23,7 @@ export default {
     // User langsung access page lewat browser url, param will be empty, redirected to list page
     if (!param.from) {
       this.$nav.to({ name: 'biodata-list' })
+      return
     }
 
     // Mau access biodata-entry, tapi tidak berasal dari biodata-list atau nanti dari approval, return error

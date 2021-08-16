@@ -179,13 +179,16 @@ export default {
       this.serverParams.filter = this._cleanFilter()
 
       const { result, error } = await this.$rest.post('/paging/fetch', this.serverParams)
-
-      this.isLoading = false
-      this.error = error
       if (result) {
         this.totalRows = result.totalRows
         this.rows = result.rows
+        this.error = null
       }
+      if (error) {
+        this.rows = []
+        this.error = error
+      }
+      this.isLoading = false
     },
     async onSearch(search = '', page = 1) {
       this.search = search

@@ -227,7 +227,7 @@ export default {
         await this.$refs.loader.success()
 
         await this.$refs.message.success('Success Save Data Family')
-        this.$nav.to({ path: '/biodata/list' })
+        this.$nav.to({ name: 'biodata-list' })
       }
 
       if (error) {
