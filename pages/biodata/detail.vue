@@ -174,7 +174,7 @@ export default {
         id: null,
         name: null,
         enabled: null,
-        father: { typeid: null, name: null, nik: null, sex: null, placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
+        father: { id: null, name: null, nik: null, sex: null, placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
         mother: { id: null, name: null, nik: null, sex: null, placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
         children: [],
         document: [],
@@ -363,7 +363,7 @@ export default {
         id: null,
         name: null,
         enabled: null,
-        father: { typeid: null, name: null, nik: null, sex: 'SEX_M', placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
+        father: { id: null, name: null, nik: null, sex: 'SEX_M', placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
         mother: { id: null, name: null, nik: null, sex: 'SEX_F', placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
         children: [],
       }

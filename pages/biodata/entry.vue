@@ -46,11 +46,14 @@ export default {
       }
     },
     rendered() {
-      const param = this.$route.params
-      if (param && param.view) {
+      if (this.result && this.result.mode === 'view') {
         // dari sisi list, melakukan oper view=true, artinya detail di tampilkan dgn mode view Only
         this.$refs.buttons.show('save', false)
         this.$refs.detail.disabled(true)
+      }
+
+      if (this.result && this.result.mode === 'edit') {
+        // do ntohting krn secara default sudah benar
       }
 
       // passing data hasil fetch ke server dari method fetcher

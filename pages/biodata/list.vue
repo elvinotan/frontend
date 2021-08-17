@@ -101,7 +101,7 @@ export default {
       this.$nav.to({ name: 'biodata-approval', params: { from: 'biodata-list', id: data.row.id, workflowId: 2 } })
     },
     lihat(data) {
-      this.$nav.to({ name: 'biodata-entry', params: { from: 'biodata-list', id: data.row.id, view: true } })
+      this.$nav.to({ name: 'biodata-entry', params: { from: 'biodata-list', id: data.row.id } })
     },
     ubah(data) {
       this.$nav.to({ name: 'biodata-entry', params: { from: 'biodata-list', id: data.row.id } })
