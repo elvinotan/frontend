@@ -26,14 +26,14 @@
               <ENumber id="fatherNik" ref="fatherNik" v-model="model.father.nik" label="NIK" placeholder="Input NIK" type="short" :required="ui.father.nik.required" :disabled="ui.father.nik.disabled" :show="ui.father.nik.show" />
             </ECol>
             <ECol :col="3">
-              <ELookup id="fatherSex" ref="fatherSex" v-model="model.father.sex" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.father.sex.required" :disabled="ui.father.sex.disabled" :show="ui.father.sex.show" lookup-group="DEMO_SEX" />
+              <ELookup id="fatherSex" ref="fatherSex" v-model="model.father.sexId" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.father.sexId.required" :disabled="ui.father.sexId.disabled" :show="ui.father.sexId.show" lookup-group="DEMO_SEX" />
               <EText id="fatherBirthPlace" ref="fatherBirthOfPlace" v-model="model.father.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.father.placeOfBirth.required" :disabled="ui.father.placeOfBirth.disabled" :show="ui.father.placeOfBirth.show" />
               <EDate id="fatherBirthDate" ref="fatherBirthOfDate" v-model="model.father.dateOfBirth" label="Tgl Lahir" :required="ui.father.dateOfBirth.required" :disabled="ui.father.dateOfBirth.disabled" :show="ui.father.dateOfBirth.show" />
             </ECol>
             <ECol :col="3">
-              <ELookup id="fatherReligion" ref="fatherReligion" v-model="model.father.religion" label="Agama" placeholder="Input Agama" :required="ui.father.religion.required" :disabled="ui.father.religion.disabled" :show="ui.father.religion.show" lookup-group="DEMO_RELIGION" />
-              <ELookup id="fatherEducation" ref="fatherEducation" v-model="model.father.education" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.father.education.required" :disabled="ui.father.education.disabled" :show="ui.father.education.show" lookup-group="DEMO_EDUCATION" />
-              <ELookup id="fatherJob" ref="fatherJob" v-model="model.father.job" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.father.job.required" :disabled="ui.father.job.disabled" :show="ui.father.job.show" lookup-group="DEMO_JOB" />
+              <ELookup id="fatherReligion" ref="fatherReligion" v-model="model.father.religionId" label="Agama" placeholder="Input Agama" :required="ui.father.religionId.required" :disabled="ui.father.religionId.disabled" :show="ui.father.religionId.show" lookup-group="DEMO_RELIGION" />
+              <ELookup id="fatherEducation" ref="fatherEducation" v-model="model.father.educationId" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.father.educationId.required" :disabled="ui.father.educationId.disabled" :show="ui.father.educationId.show" lookup-group="DEMO_EDUCATION" />
+              <ELookup id="fatherJob" ref="fatherJob" v-model="model.father.jobId" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.father.jobId.required" :disabled="ui.father.jobId.disabled" :show="ui.father.jobId.show" lookup-group="DEMO_JOB" />
             </ECol>
           </ECol>
         </ECard>
@@ -44,14 +44,14 @@
               <ENumber id="motherNik" ref="motherNik" v-model="model.mother.nik" label="NIK" placeholder="Input NIK" type="short" :required="ui.mother.nik.required" :disabled="ui.mother.nik.disabled" :show="ui.mother.nik.show" />
             </ECol>
             <ECol :col="3">
-              <ELookup id="motherSex" ref="motherSex" v-model="model.mother.sex" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.mother.sex.required" :disabled="ui.mother.sex.disabled" :show="ui.mother.sex.show" lookup-group="DEMO_SEX" />
+              <ELookup id="motherSex" ref="motherSex" v-model="model.mother.sexId" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.mother.sexId.required" :disabled="ui.mother.sexId.disabled" :show="ui.mother.sexId.show" lookup-group="DEMO_SEX" />
               <EText id="motherBirthPlace" ref="motherBirthOfPlace" v-model="model.mother.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.mother.placeOfBirth.required" :disabled="ui.mother.placeOfBirth.disabled" :show="ui.mother.placeOfBirth.show" />
               <EDate id="motherBirthDate" ref="motherBirthOfDate" v-model="model.mother.dateOfBirth" label="Tgl Lahir" :required="ui.mother.dateOfBirth.required" :disabled="ui.mother.dateOfBirth.disabled" :show="ui.mother.dateOfBirth.show" />
             </ECol>
             <ECol :col="3">
-              <ELookup id="motherReligion" ref="motherReligion" v-model="model.mother.religion" label="Agama" placeholder="Input Agama" :required="ui.mother.religion.required" :disabled="ui.mother.religion.disabled" :show="ui.mother.religion.show" lookup-group="DEMO_RELIGION" />
-              <ELookup id="motherEducation" ref="motherEducation" v-model="model.mother.education" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.mother.education.required" :disabled="ui.mother.education.disabled" :show="ui.mother.education.show" lookup-group="DEMO_EDUCATION" />
-              <ELookup id="motherJob" ref="motherJob" v-model="model.mother.job" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.mother.job.required" :disabled="ui.mother.job.disabled" :show="ui.mother.job.show" lookup-group="DEMO_JOB" />
+              <ELookup id="motherReligion" ref="motherReligion" v-model="model.mother.religionId" label="Agama" placeholder="Input Agama" :required="ui.mother.religionId.required" :disabled="ui.mother.religionId.disabled" :show="ui.mother.religionId.show" lookup-group="DEMO_RELIGION" />
+              <ELookup id="motherEducation" ref="motherEducation" v-model="model.mother.educationId" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.mother.educationId.required" :disabled="ui.mother.educationId.disabled" :show="ui.mother.educationId.show" lookup-group="DEMO_EDUCATION" />
+              <ELookup id="motherJob" ref="motherJob" v-model="model.mother.jobId" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.mother.jobId.required" :disabled="ui.mother.jobId.disabled" :show="ui.mother.jobId.show" lookup-group="DEMO_JOB" />
             </ECol>
           </ECol>
         </ECard>
@@ -67,13 +67,13 @@
         :columns="[
           { label: 'Name', field: 'name', sortable: true, width: '200px', tooltip: 'Nama', type: 'string' },
           { label: 'Nik', field: 'nik', sortable: true, width: '100px', tooltip: 'NIK', type: 'number' },
-          { label: 'Jenis Kelamin', field: 'sex', sortable: true, width: '100px', tooltip: 'Jenis Kelamin', type: 'lookup', reference: 'DEMO_SEX' },
+          { label: 'Jenis Kelamin', field: 'sexId', sortable: true, width: '100px', tooltip: 'Jenis Kelamin', type: 'lookup', reference: 'DEMO_SEX' },
           { label: 'Tempat Lahir', field: 'placeOfBirth', sortable: true, width: '100px', tooltip: 'Tempat Lahir', type: 'string' },
           { label: 'Tgl Lahir', field: 'dateOfBirth', sortable: true, width: '100px', tooltip: 'Tgl Lahir', type: 'date' },
-          { label: 'Agama', field: 'religion', sortable: true, width: '100px', tooltip: 'Agama', type: 'lookup', reference: 'DEMO_RELIGION' },
-          { label: 'Pendidikan', field: 'education', sortable: true, width: '100px', tooltip: 'Pendidikan', type: 'lookup', reference: 'DEMO_EDUCATION' },
-          { label: 'Pekerjaan', field: 'job', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'DEMO_JOB' },
-          { label: 'KTP', field: 'doc', sortable: false, width: '100px', tooltip: 'KTP', type: 'file', maxSize: 2, accept: 'image/jpeg' },
+          { label: 'Agama', field: 'religionId', sortable: true, width: '100px', tooltip: 'Agama', type: 'lookup', reference: 'DEMO_RELIGION' },
+          { label: 'Pendidikan', field: 'educationId', sortable: true, width: '100px', tooltip: 'Pendidikan', type: 'lookup', reference: 'DEMO_EDUCATION' },
+          { label: 'Pekerjaan', field: 'jobId', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'DEMO_JOB' },
+          { label: 'KTP', field: 'docId', sortable: false, width: '100px', tooltip: 'KTP', type: 'file', maxSize: 2, accept: 'image/jpeg' },
           { field: 'action', width: '200px' },
         ]"
         :actions="[
@@ -123,14 +123,14 @@
         <ECol :col="2">
           <EText id="childName" ref="childName" v-model="child.name" label="Nama Anak" placeholder="Input Nama Anak" type="short" :required="ui.dialog.name.required" :disabled="ui.dialog.name.disabled" :show="ui.dialog.name.show" />
           <ENumber id="childNik" ref="childNik" v-model="child.nik" label="NIK" placeholder="Input NIK" type="short" :required="ui.dialog.nik.required" :disabled="ui.dialog.nik.disabled" :show="ui.dialog.nik.show" />
-          <ELookup id="childSex" ref="childSex" v-model="child.sex" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.dialog.sex.required" :disabled="ui.dialog.sex.disabled" :show="ui.dialog.sex.show" lookup-group="DEMO_SEX" />
+          <ELookup id="childSex" ref="childSex" v-model="child.sexId" label="Jenis Kelamin" placeholder="Input Jenis Kelamin" :required="ui.dialog.sexId.required" :disabled="ui.dialog.sexId.disabled" :show="ui.dialog.sexId.show" lookup-group="DEMO_SEX" />
           <EText id="childBirthPlace" ref="childBirthPlace" v-model="child.placeOfBirth" label="Tempat Lahir" placeholder="Input Tempat Lahir" type="short" :required="ui.dialog.placeOfBirth.required" :disabled="ui.dialog.placeOfBirth.disabled" :show="ui.dialog.placeOfBirth.show" />
           <EDate id="childBirthDate" ref="childBirthDate" v-model="child.dateOfBirth" label="Tgl Lahir" :required="ui.dialog.dateOfBirth.required" :disabled="ui.dialog.dateOfBirth.disabled" :show="ui.dialog.dateOfBirth.show" />
-          <ELookup id="childReligion" ref="childReligion" v-model="child.religion" label="Agama" placeholder="Input Agama" :required="ui.dialog.religion.required" :disabled="ui.dialog.religion.disabled" :show="ui.dialog.religion.show" lookup-group="DEMO_RELIGION" />
-          <ELookup id="childEducation" ref="childEducation" v-model="child.education" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.dialog.education.required" :disabled="ui.dialog.education.disabled" :show="ui.dialog.education.show" lookup-group="DEMO_EDUCATION" />
-          <ELookup id="childJob" ref="childJob" v-model="child.job" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.dialog.job.required" :disabled="ui.dialog.job.disabled" :show="ui.dialog.job.show" lookup-group="DEMO_JOB" />
+          <ELookup id="childReligion" ref="childReligion" v-model="child.religionId" label="Agama" placeholder="Input Agama" :required="ui.dialog.religionId.required" :disabled="ui.dialog.religionId.disabled" :show="ui.dialog.religionId.show" lookup-group="DEMO_RELIGION" />
+          <ELookup id="childEducation" ref="childEducation" v-model="child.educationId" label="Pendidikan" placeholder="Input Pendidikan" :required="ui.dialog.educationId.required" :disabled="ui.dialog.educationId.disabled" :show="ui.dialog.educationId.show" lookup-group="DEMO_EDUCATION" />
+          <ELookup id="childJob" ref="childJob" v-model="child.jobId" label="Pekerjaan" placeholder="Input Perkerjaan" :required="ui.dialog.jobId.required" :disabled="ui.dialog.jobId.disabled" :show="ui.dialog.jobId.show" lookup-group="DEMO_JOB" />
         </ECol>
-        <EUpload id="childDoc" ref="childDoc" v-model="child.doc" label="KTP" :required="ui.dialog.doc.required" :disabled="ui.dialog.doc.disabled" :show="ui.dialog.doc.show" :max-size="2" accept="image/jpeg" />
+        <EUpload id="childDoc" ref="childDoc" v-model="child.docId" label="KTP" :required="ui.dialog.docId.required" :disabled="ui.dialog.docId.disabled" :show="ui.dialog.docId.show" :max-size="2" accept="image/jpeg" />
       </ECol>
     </EDialog>
   </ECard>
@@ -139,23 +139,23 @@
 const uiProps = {
   name: { required: true, disabled: false, show: true },
   nik: { required: true, disabled: false, show: true },
-  sex: { required: true, disabled: false, show: true },
+  sexId: { required: true, disabled: false, show: true },
   placeOfBirth: { required: true, disabled: false, show: true },
   dateOfBirth: { required: true, disabled: false, show: true },
-  religion: { required: true, disabled: false, show: true },
-  education: { required: true, disabled: false, show: true },
-  job: { required: true, disabled: false, show: true },
+  religionId: { required: true, disabled: false, show: true },
+  educationId: { required: true, disabled: false, show: true },
+  jobId: { required: true, disabled: false, show: true },
 }
 const empty = {
   id: null,
   name: null,
   nik: null,
-  sex: null,
+  sexId: null,
   placeOfBirth: null,
   dateOfBirth: null,
-  religion: null,
-  education: null,
-  job: null,
+  religionId: null,
+  educationId: null,
+  jobId: null,
 }
 
 export default {
@@ -167,15 +167,15 @@ export default {
         mother: this.$object.clone(uiProps),
         children: { table: { required: true, disabled: false, show: true } },
         document: { table: { required: true, disabled: false, show: true } },
-        dialog: { ...this.$object.clone(uiProps), doc: { required: true, disabled: false, show: true } },
+        dialog: { ...this.$object.clone(uiProps), docId: { required: true, disabled: false, show: true } },
       },
       child: this.$object.clone(empty),
       model: {
         id: null,
         name: null,
         enabled: null,
-        father: { id: null, name: null, nik: null, sex: null, placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
-        mother: { id: null, name: null, nik: null, sex: null, placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
+        father: { id: null, name: null, nik: null, sexId: null, placeOfBirth: null, dateOfBirth: null, religionId: null, educationId: null, jobId: null },
+        mother: { id: null, name: null, nik: null, sexId: null, placeOfBirth: null, dateOfBirth: null, religionId: null, educationId: null, jobId: null },
         children: [],
         document: [],
       },
@@ -189,10 +189,10 @@ export default {
       return
     }
 
-    this.model.father.sex = 'SEX_M'
-    this.model.mother.sex = 'SEX_F'
-    this.ui.father.sex.disabled = true
-    this.ui.mother.sex.disabled = true
+    this.model.father.sexId = 19
+    this.model.mother.sexId = 18
+    this.ui.father.sexId.disabled = true
+    this.ui.mother.sexId.disabled = true
   },
   methods: {
     // INI METHOD UNTUK ENTRY MAIN PAGE
@@ -202,8 +202,8 @@ export default {
     disabled(condition) {
       this.$wrapper.disabled([this.ui.father, this.ui.mother, this.ui.children, this.ui.document], condition)
       if (!condition) {
-        this.ui.father.sex.disabled = true
-        this.ui.mother.sex.disabled = true
+        this.ui.father.sexId.disabled = true
+        this.ui.mother.sexId.disabled = true
       }
     },
     async save() {
@@ -301,7 +301,7 @@ export default {
 
     // INI METHOD UNTUK ENTRY DIALOG
     addChildren() {
-      this.child = { ...this.$object.clone(empty), doc: null }
+      this.child = { ...this.$object.clone(empty), docId: null }
       this.$refs.childrenDlg.open()
     },
     editChildren(props) {
@@ -327,35 +327,35 @@ export default {
       this.model.father.id = null
       this.model.father.name = 'Elvino'
       this.model.father.nik = 123456
-      this.model.father.sex = 'SEX_M'
+      this.model.father.sexId = 19
       this.model.father.placeOfBirth = 'Bogor'
       this.model.father.dateOfBirth = '1978-09-19'
-      this.model.father.religion = 'RELIGION_KH'
-      this.model.father.education = 'EDUCATION_S1'
-      this.model.father.job = 'JOB_K'
+      this.model.father.religionId = 16
+      this.model.father.educationId = 1
+      this.model.father.jobId = 10
 
       this.model.mother.id = null
       this.model.mother.name = 'Carinnia'
       this.model.mother.nik = 654321
-      this.model.mother.sex = 'SEX_F'
+      this.model.mother.sexId = 18
       this.model.mother.placeOfBirth = 'Jakarta'
       this.model.mother.dateOfBirth = '1979-09-26'
-      this.model.mother.religion = 'RELIGION_KA'
-      this.model.mother.education = 'EDUCATION_S2'
-      this.model.mother.job = 'JOB_I'
+      this.model.mother.religionId = 15
+      this.model.mother.educationId = 2
+      this.model.mother.jobId = 9
 
       this.model.children = []
       this.model.children.push({
         id: null,
-        name: 'Constantine Davin Ethan',
+        name: 'Constantine',
         nik: 162534,
-        sex: 'SEX_M',
+        sexId: 19,
         placeOfBirth: 'Jakarta',
         dateOfBirth: '2007-03-26',
-        religion: 'RELIGION_KA',
-        education: 'EDUCATION_SMP',
-        job: 'JOB_P',
-        doc: null,
+        religionId: 15,
+        educationId: 5,
+        jobId: 11,
+        docId: null,
       })
     },
     _resetNewFamilyData() {
@@ -363,8 +363,8 @@ export default {
         id: null,
         name: null,
         enabled: null,
-        father: { id: null, name: null, nik: null, sex: 'SEX_M', placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
-        mother: { id: null, name: null, nik: null, sex: 'SEX_F', placeOfBirth: null, dateOfBirth: null, religion: null, education: null, job: null },
+        father: { id: null, name: null, nik: null, sexId: 19, placeOfBirth: null, dateOfBirth: null, religionId: null, educationId: null, jobId: null },
+        mother: { id: null, name: null, nik: null, sexId: 18, placeOfBirth: null, dateOfBirth: null, religionId: null, educationId: null, jobId: null },
         children: [],
       }
       // await this.$rest.delay(100)
