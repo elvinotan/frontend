@@ -69,7 +69,15 @@ export default {
       this.state = 0
     },
     hide() {
-      this.visible = false
+      const self = this
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          self.visible = false
+          self.label = ''
+          self.state = 0
+          resolve()
+        }, 1000)
+      })
     },
     success() {
       this.state = 1
@@ -79,7 +87,7 @@ export default {
         setTimeout(() => {
           self.visible = false
           self.label = ''
-          this.state = 0
+          self.state = 0
           resolve()
         }, 1000)
       })
@@ -92,7 +100,7 @@ export default {
         setTimeout(() => {
           self.visible = false
           self.label = ''
-          this.state = 0
+          self.state = 0
           resolve()
         }, 1000)
       })

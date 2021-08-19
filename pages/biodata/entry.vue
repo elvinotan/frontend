@@ -50,10 +50,12 @@ export default {
       }
     },
     rendered() {
-      if (this.$refs.buttons) this.$refs.buttons.rendered(this.result.mode)
+      this.$nextTick(() => {
+        if (this.result && this.$refs.buttons) this.$refs.buttons.rendered(this.result.mode)
 
-      // passing data hasil fetch ke server dari method fetcher
-      if (this.result && this.$refs.detail) this.$refs.detail.init(this.result)
+        // passing data hasil fetch ke server dari method fetcher
+        if (this.result && this.$refs.detail) this.$refs.detail.init(this.result)
+      })
     },
   },
 }

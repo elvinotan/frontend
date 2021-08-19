@@ -1,6 +1,9 @@
 <template>
   <EForm id="buttonApproval">
-    <ETextArea id="reason" ref="reason" v-model="model.reason" label="Reason" :required="model.required" />
+    <ELoading ref="loader" />
+    <EConfirmation id="confirmation" ref="confirmation" positive="Yes" negative="No" />
+    <EMessage id="message" ref="message" />
+    <ETextArea id="remark" ref="remark" v-model="model.remark" label="Reason" :required="model.required" />
     <br />
     <ERight>
       <EButton v-if="showBack" id="buttonApprovalBack" label="Back" color="gray" @click="_back" />
@@ -14,6 +17,7 @@
 export default {
   name: 'EButtonApproval',
   props: {
+    uri: { type: String, required: true, default: 'Please Provide Data URI' },
     workflowId: { type: Number, required: false, default: null },
     disabled: { type: Function, required: false, default: null },
     back: { type: Function, required: false, default: null },
@@ -23,9 +27,10 @@ export default {
   },
   data() {
     return {
+      info: null,
       model: {
         required: false,
-        reason: null,
+        remark: null,
       },
       showBack: true,
       showApprove: true,
@@ -40,7 +45,8 @@ export default {
       if (name === 'reject') this.showReject = condition
       if (name === 'delete') this.showDelete = condition
     },
-    rendered(mode) {
+    rendered(mode, info) {
+      this.info = info
       this.disabled(true)
     },
     _back() {
@@ -48,28 +54,42 @@ export default {
     },
     _approve() {
       this.model.required = false
-      this.$refs.reason.clearError()
+      this.$refs.remark.clearError()
+
       this.$nextTick(() => {
-        this.approve({ workflowId: this.workflowId, reason: this.model.reason })
+        this._approval('A', 'approve', 'Approving')
       })
     },
     _reject() {
       this.model.required = true
       this.$nextTick(() => {
-        const { valid } = this.$refs.reason.validate()
-        if (valid) {
-          this.reject({ workflowId: this.workflowId, reason: this.model.reason })
-        }
+        const { valid } = this.$refs.remark.validate()
+        if (valid) this._approval('R', 'reject', 'Rejecting')
       })
     },
     _delete() {
       this.model.required = true
       this.$nextTick(() => {
-        const { valid } = this.$refs.reason.validate()
-        if (valid) {
-          this.delete({ workflowId: this.workflowId, reason: this.model.reason })
-        }
+        const { valid } = this.$refs.remark.validate()
+        if (valid) this._approval('D', 'delete', 'Deleting')
       })
+    },
+    async _approval(action, actionStr, description) {
+      const { Yes } = await this.$refs.confirmation.confirm(`Are you sure want to ${actionStr} ? ${this.info}`)
+      if (Yes) {
+        this.$refs.loader.show(`${description} Data`)
+        const { result, error } = await this.$rest.post(this.uri, { action, workflowId: this.workflowId, remark: this.model.remark })
+
+        if (result) {
+          await this.$refs.loader.success()
+          await this.$refs.message.success(`Success ${description} Data ${this.info}`)
+          this._back()
+        }
+
+        if (error) {
+          await this.$refs.message.fail(`Fail to ${description} Data ${this.info}`)
+        }
+      }
     },
   },
 }

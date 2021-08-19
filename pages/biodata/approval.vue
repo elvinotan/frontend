@@ -2,8 +2,8 @@
   <div>
     <EPageLoader id="fetcher" ref="fetcher" label="Load Data" :fetcher="fetcher" @rendered="rendered">
       <detail ref="detail">
-        <template #approval_button="{ disabled, back, approve, reject, deletee }">
-          <EButtonApproval ref="buttons" :workflow-id="workflowId" :disabled="disabled" :back="back" :approve="approve" :reject="reject" :delete="deletee" />
+        <template #approval_button="{ disabled, back }">
+          <EButtonApproval ref="buttons" :info="info" uri="/family/approval" :workflow-id="workflowId" :disabled="disabled" :back="back" />
         </template>
       </detail>
     </EPageLoader>
@@ -15,6 +15,7 @@ export default {
   components: { detail }, // import component detail
   data() {
     return {
+      info: null,
       workflowId: null,
       result: null,
     }
@@ -55,10 +56,12 @@ export default {
       }
     },
     rendered() {
-      if (this.$refs.buttons) this.$refs.buttons.rendered(this.result.mode)
+      this.$nextTick(() => {
+        if (this.result && this.$refs.buttons) this.$refs.buttons.rendered(this.result.mode, `[FamilyName=${this.result.name}]`)
 
-      // passing data hasil fetch ke server dari method fetcher
-      if (this.result && this.$refs.detail) this.$refs.detail.init(this.result)
+        // passing data hasil fetch ke server dari method fetcher
+        if (this.result && this.$refs.detail) this.$refs.detail.init(this.result)
+      })
     },
   },
 }

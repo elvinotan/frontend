@@ -119,7 +119,7 @@
 
     <!-- Button Slot -->
     <slot name="entry_button" :disabled="disabled" :back="back" :save="save" :confirm="confirm" />
-    <slot name="approval_button" :disabled="disabled" :back="back" :approve="approve" :reject="reject" :deletee="deletee" />
+    <slot name="approval_button" :disabled="disabled" :back="back" />
 
     <!-- Entry Dialog -->
     <EDialog id="childrenDlg" ref="childrenDlg" title="Tambah Anak" :width="800" :height="400" :buttons="[{ label: 'Simpan', emit: 'saveChild', color: 'green' }]" @saveChild="saveChild">
@@ -245,15 +245,6 @@ export default {
         this.handleRestError(error)
       }
     },
-    approve({ workflowId, reason }) {
-      alert('Approve ' + workflowId + ', with reason=' + reason)
-    },
-    reject({ workflowId, reason }) {
-      alert('Reject ' + workflowId + ', with reason=' + reason)
-    },
-    deletee({ workflowId, reason }) {
-      alert('Delete ' + workflowId + ', with reason=' + reason)
-    },
     back({ from }) {
       if (from === 'entry-save') {
         this.$nav.to({ name: 'biodata-list' })
@@ -374,12 +365,6 @@ export default {
       this.$nextTick(() => {
         this.$wrapper.clearError(this.$refs.customerEntry)
       })
-    },
-    elvino() {
-      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
     },
   },
 }
