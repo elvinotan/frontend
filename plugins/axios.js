@@ -14,17 +14,17 @@ export default function ({ $axios, redirect, app, ...other }) {
   })
   $axios.onResponse((response) => {
     const duration = new Date().getTime() - response.config.metadata.startTime.getTime()
-    const uri = response.config.url.substring(22)
+    const uri = response.config.url.substring(30)
     if (duration <= 50) {
-      console.log(`%c ResponseTime.EXCELLENT for ${uri}  ${duration} ms`, 'color: #009e60')
+      console.log(`%c EXCELLENT ${uri} ${duration} ms`, 'color: #009e60')
     } else if (duration <= 100) {
-      console.log(`%c ResponseTime.NICE for ${uri}  ${duration} ms`, 'color: #cc9d6e')
+      console.log(`%c NICE ${uri} ${duration} ms`, 'color: #cc9d6e')
     } else if (duration <= 150) {
-      console.log(`%c ResponseTime.OK for ${uri}  ${duration} ms`, 'color: #abcc71')
+      console.log(`%c OK ${uri} ${duration} ms`, 'color: #abcc71')
     } else if (duration <= 200) {
-      console.log(`%c ResponseTime.WARNING for ${uri}  ${duration} ms`, 'background: #6a4b0f; color: #e0d2b9')
+      console.log(`%c WARNING ${uri} ${duration} ms`, 'background: #6a4b0f; color: #e0d2b9')
     } else {
-      console.log(`%c ResponseTime.FATAL for ${uri}  ${duration} ms`, 'background: #772232; color: #fac7d0')
+      console.log(`%c FATAL ${uri} ${duration} ms`, 'background: #772232; color: #fac7d0')
     }
   })
   // $axios.onError((error) => {})
