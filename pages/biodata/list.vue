@@ -21,7 +21,6 @@
       :add-new-data="addNewData"
       :disabled-action="disabledAction"
       :filter="filter"
-      :initial-sort-by="[{ field: 'fatherName', type: 'asc' }]"
       :actions="[
         { label: 'Edit', emit: 'ubah' },
         { label: 'View', emit: 'lihat' },

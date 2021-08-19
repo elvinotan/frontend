@@ -87,7 +87,7 @@ export default {
         }
 
         if (error) {
-          await this.$refs.message.fail(`Fail to ${description} Data ${this.info}`)
+          await this.$refs.message.error(`Fail to ${description} Data ${this.info}`)
         }
       }
     },

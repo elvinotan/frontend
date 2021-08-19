@@ -30,6 +30,7 @@ export default function ({ $axios, $config, $string, $crypto, store }, inject) {
     // Rest Call base on type
     async get(pUrl = '', param, pHeaders = {}) {
       const {
+        encode = true,
         forceUpdate = false,
         vuex,
         localStorage,
@@ -56,8 +57,7 @@ export default function ({ $axios, $config, $string, $crypto, store }, inject) {
       }
 
       try {
-        // const paramEncrypt = param ? '/' + $crypto.encrypt(param) : ''
-        const paramEncrypt = param ? '/' + param : ''
+        const paramEncrypt = param ? '/' + (encode ? $crypto.encode(param) : param) : ''
         const url = $string.replaceByProperty(pUrl + paramEncrypt, $config)
         const host = `https://${$config.API_HOST}:${$config.API_PORT}${$config.API_PREFIX}`
         const { data } = await $axios.$get(host + url, { headers })

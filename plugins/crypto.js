@@ -1,9 +1,14 @@
 import CryptoJS from 'crypto-js/crypto-js'
+import Hashids from 'hashids'
+
+const KEY = 'simiank3mb4ngul4'
+const IV = 'k3mb4ngul4simian'
+const hashids = new Hashids(KEY)
 
 export default function (plugin, inject) {
   const crypto = {
-    key: CryptoJS.enc.Utf8.parse('simiank3mb4ngul4'), // do logic randaom to result key
-    iv: CryptoJS.enc.Utf8.parse('k3mb4ngul4simian'), // do logic randaom to result iv
+    key: CryptoJS.enc.Utf8.parse(KEY), // do logic randaom to result key
+    iv: CryptoJS.enc.Utf8.parse(IV), // do logic randaom to result iv
     /**
      * AES Encryption: the string key iv returns base64
      */
@@ -40,6 +45,14 @@ export default function (plugin, inject) {
 
       const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8)
       return decryptedStr.toString()
+    },
+
+    encode: (number) => {
+      return hashids.encode(number)
+    },
+
+    decode: (string) => {
+      return hashids.decode(string)
     },
   }
   inject('crypto', crypto)
