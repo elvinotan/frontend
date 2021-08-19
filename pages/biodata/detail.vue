@@ -116,7 +116,9 @@
         accept="image/jpeg image/jpg application/pdf"
       />
     </ECol>
-
+    <slot name="approval_reason" />
+    <slot name="approval_button" :approve="approve" :reject="reject" :deletee="deletee" />
+    <slot name="entry_button" :disabled="disabled" :back="back" :save="save" :confirm="confirm" />
     <!-- Entry Dialog -->
     <EDialog id="childrenDlg" ref="childrenDlg" title="Tambah Anak" :width="800" :height="400" :buttons="[{ label: 'Simpan', emit: 'saveChild', color: 'green' }]" @saveChild="saveChild">
       <ECol>
@@ -247,7 +249,7 @@ export default {
     reject(workflowId, reason) {
       alert('Reject ' + workflowId + ', with reason=' + reason)
     },
-    delete(workflowId, reason) {
+    deletee(workflowId, reason) {
       alert('Delete ' + workflowId + ', with reason=' + reason)
     },
     back(from) {
@@ -371,6 +373,12 @@ export default {
       this.$nextTick(() => {
         this.$wrapper.clearError(this.$refs.customerEntry)
       })
+    },
+    elvino() {
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
     },
   },
 }

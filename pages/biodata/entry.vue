@@ -1,8 +1,12 @@
 <template>
   <div>
     <EPageLoader id="fetcher" ref="fetcher" label="Load Data" :fetcher="fetcher" @rendered="rendered">
-      <detail ref="detail" />
-      <EButtonEntry ref="buttons" @back="back" @save="save" @confirm="confirm" />
+      <detail ref="detail">
+        <template #entry_button="{ disabled, back, save, confirm }">
+          <br />
+          <EButtonEntry ref="buttons" :disabled="disabled" :back="back" :save="save" :confirm="confirm" />
+        </template>
+      </detail>
     </EPageLoader>
   </div>
 </template>
@@ -46,39 +50,10 @@ export default {
       }
     },
     rendered() {
-      if (this.result && this.result.mode === 'view') {
-        // dari sisi list, melakukan oper view=true, artinya detail di tampilkan dgn mode view Only
-        this.$refs.buttons.show('save', false)
-        this.$refs.detail.disabled(true)
-      }
-
-      if (this.result && this.result.mode === 'edit') {
-        // do ntohting krn secara default sudah benar
-      }
+      this.$refs.buttons.rendered(this.result.mode)
 
       // passing data hasil fetch ke server dari method fetcher
       if (this.result) this.$refs.detail.init(this.result)
-    },
-    back(onConfirm) {
-      // onConfirm => artinya action di trigger oleh mode confirm
-      // update state back, button back hanya 1 jadi akan byk if nya
-      this.$refs.detail.back(onConfirm ? 'confirm' : 'save')
-      if (onConfirm) {
-        // Update button state
-        this.$refs.buttons.show('save', true)
-        this.$refs.buttons.show('confirm', false)
-      }
-    },
-    async save() {
-      const valid = await this.$refs.detail.save()
-      if (valid) {
-        // Update button state
-        this.$refs.buttons.show('save', false)
-        this.$refs.buttons.show('confirm', true)
-      }
-    },
-    confirm() {
-      this.$refs.detail.confirm()
     },
   },
 }

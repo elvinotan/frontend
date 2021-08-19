@@ -25,6 +25,7 @@
       :actions="[
         { label: 'Edit', emit: 'ubah' },
         { label: 'View', emit: 'lihat' },
+        { label: 'Approval', emit: 'persetujuan' },
       ]"
       :columns="[
         { label: 'Nama Ayah', field: 'fatherName', sortable: true, width: '100px', tooltip: 'Father Name', type: 'text' },
@@ -43,10 +44,11 @@
         { label: 'Agama', field: 'motherReligion', sortable: true, width: '100px', tooltip: 'Agama', type: 'lookup', reference: 'DEMO_RELIGION' },
         { label: 'Edukasi', field: 'motherEducation', sortable: true, width: '100px', tooltip: 'Edukasi', type: 'lookup', reference: 'DEMO_EDUCATION' },
         { label: 'Pekerjaan', field: 'motherJob', sortable: true, width: '100px', tooltip: 'Pekerjaan', type: 'lookup', reference: 'DEMO_JOB' },
+        { label: 'Status', field: 'recordStatus', sortable: true, width: '100px', tooltip: 'Record Status', type: 'text' },
       ]"
-      @RowClick="rowClick"
       @lihat="lihat"
       @ubah="ubah"
+      @persetujuan="persetujuan"
     />
     <EMessage id="customerMessage" ref="customerMessage" />
   </ECol>
@@ -95,16 +97,20 @@ export default {
       if (label.emit === 'lihat') {
         return false
       }
+      if (label.emit === 'persetujuan') {
+        if (['A', 'R', 'D'].includes(data.row.recordStatus)) return true
+        return false
+      }
       return false
-    },
-    rowClick(data) {
-      this.$nav.to({ name: 'biodata-approval', params: { from: 'biodata-list', id: data.row.id, workflowId: 2 } })
     },
     lihat(data) {
       this.$nav.to({ name: 'biodata-entry', params: { from: 'biodata-list', id: data.row.id } })
     },
     ubah(data) {
       this.$nav.to({ name: 'biodata-entry', params: { from: 'biodata-list', id: data.row.id } })
+    },
+    persetujuan(data) {
+      this.$nav.to({ name: 'biodata-approval', params: { from: 'biodata-list', id: data.row.id, workflowId: data.row.workflowId } })
     },
     clear() {
       this.filter = { ...empty }

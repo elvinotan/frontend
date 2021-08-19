@@ -35,7 +35,7 @@ export default {
       this.$emit('reject')
     },
     _delete() {
-      this.$emit('delete')
+      this.$emit('deletee')
     },
   },
 }

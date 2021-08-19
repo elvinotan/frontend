@@ -1,9 +1,20 @@
 <template>
   <div>
     <EPageLoader id="fetcher" ref="fetcher" label="Load Data" :fetcher="fetcher" @rendered="rendered">
-      <detail ref="detail" />
-      <ETextArea id="reason" v-model="reason" label="Reason" />
-      <EButtonApproval ref="buttons" @back="back" @approve="approve" @reject="reject" @delete="deletee" />
+      <detail ref="detail">
+        <template #approval_reason>
+          <ETextArea id="reason" v-model="reason" label="Reason" />
+        </template>
+        <template #approval_button="{ back, approve, reject, deletee }">
+          <br />
+          <ERight>
+            <EButton id="buttonApprovalBack" label="Back" color="gray" @click="back" />
+            <EButton id="buttonApprovalApprove" label="Approve" color="green" @click="approve" />
+            <EButton id="buttonEntryReject" label="Reject" color="green" @click="reject" />
+            <EButton id="buttonEntryDelete" label="Delete" color="green" @click="deletee" />
+          </ERight>
+        </template>
+      </detail>
     </EPageLoader>
   </div>
 </template>
@@ -60,15 +71,6 @@ export default {
     },
     back() {
       this.$refs.detail.back('approval')
-    },
-    approve() {
-      this.$refs.detail.approve(this.workflowId, this.reason)
-    },
-    reject() {
-      this.$refs.detail.reject(this.workflowId, this.reason)
-    },
-    deletee() {
-      this.$refs.detail.delete(this.workflowId, this.reason)
     },
   },
 }
