@@ -38,6 +38,9 @@ export default {
       showDelete: true,
     }
   },
+  mounted() {
+    this.disabled(true)
+  },
   methods: {
     show(name, condition) {
       if (name === 'back') this.showBack = condition

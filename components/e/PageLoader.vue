@@ -69,7 +69,7 @@ export default {
       this.fetched = await this.fetcher()
       if (this.fetched) {
         this.loaded = true
-        this.$nextTick(() => this.$emit('rendered'))
+        this.$emit('rendered')
       }
     },
     setInfo(info) {
