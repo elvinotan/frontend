@@ -1,5 +1,7 @@
 <template>
-  <EForm id="buttonEntry">
+  <EForm id="buttonApproval">
+    <ETextArea id="reason" ref="reason" v-model="model.reason" label="Reason" :required="model.required" />
+    <br />
     <ERight>
       <EButton v-if="showBack" id="buttonApprovalBack" label="Back" color="gray" @click="_back" />
       <EButton v-if="showApprove" id="buttonApprovalApprove" label="Approve" color="green" @click="_approve" />
@@ -10,8 +12,21 @@
 </template>
 <script>
 export default {
+  name: 'EButtonApproval',
+  props: {
+    workflowId: { type: Number, required: false, default: null },
+    disabled: { type: Function, required: false, default: null },
+    back: { type: Function, required: false, default: null },
+    approve: { type: Function, required: false, default: null },
+    reject: { type: Function, required: false, default: null },
+    delete: { type: Function, required: false, default: null },
+  },
   data() {
     return {
+      model: {
+        required: false,
+        reason: null,
+      },
       showBack: true,
       showApprove: true,
       showReject: true,
@@ -25,17 +40,36 @@ export default {
       if (name === 'reject') this.showReject = condition
       if (name === 'delete') this.showDelete = condition
     },
+    rendered(mode) {
+      this.disabled(true)
+    },
     _back() {
-      this.$emit('back')
+      this.back({ from: 'approval' })
     },
     _approve() {
-      this.$emit('approve')
+      this.model.required = false
+      this.$refs.reason.clearError()
+      this.$nextTick(() => {
+        this.approve({ workflowId: this.workflowId, reason: this.model.reason })
+      })
     },
     _reject() {
-      this.$emit('reject')
+      this.model.required = true
+      this.$nextTick(() => {
+        const { valid } = this.$refs.reason.validate()
+        if (valid) {
+          this.reject({ workflowId: this.workflowId, reason: this.model.reason })
+        }
+      })
     },
     _delete() {
-      this.$emit('deletee')
+      this.model.required = true
+      this.$nextTick(() => {
+        const { valid } = this.$refs.reason.validate()
+        if (valid) {
+          this.delete({ workflowId: this.workflowId, reason: this.model.reason })
+        }
+      })
     },
   },
 }

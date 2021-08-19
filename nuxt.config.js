@@ -67,3 +67,6 @@ export default {
     config: {},
   },
 }
+
+// Formatting source code
+// https://stackoverflow.com/questions/52586965/why-does-prettier-not-format-code-in-vs-code

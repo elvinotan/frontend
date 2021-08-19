@@ -49,7 +49,7 @@ export default {
     },
     _back() {
       if (this.back) {
-        this.back(this.showConfirm ? 'confirm' : 'save')
+        this.back(this.showConfirm ? { from: 'entry-confirm' } : { from: 'entry-save' })
         if (this.showConfirm) {
           this.showSave = true
           this.showConfirm = false
@@ -58,7 +58,7 @@ export default {
     },
     async _save() {
       if (this.save) {
-        const valid = await this.save()
+        const valid = await this.save({})
         if (valid) {
           this.showSave = false
           this.showConfirm = true
@@ -66,7 +66,7 @@ export default {
       }
     },
     _confirm() {
-      if (this.confirm) this.confirm()
+      if (this.confirm) this.confirm({})
     },
   },
 }

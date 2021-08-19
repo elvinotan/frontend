@@ -2,17 +2,8 @@
   <div>
     <EPageLoader id="fetcher" ref="fetcher" label="Load Data" :fetcher="fetcher" @rendered="rendered">
       <detail ref="detail">
-        <template #approval_reason>
-          <ETextArea id="reason" v-model="reason" label="Reason" />
-        </template>
-        <template #approval_button="{ back, approve, reject, deletee }">
-          <br />
-          <ERight>
-            <EButton id="buttonApprovalBack" label="Back" color="gray" @click="back" />
-            <EButton id="buttonApprovalApprove" label="Approve" color="green" @click="approve" />
-            <EButton id="buttonEntryReject" label="Reject" color="green" @click="reject" />
-            <EButton id="buttonEntryDelete" label="Delete" color="green" @click="deletee" />
-          </ERight>
+        <template #approval_button="{ disabled, back, approve, reject, deletee }">
+          <EButtonApproval ref="buttons" :workflow-id="workflowId" :disabled="disabled" :back="back" :approve="approve" :reject="reject" :delete="deletee" />
         </template>
       </detail>
     </EPageLoader>
@@ -25,7 +16,7 @@ export default {
   data() {
     return {
       workflowId: null,
-      reason: null,
+      result: null,
     }
   },
   created() {
@@ -64,13 +55,10 @@ export default {
       }
     },
     rendered() {
-      this.$refs.detail.disabled(true)
+      if (this.$refs.buttons) this.$refs.buttons.rendered(this.result.mode)
 
       // passing data hasil fetch ke server dari method fetcher
-      if (this.result) this.$refs.detail.init(this.result)
-    },
-    back() {
-      this.$refs.detail.back('approval')
+      if (this.result && this.$refs.detail) this.$refs.detail.init(this.result)
     },
   },
 }

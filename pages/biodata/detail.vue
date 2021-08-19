@@ -116,9 +116,11 @@
         accept="image/jpeg image/jpg application/pdf"
       />
     </ECol>
-    <slot name="approval_reason" />
-    <slot name="approval_button" :approve="approve" :reject="reject" :deletee="deletee" />
+
+    <!-- Button Slot -->
     <slot name="entry_button" :disabled="disabled" :back="back" :save="save" :confirm="confirm" />
+    <slot name="approval_button" :disabled="disabled" :back="back" :approve="approve" :reject="reject" :deletee="deletee" />
+
     <!-- Entry Dialog -->
     <EDialog id="childrenDlg" ref="childrenDlg" title="Tambah Anak" :width="800" :height="400" :buttons="[{ label: 'Simpan', emit: 'saveChild', color: 'green' }]" @saveChild="saveChild">
       <ECol>
@@ -243,24 +245,23 @@ export default {
         this.handleRestError(error)
       }
     },
-    approve(workflowId, reason) {
+    approve({ workflowId, reason }) {
       alert('Approve ' + workflowId + ', with reason=' + reason)
     },
-    reject(workflowId, reason) {
+    reject({ workflowId, reason }) {
       alert('Reject ' + workflowId + ', with reason=' + reason)
     },
-    deletee(workflowId, reason) {
+    deletee({ workflowId, reason }) {
       alert('Delete ' + workflowId + ', with reason=' + reason)
     },
-    back(from) {
-      if (from === 'save') {
+    back({ from }) {
+      if (from === 'entry-save') {
         this.$nav.to({ name: 'biodata-list' })
       }
-      if (from === 'confirm') {
+      if (from === 'entry-confirm') {
         this.disabled(false)
       }
       if (from === 'approval') {
-        // TODO nanti back ke halaman approval
         this.$nav.to({ name: 'biodata-list' })
       }
     },
