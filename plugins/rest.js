@@ -16,7 +16,8 @@ export default function ({ $axios, $config, $string, $crypto, store }, inject) {
       store.commit('setItem', { key, object })
     },
     getVuex(key) {
-      return store.getters.getItem(key)
+      const obj = store.getters.getItem(key)
+      return JSON.parse(JSON.stringify(obj))
     },
     removeVuex(key) {
       store.commit('removeItem', key)
