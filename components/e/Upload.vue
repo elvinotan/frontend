@@ -98,6 +98,7 @@ export default {
           this.rows = [result]
         }
         if (error) {
+          this.rows = []
           throw error
         }
       }
@@ -185,6 +186,7 @@ export default {
         fileRaw.state = this.$enum.UPLOAD.ONUPLOAD
         const { state, ...other } = file
         this.$rest.post('/file/save', other).then(({ result, error }) => {
+          console.log('result ', result)
           if (result) {
             fileRaw.id = result.id
             fileRaw.state = this.$enum.UPLOAD.UPLOADED

@@ -507,6 +507,23 @@
                   <td>Label untuk component</td>
                 </tr>
                 <tr>
+                  <td>show</td>
+                  <td><input v-model="button.show" type="checkbox" /></td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>true</td>
+                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
+                </tr>
+
+                <tr>
+                  <td>disabled</td>
+                  <td><input v-model="button.disabled" type="checkbox" /></td>
+                  <td>Boolean</td>
+                  <td>false</td>
+                  <td>false</td>
+                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
+                </tr>
+                <tr>
                   <td>color</td>
                   <td>
                     <select v-model="button.color">
@@ -520,22 +537,6 @@
                   <td>false</td>
                   <td>gray</td>
                   <td>Component background color</td>
-                </tr>
-                <tr>
-                  <td>disabled</td>
-                  <td><input v-model="button.disabled" type="checkbox" /></td>
-                  <td>Boolean</td>
-                  <td>false</td>
-                  <td>false</td>
-                  <td>Boolean untuk menentukan disabled atau tidaknya component,</td>
-                </tr>
-                <tr>
-                  <td>show</td>
-                  <td><input v-model="button.show" type="checkbox" /></td>
-                  <td>Boolean</td>
-                  <td>false</td>
-                  <td>true</td>
-                  <td>Boolean untuk menentukan component tampil atau tidak. tag ini menggunakan v-if</td>
                 </tr>
               </tbody>
             </table>
@@ -680,7 +681,7 @@
                   <td>Validasi minumum angka yang bisa di input</td>
                 </tr>
                 <tr>
-                  <td>maxlength</td>
+                  <td>maximum</td>
                   <td>
                     <input v-model.number="number.maximum" type="number" />
                   </td>
@@ -883,7 +884,7 @@
                   <td>Validasi minumum angka yang bisa di input</td>
                 </tr>
                 <tr>
-                  <td>maxlength</td>
+                  <td>maximum</td>
                   <td>
                     <input v-model.number="decimal.maximum" type="number" />
                   </td>
@@ -1052,7 +1053,7 @@
                   <td>Validasi minumum tanggal yang bisa di input</td>
                 </tr>
                 <tr>
-                  <td>maxlength</td>
+                  <td>maximum</td>
                   <td>2021-09-30</td>
                   <td>Number</td>
                   <td>false</td>
@@ -2579,7 +2580,7 @@
             </table>
           </EForm>
           <EForm id="EUpload">
-            <EUpload id="UploadComponent" ref="UploadComponent" v-model="upload.value.fileId" :label="upload.label" :required="upload.required" :disabled="upload.disabled" :show="upload.show" :max-size="upload.maxSize" :accept="upload.accept" />
+            <EUpload id="UploadComponent" ref="UploadComponent" v-model="upload.value" :label="upload.label" :required="upload.required" :disabled="upload.disabled" :show="upload.show" :max-size="upload.maxSize" :accept="upload.accept" />
             <br />
             <div class="text-xs">Template : {{ htmlUpload }}</div>
             <br />
@@ -2661,6 +2662,22 @@
                   <td>false</td>
                   <td>image/jpeg image/jpg image/jpg application/pdf text/plain video/mp4</td>
                   <td>Tipe file apa saja yang di perboleahkan di upload</td>
+                </tr>
+                <tr>
+                  <td>vruntime</td>
+                  <td>Function Callback</td>
+                  <td>Function</td>
+                  <td>false</td>
+                  <td>null</td>
+                  <td>OnType runtime validation, test ketik GAGAL untuk mencoba</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td><input v-model.number="upload.value" type="input" /></td>
+                  <td>Number</td>
+                  <td>false</td>
+                  <td>null</td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
                 </tr>
               </tbody>
             </table>
@@ -2811,6 +2828,14 @@
                   <td>false</td>
                   <td>image/jpeg image/jpg image/jpg application/pdf text/plain video/mp4</td>
                   <td>Tipe file apa saja yang di perboleahkan di upload</td>
+                </tr>
+                <tr>
+                  <td>vruntime</td>
+                  <td>Function Callback</td>
+                  <td>Function</td>
+                  <td>false</td>
+                  <td>null</td>
+                  <td>OnType runtime validation, test ketik GAGAL untuk mencoba</td>
                 </tr>
                 <tr>
                   <td>files</td>
@@ -3039,6 +3064,14 @@
                   <td>false</td>
                   <td>null</td>
                   <td>Penambahan colum pada sisi kiri, untuk menandakan apakah data sudah terpersist ke db atau belum, agar user tau yang mana yang sudah ke save dan blm</td>
+                </tr>
+                <tr>
+                  <td>mode</td>
+                  <td>-</td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>default</td>
+                  <td>Logic bypass untuk custom behaviour, para developer dilakang menggunakan prop ini untuk develop logic, prop ini meng-overwrite default behaviour</td>
                 </tr>
               </tbody>
             </table>
@@ -3413,6 +3446,22 @@
                   <td>false</td>
                   <td>[]</td>
                   <td>Colum configuration berupa array dgn format { label: null, field: null, sortable: null, width: null, tooltip: null, type: null} untuk type meng-support text, date, number, decimal, percentage, boolean</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td><input v-model="popupPagination.value" type="input" /></td>
+                  <td>String</td>
+                  <td>false</td>
+                  <td>''</td>
+                  <td>Two way data binding, saat ini data yang di input dalam bentuk upprcase, customize sesuai kebutuhan</td>
+                </tr>
+                <tr>
+                  <td>vruntime</td>
+                  <td>Function Callback</td>
+                  <td>Function</td>
+                  <td>false</td>
+                  <td>null</td>
+                  <td>OnType runtime validation, test ketik GAGAL untuk mencoba</td>
                 </tr>
               </tbody>
             </table>
@@ -4305,7 +4354,7 @@ export default {
         show: true,
         maxSize: 8,
         accept: 'image/jpeg application/pdf',
-        value: { fileId: null },
+        value: null,
       },
       multiUpload: {
         label: 'Apprisal File',

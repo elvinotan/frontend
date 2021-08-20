@@ -54,7 +54,6 @@ export default {
     show: { type: Boolean, required: false, default: true },
     value: { type: String, required: false, default: '' },
     vruntime: { type: Function, required: false, default: null },
-
     picker: { type: String, required: true, default: '' },
     filter: {
       type: Object,
@@ -120,6 +119,12 @@ export default {
     },
     _info() {
       return `${this.value ? this.value.length : 0} / ${this.maxlength} Char`
+    },
+  },
+  watch: {
+    value(newVal, oldVal) {
+      this.lvalue = newVal
+      this.validate()
     },
   },
   mounted() {
